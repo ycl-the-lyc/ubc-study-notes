@@ -20,7 +20,7 @@ for sub in $subs {
         exit 2
     }
 
-    if not (orig-dir $sub | path exists) {
+    if not ($sub | path exists) {
         mkdir $"($sub)"
     }
     cp (orig-dir $sub main.pdf) $"($sub)/($sub).pdf"
