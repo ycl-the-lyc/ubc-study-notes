@@ -5,20 +5,24 @@ let subs = [
     wrds-150b
 ]
 
+def orig-dir [...extra: string] {
+    $"../../src/study/($extra | path join)"
+}
+
 for sub in $subs {
-    if not (($"../study/($sub)" | path type) == dir) {
+    if not ((orig-dir | path type) == dir) {
         print $"No such subject: ($sub)"
         exit 1
     }
-    if not (($"../study/($sub)/main.pdf" | path type) == file) {
+    if not ((orig-dir $sub main.pdf | path type) == file) {
         print $"No main.pdf in ($sub)"
         exit 2
     }
 
-    if not ($"($sub)" | path exists) {
+    if not (orig-dir $sub | path exists) {
         mkdir $"($sub)"
     }
-    cp $"../study/($sub)/main.pdf" $"($sub)/($sub).pdf"
+    cp (orig-dir $sub main.pdf) $"($sub)/($sub).pdf"
 }
 
 if (git status --porcelain) == "" {
