@@ -1,4 +1,5 @@
 let subs = [
+    math-101
     math-152
     phys-158
     phys-170
