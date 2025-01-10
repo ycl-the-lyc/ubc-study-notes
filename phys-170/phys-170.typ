@@ -21,6 +21,7 @@
 #let lb = $"lb"$
 
 #let vecb(body) = $vectorbold(upright(body))$
+#let veca(body) = $vectorarrow(italic(body))$
 #let vecl(body) = $vectorbold(italic(body))$
 
 = General Principles
@@ -56,9 +57,9 @@ $
 In this course, we will use $ g = qty(9.81, m/s^2) $ which happens to be true for Vancouver.
 
 == Vector Notation
-In this course, vectors are upright bold, and vector magnitudes are italicized bold.
+In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an arrow over.
 
-$ vecb(A) "has a magnitude of" vecl(A). $
+$ vecb(A) "has a magnitude of" vecl(A) "in direction" veca(i). $
 
 == Angle Unit
 In this course, angles are in degrees.
@@ -68,11 +69,11 @@ Force, having both magnitude and direction, is a vector.
 Intuitively, we can apply all kinds of vector operations to forces, as you would learn in MATH 152.
 
 == Addition
-Use #quote[Tip to tail] for triangular method of addition: draw the vectors head to tail, and the resultant vector is the vector from the tail of the first vector to the head of the last vector.
+Use #quote[tip to tail] for triangular method of addition: draw the vectors head to tail, and the resultant vector is the vector from the tail of the first vector to the head of the last vector.
 
 == Force Components
 $
-  vecb(F) = x vecb(i) + y vecb(j)
+  vecb(F) = vecl(x) veca(i) + vecl(y) veca(j)
 $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
 
@@ -114,15 +115,25 @@ $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
     To generalize it, we can write it as
     $
-      vecb(F) &= vecl(F)_x vecb(i) + vecl(F)_y vecb(j) \
-      &= vecl(F) (cos(theta) vecb(i) + sin(theta) vecb(j))
+      vecb(F) &= vecl(F)_x veca(i) + vecl(F)_y veca(j) \
+      &= vecl(F) (cos(theta) veca(i) + sin(theta) veca(j))
     $
-    where $vecb(i), vecb(j)$ are unit vectors in the $x, y$, or any orthogonal directions.
+    where $veca(i), veca(j)$ are unit vectors in the $x, y$ directions.
     This is the Cartesian form of a vector.
   ],
 )
 
 For a force with 2 dimensions, we call it a coplanar force.
+
+Sometimes, non-linear equations arise from problems involving forces. Gladly use math solvers for those.
+
+== Unit Vector
+To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $veca(u) = vecb(A) / vecl(A)$.
+
+== 3D Forces
+Forces in 3D are $vecb(F) = vecl(F)_x veca(i) + vecl(F)_y veca(j) + vecl(F)_z veca(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
+
+To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
 = Equilibrium of a Particle
 
