@@ -38,6 +38,8 @@ for sub in $subs {
 
 }
 
+git pull
+
 if (git status --porcelain) == "" {
     print "No changes"
     exit 0

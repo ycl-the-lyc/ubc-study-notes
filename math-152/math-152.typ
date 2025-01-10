@@ -143,7 +143,7 @@ The length of a vector is the square root of the sum of the squares of the scala
 It can be notated as $||vecb(a)||$.
 
 $
-  ||vecb(a)|| = sqrt(vecb(a) dot vecb(a)) = sqrt(a_1^2 + a_2^2 + a_3^2).
+  vecl(a) = sqrt(vecb(a) dot vecb(a)) = sqrt(a_1^2 + a_2^2 + a_3^2).
 $
 
 For example, $||vecb(x) - vecb(c)|| = 1$ means all points which are 1 unit away from $vecb(c)$, a circle.
@@ -163,9 +163,9 @@ $
   A &= "base" times "height" \
   &= vecl(a) vecl(b) sin(theta) \
   &= vecl(a) vecl(b) cos(pi / 2 - theta) \
-  &= vecb(a_(perp)) dot vecb(b)
+  &= vecb(a_perp) dot vecb(b)
 $
-where $vecb(a_(perp))$ is the vector perpendicular to $vecb(a)$.
+where $vecb(a_perp)$ is the vector perpendicular to $vecb(a)$.
 
 == Matrices
 A matrix is a rectangular array of scalars.

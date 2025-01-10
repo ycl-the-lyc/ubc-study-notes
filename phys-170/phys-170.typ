@@ -93,17 +93,36 @@ $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
       line((2, 0), (2, 3), name: "fy", stroke: (paint: red))
       content("fy.mid", (rel: (-0.35, 0)), $vecb(F)_y$)
-      
-      cetz.angle.angle((0, 0), "fx.end", "fy.end", radius: 0.5, fill: green.transparentize(80%), mark: none, label: $theta$, label-radius: 65%)
+
+      cetz.angle.angle(
+        (0, 0),
+        "fx.end",
+        "fy.end",
+        radius: 0.5,
+        fill: green.transparentize(80%),
+        mark: none,
+        label: $theta$,
+        label-radius: 65%,
+      )
     },
   ),
   align(horizon)[
     Force $vecb(F)$ can be represented as a combination of $vecb(F)_x$ and $vecb(F)_y$
-  $ vecb(F) = vecb(F)_x + vecb(F)_y $
-  or as a polar coordinate of angle $theta = arctan(vecl(F)_y / vecl(F)_x)$ and magnitude $vecl(F)$
-  $ vecb(F) = vecl(F) (cos(theta) + sin(theta)) $
+    $ vecb(F) = vecb(F)_x + vecb(F)_y $
+    or as a polar coordinate of angle $theta = arctan(vecl(F)_y / vecl(F)_x)$ and magnitude $vecl(F)$
+    $ vecb(F) = vecl(F) (cos(theta) + sin(theta)). $
+
+    To generalize it, we can write it as
+    $
+      vecb(F) &= vecl(F)_x vecb(i) + vecl(F)_y vecb(j) \
+      &= vecl(F) (cos(theta) vecb(i) + sin(theta) vecb(j))
+    $
+    where $vecb(i), vecb(j)$ are unit vectors in the $x, y$, or any orthogonal directions.
+    This is the Cartesian form of a vector.
   ],
 )
+
+For a force with 2 dimensions, we call it a coplanar force.
 
 = Equilibrium of a Particle
 
