@@ -25,6 +25,7 @@
 #let vecb(body) = $vectorbold(body)$
 #let veca(body) = $vectorarrow(body)$
 #let vecl(body) = $||vecb(body)||$
+#let det = "det"
 
 = Scalars
 A scalar $x$ has
@@ -59,6 +60,14 @@ $
   vecb(a) = vec(1, 2) "is a" RR^2 \
   vecb(b) = vec(1, 2, 3, 4) "is a" RR^4
 $
+
+== Linear Combinations
+A linear combination of vectors is the sum of the vectors multiplied by scalars. Each vector is a orthogonal basis vector.
+
+For example, $vecb(a) in RR^3$ can be written as
+$
+  vecb(a) = x vecb(i) + y vecb(j) + z vecb(k)
+$ where $vecb(i)$, $vecb(j)$, $vecb(k)$ are the orthogonal basis vectors for a 3 dimensional space.
 
 == Vector Operations
 
@@ -105,6 +114,7 @@ The length of the connecting vector is the distance between the two vectors.
 === Dot Product
 The two vectors must have the same size/dimension.
 The dot product of two vectors is the sum of the products of the corresponding scalars.
+
 $
   vecb(a) dot vecb(b) = a_1 b_1 + a_2 b_2 + a_3 b_3.
 $
@@ -128,14 +138,6 @@ $
   theta &approx qty(1.23, rad) = 70.53 degree.
 $
 
-=== Projection
-The projection of $vecb(a)$ onto $vecb(b)$ is the vector that is parallel to $vecb(b)$ and has the same length as the projection of $vecb(a)$ onto $vecb(b)$.
-$
-  "Proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
-  //TODO middle form
-  &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2.
-$
-
 === Vector Length
 The length of a vector is the square root of the sum of the squares of the scalars in the vector, which is also the square root of the dot product of the vector with itself.
 It can be notated as $||vecb(a)||$.
@@ -146,11 +148,68 @@ $
 
 For example, $||vecb(x) - vecb(c)|| = 1$ means all points which are 1 unit away from $vecb(c)$, a circle.
 
-== Linear Combinations
-A linear combination of vectors is the sum of the vectors multiplied by scalars. Each vector is a orthogonal basis vector.
-
-For example, $vecb(a) in RR^3$ can be written as
+=== Projection
+The projection of $vecb(a)$ onto $vecb(b)$ is the vector that is parallel to $vecb(b)$ and has the same length as the projection of $vecb(a)$ onto $vecb(b)$.
 $
-  vecb(a) = x vecb(i) + y vecb(j) + z vecb(k)
-$ where $vecb(i)$, $vecb(j)$, $vecb(k)$ are the orthogonal basis vectors for a 3 dimensional space.
+  "Proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
+  //TODO middle form
+  &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2.
+$
 
+=== Parallelogram
+A parallelogram is a quadrilateral with opposite sides parallel.
+Given two vectors $vecb(a)$ and $vecb(b)$, the area of the parallelogram formed by them is
+$
+  A &= "base" times "height" \
+  &= vecl(a) vecl(b) sin(theta) \
+  &= vecl(a) vecl(b) cos(pi / 2 - theta) \
+  &= vecb(a_(perp)) dot vecb(b)
+$
+where $vecb(a_(perp))$ is the vector perpendicular to $vecb(a)$.
+
+== Matrices
+A matrix is a rectangular array of scalars.
+It can also be thought of as rows of vectors.
+$
+  mat(a, b; c, d).
+$
+
+=== Determinant
+Given a matrix $vecb(a) = mat(a, b; c, d)$, the determinant of a 2x2 matrix is
+$
+  det vecb(a) equiv matrixdet(a, b; c, d) &= a d - b c.
+$
+
+The determinant of a 3x3 matrix is
+$
+  matrixdet(a, b, c; d, e, f; g, h, i) = a e i + b f g + c d h - c e g - b d i - a f h \
+  "(try find a pattern here!)"
+$
+Or, it can be computed by row expansion, which is taking each of the elements in a row and multiplying it by the determinant of the 2x2 matrix formed by the elements in the rows and columns the chosen element is not in. Take note of the alternating signs.
+$
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2).
+$
+
+For a parallelogram formed by two vectors $vecb(a) "and" vecb(b)$, the area is the absolute value of the determinant of the matrix formed by the vectors:
+$
+  A_"parallelogram" = matrixdet(a_1, a_2; b_1, b_2).
+$
+
+For example, for $vecb(a) = vec(1, -2) "and" vecb(b) = vec(3, 5)$, the area of the parallelogram is
+$
+  A_"parallelogram" = matrixdet(1, 3; -2, 5) = 11.
+$
+
+=== Linear Dependence
+//TODO
+
+=== Cross Product
+The cross product of two vectors is a vector that is orthogonal to the two vectors, \
+a.k.a. the normal vector of the plane formed by the two vectors, \
+a.k.a. the vector that is perpendicular to the two vectors.
+
+Given $vecb(a) = vec(a_1, a_2, a_3) "and" vecb(b) = vec(b_1, b_2, b_3)$, the cross product is
+$
+  vecb(a) times vecb(b) &= matrixdet(i, j, k; a_1, a_2, a_3; b_1, b_2, b_3) \
+  &= vec(a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1).
+$
