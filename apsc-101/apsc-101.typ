@@ -2,12 +2,10 @@
 #show: ilm.with(
   title: [
     APSC101 Study Notes \
-    #underline[]
+    #underline[b*]
   ],
   author: "",
 )
-
-#import "@preview/circuiteria:0.1.0": *
 
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
