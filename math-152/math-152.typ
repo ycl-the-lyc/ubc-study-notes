@@ -26,6 +26,7 @@
 #let veca(body) = $vectorarrow(body)$
 #let vecl(body) = $||vecb(body)||$
 #let det = "det"
+#set math.mat(delim: "[")
 
 = Scalars
 A scalar $x$ has
@@ -138,6 +139,8 @@ $
   theta &approx qty(1.23, rad) = 70.53 degree.
 $
 
+Note: if the dot product of two vectors $vecb(a) dot vecb(b) = 0$, then vectors $vecb(a)$ and $vecb(b)$ are *perbendicular*.
+
 === Vector Length
 The length of a vector is the square root of the sum of the squares of the scalars in the vector, which is also the square root of the dot product of the vector with itself.
 It can be notated as $||vecb(a)||$.
@@ -151,10 +154,23 @@ For example, $||vecb(x) - vecb(c)|| = 1$ means all points which are 1 unit away 
 === Projection
 The projection of $vecb(a)$ onto $vecb(b)$ is the vector that is parallel to $vecb(b)$ and has the same length as the projection of $vecb(a)$ onto $vecb(b)$.
 $
-  "Proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
+  "proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
   //TODO middle form
   &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2.
 $
+
+==== Derivation
+The projection of $vecb(a)$ onto $vecb(b)$ can be represented as a scalar multipled by $vecb(b)$, where $vecb(b) != 0$.
+$ "proj"_vecb(b) vecb(a) = s vecb(b) $ <eq:projection>
+
+We know that the perpendicular vector, connecting point on $vecb(b)$ to the end of $vecb(a)$, can be denoted as $vecb(a) - s vecb(b)$.
+
+Hence, we know that
+$ (vecb(a) - s vecb(b)) dot vecb(b) = 0 $
+$ vecb(a) dot vecb(b) - s (vecb(b) dot vecb(b)) = 0 $
+$ s = (vecb(a) dot vecb(b)) / (vecb(b) dot vecb(b)) $
+Plugging back into @eq:projection, we hence get:
+$ "proj"_vecb(b) vecb(a) = (vecb(a) dot vecb(b)) / vecl(b)^2  vecb(b) $
 
 === Parallelogram
 A parallelogram is a quadrilateral with opposite sides parallel.
@@ -174,21 +190,60 @@ $
   mat(a, b; c, d).
 $
 
-=== Determinant
+=== Determinant of 2x2 Matrix
 Given a matrix $vecb(a) = mat(a, b; c, d)$, the determinant of a 2x2 matrix is
 $
   det vecb(a) equiv matrixdet(a, b; c, d) &= a d - b c.
 $
+
+=== Determinant of 3x3 Matrix
+
+Let a matrix be defined as:
+$
+  mat(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) 
+$
+
+The minor matrix for an element is the 2x2 matrix obtained from deleting the row and column that element is in.
+\ e.g. $ "minor matrix of" f = mat(a_1,a_2;c_1,c_2) $
+
+
+One way to find the determinant is by row expansion, which is taking each of the elements in a row OR column and multiplying it by the determinant of the minor matrix. Take note of the alternating signs. (This is knkown as "Laplace Expansion" for anyone curious).\
+
+The signs for computing the sum of each element x its minor is:
+$ mat(+,-,+;-,+,-;+,-,+) $
+
+If you pick row 1: 
+$
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2).
+$
+
+If you pick row 2: 
+$
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= 
+  - b_1 matrixdet(a_2, a_3; c_2, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - b_3 matrixdet(a_1, a_2; c_1, c_2).
+$
+
+If you pick column 2:
+$
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= 
+  -a_2 matrixdet(b_1, b_3; c_1, c_3)  + b_2 matrixdet(a_1, a_3; c_1, c_3) - c_2 matrixdet(a_1, a_3; b_1, b_3).
+$
+
+/ Tip: pick any row / column with the *MOST ZEROES*.
+
 
 The determinant of a 3x3 matrix is
 $
   matrixdet(a, b, c; d, e, f; g, h, i) = a e i + b f g + c d h - c e g - b d i - a f h \
   "(try find a pattern here!)"
 $
-Or, it can be computed by row expansion, which is taking each of the elements in a row and multiplying it by the determinant of the 2x2 matrix formed by the elements in the rows and columns the chosen element is not in. Take note of the alternating signs.
-$
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2).
-$
+
+This can be visualised as putting copying the first two columns onto the right, then for each 3 number diagonal in the shape of a backslash, take the product of the three numbers and sum them, and for each 3 number diagonal in the shape, subtract the each product from the previous sum. \
+\
+
+
+// may add smth here //
+
 
 For a parallelogram formed by two vectors $vecb(a) "and" vecb(b)$, the area is the absolute value of the determinant of the matrix formed by the vectors:
 $
@@ -199,6 +254,10 @@ For example, for $vecb(a) = vec(1, -2) "and" vecb(b) = vec(3, 5)$, the area of t
 $
   A_"parallelogram" = matrixdet(1, 3; -2, 5) = 11.
 $
+
+
+//ADD 4X4 MATRIX DETERMINANT // 
+
 
 === Linear Dependence
 //TODO
