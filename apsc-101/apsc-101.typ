@@ -2,21 +2,27 @@
 #show: ilm.with(
   title: [
     APSC101 Study Notes \
-    #underline[b*]
+    #underline[]
   ],
   author: "",
 )
+
+
+#set terms(separator: [: ])
 
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
 #import units: *
 #import prefixes: *
 
-= Prof Skills
+= Professional Skills
 == Tuckerman's Stage of Development
 / 4 Stages: Forming, Storming, Norming, Performing
 
 /* insert image */
+#image("assets/tuckermanTeamDev.png", width: 60%, height: 200pt, fit: "contain")
+
+#v(-5pt)
 
 === Important Notes
 - relationships within members get BETTER over time 
@@ -31,6 +37,9 @@
 == Conflict Management
 
 /* insert image of conflict management styles */
+
+#image("assets/conflictManagementStyles.png", width: 60%, height: 200pt, fit: "contain")
+
 -  
   - *Avoiding* good when tensions high
   - *Accommodating* good when the issue matters more to the other party
@@ -38,6 +47,22 @@
   - *Compromising* good if time is short and relationships/problem must be balanced
   - *Collaborating* when you have time to work towards finding the ideal solution for everyone
 - _Good teams change their style as situation demands_
+
+
+= Risk Management
+
+== Definition
+
+$"Risk" = "Severity" times "Likelihood"$
+
+
+=== Risk Sources
+
+/ Preventable:
+  controllable innnnnnnnnnnnnnnnnndent
+  looooooooooooooong
+/ Strategic: taken for possibility of greater reward
+/ External: outside of control
 
 
 
