@@ -58,9 +58,7 @@ $"Risk" = "Severity" times "Likelihood"$
 
 === Risk Sources
 
-/ Preventable:
-  controllable innnnnnnnnnnnnnnnnndent
-  looooooooooooooong
+/ Preventable: controllable 
 / Strategic: taken for possibility of greater reward
 / External: outside of control
 
