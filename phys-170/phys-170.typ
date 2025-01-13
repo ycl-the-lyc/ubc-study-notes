@@ -173,6 +173,12 @@ $
   vecl(F)_y &= vecl(F)_(x y) sin(theta)
 $
 
+Or instead, given 2 ($beta, gamma$) of the 3 Cartesian angles, we can determine the force by
+$
+  cos(alpha) = sqrt(1 - cos^2(beta) - cos^2(gamma)) \
+  vecb(F) = vecl(F) (cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k)).
+$
+
 = Equilibrium of a Particle
 
 = Force System Resultants
