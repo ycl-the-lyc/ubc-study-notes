@@ -1,12 +1,11 @@
 #import "@preview/ilm:1.4.0": *
 #show: ilm.with(
   title: [
-    APSC101 Study Notes \
-    #underline[]
+    APSC 101 Study Notes \
+    #underline[Intro to Engineering II]
   ],
   author: "",
 )
-
 
 #set terms(separator: [: ])
 
@@ -16,6 +15,7 @@
 #import prefixes: *
 
 = Professional Skills
+
 == Tuckerman's Stage of Development
 / 4 Stages: Forming, Storming, Norming, Performing
 
@@ -25,14 +25,14 @@
 #v(-5pt)
 
 === Important Notes
-- relationships within members get BETTER over time 
-  -  this includes storming, as team members are more willing to speak their minds
+- relationships within members get BETTER over time
+  - this includes storming, as team members are more willing to speak their minds
 - conflict occurs at all stages
 
 === Good vs Bad Norming
 - Good norming is healthy
-- Bad norming --> team disfunction
-    - e.g. one team member routinely misses meetings and team does nothing
+- Bad norming --> team dysfunction
+  - e.g. one team member routinely misses meetings and team does nothing
 
 == Conflict Management
 
@@ -40,29 +40,67 @@
 
 #image("assets/conflictManagementStyles.png", width: 60%, height: 200pt, fit: "contain")
 
--  
-  - *Avoiding* good when tensions high
-  - *Accommodating* good when the issue matters more to the other party
-  - *Competing* good when issue is self-critical and immediate
-  - *Compromising* good if time is short and relationships/problem must be balanced
-  - *Collaborating* when you have time to work towards finding the ideal solution for everyone
-- _Good teams change their style as situation demands_
+/ Avoiding: Good when tensions high.
+/ Accommodating: Good when the issue matters more to the other party.
+/ Competing: Good when issue is self-critical and immediate.
+/ Compromising: Good if time is short and relationships/problem must be balanced.
+/ Collaborating: When you have time to work towards finding the ideal solution for everyone.
+
+_Good teams change their style as situation demands._
 
 
 = Risk Management
 
-== Definition
-
 $"Risk" = "Severity" times "Likelihood"$
 
+== Risk Sources
 
-=== Risk Sources
+/ Preventable: Controllable. \
+  General time management issues included, such as not anticipating delays.
+/ Strategic: Taken for possibility of greater reward. \
+  For example, rushing through decision making stages for earlier project completion, this is a strategic risk, not preventable.
+/ External: Outside of control.
 
-/ Preventable: controllable 
-/ Strategic: taken for possibility of greater reward
-/ External: outside of control
+== Risk Tools
 
+//TODO risk management process
 
+#figure(
+  caption: [Risk Classification Table],
+  table(
+    columns: 5,
+    stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
+    table.header(
+      table.cell(colspan: 2, rowspan: 2, none),
+      table.cell(colspan: 3)[Risk Source],
+      [Preventable],
+      [Strategic],
+      [External],
+    ),
+    table.cell(
+      rowspan: 4,
+      context {
+        let c = smallcaps[Risk Category]
+        let ds = measure(c)
+        box(
+          // width: ds.height,
+          // height: ds.width,
+          c
+        )
+      },
+    ),
+    [Safety], ..([],)*2, [none],
+    [Technical], ..([],)*3,
+    [Project \ Management], ..([],)*3,
+    [Operational], ..([],)*3,
+  ),
+)
 
+A risk classification table is a tool used to identify and classify risks based on their severity and likelihood.
 
+#figure(
+  caption: [Risk Matrix],
+  [],
+)
 
+//TODO risk register (table)
