@@ -284,3 +284,24 @@ $
   &= matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) \
   &= abs(vecb(a) dot (vecb(b) times vecb(c))).
 $
+
+= Lines, Curves and Planes in Vector Form
+
+== Lines in 2D Space
+There is a line $L$.
+Take a point on the line, $vecb(p) = vec(x, y)$, then take a vector that is parallel to the line, $vecb(l) = vec(i, j)$.
+The line can be represented as
+$
+  vecb(x) = vecb(p) + t vecb(l)
+$
+where $t in RR$.
+
+Where there is a line, there is a normal vector to the line, $vecb(n)$.
+Thus the line can also be represented as
+$
+  vecb(n) dot (vecb(x) - vecb(p)) &= 0 \
+  vecb(n) dot vecb(x) &= vecb(n) dot vecb(p).
+$
+
+If we have a line $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vecb(n) dot vecb(p) = 0$, $vecb(p) = vec(0, 0, 0)$, so the line must pass through the origin.
+Additionally, the normal vector is $vec(1, -2, 3)$.
