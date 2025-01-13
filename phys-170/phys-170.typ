@@ -135,6 +135,44 @@ Forces in 3D are $vecb(F) = vecl(F)_x hat(i) + vecl(F)_y hat(j) + vecl(F)_z hat(
 
 To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
+=== Direction of Cartesian Vector
+The direction of a Cartesian vector is the angles between the vector and the *positive* axis.
+$alpha, beta, gamma$ each corresponds to the angle from the positive $x, y, z$ axis.
+$
+  cos(alpha) &= vecl(F)_x / vecl(F) \
+  cos(beta) &= vecl(F)_y / vecl(F) \
+  cos(gamma) &= vecl(F)_z / vecl(F)
+$
+
+Therefore,
+$
+  hat(u) &= cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k)
+$ and $
+  vecb(F) &= vecl(F) hat(u) \
+  &= vecl(F) (cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k))
+$
+
+The directions satisfy $-180 degree < alpha, beta, gamma < 180 degree$ and have identity
+$
+  cos^2(alpha) + cos^2(beta) + cos^2(gamma) = 1.
+$
+
+=== Determining 3D Force Components
+
+#figure(
+  caption: [A Cartesian Vector],
+  image("assets/cart-force.png", width: 50%)
+  //REF Engineering Mechanics: Statics, 15th Edition, Hibbeler
+)
+
+With magnitude $vecl(F)$ and angles from the positive z-axis $phi$ and from the positive x-axis $theta$, we can determine the force components by first solving for $vecl(F)_z$, then $vecl(F)_(x y)$ followed by $vecl(F)_x$ and $vecl(F)_y$.
+$
+  vecl(F)_z &= vecl(F) cos(phi) \
+  vecl(F)_(x y) &= vecl(F) sin(phi) \
+  vecl(F)_x &= vecl(F)_(x y) cos(theta) \
+  vecl(F)_y &= vecl(F)_(x y) sin(theta)
+$
+
 = Equilibrium of a Particle
 
 = Force System Resultants
