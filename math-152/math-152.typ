@@ -238,8 +238,7 @@ $
   "(try find a pattern here!)"
 $
 
-This can be visualised as putting copying the first two columns onto the right, then for each 3 number diagonal in the shape of a backslash, take the product of the three numbers and sum them, and for each 3 number diagonal in the shape, subtract the each product from the previous sum. \
-\
+This can be visualised as putting copying the first two columns onto the right, then for each 3 number diagonal in the shape of a backslash, take the product of the three numbers and sum them, and for each 3 number diagonal in the shape, subtract the each product from the previous sum.
 
 
 // may add smth here //
@@ -269,6 +268,19 @@ a.k.a. the vector that is perpendicular to the two vectors.
 
 Given $vecb(a) = vec(a_1, a_2, a_3) "and" vecb(b) = vec(b_1, b_2, b_3)$, the cross product is
 $
-  vecb(a) times vecb(b) &= matrixdet(i, j, k; a_1, a_2, a_3; b_1, b_2, b_3) \
+  vecb(a) times vecb(b) &= matrixdet(hat(i), hat(j), hat(k); a_1, a_2, a_3; b_1, b_2, b_3) \
   &= vec(a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1).
+$
+
+In a Right Hand (RH) coordinate system, the cross product is the vector that points in the direction of the thumb when the fingers of the right hand curl from $vecb(a)$ to $vecb(b)$.
+In other words, the cross product is the vector that is orthogonal/perpendicular to the two vectors.
+$ vecb(a) dot (vecb(a) times vecb(b)) = 0 $
+
+=== Volume of Parallelepiped
+The volume of a parallelepiped formed by three vectors $vecb(a)$, $vecb(b)$, and $vecb(c)$ is the absolute value of the determinant of the matrix formed by the vectors.
+$
+  V_"parallelepiped" &= "base area" times "height" \
+  &= A_"parallelogram" times cos(theta) vecl(c) \
+  &= matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) \
+  &= abs(vecb(a) dot (vecb(b) times vecb(c))).
 $
