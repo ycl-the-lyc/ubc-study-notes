@@ -57,9 +57,9 @@ $
 In this course, we will use $ g = qty(9.81, m/s^2) $ which happens to be true for Vancouver.
 
 == Vector Notation
-In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an arrow over.
+In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
 
-$ vecb(A) "has a magnitude of" vecl(A) "in direction" veca(i). $
+$ vecb(A) "has a magnitude of" vecl(A) "in direction" hat(i). $
 
 == Angle Unit
 In this course, angles are in degrees.
@@ -73,7 +73,7 @@ Use #quote[tip to tail] for triangular method of addition: draw the vectors head
 
 == Force Components
 $
-  vecb(F) = vecl(x) veca(i) + vecl(y) veca(j)
+  vecb(F) = vecl(x) hat(i) + vecl(y) hat(j)
 $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
 
@@ -115,10 +115,10 @@ $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
     To generalize it, we can write it as
     $
-      vecb(F) &= vecl(F)_x veca(i) + vecl(F)_y veca(j) \
-      &= vecl(F) (cos(theta) veca(i) + sin(theta) veca(j))
+      vecb(F) &= vecl(F)_x hat(i) + vecl(F)_y hat(j) \
+      &= vecl(F) (cos(theta) hat(i) + sin(theta) hat(j))
     $
-    where $veca(i), veca(j)$ are unit vectors in the $x, y$ directions.
+    where $hat(i), hat(j)$ are unit vectors in the $x, y$ directions.
     This is the Cartesian form of a vector.
   ],
 )
@@ -128,10 +128,10 @@ For a force with 2 dimensions, we call it a coplanar force.
 Sometimes, non-linear equations arise from problems involving forces. Gladly use math solvers for those.
 
 == Unit Vector
-To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $veca(u) = vecb(A) / vecl(A)$.
+To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $hat(u) = vecb(A) / vecl(A)$.
 
 == 3D Forces
-Forces in 3D are $vecb(F) = vecl(F)_x veca(i) + vecl(F)_y veca(j) + vecl(F)_z veca(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
+Forces in 3D are $vecb(F) = vecl(F)_x hat(i) + vecl(F)_y hat(j) + vecl(F)_z hat(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
 
 To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
