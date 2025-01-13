@@ -50,7 +50,6 @@
 
 / Resistance (R): The opposition to the flow of electric current, measured in Ohms ($Omega$).
   $ V = I R $
-  $ P = I V = I^2R = V^2 / R $
 
   Resistance of a resistor depends on its material, length $L$, and cross-sectional area $A$.
   $ R = rho L / A $ where $rho$ is the resistivity of the material.
@@ -131,4 +130,27 @@ When traveling against the direction of the current, invert the signs.
   A 'closed loop' is a path that starts and ends at the same point, no matter the direction of current.
 
 These two laws are crucial in analyzing circuits (solving problems), especially when appliances are not clearly connected in series or parallel.
+
+== Short, Open Circuits and Proportionality
+/ Short Circuit: A circuit with no resistance, causing a large current to flow.
+  The voltage drop across a short circuit is zero.
+/ Open Circuit: A circuit with infinite resistance, causing no current to flow.
+
+In case of a parallel circuit, the voltage across each component is the same, while the current is inversely proportional to the resistance.
+While in a series circuit, the current across each component is the same, while the voltage is inversely proportional to the resistance.
+
+For instance, $qty(3, A)$ of current flows through a $qty(2, "Omega")$ and a $qty(1, "Omega")$ resistors, the current through each will be $qty(1, A) "and" qty(2, A)$.
+
+Combining this knowledge with Kirchhoff's laws, we can solve even more complex circuits.
+
+== Real Batteries
+/ Internal Resistance ($r$): The resistance within a battery, causing a voltage drop.
+  $
+    V_"terminal" = epsilon - I r \
+    I = epsilon / (r + R)
+  $
+
+== Power
+/ Power: The rate at which energy is consumed or produced, measured in Watts ($unit(W)$).
+  $ P = I V = I^2 R = V^2 / R $
 
