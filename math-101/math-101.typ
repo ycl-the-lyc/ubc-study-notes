@@ -7,6 +7,10 @@
   author: "Yecheng Liang",
 )
 
+#import "@preview/equate:0.2.1": equate
+#show: equate.with(breakable: true, sub-numbering: true)
+#set math.equation(numbering: "(1.1)")
+
 #import "@preview/physica:0.9.4": *
 #import "@preview/cetz:0.3.1"
 #import "@preview/cetz-plot:0.1.0"
@@ -133,4 +137,71 @@ $
   &= "the actual signed area" \
   &= "wait isn't this the definition of the integral?" \
   &= integral_a^b f(x) dd(x).
+$
+
+= Fundamental Theorem of Calculus
+
+== Part 1
+The Fundamental Theorem of Calculus (FTC) states that the derivative of the integral of a function is the function itself.
+$
+  (integral_a^x f(t) dd(t))' = f(x).
+$
+
+== Integral Properties
+Integral with range $a$ to $b$ is a linear operator:
+$
+  integral_a^b f(x) dd(x) &= -integral_b^a f(x) dd(x) \
+  integral_a^b f(x) dd(x) &= integral_a^c f(x) dd(x) + integral_c^b f(x) dd(x).
+$
+
+Scaling and summing are also allowed:
+$
+  integral_a^b k f(x) dd(x) &= k integral_a^b f(x) dd(x) \
+  integral_a^b (f(x) + g(x)) dd(x) &= integral_a^b f(x) dd(x) + integral_a^b g(x) dd(x).
+$
+
+However, the integral of a product is not the product of integrals:
+$
+  integral_a^b f(x) g(x) dd(x) &eq.not integral_a^b f(x) dd(x) integral_a^b g(x) dd(x),
+$
+nor can an integral 'scale' like a scalar:
+$
+  integral_a^b f(x) g(x) dd(x) &eq.not g(x) integral_a^b f(x) dd(x).
+$
+
+== Anti-derivative
+The anti-derivative of a function $f(x)$ is a function $F(x)$ such that $F'(x) = f(x)$.
+
+For example, the anti-derivative of $x^n$ is $(1/(n+1)) x^(n+1) + c$, where $c$ is a constant. $c$ can be any number, since the derivative of a constant is 0.
+
+Unfortunately, there is no systematic way to find the anti-derivative of a function, but there are some common rules to follow.
+$
+  integral 1/x dd(x) &= ln(abs(x)) + c \
+  integral e^x dd(x) &= e^x + c \
+  integral ln(x) dd(x) &= x ln(x) - x + c \
+  integral tan(x) dd(x) &= -ln(abs(cos(x))) + c.
+$
+
+Also, there are functions we can't find the anti-derivative for, like $e^(-x^2)$.
+
+== Part 2
+The second part of the Fundamental Theorem of Calculus states that the integral of a function can be calculated by finding an anti-derivative of the function.
+For a definite integral, such operation will cancel out the constant $c$:
+$
+  integral_a^b f(x) dd(x) &= F(b) - c - F(a) - (-c) \
+  &= F(b) - F(a).
+$
+
+== Even and Odd Functions
+/ Even function: $f(x) = f(-x)$, symmetrical about the $y$-axis.
+/ Odd function: $f(x) = -f(-x)$, symmetrical about the origin.
+
+For an even function, the integral over a symmetric interval is twice the integral over half the interval:
+$
+  integral_(-a)^a f(x) dd(x) &= 2 integral_0^a f(x) dd(x).
+$
+
+For an odd function, the integral over a symmetric interval is 0:
+$
+  integral_(-a)^a f(x) dd(x) &= 0.
 $
