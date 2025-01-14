@@ -100,7 +100,7 @@ $
           ((x, ex-sqrt(x)),),
           bar-position: "end",
           bar-width: 2,
-          style: (stroke: white.transparentize(80%)+2pt, fill: gray.transparentize(80%)),
+          style: (stroke: white.transparentize(80%) + 2pt, fill: gray.transparentize(80%)),
         )
         plot.add(domain: (0, 8), ex-sqrt, samples: 128)
       }
@@ -175,13 +175,25 @@ The anti-derivative of a function $f(x)$ is a function $F(x)$ such that $F'(x) =
 For example, the anti-derivative of $x^n$ is $(1/(n+1)) x^(n+1) + c$, where $c$ is a constant. $c$ can be any number, since the derivative of a constant is 0.
 
 Unfortunately, there is no systematic way to find the anti-derivative of a function, but there are some common rules to follow.
-$
-  integral 1/x dd(x) &= ln(abs(x)) + c \
-  integral e^x dd(x) &= e^x + c \
-  integral ln(x) dd(x) &= x ln(x) - x + c \
-  integral tan(x) dd(x) &= -ln(abs(cos(x))) + c.
-$
-//TODO anti-derivative table
+#figure(
+  block(
+    breakable: false,
+    table(
+      columns: 2,
+      table.header([Function], [Anti-derivative]),
+      $1 / x$, $ln(abs(x)) + c$,
+      $e^x$, $e^x + c$,
+      $ln(x)$, $x ln(x) - x + c$,
+      $tan(x)$, $-ln(abs(cos(x))) + c$,
+      $sin(x)$, $-cos(x) + c$,
+      $cos(x)$, $sin(x) + c$,
+      $sec^2(x)$, $tan(x) + c$,
+      $csc^2(x)$, $-cot(x) + c$,
+      $sec(x) tan(x)$, $sec(x) + c$,
+      $csc(x) cot(x)$, $-csc(x) + c$,
+    ),
+  ),
+)
 
 Also, there are functions we can't find the anti-derivative for, like $e^(-x^2)$.
 
