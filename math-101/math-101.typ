@@ -181,6 +181,7 @@ $
   integral ln(x) dd(x) &= x ln(x) - x + c \
   integral tan(x) dd(x) &= -ln(abs(cos(x))) + c.
 $
+//TODO anti-derivative table
 
 Also, there are functions we can't find the anti-derivative for, like $e^(-x^2)$.
 
