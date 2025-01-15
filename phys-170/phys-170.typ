@@ -59,7 +59,7 @@ In this course, we will use $ g = qty(9.81, m/s^2) $ which happens to be true fo
 == Vector Notation
 In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
 
-$ vecb(A) "has a magnitude of" vecl(A) "in direction" hat(i). $
+$ vecb(A) "has a magnitude of" vecl(A) "in direction" hat(A). $
 
 == Angle Unit
 In this course, angles are in degrees.
@@ -73,7 +73,7 @@ Use #quote[tip to tail] for triangular method of addition: draw the vectors head
 
 == Force Components
 $
-  vecb(F) = vecl(x) hat(i) + vecl(y) hat(j)
+  vecb(F) = vecl(x) vecb(i) + vecl(y) vecb(j)
 $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
 
@@ -115,10 +115,10 @@ $ where $x, y$ are magnitudes of the force in the $vecb(i), vecb(j)$ directions.
 
     To generalize it, we can write it as
     $
-      vecb(F) &= vecl(F)_x hat(i) + vecl(F)_y hat(j) \
-      &= vecl(F) (cos(theta) hat(i) + sin(theta) hat(j))
+      vecb(F) &= vecl(F)_x vecb(i) + vecl(F)_y vecb(j) \
+      &= vecl(F) (cos(theta) vecb(i) + sin(theta) vecb(j))
     $
-    where $hat(i), hat(j)$ are unit vectors in the $x, y$ directions.
+    where $vecb(i), vecb(j)$ are unit vectors in the $x, y$ directions.
     This is the Cartesian form of a vector.
   ],
 )
@@ -131,7 +131,7 @@ Sometimes, non-linear equations arise from problems involving forces. Gladly use
 To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $hat(u) = vecb(A) / vecl(A)$.
 
 == 3D Forces
-Forces in 3D are $vecb(F) = vecl(F)_x hat(i) + vecl(F)_y hat(j) + vecl(F)_z hat(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
+Forces in 3D are $vecb(F) = vecl(F)_x vecb(i) + vecl(F)_y vecb(j) + vecl(F)_z vecb(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
 
 To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
@@ -146,10 +146,10 @@ $
 
 Therefore,
 $
-  hat(u) &= cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k)
+  hat(u) &= cos(alpha) vecb(i) + cos(beta) vecb(j) + cos(gamma) vecb(k)
 $ and $
   vecb(F) &= vecl(F) hat(u) \
-  &= vecl(F) (cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k))
+  &= vecl(F) (cos(alpha) vecb(i) + cos(beta) vecb(j) + cos(gamma) vecb(k))
 $
 
 The directions satisfy $-180 degree < alpha, beta, gamma < 180 degree$ and have identity
@@ -176,7 +176,19 @@ $
 Or instead, given 2 ($beta, gamma$) of the 3 Cartesian angles, we can determine the force by
 $
   cos(alpha) = sqrt(1 - cos^2(beta) - cos^2(gamma)) \
-  vecb(F) = vecl(F) (cos(alpha) hat(i) + cos(beta) hat(j) + cos(gamma) hat(k)).
+  vecb(F) = vecl(F) (cos(alpha) vecb(i) + cos(beta) vecb(j) + cos(gamma) vecb(k)).
+$
+
+== Position Vectors
+Position vectors are vectors that describe the position of a point in space relative to a reference point.
+
+As obvious, we need 3 coordinates to locate a point in 3D space.
+Point $P(x, y, z)$ has position vector $vecb(r) = x vecb(i) + y vecb(j) + z vecb(k)$ relative to the origin.
+
+Note that the position vector does not always come from the origin, it can be relative to arbitrary points.
+Given $A(x_A, y_A, z_A)$ and $B(x_B, y_B, z_B)$, the position vector of $B$ relative to $A$ is
+$
+  vecb(r) = (x_B - x_A) vecb(i) + (y_B - y_A) vecb(j) + (z_B - z_A) vecb(k).
 $
 
 = Equilibrium of a Particle
