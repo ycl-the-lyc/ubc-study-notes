@@ -191,6 +191,17 @@ $
   vecb(r) = (x_B - x_A) vecb(i) + (y_B - y_A) vecb(j) + (z_B - z_A) vecb(k).
 $
 
+Connecting to unit vectors, $vecb(u) = vecb(F) / vecl(F)$,
+$
+  vecb(F) = vecl(F) vecb(u) = vecl(F) vecb(r) / vecl(r).
+$
+
+To simplify calculation, let $X = vecl(F) / vecl(r)$,
+$
+  vecb(F) &= X vecb(r) \
+  vecl(F) &= X vecl(r).
+$
+
 = Equilibrium of a Particle
 
 = Force System Resultants
