@@ -22,7 +22,7 @@
 / Resistors (R): Resists current, consumes power.
   Light bulbs, lamps are also resistors.
 
-/ Capacitors (C): Stores electric charge and energy.
+/ #link(<sc:capacitor>)[Capacitors (C)]: Stores electric charge and energy.
   Not to be confused with batteries: \
   Batteries release energy in a slow manner;
   capacitors can discharge energy in a short burst.
@@ -37,16 +37,7 @@
 
 / Voltage (V): The potential difference between two points, measured in Volts (V).
 
-/ Capacitance (C): The ability to store electric charge, measured in Farads (F).
-  $ Q = C V $
-  $ I = dd(Q) / dd(t) = C dd(V) / dd(t) $
-
-  Capacitance of a capacitor depends on its material, area $A$, and distance $d$ between plates.
-  $ C = epsilon A / d $ where $epsilon$ is the permittivity of the material.
-
-  For multiple capacitors,
-  $ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $
-  $ C_"parallel" = C_1 + C_2 + ... $
+/ #link(<sc:capacitance>)[Capacitance (C)]: The ability to store electric charge, measured in Farads (F).
 
 / Resistance (R): The opposition to the flow of electric current, measured in Ohms ($Omega$).
   $ V = I R $
@@ -146,11 +137,42 @@ Combining this knowledge with Kirchhoff's laws, we can solve even more complex c
 == Real Batteries
 / Internal Resistance ($r$): The resistance within a battery, causing a voltage drop.
   $
-    V_"terminal" = epsilon - I r \
-    I = epsilon / (r + R)
+    V_"battery" &= epsilon - I r \
+    I &= epsilon / (r + R).
   $
+
+Hence, the terminal voltage of a battery is
+$
+  V_"terminal" &= epsilon - epsilon / (r + R) r \
+  &= epsilon R / (r + R).
+$
 
 == Power
 / Power: The rate at which energy is consumed or produced, measured in Watts ($unit(W)$).
   $ P = I V = I^2 R = V^2 / R $
 
+== Grounding
+/ Ground: A reference point in a circuit, usually at zero voltage.
+  It is used to measure the voltage of other points in the circuit.
+
+/ Grounding: Connecting a circuit to the ground or other big conductors to send away excess energy, usually to prevent electric shock.
+  It is also used to stabilize the voltage of a circuit.
+
+Addition of a ground symbol in a circuit diagram does not affect the circuit itself, our calculations stay the same.
+However, our *zero reference point changes*, and we must measure the voltage of other points in the circuit with respect to the ground!
+
+== Capacitor <sc:capacitor>
+Any collection of conductors that can store electric charge & energy.
+
+== Capacitance ($C$) <sc:capacitance>
+The ability to store electric charge, measured in Farads ($unit(F)$).
+
+Capacitance of a capacitor depends on its material, area $A$, and distance $d$ between plates.
+$ C = epsilon A / d $ where $epsilon$ is the electric permittivity of the material.
+
+$ Q = C V $
+$ I = dd(Q) / dd(t) = C dd(V) / dd(t) $
+
+For multiple capacitors,
+$ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $
+$ C_"parallel" = C_1 + C_2 + ... $

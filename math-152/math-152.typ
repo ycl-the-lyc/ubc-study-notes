@@ -25,6 +25,7 @@
 #let vecb(body) = $vectorbold(body)$
 #let veca(body) = $vectorarrow(body)$
 #let vecl(body) = $||vecb(body)||$
+// #let vec(..body) = $(body.pos().join(", "))$
 #let det = "det"
 #set math.mat(delim: "[")
 
@@ -155,11 +156,12 @@ For example, $||vecb(x) - vecb(c)|| = 1$ means all points which are 1 unit away 
 The projection of $vecb(a)$ onto $vecb(b)$ is the vector that is parallel to $vecb(b)$ and has the same length as the projection of $vecb(a)$ onto $vecb(b)$.
 $
   "proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
-  //TODO middle form
-  &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2.
+  &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2 \
+  &= (vecb(a) dot hat(b)) hat(b)
 $
 
-==== Derivation
+Here's a proof:
+
 The projection of $vecb(a)$ onto $vecb(b)$ can be represented as a scalar multipled by $vecb(b)$, where $vecb(b) != 0$.
 $ "proj"_vecb(b) vecb(a) = s vecb(b) $ <eq:projection>
 
@@ -171,6 +173,11 @@ $ vecb(a) dot vecb(b) - s (vecb(b) dot vecb(b)) = 0 $
 $ s = (vecb(a) dot vecb(b)) / (vecb(b) dot vecb(b)) $
 Plugging back into @eq:projection, we hence get:
 $ "proj"_vecb(b) vecb(a) = (vecb(a) dot vecb(b)) / vecl(b)^2  vecb(b) $
+
+Further, a vector $vecb(a)$ has $vecb(a) / vecl(a) = hat(a)$, so
+$
+  (vecb(a) dot vecb(b)) / vecl(b)^2  vecb(b) &= (vecb(a) dot hat(b)) hat(b).
+$
 
 === Parallelogram
 A parallelogram is a quadrilateral with opposite sides parallel.
@@ -289,12 +296,24 @@ $
 
 == Lines in 2D Space
 There is a line $L$.
-Take a point on the line, $vecb(p) = vec(x, y)$, then take a vector that is parallel to the line, $vecb(l) = vec(i, j)$.
+Take a point on the line, $vecb(p) = vec(x_0, y_0)$, then take a vector that is parallel to the line, $vecb(l) = vec(i, j)$.
 The line can be represented as
 $
   vecb(x) = vecb(p) + t vecb(l)
 $
 where $t in RR$.
+
+Alternatively,
+$
+cases(
+  x = i t + x_0,
+  y = j t + y_0
+)
+$
+
+The directional vector $vecb(l)$ is can be compared to other vectors to determine if they are parallel or perpendicular, or neither.
+- If $vecb(l)_1 dot vecb(l)_2 = 0$, then the two vectors are perpendicular.
+- Else, if $vecb(l)_1 = c vecb(l)_2$ where $c$ is a scalar constant, then the two vectors are parallel.
 
 Where there is a line, there is a normal vector to the line, $vecb(n)$.
 Thus the line can also be represented as
@@ -305,3 +324,34 @@ $
 
 If we have a line $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vecb(n) dot vecb(p) = 0$, $vecb(p) = vec(0, 0, 0)$, so the line must pass through the origin.
 Additionally, the normal vector is $vec(1, -2, 3)$.
+
+== Planes in 3D Space
+There is a plane $S "in" RR^3$.
+Take a point on the plane, $vecb(p) = vec(x_0, y_0, z_0)$.
+If $vecb(x)$ is a point on the plane, $vecb(x) - vecb(p)$ must be perpendicular to the normal vector of the plane from origin, $vecb(n)$.
+Thus the plane can be represented as
+$
+  vecb(n) dot (vecb(x) - vecb(p)) = 0 " or " vecb(n) dot vecb(x) = vecb(n) dot vecb(p).
+$
+Similarly, if we have a plane $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vecb(n) dot vecb(p) = 0$, $vecb(p) = vec(0, 0, 0)$, so the plane must pass through the origin.
+Additionally, the normal vector is $vec(1, -2, 3)$.
+
+The plane can also be seen as:
+$
+  a x + b y + c z = d.
+$
+where $vec(a, b, c) = vecb(n)$ and $d = vecb(n) dot vecb(p)$.
+We can see that this is an expansion of the $vecb(n) dot vecb(x) = vecb(n) dot vecb(p)$ form.
+
+Alternatively, we can use the parametric form:
+$
+  vecb(x) - vecb(p) = s vecb(u) + t vecb(v)
+$
+where $vecb(u)$ and $vecb(v)$ are two vectors parallel to the plane and $s, t in RR$.
+
+=== Distance from Point to Plane
+The distance from a point $vecb(p)$ to a plane $a x + b y + c z = d$ is
+$
+  d_"distance" = abs(a x_0 + b y_0 + c z_0 - d) / sqrt(a^2 + b^2 + c^2).
+$
+//TODO proof
