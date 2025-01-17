@@ -205,6 +205,8 @@ $
   &= F(b) - F(a).
 $
 
+To put it in other words, once $c$ is fixed, the integral has bounds, and is definite.
+
 == Even and Odd Functions
 / Even function: $f(x) = f(-x)$, symmetrical about the $y$-axis.
 / Odd function: $f(x) = -f(-x)$, symmetrical about the origin.
