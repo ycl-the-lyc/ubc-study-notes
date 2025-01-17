@@ -22,12 +22,14 @@
   ),
 )
 
+#set math.vec(delim: "[")
 #let vecb(body) = $vectorbold(body)$
 #let veca(body) = $vectorarrow(body)$
 #let vecl(body) = $||vecb(body)||$
+#let vecu(body) = $vectorunit(body)$
 // #let vec(..body) = $(body.pos().join(", "))$
 #let det = "det"
-#set math.mat(delim: "[")
+#set math.mat(delim: "[")
 
 = Scalars
 A scalar $x$ has
@@ -136,7 +138,7 @@ If neither of the vectors is the zero vector, and the dot product is 0, then the
 
 Given $vecb(a) = vec(1, 1, 1) "and" vecb(b) = vec(1, -1, 1)$, the angle between them is
 $
-  cos(theta) &= (1 times 1 + 1 times -1 + 1 times 1) / (sqrt(1^2 + 1^2 + 1^2) times sqrt(1^2 + -1^2 + 1^2)) = 1/3 \
+  cos(theta) &= (1 times 1 + 1 times -1 + 1 times 1) / (sqrt(1^2 + 1^2 + 1^2) times sqrt(1^2 + -1^2 + 1^2)) = 1 / 3 \
   theta &approx qty(1.23, rad) = 70.53 degree.
 $
 
@@ -172,11 +174,11 @@ $ (vecb(a) - s vecb(b)) dot vecb(b) = 0 $
 $ vecb(a) dot vecb(b) - s (vecb(b) dot vecb(b)) = 0 $
 $ s = (vecb(a) dot vecb(b)) / (vecb(b) dot vecb(b)) $
 Plugging back into @eq:projection, we hence get:
-$ "proj"_vecb(b) vecb(a) = (vecb(a) dot vecb(b)) / vecl(b)^2  vecb(b) $
+$ "proj"_vecb(b) vecb(a) = (vecb(a) dot vecb(b)) / vecl(b)^2 vecb(b) $
 
 Further, a vector $vecb(a)$ has $vecb(a) / vecl(a) = hat(a)$, so
 $
-  (vecb(a) dot vecb(b)) / vecl(b)^2  vecb(b) &= (vecb(a) dot hat(b)) hat(b).
+  (vecb(a) dot vecb(b)) / vecl(b)^2 vecb(b) &= (vecb(a) dot hat(b)) hat(b).
 $
 
 === Parallelogram
@@ -207,7 +209,7 @@ $
 
 Let a matrix be defined as:
 $
-  mat(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) 
+  mat(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3)
 $
 
 The minor matrix for an element is the 2x2 matrix obtained from deleting the row and column that element is in.
@@ -219,21 +221,21 @@ One way to find the determinant is by row expansion, which is taking each of the
 The signs for computing the sum of each element x its minor is:
 $ mat(+,-,+;-,+,-;+,-,+) $
 
-If you pick row 1: 
+If you pick row 1:
 $
   matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2).
 $
 
-If you pick row 2: 
+If you pick row 2:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= 
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
   - b_1 matrixdet(a_2, a_3; c_2, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - b_3 matrixdet(a_1, a_2; c_1, c_2).
 $
 
 If you pick column 2:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= 
-  -a_2 matrixdet(b_1, b_3; c_1, c_3)  + b_2 matrixdet(a_1, a_3; c_1, c_3) - c_2 matrixdet(a_1, a_3; b_1, b_3).
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
+  -a_2 matrixdet(b_1, b_3; c_1, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - c_2 matrixdet(a_1, a_3; b_1, b_3).
 $
 
 / Tip: pick any row / column with the *MOST ZEROES*.
@@ -262,7 +264,7 @@ $
 $
 
 
-//ADD 4X4 MATRIX DETERMINANT // 
+//ADD 4X4 MATRIX DETERMINANT //
 
 
 === Linear Dependence
@@ -275,7 +277,7 @@ a.k.a. the vector that is perpendicular to the two vectors.
 
 Given $vecb(a) = vec(a_1, a_2, a_3) "and" vecb(b) = vec(b_1, b_2, b_3)$, the cross product is
 $
-  vecb(a) times vecb(b) &= matrixdet(hat(i), hat(j), hat(k); a_1, a_2, a_3; b_1, b_2, b_3) \
+  vecb(a) times vecb(b) &= matrixdet(vecu(i), vecu(j), vecu(k); a_1, a_2, a_3; b_1, b_2, b_3) \
   &= vec(a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1).
 $
 
@@ -305,7 +307,7 @@ where $t in RR$.
 
 Alternatively,
 $
-cases(
+  cases(
   x = i t + x_0,
   y = j t + y_0
 )
@@ -347,11 +349,93 @@ Alternatively, we can use the parametric form:
 $
   vecb(x) - vecb(p) = s vecb(u) + t vecb(v)
 $
-where $vecb(u)$ and $vecb(v)$ are two vectors parallel to the plane and $s, t in RR$.
+where $vecb(u)$ and $vecb(v)$ are two vectors on the plane and $s, t in RR$.
+
+For example, a plane $S$ has parametric form
+$
+  vecb(x) = vec(1, 2, 1) + s vec(1, 0, 1) + t vec(1, 1, 0).
+$
+To find the normal representation, we can do a cross product of the two vectors on the plane to get the normal vector.
+$
+  vecb(n) &= vec(1, 0, 1) times vec(1, 1, 0) \
+  &= matrixdet(vecu(i), vecu(j), vecu(k); 1, 0, 1; 1, 1, 0) \
+  &= vec(1, -1, -1).
+$
+
+Another example, given plane $S$'s equation $x + 2y + 3z = 6$, we can find its parametric form by locating three points on the plane, then finding two vectors connecting the dots.
+
+However, a better way is to restrict two of the variables to 0 and the third to 1.
+$
+  x + 2y + 3z &= 6 \
+  y &= s \
+  z &= t \
+  x &= 6 - 2y - 3z \
+  &= 6 - 2s - 3t.
+$ $
+  vecb(x) = vec(6, 0, 0) + s vec(-2, 1, 0) + t vec(-3, 0, 1).
+$
 
 === Distance from Point to Plane
-The distance from a point $vecb(p)$ to a plane $a x + b y + c z = d$ is
+The distance from a point $P(x_0, y_0, z_0)$ to a plane $a x + b y + c z = d$ is
 $
   d_"distance" = abs(a x_0 + b y_0 + c z_0 - d) / sqrt(a^2 + b^2 + c^2).
 $
 //TODO proof
+
+== Lines in 3D Space
+3D line $L$ can be written as
+$
+  vecb(x) = vecb(p) + t vecb(l),
+$ the same as in 2D space.
+
+The line can also be represented as the intersection of two planes.
+$
+  cases(
+    vecb(n)_1 dot vecb(x) = vecb(n)_1 dot vecb(p)_1,
+    vecb(n)_2 dot vecb(x) = vecb(n)_2 dot vecb(p)_2
+  ) \
+  vecb(l) = vecb(n)_1 times vecb(n)_2.
+$
+
+Example: given a line $L$ with
+$
+  cases(
+    x + y + z = 3,
+    x - y + 2z = -7
+  )
+$
+Firstly, the planes' normals are obviously
+$
+  vecb(n)_1 = vec(1, 1, 1) \
+  vecb(n)_2 = vec(1, -1, 2).
+$
+So we can have $vecb(l)$
+$
+  vecb(l) = vecb(n)_1 times vecb(n)_2 = matrixdet(vecu(i), vecu(j), vecu(k); 1, 1, 1; 1, -1, 2) = vec(3, -1, -2).
+$
+Let $z = 0$,
+$
+  cases(
+    x + y = 3,
+    x - y = -7
+  ) \
+  cases(
+    x = -2,
+    y = 5
+  ).
+$
+Thus, $vecb(p) = vec(-2, 5, 0)$ is on $L$.
+$
+  vecb(x) = vec(-2, 5, 0) + t vec(3, -1, -2).
+$
+
+Inversely, given a line $L$ with
+$
+  vecb(x) = vec(1, 2, 1) + t vec(1, 1, 2),
+$
+we can find two planes that intersect at the line.
+Look for two combinations of $t = x, y, z$ that when plugged in, will remove $t$ from the equation.
+That will give us two planes.
+
+=== Distance Between Two Lines
+
