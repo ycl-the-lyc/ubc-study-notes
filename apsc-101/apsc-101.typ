@@ -9,6 +9,9 @@
 
 #set terms(separator: [: ])
 
+#import "@preview/fletcher:0.5.4" as fletcher: diagram, node, edge
+#import fletcher.shapes: diamond
+
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
 #import units: *
@@ -64,7 +67,40 @@ $"Risk" = "Severity" times "Likelihood"$
 == Risk Tools
 
 //TODO risk management process
+#let rmp = (
+  identify: (0, 0),
+  analize: (0, 1),
+  cc-acceptable: (0, 2),
+  cc-reducible: (1, 2),
+  reduce: (1, 1),
+  monitor: (0, 3),
+  discountinue: (1, 3),
+)
+#figure(
+  caption: [Risk Management Process],
+  diagram(
+    node-stroke: black + 1pt,
+    node-inset: 10pt,
+    spacing: (5em,) * 2,
+    {
+      node(rmp.identify, [Identify risks])
+      node(rmp.analize, [Conduct risk analysis])
+      node(rmp.cc-acceptable, [Is the risk \ acceptable?], shape: diamond)
+      node(rmp.cc-reducible, [Can risk be \ reduced?], shape: diamond)
+      node(rmp.reduce, [Reduce the risk])
+      node(rmp.monitor, [Monitor and manage risks])
+      node(rmp.discountinue, [Discontinue])
 
+      edge(rmp.identify, rmp.analize, "-|>")
+      edge(rmp.analize, rmp.cc-acceptable, "-|>")
+      edge(rmp.cc-acceptable, rmp.cc-reducible, [no], "-|>")
+      edge(rmp.cc-acceptable, rmp.monitor, [yes], "-|>")
+      edge(rmp.cc-reducible, rmp.reduce, [yes], "-|>")
+      edge(rmp.cc-reducible, rmp.discountinue, [no], "-|>")
+      edge(rmp.reduce, rmp.identify, "-|>", corner: left)
+    },
+  ),
+)
 #figure(
   caption: [Risk Classification Table],
   table(
@@ -80,19 +116,20 @@ $"Risk" = "Severity" times "Likelihood"$
     table.cell(
       rowspan: 4,
       context {
-        let c = smallcaps[Risk Category]
+        let c = rotate(-90deg, origin: right + bottom, smallcaps[Risk Category])
         let ds = measure(c)
         box(
-          // width: ds.height,
-          // height: ds.width,
+          width: ds.width,
+          height: ds.height,
+          // clip: true,
           c
         )
       },
     ),
-    [Safety], ..([],)*2, [none],
-    [Technical], ..([],)*3,
-    [Project \ Management], ..([],)*3,
-    [Operational], ..([],)*3,
+    [Safety], ..([],) * 2, [none],
+    [Technical], ..([],) * 3,
+    [Project \ Management], ..([],) * 3,
+    [Operational], ..([],) * 3,
   ),
 )
 
