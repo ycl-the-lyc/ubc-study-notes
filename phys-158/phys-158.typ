@@ -174,5 +174,39 @@ $ Q = C V $
 $ I = dd(Q) / dd(t) = C dd(V) / dd(t) $
 
 For multiple capacitors,
-$ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $
-$ C_"parallel" = C_1 + C_2 + ... $
+$ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $ <eq:capacitor-series>
+$ C_"parallel" = C_1 + C_2 + ... $ <eq:capacitor-parallel>
+
+=== Capacitors in Parallel
+As they are in parallel, the voltage drop across them should be the same, regardless of the capacitance.
+$
+  V &= V_1 = V_2 = ... \
+  Q &= C_1 V_1 + C_2 V_2 + ... \
+  &= C_1 V + C_2 V + ... \
+  &= (C_1 + C_2 + ...) V \
+  Q / V &= C_1 + C_2 + ...
+$ which leads to @eq:capacitor-parallel.
+
+Imagine all the parallel capacitors as one big capacitor with the sum of capacitances. Now the formula makes sense.
+
+=== Capacitors in Series
+When connected in series, the capacitors can be viewed as one beginning plate with positive charges and one ending plate with negative charges, plus all the plates in between, with charges but adding up to zero.
+
+In this case, charges across the capacitors are the same.
+$
+  Q &= Q_1 = Q_2 = ... \
+  V &= V_1 + V_2 + ... \
+  &= Q / C_1 + Q / C_2 + ... \
+  &= Q (1 / C_1 + 1 / C_2 + ...) \
+  V / Q &= 1 / C_1 + 1 / C_2 + ...
+$ which leads to @eq:capacitor-series.
+
+=== Work and Energy in Capacitors
+Batteries charge capacitors bit by bit, by $dd(q)$.
+Thus, we can say the work done is
+$
+  dd(W) &= Delta V dd(q) \
+  &= q / C  dd(q) \
+$ $
+  U = 1 / C integral_0^Q q dd(q) = Q^2 / (2 C)
+$ <eq:capacitor-energy>
