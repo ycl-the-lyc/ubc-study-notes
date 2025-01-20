@@ -8,6 +8,8 @@
 )
 
 #import "@preview/cetz:0.3.1"
+#import "@preview/cetz-plot:0.1.0"
+
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
 #import units: *
@@ -234,17 +236,48 @@ $
 Note the similarity to the parallel component formula.
 
 = Equilibrium of a Particle
+This section only concerns static equilibrium, where the particle is at rest.
+In other words, $ sum vecb(F) = 0. $
 
-= Force System Resultants
+== Free-Body Diagram
+To draw a free-body diagram,
++ Draw a labeled right-hand coordinate system.
++ Draw outlined shape.
++ Show all forces. \
+  Since this is static equilibrium, account for _active_ and _reactive_ forces.
++ Identify and label each force.
 
-= Equilibrium of a Rigid Body
+== Coplanar Force Systems
+On a 2D plane, forces can be resolved into $x, y$ components.
+$
+  sum vecb(F)_x &= 0 \
+  sum vecb(F)_y &= 0.
+$
 
-= Friction
+== 3D Force Systems
+Forces in 3D can be resolved into $x, y, z$ components.
+$
+  sum vecb(F)_x &= 0 \
+  sum vecb(F)_y &= 0 \
+  sum vecb(F)_z &= 0.
+$
 
-= Kinematics of a Particle
+Be very careful with the signs of the forces.
 
-= Kinetics of a Particle: Force and Acceleration
+== Solving Equilibrium Problems
+With multiple forces and their direction vectors (_not unit vectors_) $vecb(r)$, $ F = vecb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$
+Solving for $X, Y, Z$ gives the forces.
 
-= Kinetics of a Particle: Work and Energy
-
-= Kinetics of a Particle: Impulse and Momentum
+// = Force System Resultants
+//
+// = Equilibrium of a Rigid Body
+//
+// = Friction
+//
+// = Kinematics of a Particle
+//
+// = Kinetics of a Particle: Force and Acceleration
+//
+// = Kinetics of a Particle: Work and Energy
+//
+// = Kinetics of a Particle: Impulse and Momentum
