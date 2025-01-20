@@ -56,6 +56,12 @@ _Good teams change their style as situation demands._
 
 $"Risk" = "Severity" times "Likelihood"$
 
+$"Risk" eq.not "Hazard"$
+
+/ Risk: _Possibility_ of harm, consequences, or damage.
+/ Hazard: _Capacity_ of equipment, material, or processes to cause
+harm.
+
 == Risk Sources
 
 / Preventable: Controllable. \
@@ -101,35 +107,31 @@ $"Risk" = "Severity" times "Likelihood"$
     },
   ),
 )
-#figure(
-  caption: [Risk Classification Table],
-  table(
-    columns: 5,
-    stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
-    table.header(
-      table.cell(colspan: 2, rowspan: 2, none),
-      table.cell(colspan: 3)[Risk Source],
-      [Preventable],
-      [Strategic],
-      [External],
+
+#block(
+  width: 100%,
+  breakable: false,
+  figure(
+    caption: [Risk Classification Table],
+    table(
+      columns: 5,
+      stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
+      table.header(
+        table.cell(colspan: 2, rowspan: 2, none),
+        table.cell(colspan: 3)[Risk Source],
+        [Preventable],
+        [Strategic],
+        [External],
+      ),
+      table.cell(
+        rowspan: 4,
+        rotate(-90deg, origin: right+top, reflow: true)[Risk Category #h(1em)],
+      ),
+      [Safety], ..([],) * 2, [none],
+      [Technical], ..([],) * 3,
+      [Project \ Management], ..([],) * 3,
+      [Operational], ..([],) * 3,
     ),
-    table.cell(
-      rowspan: 4,
-      context {
-        let c = rotate(-90deg, origin: right + bottom, smallcaps[Risk Category])
-        let ds = measure(c)
-        box(
-          width: ds.width,
-          height: ds.height,
-          // clip: true,
-          c
-        )
-      },
-    ),
-    [Safety], ..([],) * 2, [none],
-    [Technical], ..([],) * 3,
-    [Project \ Management], ..([],) * 3,
-    [Operational], ..([],) * 3,
   ),
 )
 
@@ -141,3 +143,4 @@ A risk classification table is a tool used to identify and classify risks based 
 )
 
 //TODO risk register (table)
+
