@@ -437,5 +437,53 @@ we can find two planes that intersect at the line.
 Look for two combinations of $t = x, y, z$ that when plugged in, will remove $t$ from the equation.
 That will give us two planes.
 
-=== Distance Between Two Lines
+=== Projection of a Line onto A Plane
+Let $vecb(a)$ be a line and $S$ be a plane in 3D space.
+
+In case that $S$ is one of the coordinate planes, the projection is simple enough (taught in PHYS 170).
+$
+  vecb(a)_"proj on xy-plane" = vec(a_1, a_2, 0)
+$ and so for the other two planes.
+
+In general, the projection in 3D space resembles the projection in 2D space.
+$
+  vecb(a)_parallel &= vecb(a) - vecb(a)_perp \
+  &= vecb(a)_"proj"
+$
+
+= Systems of Linear Equations
+A system of linear equations is a set of equations that can be written in the form like
+$
+  cases(
+    a_11 x + b_12 y + c_13 z = d_1,
+    a_21 x + b_22 y + c_23 z = d_2,
+    a_31 x + b_32 y + c_33 z = d_3
+  )
+$ where $a_(i j), b_i, (i, j in (1, 2, 3)) in RR$, which $i$ is for row and $j$ is for column.
+
+Notice that each equation defines a plane in 3D space.
+The planes can intersect at a point, form a line, or (have 2 or more of them) be parallel.
+
+== Linear Dependence and Independence
+/ Linear Dependence (LD): Non-zero vectors which are parallel to each other, or can be expressed as a scalar multiple of each other, or most generally, $s_1 vecb(a)_1 + s_2 vecb(a)_2 + ... = vecb(0)$ can be true when _not all_ $s$'s are 0. \
+  In 2D geometry, the parallelogram formed by two LD vectors would have 0 area.
+/ Linear Independence (LI): Non-zero vectors which satisfy none of the LD requirements.
+/ Linear Combination: A vector expressed as a sum of scalar multiples of other vectors.
+/ Basis: A set of LI vectors that can be used to express any vector in the space.
+  In an $RR^n$ space, the basis has $n$ vectors.
+  Hence, a set of vectors are definitely LD if there are more than $n$ vectors in the set.
+
+For example,
+$
+  vec(1, -2, 3) "and" vec(-2, 4, -6) &"are LD" \
+  vec(1, -2, 3) "and" vec(1, 1, 1) &"are LI".
+$
+
+To check if a set of vectors are LI, we can form a matrix with the vectors as _rows_ and find the determinant.
+If the determinant is not 0, then the vectors are LI.
+
+For example,
+$
+  matrixdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
+$ so $vec(1, 0, 1), vec(1, -1, 2) "and" vec(1, 1, 1)$ are LI.
 
