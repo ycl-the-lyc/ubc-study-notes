@@ -167,6 +167,10 @@ Any collection of conductors that can store electric charge & energy.
 == Capacitance ($C$) <sc:capacitance>
 The ability to store electric charge, measured in Farads ($unit(F)$).
 
+$
+  C = Q / V.
+$
+
 Capacitance of a capacitor depends on its material, area $A$, and distance $d$ between plates.
 $ C = epsilon A / d $ where $epsilon$ is the electric permittivity of the material.
 
@@ -207,6 +211,59 @@ Thus, we can say the work done is
 $
   dd(W) &= Delta V dd(q) \
   &= q / C  dd(q) \
-$ $
-  U = 1 / C integral_0^Q q dd(q) = Q^2 / (2 C)
+$
+And energy is
+$
+  U &= 1 / C integral_0^Q q dd(q) = Q^2 / (2 C) \
+  &= (C V^2) / 2.
 $ <eq:capacitor-energy>
+
+=== Energy in C-only Circuits
+It seems curious that, in a circuit with only capacitors, when charge is transferred between capacitors, the energy is _not_ conserved, in other word, lost.
+
+That is because capacitor behaviors cannot be examined without resistors, so even if not shown, the circuit should contain some resistance, probably in the wires.
+
+=== R-C Circuits
+/ R-C Circuits: Circuits with resistors and capacitors.
+  They are used in timing circuits, filters, and oscillators.
+
+Imagine a circuit with a battery, a switch, a resistor and a capacitor.
+The capacitor initially has no charge, and the switch is closed at $t = 0$.
+
+1. At $t = 0-$, the capacitor has no charge, and the voltage across it is zero.
+2. At $t = 0+$, the switch is _just_ closed, and the capacitor starts charging. The voltage across the capacitor is still zero since it has no charge, and hence act as an ideal wire.
+3. As time goes by, the capacitor charges, and the voltage across it increases, while the current decreases.
+
+By Kirchhoff's Voltage Law, the voltage across the resistor and the capacitor should sum up to the battery voltage.
+$
+  V_"battery" &= V_"resistor" + V_"capacitor" \
+  &= i(t) R + q(t) / C.
+$
+As $i(t) = dv(q, t)$, we can rewrite the equation as
+$
+  epsilon = R dv(q, t) + q / C.
+$ <eq:voltage-rc>
+
+Derive the @eq:voltage-rc in respect to time, we get
+$
+  dv(epsilon, t) &= R dv(q(t), t, 2) + dv(q(t), t) / C \
+  0 &= R dv(i(t), t) + i(t) / C.
+$
+
+=== Charging and Discharging Capacitors
+When a capacitor is charging, the current flows from the battery to the capacitor, and the voltage across the capacitor increases.
+When a capacitor is discharging, the current flows from the capacitor to the circuit, and the voltage across the capacitor decreases.
+
+In an R-C circuit, the energy stored in the capacitor increases and decreases exponentially, respectively.
+$
+  q(t)_"charging" &= Q (1 - e^(-t slash R C)) \
+  i(t)_"charging" &= dv(q(t), t) = e^(-t slash R C) / (R C),
+$ $
+  q(t)_"discharging" &= Q e^(-t slash R C) \
+  i(t)_"discharging" &= dv(q(t), t) = - e^(-t slash R C) / (R C)
+$ where $Q$ is the maximum charge stored in the capacitor, $R$ is the resistance in series, and $C$ is the capacitance in parallel.
+
+At times, $R C$ is written as $tau$, the time constant of the RC circuit.
+Think: at $t = tau$, how much charge is in the capacitor?
+
+Notice the similarity between these equations and the exponential decay equation for damped oscillations, it will be useful.
