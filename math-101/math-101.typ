@@ -220,3 +220,82 @@ For an odd function, the integral over a symmetric interval is 0:
 $
   integral_(-a)^a f(x) dd(x) &= 0.
 $
+
+== Integration by Substitution
+In essence, integration by substitution is the chain rule in reverse.
+$
+  dv(,x) f(g(x)) &= f'(g(x)) dot g'(x) \
+  integral f'(g(x)) dot g'(x) dd(x) &= f(g(x)) + c.
+$
+
+When we have $f'(g(x))$ and $g'(x)$, we can substitute $u(x) = g(x)$ and $u'(x) = g'(x) dd(x)$:
+$
+  integral f'(g(x)) dot g'(x) dd(x) &= integral f'(u(x)) u'(x) dd(x) \
+  &= lr(integral g(u) dd(u) |)_(u=u(x)) \
+  &= f(u) + c.
+$
+$u$ would typically be something that is easy to differentiate.
+
+For example, consider $integral 9 sin^8(x) cos(x) dd(x)$.
+Let $u = sin(x)$,
+$
+  dd(u) &= u'(x) dd(x) \
+  &= cos(x) dd(x).
+$ $
+  integral 9 sin^8(x) cos(x) dd(x) &= 9 integral sin^8(x) underline(cos(x) dd(x)) \
+  &= 9 integral sin^8(x) underline(dd(u)) \
+  &= 9 integral u^8 dd(u) \
+  &= 9 times (1 / 9) u^9 + c \
+  &= sin^9(x) + c.
+$
+
+The expression to become $dd(u)$ would not always be so obvious, so it is a good idea to first factor the integrand.
+Also, you will want $u$ to be some function with arguments more than just $x$, like $sqrt(x)$ or $(x^2 + 1)$.
+
+=== Substitution with Definite Integrals
+When substituting in a definite integral, the bounds must be changed accordingly:
+$
+  integral_a^b f'(g(x)) dot g'(x) dd(x) &= integral_(u(a))^(u(b)) f'(u) dd(u).
+$
+
+Alternatively, we can first find the indefinite integral, then take in the bounds.
+
+The general steps are:
++ Determine $u$.
++ _Do not forget to_ substitute bounds.
++ Substitute to $dd(u)$.
++ Substitute the integrand with $u$.
+
+=== Special Integrals
+#figure(
+  caption: [Integrals to Memorize],
+  {
+    show math.equation.where(block: true): it => $display(#it)$
+    table(
+      columns: 3,
+      align: center + horizon,
+      inset: (y: 1em),
+      table.header([Function], [Anti-derivative], [Note]),
+      $ 1 / (1 + x^2) $,
+      $ arctan(x) + c $,
+      [For denominator $a^2 + x^2$, use $1/a arctan(x / a)$. \ (Time $a^2$ to inside and substitute $u = x / a$.)],
+
+      $ 1 / sqrt(1 - x^2) $,
+      $ arcsin(x) + c $,
+      [For denominator $sqrt(a - (x - b)^2)$, use $arcsin((x - b) / sqrt(a))$. \ (Time $sqrt(a)$ to inside and substitute $u = (x - b) / sqrt(a)$.)],
+    )
+  },
+)
+
+== Area Between Curves
+Turns out, we were integrating some others functions against function $y = 0$ all this time!
+So to find area between curves, we can just subtract the two functions and integrate the result.
+
+Note that when asked to find the area, _not signed area_, we should make sure to subtract the function with smaller value in bounds from the one with larger value.
+Usually it is done by finding intersections of the two functions and comparing the values around those points, or the derivatives at those points.
+
+Sometimes, we will even break up the integral into multiple parts, where the functions are integrable.
+When it is hard to integrate in terms of $x$, try taking an inverse approach and integrate in terms of $y$.
+
+// == Integration by Parts
+
