@@ -64,6 +64,8 @@ In this course, vectors are upright bold, and vector magnitudes are italicized b
 
 $ vecb(A) "has a magnitude of" vecl(A) "in direction" vecu(A). $
 
+In manuscript, of course we cannot strike bold, so we use overhead arrow for vectors instead.
+
 == Angle Unit
 In this course, angles are in degrees.
 
@@ -265,8 +267,17 @@ $
 Be very careful with the signs of the forces.
 
 == Solving Equilibrium Problems
-With multiple forces and their direction vectors (_not unit vectors_) $vecb(r)$, $ F = vecb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$
+With multiple forces and their direction vectors (_not unit vectors_) $vecb(r)$, $ F = vecb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$.
 Solving for $X, Y, Z$ gives the forces.
+To solve a typical $X, Y, Z$ system, we can use the `rref` function on a matrix of the coefficients in the equations and their RHS. More in MATH 152.
+
+Why don't we directly compute the values? Try and see for yourself, you will comeback to the $X, Y, Z$'s.
+
+A sanity check would be to ensure that the forces are on the same magnitude as the original forces, and are in somewhat canceling directions.
+
+#block(stroke: red, inset: 0.8em)[
+  As always, check angles and signs. Forces project to the negative axis have $alpha, beta, gamma > 90 degree$.
+]
 
 // = Force System Resultants
 //
