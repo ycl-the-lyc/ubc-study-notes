@@ -7,7 +7,8 @@
   author: "Yecheng Liang",
 )
 
-#import "@preview/circuiteria:0.1.0": *
+#import "@preview/cetz:0.3.1": canvas, draw
+#import "@preview/cetz-plot:0.1.0": plot
 
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
@@ -210,7 +211,7 @@ Batteries charge capacitors bit by bit, by $dd(q)$.
 Thus, we can say the work done is
 $
   dd(W) &= Delta V dd(q) \
-  &= q / C  dd(q) \
+  &= q / C dd(q) \
 $
 And energy is
 $
@@ -230,9 +231,10 @@ That is because capacitor behaviors cannot be examined without resistors, so eve
 Imagine a circuit with a battery, a switch, a resistor and a capacitor.
 The capacitor initially has no charge, and the switch is closed at $t = 0$.
 
-1. At $t = 0-$, the capacitor has no charge, and the voltage across it is zero.
-2. At $t = 0+$, the switch is _just_ closed, and the capacitor starts charging. The voltage across the capacitor is still zero since it has no charge, and hence act as an ideal wire.
-3. As time goes by, the capacitor charges, and the voltage across it increases, while the current decreases.
++ At $t = 0-$, the capacitor has no charge, and the voltage across it is zero.
++ At $t = 0+$, the switch is _just_ closed, and the capacitor starts charging. The voltage across the capacitor is still zero since it has no charge, and hence act as an ideal wire.
++ As time goes by, the capacitor charges, and the voltage across it increases, while the current decreases.
++ At $t -> oo$, the capacitor is fully charged, and it act as an open circuit, and the current is zero.
 
 By Kirchhoff's Voltage Law, the voltage across the resistor and the capacitor should sum up to the battery voltage.
 $
@@ -255,15 +257,87 @@ When a capacitor is charging, the current flows from the battery to the capacito
 When a capacitor is discharging, the current flows from the capacitor to the circuit, and the voltage across the capacitor decreases.
 
 In an R-C circuit, the energy stored in the capacitor increases and decreases exponentially, respectively.
+#let q-charge = t => 1 - calc.exp(-t / 2)
+#let q-discharge = t => calc.exp(-t / 2)
 $
-  q(t)_"charging" &= Q (1 - e^(-t slash R C)) \
-  i(t)_"charging" &= dv(q(t), t) = e^(-t slash R C) / (R C),
-$ $
-  q(t)_"discharging" &= Q e^(-t slash R C) \
-  i(t)_"discharging" &= dv(q(t), t) = - e^(-t slash R C) / (R C)
+  q(t)_"charging" &= C V (1 - e^(-t slash R C)) \
+  i(t)_"charging" &= dv(q(t), t) = V / R e^(-t slash R C),
+$ $C V$ is the final charge that would be stored in the capacitor.
+
+$
+  q(t)_"discharging" &= Q_0 e^(-t slash R C) \
+  i(t)_"discharging" &= dv(q(t), t) = I_0 e^(-t slash R C).
 $ where $Q$ is the maximum charge stored in the capacitor, $R$ is the resistance in series, and $C$ is the capacitance in parallel.
+
+#let plot-options = (
+  axis-style: "left",
+  size: (4, 4),
+  x-label: $t$,
+  y-label: $q$,
+  x-tick-step: none,
+  y-tick-step: none,
+  x-ticks: (),
+  y-ticks: (),
+)
+#let dash-stroke = (dash: "dashed", thickness: .5pt, paint: black.transparentize(75%))
+
+#grid(
+  columns: (1fr, 1fr),
+  align: center,
+  canvas({
+    import draw: *
+
+    plot.plot(
+      name: "charging",
+      ..plot-options,
+      {
+        plot.add(q-charge, domain: (0, 8))
+        plot.add-anchor("tau", (2, q-charge(2)))
+      },
+    )
+
+    circle("charging.tau", radius: 1pt)
+    line((), (rel: (0, -q-charge(2) * 4)), stroke: dash-stroke)
+    content((rel: (0, -.25)), $tau$)
+    line("charging.tau", (rel: (-1, 0)), stroke: dash-stroke)
+    content((rel: (-1, 0)), box(width: 10em, $1 - e^(-1) = 63.2%$))
+  }),
+  canvas({
+    import draw: *
+
+    plot.plot(
+      name: "discharging",
+      ..plot-options,
+      {
+        plot.add(q-discharge, domain: (0, 8))
+        plot.add-anchor("tau", (2, q-discharge(2)))
+      },
+    )
+
+    circle("discharging.tau", radius: 1pt)
+    line((), (rel: (0, -q-discharge(2) * 4)), stroke: dash-stroke)
+    content((rel: (0, -.25)), $tau$)
+    line("discharging.tau", (rel: (-1, 0)), stroke: dash-stroke)
+    content((rel: (-1, 0)), box(width: 7em, $e^(-1) = 36.8%$))
+  }),
+)
+
+
 
 At times, $R C$ is written as $tau$, the time constant of the RC circuit.
 Think: at $t = tau$, how much charge is in the capacitor?
 
 Notice the similarity between these equations and the exponential decay equation for damped oscillations, it will be useful.
+
+
+== Inductors
+/ Inductors: A coil of wire that generates an induced current, opposing the passing current.
+  They are used in transformers, motors, and generators.
+/ Inductance ($L$): The ability to generate an induced current, measured in Henrys ($unit(H)$).
+  $ V = L dd(I) / dd(t) $
+
+Inductors act quite as an opposite to capacitors, consider the prior switch-closed capacitor example:
++ At $t = 0-$, the current is zero, and the voltage across the inductor is zero.
++ At $t = 0+$, the switch is _just_ closed, the voltage across the inductor is $epsilon$ as there is still no current so potential drop across other components (resistor) is zero.
++ As time goes by, the current increases, and the voltage across the inductor decreases.
++ At $t -> oo$, the current is at maximum and constant, and the voltage across the inductor is zero.
