@@ -487,3 +487,74 @@ $
   matrixdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
 $ so $vec(1, 0, 1), vec(1, -1, 2) "and" vec(1, 1, 1)$ are LI.
 
+== Solving Systems of Linear Equations
+Previously, we solve systems of linear equations by substitution or elimination. (No way I'm explaining elimination here.)
+
+Two equations and two unknowns are good, how about three for each? A hundred for each?
+This is when matrices come in handy.
+
+Using elimination, we are essentially multiplying the equations by a scalar and adding them together. Recall that this is a linear combination of the equations. If the system is solvable, we must be able to express one equation as a linear combination of the others.
+
+To solve the system, look at the following example:
+$
+  cases(
+    x_1 + x_2 + x_3 = 4,
+    x_1 + 2x_2 + 3x_3 = 9,
+    2x_1 + 3x_2 + x_3 = 7
+  )
+  \
+  cases(
+    (2) = (2) - (1),
+    (3) = (3) - 2(1)
+  )
+  space.quad
+  cases(
+    x_1 + x_2 + x_3 = 4,
+    x_2 + 2x_3 = 5,
+    x_2 - x_3 = -1
+  )
+  \
+  ...
+$
+
+How about we stop copying the $x$'s and write the coefficients and right-hand-side in a matrix?
+Put coefficients in each row into rows to form a matrix, and the right-hand-side into an augmented column.
+$
+  mat(
+    2, 1, 3, 1;
+    4, 5, 7, 1;
+    2, -5, 5, 7;
+    augment: #3
+  )
+  &stretch(->)^((2) = (2) - 2(1))_((3) = (3) - (1))
+  mat(
+    2, 1, 3, 1;
+    0, 3, 1, 5;
+    0, -6, 2, -8;
+    augment: #3
+  )
+  \
+  &stretch(->)^((3) = (3) + 2(2))_"\"row echelon form\""
+  mat(
+    2, 1, 3, 1;
+    0, 3, 1, 5;
+    0, 0, 4, 2;
+    augment: #3
+  )
+  \
+  &stretch(->)^((3) = (3) slash 4)
+  mat(
+    2, 1, 3, 1;
+    0, 3, 1, 5;
+    0, 0, 1, 1/2;
+    augment: #3
+  )
+  \
+  &stretch(->)^"substitute back"_(x_3 = 1 slash 2)
+  cases(
+    x_1 = -1,
+    x_2 = 3/2,
+    x_3 = 1/2
+  )
+$
+Voila!
