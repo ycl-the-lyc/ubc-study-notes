@@ -452,7 +452,7 @@ $
 $
 
 = Systems of Linear Equations
-A system of linear equations is a set of equations that can be written in the form like
+A system of linear equations is a set of equations that can be written in the parametric form
 $
   cases(
     a_11 x + b_12 y + c_13 z = d_1,
@@ -473,6 +473,10 @@ The planes can intersect at a point, form a line, or (have 2 or more of them) be
   In an $RR^n$ space, the basis has $n$ vectors.
   Hence, a set of vectors are definitely LD if there are more than $n$ vectors in the set.
 
+#block(stroke: red)[
+  If a set of vectors are LD, any subset of them _is possible to be_ LI.
+]
+
 For example,
 $
   vec(1, -2, 3) "and" vec(-2, 4, -6) &"are LD" \
@@ -486,6 +490,9 @@ For example,
 $
   matrixdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
 $ so $vec(1, 0, 1), vec(1, -1, 2) "and" vec(1, 1, 1)$ are LI.
+
+For 3 3D vectors, the other way is to check the volume of the parallelepiped formed by the vectors, $abs(vecb(a) times (vecb(b) dot vecb(c)))$.
+If the volume is not 0, then the vectors are LI.
 
 == Solving Systems of Linear Equations
 Previously, we solve systems of linear equations by substitution or elimination. (No way I'm explaining elimination here.)
@@ -526,7 +533,7 @@ $
     2, -5, 5, 7;
     augment: #3
   )
-  &stretch(->)^((2) = (2) - 2(1))_((3) = (3) - (1))
+  stretch(->)^((2) = (2) - 2(1))_((3) = (3) - (1))&
   mat(
     2, 1, 3, 1;
     0, 3, 1, 5;
@@ -534,7 +541,7 @@ $
     augment: #3
   )
   \
-  &stretch(->)^((3) = (3) + 2(2))_"\"row echelon form\""
+  stretch(->)^((3) = (3) + 2(2))_"\"row echelon form\""&
   mat(
     2, 1, 3, 1;
     0, 3, 1, 5;
@@ -542,7 +549,7 @@ $
     augment: #3
   )
   \
-  &stretch(->)^((3) = (3) slash 4)
+  stretch(->)^((3) = (3) slash 4)&
   mat(
     2, 1, 3, 1;
     0, 3, 1, 5;
@@ -550,7 +557,7 @@ $
     augment: #3
   )
   \
-  &stretch(->)^"substitute back"_(x_3 = 1 slash 2)
+  stretch(->)^"substitute back"_(x_3 = 1 slash 2)&
   cases(
     x_1 = -1,
     x_2 = 3/2,
@@ -558,3 +565,49 @@ $
   )
 $
 Voila!
+This is very similar to the Gaussian elimination we learned probably in high school, but there are reasons why we do it this way.
+
+Also, the matrix with the weird lines is called the augmented matrix.
+
+*Row Echelon Form (REF)*
+To write a matrix in row echelon form, we need to make sure that:
+- The all-zero rows are at the bottom.
+- There are no identical LHS rows.
+- There are increasing number of zeroes from upper to lower rows.
+
+When the last row is all zeros, we cannot give a unique solution to the system.
+Instead, we assign a parameter, like $t$, to the last variable and solve for the others.
+
+For example,
+$
+  mat(
+    1, 1, 1, 1;
+    1, 2, 2, 2;
+    2, 3, 3, 4;
+    augment: #3
+  )
+  stretch(->)^((2) = (2) - (1))_((3) = (3) - 2(1))&
+  mat(
+    1, 1, 1, 1;
+    0, 1, 1, 1;
+    0, 1, 1, 2;
+    augment: #3
+  ) \
+  stretch(->)^((3) = (3) - (2))&
+  mat(
+    1, 1, 1, 1;
+    0, 1, 1, 1;
+    0, 0, 0, 1;
+    augment: #3
+  ) \
+  0x_1 + 0x_2 + 0x_3 =& 1 "(impossible)" \
+  "No solution."
+$
+
+*Reduced Row Echelon Form (RREF)*
+Now, we can answer why the function we use on calculators in PHYS 170 is called "rref".
+
+=== Checking for Linear Dependence by REF
+To check if a set of vectors are LD, we can form a matrix with the vectors as *_columns_* and find the REF.
+
+If there is a row of all zeros, then the vectors are LD.
