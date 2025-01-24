@@ -279,8 +279,50 @@ A sanity check would be to ensure that the forces are on the same magnitude as t
   As always, check angles and signs. Forces project to the negative axis have $alpha, beta, gamma > 90 degree$.
 ]
 
-// = Force System Resultants
-//
+= Force System Resultants
+Forces can produce difference results.
+/ Force: Causes translation of a body.
+/ Moment/Torque: Causes rotation of a body.
+
+Translation happens on the same plane as the forces, while rotation happens perpendicular to the plane.
+
+In this course of statics, we study not the translations or rotations, but the _tendencies_ for the bodies to act so.
+
+These results combined are called the force system resultants.
+
+== Moment of a Force
+Magnitude of the moment of a force $vecb(F)$ about point $O$ is
+$
+  M_O = vecl(F) d
+$ where $d$ is the perpendicular distance from $O$ to the line of action of $vecb(F)$.
+
+Multiple moments? Just sum them up.
+
+By convention, positive moments point to the positive z axis, counterclockwise.
+
+To understand rotation in a simple way, think of (or actually do) opening a door at different points in different directions.
+
+Now, be reminded that the cross product of two vectors produces a vector perpendicular to the plane of the two vectors.
+
+=== Cross Product
+Samely, more in MATH 152.
+$
+  vecb(A) times vecb(B) &= matrixdet(
+    vecu(i), vecu(j), vecu(k);
+    A_x, A_y, A_z;
+    B_x, B_y, B_z;
+  ) \
+  &= (A_y B_z - A_z B_y) vecu(i) \
+  &- (A_x B_z - A_z B_x) vecu(j) \
+  &+ (A_x B_y - A_y B_x) vecu(k)
+$
+
+And it is non-commutative.
+$
+  vecb(C) &= vecb(A) times vecb(B) \
+  -vecb(C) &= vecb(B) times vecb(A)
+$
+
 // = Equilibrium of a Rigid Body
 //
 // = Friction
