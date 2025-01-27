@@ -291,14 +291,14 @@ In this course of statics, we study not the translations or rotations, but the _
 These results combined are called the force system resultants.
 
 == Moment of a Force
-Magnitude of the moment of a force $vecb(F)$ about point $O$ is
+Intuitively, magnitude of the moment of a force $vecb(F)$ about point $O$ is
 $
   M_O = vecl(F) d
 $ where $d$ is the perpendicular distance from $O$ to the line of action of $vecb(F)$.
 
 Multiple moments? Just sum them up.
 
-By convention, positive moments point to the positive z axis, counterclockwise.
+By convention (curl of fingers in the Right Hand Rule), positive moments point to the positive z axis, counterclockwise.
 
 To understand rotation in a simple way, think of (or actually do) opening a door at different points in different directions.
 
@@ -312,15 +312,37 @@ $
     A_x, A_y, A_z;
     B_x, B_y, B_z;
   ) \
-  &= (A_y B_z - A_z B_y) vecu(i) \
-  &- (A_x B_z - A_z B_x) vecu(j) \
-  &+ (A_x B_y - A_y B_x) vecu(k)
-$
+  &= (A_y B_z - A_z B_y) vecu(i) - (A_x B_z - A_z B_x) vecu(j) + (A_x B_y - A_y B_x) vecu(k)
+$ which is perpendicular to both $vecb(A)$ and $vecb(B)$.
 
 And it is non-commutative.
 $
   vecb(C) &= vecb(A) times vecb(B) \
   -vecb(C) &= vecb(B) times vecb(A)
+$
+
+It is mandated that we show construction of the determinant in exams even if we use calculators.
+
+== Vector Formulation of Moment
+$
+  vecb(M)_O &= vecb(r) times vecb(F)
+$ where $vecb(r)$ is the position vector of the point of application of $vecb(F)$ relative to $O$, in other words, _any_ vector from $O$ to the line of action of $vecb(F)$.
+
+The magnitude of $vecb(M)_O$ is then
+$
+  vecl(M)_O &= vecl(r) vecl(F) sin(theta) \
+  &= vecl(F) d \
+  vecb(M)_"axis" &= vecb(u)_a_x times (vecb(r) times vecb(F)) \
+  &= vecb(u)_a_x times vecb(M)_O "(this can commute)".
+$
+
+Using our recent knowledge of Cartesian vectors and cross products, we can write the moment as
+$
+  vecb(M)_O &= matrixdet(
+    vecu(i), vecu(j), vecu(k);
+    r_x, r_y, r_z;
+    F_x, F_y, F_z;
+  )
 $
 
 // = Equilibrium of a Rigid Body
