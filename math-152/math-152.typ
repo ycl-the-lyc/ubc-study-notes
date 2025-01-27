@@ -611,3 +611,21 @@ Now, we can answer why the function we use on calculators in PHYS 170 is called 
 To check if a set of vectors are LD, we can form a matrix with the vectors as *_columns_* and find the REF.
 
 If there is a row of all zeros, then the vectors are LD.
+
+== Distance from Line to Line
+Given two lines $L_1$ and $L_2$ in 3D space.
+The distance between the two lines is the length of the vector that connects the two lines and is perpendicular to both lines.
+
+Thus, a cross product of the two directional vectors of the lines gives the direction of the connecting vector.
+
+For example, given $L_1: vecb(x) = vec(1, 2, 3) + t vec(1, 0, 0)$ and $L_2: vecb(x) = s vec(1, 1, 1)$, the direction of the connecting vector is
+$
+  vec(1, 0, 0) times vec(1, 1, 1) = vec(1, -2, 1).
+  //TODO
+ \ ...
+$
+
+Alternatively, we can find two arbitrary points on each line, connect them, and find the projection of the connecting vector onto the direction of the perpendicular line from one of the points.
+
+== Rank and Solution Structure
+/ Rank: The number of LI (non-zero) rows in the REF of the non-augmented part of matrix.
