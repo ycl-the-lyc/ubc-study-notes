@@ -15,7 +15,7 @@
 #import units: *
 #import prefixes: *
 
-= Circuits
+= DC Circuits
 
 == Basic Components
 / Power Supplies (DC/AC): Direct Current and Alternating Current.
@@ -271,7 +271,7 @@ $ where $Q$ is the maximum charge stored in the capacitor, $R$ is the resistance
 
 #let plot-options = (
   axis-style: "left",
-  size: (4, 4),
+  size: (8, 4),
   x-label: $t$,
   y-label: $q$,
   x-tick-step: none,
@@ -281,43 +281,30 @@ $ where $Q$ is the maximum charge stored in the capacitor, $R$ is the resistance
 )
 #let dash-stroke = (dash: "dashed", thickness: .5pt, paint: black.transparentize(75%))
 
-#grid(
-  columns: (1fr, 1fr),
-  align: center,
+#figure(
   canvas({
     import draw: *
 
     plot.plot(
-      name: "charging",
+      name: "f",
       ..plot-options,
       {
         plot.add(q-charge, domain: (0, 8))
-        plot.add-anchor("tau", (2, q-charge(2)))
+        plot.add-anchor("charging-tau", (2, q-charge(2)))
+
+        plot.add(q-discharge, domain: (0, 8))
+        plot.add-anchor("discharging-tau", (2, q-discharge(2)))
       },
     )
 
-    circle("charging.tau", radius: 1pt)
+    circle("f.charging-tau", radius: 1pt)
     line((), (rel: (0, -q-charge(2) * 4)), stroke: dash-stroke)
     content((rel: (0, -.25)), $tau$)
-    line("charging.tau", (rel: (-1, 0)), stroke: dash-stroke)
+    line("f.charging-tau", (rel: (-2, 0)), stroke: dash-stroke)
     content((rel: (-1, 0)), box(width: 10em, $1 - e^(-1) = 63.2%$))
-  }),
-  canvas({
-    import draw: *
 
-    plot.plot(
-      name: "discharging",
-      ..plot-options,
-      {
-        plot.add(q-discharge, domain: (0, 8))
-        plot.add-anchor("tau", (2, q-discharge(2)))
-      },
-    )
-
-    circle("discharging.tau", radius: 1pt)
-    line((), (rel: (0, -q-discharge(2) * 4)), stroke: dash-stroke)
-    content((rel: (0, -.25)), $tau$)
-    line("discharging.tau", (rel: (-1, 0)), stroke: dash-stroke)
+    circle("f.discharging-tau", radius: 1pt)
+    line("f.discharging-tau", (rel: (-2, 0)), stroke: dash-stroke)
     content((rel: (-1, 0)), box(width: 7em, $e^(-1) = 36.8%$))
   }),
 )
@@ -341,3 +328,39 @@ Inductors act quite as an opposite to capacitors, consider the prior switch-clos
 + At $t = 0+$, the switch is _just_ closed, the voltage across the inductor is $epsilon$ as there is still no current so potential drop across other components (resistor) is zero.
 + As time goes by, the current increases, and the voltage across the inductor decreases.
 + At $t -> oo$, the current is at maximum and constant, and the voltage across the inductor is zero.
+
+$
+  i(t)_"charging" &= I_"max" (1 - e^(-R t slash L)) \
+  i(t)_"discharging" &= I_"max" e^(-R t slash L).
+$
+
+It is more important to know the shape of the graphs: exponential growth and decay, rather than the steps seen in R-only circuits.
+
+=== R-L-C Circuits
+In an R-L-C circuit, the function for current reminds us of the damped oscillations equation.
+So recall the damped oscillations equation:
+$
+  x(t) = A e^(-t / tau) cos(omega' t + phi)
+$ where $A$ is the amplitude, $tau$ is the time constant, $omega'$ is the angular frequency, and $phi$ is the phase angle.
+(On formula sheet.)
+
+#figure(
+  canvas({
+    import draw: *
+    plot.plot(
+      name: "f",
+      ..(:..plot-options, axis-style: "school-book"),
+      {
+        plot.add(t => calc.exp(-t / 3) * calc.cos(2 * calc.pi * t), domain: (0, calc.pi * 3), samples: 300)
+      },
+    )
+  }),
+)
+
+
+= AC Circuits
+You should still read the DC Circuits section before this one.
+
+/ Root Mean Square (RMS): The square root of the mean of the squares of a set of values.
+  For example, the RMS current is the current that would produce the same amount of heat in a resistor as the alternating current which is being derived from.
+
