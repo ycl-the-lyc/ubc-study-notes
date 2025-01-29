@@ -473,7 +473,7 @@ The planes can intersect at a point, form a line, or (have 2 or more of them) be
   In an $RR^n$ space, the basis has $n$ vectors.
   Hence, a set of vectors are definitely LD if there are more than $n$ vectors in the set.
 
-#block(stroke: red)[
+#block(stroke: red, inset: 0.65em)[
   If a set of vectors are LD, any subset of them _is possible to be_ LI.
 ]
 
@@ -569,7 +569,8 @@ This is very similar to the Gaussian elimination we learned probably in high sch
 
 Also, the matrix with the weird lines is called the augmented matrix.
 
-*Row Echelon Form (REF)*
+/ Row Echelon Form (REF): A matrix where the leading element of each row is to the right of the leading element of the row above it.
+
 To write a matrix in row echelon form, we need to make sure that:
 - The all-zero rows are at the bottom.
 - There are no identical LHS rows.
@@ -604,9 +605,6 @@ $
   "No solution."
 $
 
-*Reduced Row Echelon Form (RREF)*
-Now, we can answer why the function we use on calculators in PHYS 170 is called "rref".
-
 === Checking for Linear Dependence by REF
 To check if a set of vectors are LD, we can form a matrix with the vectors as *_columns_* and find the REF.
 
@@ -618,14 +616,22 @@ The distance between the two lines is the length of the vector that connects the
 
 Thus, a cross product of the two directional vectors of the lines gives the direction of the connecting vector.
 
-For example, given $L_1: vecb(x) = vec(1, 2, 3) + t vec(1, 0, 0)$ and $L_2: vecb(x) = s vec(1, 1, 1)$, the direction of the connecting vector is
-$
-  vec(1, 0, 0) times vec(1, 1, 1) = vec(1, -2, 1).
-  //TODO
- \ ...
-$
+For example, given $L_1: vecb(x) = vec(1, 2, 3) + t vec(1, 0, 0)$ and $L_2: vecb(x) = s vec(1, 1, 1)$, one can first get the direction of the connecting vector by taking the cross product of the two directional vectors. Then find a point on each line and the connecting vector.
 
 Alternatively, we can find two arbitrary points on each line, connect them, and find the projection of the connecting vector onto the direction of the perpendicular line from one of the points.
 
 == Rank and Solution Structure
-/ Rank: The number of LI (non-zero) rows in the REF of the non-augmented part of matrix.
+/ Rank: The number of LI (non-zero) rows in the REF of matrix, including augmentation.
+
+- If $rank[A] = rank[A|vecb(b)]$ and $rank[A] = n$, then the system has a unique solution.
+- If $rank[A] < rank[A|vecb(b)]$, then the system has no solution.
+- If $rank[A] = rank[A|vecb(b)] < n$, then the system has infinite solutions.
+
+/ Homogeneous System: A system where the RHS is all zeros.
+  0 is always a solution.
+
+/ Reduced Row Echelon Form (RREF): A matrix where the leading element (pivot) of each row is 1 and is to the right of the pivot of the row above it.
+  All elements above a pivot are 0.
+  Any column without a pivot is a free variable.
+
+To form a matrix in RREF, we can start from a REF matrix and divide each row by the pivot to make it 1, then eliminate the elements above the pivot.
