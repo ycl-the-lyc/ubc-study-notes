@@ -297,5 +297,53 @@ Usually it is done by finding intersections of the two functions and comparing t
 Sometimes, we will even break up the integral into multiple parts, where the functions are integrable.
 When it is hard to integrate in terms of $x$, try taking an inverse approach and integrate in terms of $y$.
 
+== Trigonometric Substitution
+When dealing with integrals with square roots, we can use trigonometric substitution to simplify the integrand.
+
+For example, consider $integral sqrt(1 - x^2) dd(x)$.
+If the bounds like 0 to 1, we know it is a nice part area of circle, but what if not?
+
+Forms of
+$
+  sqrt(a^2 - x^2), sqrt(a^2 + x^2), sqrt(x^2 - a^2)
+$
+can be simplified by using trigonometric substitution:
+Known that
+$
+  sin^2(theta) + cos^2(theta) = 1 \
+  tan^2(theta) + 1 = sec^2(theta),
+$
+then let $x = a sin(theta)$ where $a > 0$,
+$
+  sqrt(a^2 - x^2) &= sqrt(a^2 - a^2 sin^2(theta)) \
+  &= sqrt(a^2 cos^2(theta)) \
+  &= a abs(cos(theta)) \
+  &= a cos(theta) "when" -pi/2 <= theta <= pi/2.
+$
+
+We can thus apply it, for example,
+$
+  integral sqrt(1 - x^2) dd(x) &= integral sqrt(1 - a^2 sin^2(theta)) space a cos(theta) dd(theta) \
+  &= integral a^2 cos^2(theta) dd(theta) \
+  &= a^2 integral cos^2(theta) dd(theta) \
+  &= a^2 integral (1 + cos(2 theta)) / 2 dd(theta) \
+  &= a^2 / 2 (theta + sin(2 theta) / 2) + c \
+  &= a^2 / 2 (theta + sin(theta) cos(theta)) + c, \
+  x / a &= sin(theta) \
+  theta &= arcsin(x / a), \
+  cos(theta) &= sqrt(1 - sin^2(theta)) \
+  &= sqrt(1 - x^2 / a^2), \
+  integral sqrt(1 - x^2) dd(x) &= a^2 / 2 (arcsin(x / a) + x sqrt(1 - x^2 / a^2)) + c.
+$
+
+#block(
+  stroke: red,
+  width: 100%,
+  inset: 0.65em,
+  [Memorize trigonometric identities!],
+)
+
+
+
 // == Integration by Parts
 
