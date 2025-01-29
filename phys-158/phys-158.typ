@@ -349,7 +349,7 @@ $ where $A$ is the amplitude, $tau$ is the time constant, $omega'$ is the angula
     import draw: *
     plot.plot(
       name: "f",
-      ..(:..plot-options, axis-style: "school-book"),
+      ..plot-options + (axis-style: "school-book"),
       {
         plot.add(t => calc.exp(-t / 3) * calc.cos(2 * calc.pi * t), domain: (0, calc.pi * 3), samples: 300)
       },
@@ -364,3 +364,67 @@ You should still read the DC Circuits section before this one.
 / Root Mean Square (RMS): The square root of the mean of the squares of a set of values.
   For example, the RMS current is the current that would produce the same amount of heat in a resistor as the alternating current which is being derived from.
 
+== Voltage and Current in AC
+$
+  V(t) = V_"max" sin(omega t).
+$
+
+$
+  V_"rms" &= V_"max" / sqrt(2) \
+  I_"rms" &= I_"max" / sqrt(2).
+$
+This can be deduced from $sin(omega t) = 1/2 (1 - cos(2omega t))$.
+
+== R Circuit
+$
+  i(t) &= V(t) / R \
+  &= V_"max" / R sin(omega t),
+$ in phase with the voltage.
+At times, $R$ is written as $X_R$, the resistance.
+
+== L Circuit
+$
+  V(t) &= L dv(i,t) \
+  dv(i,t) &= V(t) / L \
+  &= V_"max" / L sin(omega t), \
+  i(t) &= - V_"max" / (omega L) cos(omega t) \
+  &= V_"max" / (omega L) cos(omega t - pi / 2) \
+  &= I_"max" sin(omega t - pi / 2),
+$ out of phase with the voltage.
+At times, $omega L$ is written as $X_L$, the inductive reactance.
+
+== C Circuit
+$
+  q(t) &= C V(t) \
+  i(t) &= dv(q,t) \
+  &= (omega C) V_"max" cos(omega t) \
+  &= (V_"max" omega C) sin(omega t + pi / 2) \
+  &= I_"max" sin(omega t + pi / 2),
+$ out of phase with the voltage.
+At times, $1 slash (omega C)$ is written as $X_C$, the capacitive reactance.
+
+== Phasors
+Phasors are vectors that represent the amplitude and phase of a sinusoidal function.
+
+#figure(
+  caption: [Phasor diagram],
+  image("assets/phasor.png", width: 67%)
+)
+
+Using projection,
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t + phi).
+$
+
+$
+  tan(phi) = (X_L - X_C) / X_R
+$ is the phase angle between the current and the voltage.
+
+== Impedance
+Impedance ($Z$) is the total opposition to the flow of current in an AC circuit, measured in Ohms ($unit("Omega")$).
+It is the combination of resistance, inductive reactance, and capacitive reactance.
+$
+  Z &= sqrt(X_R^2 + (X_L - X_C)^2) \
+  &= sqrt(R^2 + (omega L - 1 / (omega C))^2).
+$
