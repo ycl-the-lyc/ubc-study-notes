@@ -336,6 +336,11 @@ $
 
 It is more important to know the shape of the graphs: exponential growth and decay, rather than the steps seen in R-only circuits.
 
+Given the current and inductance, the energy stored in the inductor is
+$
+  U = 1 / 2 L I^2.
+$
+
 === R-L-C Circuits
 In an R-L-C circuit, the function for current reminds us of the damped oscillations equation.
 So recall the damped oscillations equation:

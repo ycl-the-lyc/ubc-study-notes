@@ -370,6 +370,31 @@ $
   vecb(M)_"couple" &= vecb(M)_A + vecb(M)_B.
 $
 
+== Simplification of Force Systems
+To simplify a force system, we can
++ Move forces to a common point.
++ Place the moments of couples at the common point.
++ Replace the forces with their resultant.
+
+/ Concurrent Forces: Lines of forces that pass through a common point.
+  They produce no moment about that point.
+/ Coplanar Forces: Forces that lie in the same plane.
+/ Parallel Forces: Forces that have parallel lines of action.
+
+A parallel force system can be simplified by replacing the forces with a single resultant force and a single resultant moment.
+It can then be further simplified by moving the resultant force to the point of application of the resultant moment.
+$
+  vecb(F)_R "and" vecb(M)_O "at" O = vecb(F)_R "with distance" vecl(M)_O / vecl(F)_R.
+$
+
+=== Reduction to a Wrench
+Given arbitrary forces and moments, we can reduce them to a single force and a single moment.
++ Regard the resultant force as a baseline, moments parallel to the force can be eliminated by moving the force to a distance $d = vecl(M)_perp slash vecl(F)_R$.
++ Move the parallel moment to the resultant force.
+
+When solving for the resultant force, first setup an imaginary point $P$ as our resultant force point, then solve for the resultant force and moment about $P$.
+Make use of the fact that the resultant moment must be parallel to the resultant force.
+
 // = Equilibrium of a Rigid Body
 //
 // = Friction
