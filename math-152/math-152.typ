@@ -31,6 +31,16 @@
 #let det = "det"
 #set math.mat(delim: "[")
 
+#let all-terms = state("terms", ())
+#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#let termlist = [
+  #pagebreak(weak: true)
+  #heading(level: 1, outlined: false, numbering: none)[Terms]
+  #context terms(..all-terms.get().map(el => {
+    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+  }))
+]
+
 = Scalars
 A scalar $x$ has
 $
@@ -238,7 +248,7 @@ $
   -a_2 matrixdet(b_1, b_3; c_1, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - c_2 matrixdet(a_1, a_3; b_1, b_3).
 $
 
-/ Tip: pick any row / column with the *MOST ZEROES*.
+*Tip*: pick any row / column with the *most zeroes*.
 
 
 The determinant of a 3x3 matrix is
@@ -635,3 +645,8 @@ Alternatively, we can find two arbitrary points on each line, connect them, and 
   Any column without a pivot is a free variable.
 
 To form a matrix in RREF, we can start from a REF matrix and divide each row by the pivot to make it 1, then eliminate the elements above the pivot.
+
+
+
+
+#termlist
