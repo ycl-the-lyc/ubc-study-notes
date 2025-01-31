@@ -375,6 +375,8 @@ $
 $
 This can be deduced from $sin(omega t) = 1/2 (1 - cos(2omega t))$.
 
+On an oscilloscope, the "Amplitude" will be double the RMS value, since it is measuring the peak-to-trough value.
+
 == R Circuit
 $
   i(t) &= V(t) / R \
@@ -393,6 +395,8 @@ $
 $ out of phase with the voltage.
 At times, $omega L$ is written as $X_L$, the inductive reactance.
 
+Note that $X_L &-> 0 "as" omega -> 0, X_L &-> oo "as" omega -> oo.$
+
 == C Circuit
 $
   q(t) &= C V(t) \
@@ -402,6 +406,8 @@ $
   &= I_"max" sin(omega t + pi / 2),
 $ out of phase with the voltage.
 At times, $1 slash (omega C)$ is written as $X_C$, the capacitive reactance.
+
+Note that $X_C &-> oo "as" omega -> 0, X_C &-> 0 "as" omega -> oo.$
 
 == Phasors
 Phasors are vectors that represent the amplitude and phase of a sinusoidal function.
@@ -419,12 +425,37 @@ $
 
 $
   tan(phi) = (X_L - X_C) / X_R
-$ is the phase angle between the current and the voltage.
+$ is the phase angle between the current and the _source_ voltage.
+
+#figure(
+  caption: [Phasor diagram for R-L-C circuits],
+  image("assets/phasors-rlc.png", width: 50%)
+)
 
 == Impedance
-Impedance ($Z$) is the total opposition to the flow of current in an AC circuit, measured in Ohms ($unit("Omega")$).
+/ Impedance ($Z$): The total opposition to the flow of current in an AC circuit, measured in Ohms ($unit("Omega")$).
 It is the combination of resistance, inductive reactance, and capacitive reactance.
+
+From the phasor diagram it is clear that, using Pythagoras' theorem,
 $
   Z &= sqrt(X_R^2 + (X_L - X_C)^2) \
   &= sqrt(R^2 + (omega L - 1 / (omega C))^2).
+$
+
+Like Ohm's Law, we can write
+$
+  V_"max" = I_"max" Z.
+$
+
+== R-L-C Circuits
+If $X_L > X_C$, the current phasor is behind the voltage phasor, and the circuit is inductive.
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t + phi).
+$
+
+If $X_L < X_C$, the current phasor is ahead of the voltage phasor, and the circuit is capacitive.
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t - abs(phi)).
 $
