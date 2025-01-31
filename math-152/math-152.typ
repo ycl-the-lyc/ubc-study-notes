@@ -35,10 +35,10 @@
 #show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
 #let termlist = [
   #pagebreak(weak: true)
-  #heading(level: 1, outlined: false, numbering: none)[Terms]
-  #context terms(..all-terms.get().map(el => {
+  #heading(level: 1, numbering: none)[Definitions]
+  #context terms(..all-terms.final().map(el => {
     terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
-  }))
+  }), tight:false)
 ]
 
 = Scalars
@@ -646,7 +646,14 @@ Alternatively, we can find two arbitrary points on each line, connect them, and 
 
 To form a matrix in RREF, we can start from a REF matrix and divide each row by the pivot to make it 1, then eliminate the elements above the pivot.
 
+Recall that LD vectors can be expressed as a linear combination of each other.
+So to verify if a set of vectors are LD, we can form a matrix with the vectors as columns and find the RREF.
+If all columns have pivots, then the vectors are LI.
 
+=== Application in Resistor Networks
+We know Ohm's Law, $V = I R$. (If you don't, you should.)
+
+== Eigenvalues and Eigenvectors
 
 
 #termlist
