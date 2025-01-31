@@ -459,3 +459,15 @@ $
   i(t) &= I_"max" cos(omega t) \
   v(t) &= V_"max" cos(omega t - abs(phi)).
 $
+
+== Power Dissipation
+In DC circuits, power is $P = I V$ as we all know it.
+Similarly, $P$ is kind of the same in AC circuits, but we need to consider the phase difference between the current and voltage.
+$
+  angle.l P angle.r = angle.l i(t) v(t) angle.r
+$
+
+In R-L-C circuits,
+$
+  angle.l P angle.r = (V_"peak" I_"peak") / 2 cos(phi)
+$ with $V_"peak" I_"peak"$ replaceable with anything equivalent.
