@@ -333,7 +333,7 @@ $
   vecl(M)_O &= vecl(r) vecl(F) sin(theta) \
   &= vecl(F) d \
   vecb(M)_"axis" &= vecb(u)_a_x times (vecb(r) times vecb(F)) \
-  &= vecb(u)_a_x times vecb(M)_O "(this can commute)".
+  &= vecb(u)_a_x times vecb(M)_O "(this can commutate)".
 $
 
 Using our recent knowledge of Cartesian vectors and cross products, we can write the moment as
@@ -343,6 +343,31 @@ $
     r_x, r_y, r_z;
     F_x, F_y, F_z;
   )
+$
+
+== Moment of a Couple
+/ Couple: A pair of forces of equal magnitude, opposite direction, and parallel lines of action.
+
+$
+  vecb(M)_"couple" &= vecb(r)_A times vecb(-F) + vecb(r)_B times vecb(F) \
+  vecl(M)_"couple" &= vecl(F) d
+$ where $d$ is the perpendicular distance between the lines of action of the forces.
+
+The moment of a couple is independent of the point about which it is taken it is a _free vector_.
+
+#block(stroke: red, inset: 0.8em)[
+  The moment of a couple is the same about any point.
+]
+
+== Equivalent Systems
+Two systems are equivalent if they produce the same external effects on a body.
+
+To 'shift' a force, we can make it a couple by adding a pair of force of equal magnitude, of opposite direction, parallel to the original force at the desired location.
+Then, add the couple moment somewhere and cancel the original force.
+
+== Couple of Moments
+$
+  vecb(M)_"couple" &= vecb(M)_A + vecb(M)_B.
 $
 
 // = Equilibrium of a Rigid Body
