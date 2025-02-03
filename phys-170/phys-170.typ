@@ -27,6 +27,16 @@
 #let vecl(body) = $vectorbold(italic(body))$
 #let vecu(body) = $vectorunit(body)$
 
+#let all-terms = state("terms", ())
+#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#let termlist = [
+  #pagebreak(weak: true)
+  #heading(level: 1, numbering: none)[Definitions]
+  #context terms(..all-terms.final().map(el => {
+    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+  }), tight:false)
+]
+
 = General Principles
 
 == The Four Horseman of Mechanics
@@ -406,3 +416,7 @@ Make use of the fact that the resultant moment must be parallel to the resultant
 // = Kinetics of a Particle: Work and Energy
 //
 // = Kinetics of a Particle: Impulse and Momentum
+
+
+
+#termlist

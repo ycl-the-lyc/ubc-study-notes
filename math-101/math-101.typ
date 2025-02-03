@@ -29,6 +29,16 @@
   (:..plot-defaults, ..args.named())
 }
 
+#let all-terms = state("terms", ())
+#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#let termlist = [
+  #pagebreak(weak: true)
+  #heading(level: 1, numbering: none)[Definitions]
+  #context terms(..all-terms.final().map(el => {
+    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+  }), tight:false)
+]
+
 = General Principles
 
 == Special Cases
@@ -347,3 +357,4 @@ $
 
 // == Integration by Parts
 
+#termlist

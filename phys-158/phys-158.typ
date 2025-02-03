@@ -15,6 +15,16 @@
 #import units: *
 #import prefixes: *
 
+#let all-terms = state("terms", ())
+#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#let termlist = [
+  #pagebreak(weak: true)
+  #heading(level: 1, numbering: none)[Definitions]
+  #context terms(..all-terms.final().map(el => {
+    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+  }), tight:false)
+]
+
 = DC Circuits
 
 == Basic Components
@@ -465,6 +475,21 @@ $
   v(t) &= V_"max" cos(omega t - abs(phi)).
 $
 
+=== Parallel R-L-C Circuits
+In parallel R-L-C circuits, the voltage across each component is the same, while the current is inversely proportional to the impedance.
+$
+  V &= V_1 = V_2 = ... \
+  I &= I_1 + I_2 + ... \
+  &= V / Z.
+$
+Here, using the phasor diagram, we can find the current and the phase angle.
+Divide each phasor by $V_"max"$, we get
+$
+  1 / Z &= sqrt((1 / R)^2 + (1 / X_L - 1 / X_C)^2) \
+  &= sqrt((1 / R)^2 + (1 / (omega L) - omega C)^2), \
+  tan(phi) &= (1 slash X_L - 1 slash X_C) / (1 slash R).
+$
+
 == Power Dissipation
 In DC circuits, power is $P = I V$ as we all know it.
 Similarly, $P$ is kind of the same in AC circuits, but we need to consider the phase difference between the current and voltage.
@@ -474,5 +499,32 @@ $
 
 In R-L-C circuits,
 $
-  angle.l P angle.r = (V_"peak" I_"peak") / 2 cos(phi)
+  angle.l P angle.r &= (V_"peak" I_"peak") / 2 cos(phi) \
+  &= (V_"rms" I_"rms") cos(phi) \
 $ with $V_"peak" I_"peak"$ replaceable with anything equivalent.
+$cos(phi)$ is called the power factor, and it is the ratio of real power to apparent power.
+
+Only the resistor contributes to power dissipation, so in idealized L/C circuits, the power is zero.
+
+== Resonance
+/ Resonance: The frequency at which the impedance of a circuit is at a minimum.
+  It is the frequency at which the inductive and capacitive reactances cancel each other out.
+
+Knowing impedance and the oscillation frequency, the current in AC circuits can be expressed as a function of $omega$.
+$
+  I(omega) &= V_"max" / Z \
+  &= V_"max" / sqrt(R^2 + (omega L - 1 / (omega C))^2).
+$
+
+Hence,
+$
+  I_"max" &= V_"max" / R \
+$ when $
+  omega L &= 1 / (omega C) \
+  omega &= 1 / sqrt(L C).
+$
+
+
+
+
+#termlist
