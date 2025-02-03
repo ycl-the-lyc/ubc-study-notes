@@ -653,6 +653,23 @@ If all columns have pivots, then the vectors are LI.
 === Application in Resistor Networks
 We know Ohm's Law, $V = I R$. (If you don't, you should.)
 
+/ Independent loop: A loop with at least one edge that is not part of any other loop.
+
+Each independent loop implies a variable.
+Dependent loops are represented by the independent loops.
+
+By Kirchhoff's Laws, the sum of the voltage drops in a loop is 0, and the current entering a node is equal to the current leaving the node.
+Use these to form a system of linear equations.
+
+This process can be troublesome for large networks, so below is another way:
+
+*Loop Only Method*:
++ Assign a current to each edge.
++ For each loop, write the sum of the currents times the resistance of the edge as 0.
++ Form a system of linear equations.
++ Move the constants to the RHS and form a matrix.
++ Solve the system using RREF.
+
 == Eigenvalues and Eigenvectors
 
 
