@@ -405,16 +405,44 @@ Given arbitrary forces and moments, we can reduce them to a single force and a s
 When solving for the resultant force, first setup an imaginary point $P$ as our resultant force point, then solve for the resultant force and moment about $P$.
 Make use of the fact that the resultant moment must be parallel to the resultant force.
 
-// = Equilibrium of a Rigid Body
-//
+= Equilibrium of a Rigid Body
+/ Internal Forces: Forces that hold the particles of a body together.
+/ External Forces: Forces that act on the body as a whole.
+
+For equilibrium, we do not consider internal forces, because they always occur in pairs and cancel each other out.
+
+In equilibrium, the sum of the forces and moments acting on a rigid body is zero, in other words, vanish.
+$
+  sum vecb(F) = 0 \
+  sum vecb(M)_O = 0.
+$
+It does not matter where the point $O$ is.
+
+When a body is in equilibrium, it is in both translational and rotational equilibrium.
+Typically, it is supported by something, and the forces and moments include the reactions of the supports.
+If a support restricts translation, it produces a reaction force, and if it restricts rotation, it produces a reaction moment.
+
+== Types of Supports
+- Roller: Restricts translation in one direction.
+- Ball and socket: Restricts translation in all directions.
+- Single journal bearing: Only allows translation in one direction and rotation about that direction.
+- Double journal bearing: Only allows translation in two directions, *_does not restrict rotation directly, but does through restricting translation_*.
+- Single journal bearing with square shaft: Only allows translation in one direction.
+- Single thrust bearing: Only allows rotation in one direction.
+- Single smooth pin: Only allows rotation about the pin.
+- Single hinge: Only allows rotation about the hinge.
+- Fixed support: Restricts translation and rotation in all directions.
+
+The translation and rotation restricted correspond to the reaction forces and moments produced by the support.
+
 // = Friction
-//
+
 // = Kinematics of a Particle
-//
+
 // = Kinetics of a Particle: Force and Acceleration
-//
+
 // = Kinetics of a Particle: Work and Energy
-//
+
 // = Kinetics of a Particle: Impulse and Momentum
 
 
