@@ -353,8 +353,16 @@ $
   [Memorize trigonometric identities!],
 )
 
+== Integration by Parts
+Integration by parts is the reverse of the product rule.
+$
+  (u v)' = u' v + u v'.
+$
 
-
-// == Integration by Parts
+When we have $u$ and $v'$, we can integrate by parts:
+$
+  integral u v dd(x) &= u integral v dd(x) - integral u' (integral v dd(x)) dd(x) \
+  integral u' v dd(x) &= u v - integral u v' dd(x).
+$
 
 #termlist
