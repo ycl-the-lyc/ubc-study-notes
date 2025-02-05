@@ -79,6 +79,12 @@ In manuscript, of course we cannot strike bold, so we use overhead arrow for vec
 == Angle Unit
 In this course, angles are in degrees.
 
+== Drawing Diagrams
+- Draw it _big_.
+- Draw axis.
+- Draw forces and couple moments.
+- Do _not_ draw moments due to forces.
+
 = Force Vectors
 Force, having both magnitude and direction, is a vector.
 Intuitively, we can apply all kinds of vector operations to forces, as you would learn in MATH 152.
@@ -426,7 +432,7 @@ If a support restricts translation, it produces a reaction force, and if it rest
 - Roller: Restricts translation in one direction.
 - Ball and socket: Restricts translation in all directions.
 - Single journal bearing: Only allows translation in one direction and rotation about that direction.
-- Double journal bearing: Only allows translation in two directions, *_does not restrict rotation directly, but does through restricting translation_*.
+- Double journal bearing: Only allows translation in two directions, _does not restrict rotation directly, but does through restricting translation, which means *no reactant moment*_. The same for other journal bearings.
 - Single journal bearing with square shaft: Only allows translation in one direction.
 - Single thrust bearing: Only allows rotation in one direction.
 - Single smooth pin: Only allows rotation about the pin.
