@@ -32,13 +32,22 @@
 #set math.mat(delim: "[")
 
 #let all-terms = state("terms", ())
-#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#show terms.item: it => context {
+  let loc = here()
+  all-terms.update(c => c + ((it, loc),))
+  it
+}
 #let termlist = [
   #pagebreak(weak: true)
   #heading(level: 1, numbering: none)[Definitions]
-  #context terms(..all-terms.final().map(el => {
-    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
-  }), tight:false)
+  #context terms(
+    ..all-terms
+      .final()
+      .map(el => {
+        terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+      }),
+    tight: false,
+  )
 ]
 
 = Scalars
@@ -52,6 +61,8 @@ $
   x in CC space ("complex numbers")
 $
 is also a scalar.
+
+You can also say a scalar is a 1x1 matrix.
 
 = Vectors
 A vector is 2 or more scalars arranged in a predetermined order.
@@ -663,14 +674,41 @@ Use these to form a system of linear equations.
 
 This process can be troublesome for large networks, so below is another way:
 
-*Loop Only Method*:
-+ Assign a current to each edge.
+*Loop only method*:
++ Identify a number of independent loops that is enough for all unknowns. \
+  The loops can be arbitrary, current should conform to the direction of the loop.
 + For each loop, write the sum of the currents times the resistance of the edge as 0.
 + Form a system of linear equations.
 + Move the constants to the RHS and form a matrix.
 + Solve the system using RREF.
 
-== Eigenvalues and Eigenvectors
+=== Application in Chemical Reactions
+#[
+  #show math.equation: it => {
+    show math.equation: math.upright
+    show "x": math.italic
+    it
+  }
+  Consider chemical reaction $x_1 C_6 H_12 O_6 + x_2 O_2 => x_3 C O_2 + x_4 H_2 O$.
+  Because atoms are conserved, we can form a system of linear equations.
+  Then solve it using RREF.
+]
 
+=== Application in Traffic Flow
+Consider four nodes connected by roads to form a rectangle.
+Given incoming traffic for two nodes and out-coming traffic for two other nodes, we can form a system of linear equations to find the traffic flow between the nodes.
+
+You may not find a unique solution out right, but take reality into account, e.g. solutions must be positive.
+
+== Eigenvalues and Eigenvectors
+If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
+$
+  mat(
+    a_(11), a_(12), dots.c, a_(1n);
+    a_(21), a_(22), dots.c, a_(2n);
+    dots.v, dots.v, dots.down, dots.v;
+    a_(n 1), a_(n 2), dots.c, a_(n n)
+  )_(n times n)
+$
 
 #termlist
