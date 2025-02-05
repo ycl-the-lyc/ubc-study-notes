@@ -7,6 +7,8 @@
   author: "Yecheng Liang",
 )
 
+#import "@preview/weave:0.2.0": compose_ as c_
+
 #import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0": plot
 
@@ -16,14 +18,26 @@
 #import prefixes: *
 
 #let all-terms = state("terms", ())
-#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#show terms.item: it => context {
+  let loc = here()
+  all-terms.update(c => c + ((it, loc),))
+  it
+}
 #let termlist = [
   #pagebreak(weak: true)
   #heading(level: 1, numbering: none)[Definitions]
-  #context terms(..all-terms.final().map(el => {
-    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
-  }), tight:false)
+  #context terms(
+    ..all-terms
+      .final()
+      .map(el => {
+        terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+      }),
+    tight: false,
+  )
 ]
+
+#let veca = vectorarrow
+#let vecl = text.with(style: "italic")
 
 = DC Circuits
 
@@ -429,7 +443,7 @@ Phasors are vectors that represent the amplitude and phase of a sinusoidal funct
 
 #figure(
   caption: [Phasor diagram],
-  image("assets/phasor.png", width: 67%)
+  image("assets/phasor.png", width: 67%),
 )
 
 Using projection,
@@ -444,7 +458,7 @@ $ is the phase angle between the current and the _source_ voltage.
 
 #figure(
   caption: [Phasor diagram for R-L-C circuits],
-  image("assets/phasors-rlc.png", width: 50%)
+  image("assets/phasors-rlc.png", width: 50%),
 )
 
 == Impedance
@@ -462,7 +476,7 @@ $
   V_"max" = I_"max" Z.
 $
 
-== R-L-C Circuits
+== R-L-C Circuits in Series
 If $X_L > X_C$, the current phasor is behind the voltage phasor, and the circuit is inductive.
 $
   i(t) &= I_"max" cos(omega t) \
@@ -475,14 +489,14 @@ $
   v(t) &= V_"max" cos(omega t - abs(phi)).
 $
 
-=== Parallel R-L-C Circuits
+== R-L-C Circuits in Parallel
 In parallel R-L-C circuits, the voltage across each component is the same, while the current is inversely proportional to the impedance.
 $
   V &= V_1 = V_2 = ... \
   I &= I_1 + I_2 + ... \
   &= V / Z.
 $
-Here, using the phasor diagram, we can find the current and the phase angle.
+Here, using the phasor diagram ($because X_C > X_L, therefore 1 / X_C < 1 / X_L$), we can find the current and the phase angle.
 Divide each phasor by $V_"max"$, we get
 $
   1 / Z &= sqrt((1 / R)^2 + (1 / X_L - 1 / X_C)^2) \
@@ -524,7 +538,28 @@ $ when $
   omega &= 1 / sqrt(L C).
 $
 
+= Electric Force and Field
 
+Rules of electric charges:
+- Like charges repel, and opposite charges attract.
+- Charges are conserved, they cannot be created or destroyed.
+- When conductors touch, charges redistribute to reach equilibrium.
 
+/ Electric charge: The fundamental property of matter, measured in Coulombs (C).
+  $ q = n e $ where $n$ is the number of charges and $e = qty(1.6 times 10^-19, C)$ is the elementary charge.
+/ Coulomb's Law: The force between two charges is directly proportional to the product of the charges and inversely proportional to the square of the distance between them, this force is _equal in magnitude_ on both charges.
+  $ F = k (abs(q_1) abs(q_2)) / r^2 $
+  where $k = 1 / (4 pi epsilon_0) = qty(8.99 times 10^9, N m^2 / C^2)$ is the Coulomb constant.
+
+We use $k = qty(9 times 10^9, N m^2 / C^2)$ in this course.
+
+== Electrostatic Attraction and Repulsion
+Two charges are simple enough: the forces are equal in magnitude and opposite in direction.
+How about more charges?
+
+/ Principle of Superposition: The force on a charge due to multiple charges is the vector sum of the forces due to each charge individually.
+
+Here again we introduce vectors, the force is a vector, and the direction of the force is along the line connecting the two charges.
+More vectors in MATH 152.
 
 #termlist
