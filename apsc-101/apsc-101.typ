@@ -150,7 +150,7 @@ A risk classification table is a tool used to identify and classify risks based 
     columns: (4em,) * 7,
     stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
     fill: (x, y) => if (x < 2 or y < 2) { none } else {
-      red.transparentize(10% * (7 - x + y))
+      red.transparentize(10% * (6 - x + y))
     },
     table.header(
       table.cell(colspan: 2, rowspan: 2, none),
