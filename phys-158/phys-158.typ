@@ -562,4 +562,92 @@ How about more charges?
 Here again we introduce vectors, the force is a vector, and the direction of the force is along the line connecting the two charges.
 More vectors in MATH 152.
 
+For example, given two point charges with the same charge $Q$ and the same mass $m$ suspended from a point on strings of equal length $L$, the angle between the strings is $theta$ and the distance between the two charges is $r$.
+In this case, $Q$ can be expressed as
+$
+  vecl(F)_e &= m g tan(theta/2) \
+  &= k Q^2 / r^2 \
+  &= k Q^2 / ((2L)^2 sin^2(theta / 2)), \
+  Q &= sqrt((4 L^2) / k m g tan(theta/2) sin^2(theta/2)).
+$
+
+== Electric Field
+/ Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
+  $
+    E = veca(F) / q_t = k q_s / r^2 veca(u)_r
+  $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
+
+#figure(
+  caption: [Electric fields],
+  grid(
+    columns: 2,
+    column-gutter: 1cm,
+    box(
+      clip: true,
+      width: 5cm,
+      height: 5cm,
+      align(
+        center + horizon,
+        canvas({
+          import draw: *
+
+          let qs = (0, 0)
+          let qt = (2, 0)
+          let m = qs.at(0) + qt.at(0) / 2
+
+          group({
+            set-style(stroke: (paint: std.gray, thickness: .05pt))
+            for i in range(-10, 11) {
+              if i != 0 {
+                i = calc.pow(i / 5, 3)
+                arc-through(qs, (m, i), qt)
+              }
+              line((-2, 0), (4, 0))
+            }
+          })
+
+          circle(qs, radius: .5em, stroke: red)
+          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+          circle(qt, radius: .5em, stroke: blue)
+          content((rel: (0, .04)), text(stroke: 1.5pt + blue, "-"))
+        }),
+      ),
+    ),
+    box(
+      clip: true,
+      width: 5cm,
+      height: 5cm,
+      align(
+        center + horizon,
+        canvas({
+          import draw: *
+
+          let qs = (0, 0)
+          let qt = (2, 0)
+          let m = qs.at(0) + qt.at(0) / 2
+
+          group({
+            set-style(stroke: (paint: std.gray, thickness: .05pt))
+            for i in range(-10, 11) {
+              if i != 0 {
+                i = calc.pow(i / 5, 3)
+                //TODO repel lines
+              }
+              line((-2, 0), qs)
+              line((4, 0), qt)
+            }
+          })
+
+          content((m, 0), [TODO])
+
+          circle(qs, radius: .5em, stroke: red)
+          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+          circle(qt, radius: .5em, stroke: red)
+          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+        }),
+      ),
+    ),
+  ),
+)
+
 #termlist
