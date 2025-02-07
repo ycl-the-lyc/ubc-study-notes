@@ -125,7 +125,7 @@ harm.
       ),
       table.cell(
         rowspan: 4,
-        rotate(-90deg, origin: right + top, reflow: true)[Risk Category #h(1em)],
+        rotate(-90deg, origin: right + top, reflow: true, smallcaps[Risk Category #h(.2em)]),
       ),
       [Safety], ..([],) * 2, [N/A],
       [Technical], ..([],) * 3,
@@ -139,15 +139,8 @@ A risk classification table is a tool used to identify and classify risks based 
 
 #figure(
   caption: [Risk Matrix],
-  [],
-)
-
-//TODO risk register (table)
-
-#figure(
-  caption: [Risk Register],
   table(
-    columns: (4em,) * 7,
+    columns: (2em,) + (4em,) * 6,
     stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
     fill: (x, y) => if (x < 2 or y < 2) { none } else {
       red.transparentize(10% * (6 - x + y))
@@ -163,7 +156,7 @@ A risk classification table is a tool used to identify and classify risks based 
     ),
     table.cell(
       rowspan: 5,
-      rotate(-90deg, origin: right + top, reflow: true)[Likelihood #h(2em)],
+      rotate(-90deg, origin: right + top, reflow: true, smallcaps[Likelihood #h(1.2em)]),
     ),
     [5], ..([],) * 5,
     [4], ..([],) * 5,
@@ -171,4 +164,22 @@ A risk classification table is a tool used to identify and classify risks based 
     [2], ..([],) * 5,
     [1], ..([],) * 5,
   ),
+)
+
+#figure(
+  caption: [Risk Register],
+  table(
+    columns: 6,
+    table.header(
+      [ID],
+      [Description],
+      [Severity],
+      [Likeli#{sym.space.nobreak;h(-.25em)}hood],
+      [Rating],
+      [Mitigation],
+    ),
+    [1], ..([],) * 5,
+    [2], ..([],) * 5,
+    [3], ..([],) * 5,
+  )
 )
