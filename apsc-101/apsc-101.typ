@@ -20,7 +20,7 @@
 = Professional Skills
 
 == Tuckerman's Stage of Development
-/ 4 Stages: Forming, Storming, Norming, Performing
+/ Tuckerman's Stages of Development: Forming, Storming, Norming, Performing
 
 /* insert image */
 #image("assets/tuckermanTeamDev.png", width: 60%, height: 200pt, fit: "contain")
@@ -125,9 +125,9 @@ harm.
       ),
       table.cell(
         rowspan: 4,
-        rotate(-90deg, origin: right+top, reflow: true)[Risk Category #h(1em)],
+        rotate(-90deg, origin: right + top, reflow: true)[Risk Category #h(1em)],
       ),
-      [Safety], ..([],) * 2, [none],
+      [Safety], ..([],) * 2, [N/A],
       [Technical], ..([],) * 3,
       [Project \ Management], ..([],) * 3,
       [Operational], ..([],) * 3,
@@ -144,3 +144,31 @@ A risk classification table is a tool used to identify and classify risks based 
 
 //TODO risk register (table)
 
+#figure(
+  caption: [Risk Register],
+  table(
+    columns: (4em,) * 7,
+    stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
+    fill: (x, y) => if (x < 2 or y < 2) { none } else {
+      red.transparentize(10% * (7 - x + y))
+    },
+    table.header(
+      table.cell(colspan: 2, rowspan: 2, none),
+      table.cell(colspan: 5)[Severity],
+      [1],
+      [2],
+      [3],
+      [4],
+      [5],
+    ),
+    table.cell(
+      rowspan: 5,
+      rotate(-90deg, origin: right + top, reflow: true)[Likelihood #h(2em)],
+    ),
+    [5], ..([],) * 5,
+    [4], ..([],) * 5,
+    [3], ..([],) * 5,
+    [2], ..([],) * 5,
+    [1], ..([],) * 5,
+  ),
+)
