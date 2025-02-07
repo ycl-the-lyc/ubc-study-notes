@@ -700,6 +700,82 @@ Given incoming traffic for two nodes and out-coming traffic for two other nodes,
 
 You may not find a unique solution out right, but take reality into account, e.g. solutions must be positive.
 
+== Matrix Multiplication
+Given two matrices $A$ and $B$ where $A$ has $m$ rows and $n$ columns and $B$ has $n$ rows and $p$ columns, the product $A B$ is a matrix with $m$ rows and $p$ columns.
+
+In principle, the number of _columns_ (_size of row_) in the first matrix must equal the number of _rows_ (_size of column_) in the second matrix for the product to be defined.
+
+For an element in the product matrix $C$,
+$
+  c_(i j) &= (i^"th" "row of" A) dot (j^"th" "column of" B) \
+  &= sum_(k = 1)^(n) a_(i k) b_(k j).
+$
+
+For example,
+$
+  mat(a , b, c; d, e, f)_(2 times 3) mat(x; y; z)_(3 times 1) &= mat(a x + b y + c z; d x + e y + f z)_(2 times 1) \
+  mat(x; y; z)_(3 times 1) mat(a , b, c; d, e, f)_(2 times 3) &= "undefined", 1 eq.not 2.
+$
+
+Even if $A_(n times n)$ and $B_(n times n)$, $A B eq.not B A$ in general.
+Only in the special case of diagonal matrices:
+$
+  A &= mat(
+    a, 0, dots.c, 0;
+    0, b, dots.c, 0;
+    dots.v, dots.v, dots.down, dots.v;
+    0, 0, dots.c, c
+  ) \
+  A B &= B A.
+$
+There is a type of matrix called the identity matrix, $I$, where
+$
+  I_n &= mat(
+    1, 0, dots.c, 0;
+    0, 1, dots.c, 0;
+    dots.v, dots.v, dots.down, dots.v;
+    0, 0, dots.c, 1
+  )_(n times n).
+$
+We would explore more wonders of the diagonal, identity and triangular matrices later.
+
+Now, we can write linear systems in matrix multiplication form.
+$
+  cases(
+    a_11 x_1 + a_12 x_2 + dots.c + a_13 x_3 = b_1,
+    a_21 x_1 + a_22 x_2 + dots.c + a_23 x_3 = b_2,
+    dots.v,
+    a_31 x_1 + a_32 x_2 + dots.c + a_33 x_3 = b_3
+  ) \
+  "is equivilant to" \
+  mat(
+    a_11, a_12, dots.c, a_13;
+    a_21, a_22, dots.c, a_23;
+    dots.v, dots.v, dots.v, dots.v;
+    a_31, a_32, dots.c, a_33
+  ) mat(x_1; x_2; dots.v; x_3) = mat(b_1; b_2; dots.v; b_3).
+$
+Such form has a simple notation:
+$
+  A vecb(x) = vecb(b).
+$ which $A$ is called the coefficient matrix.
+
+=== Properties of Matrix Multiplication
+- Associative: $A (B C) = (A B) C$.
+- Distributive: $A (B + C) = A B + A C$.
+- Not commutative: $A B eq.not B A$ in general.
+- Identity: $I A = A I = A$ where $I$ is the identity matrix.
+- Inverse: $A A^(-1) = A^(-1) A = I$ where $A^(-1)$ is the inverse of $A$.
+- Transpose: $(A B)^T = B^T A^T$.
+
+=== Powers of Matrices
+One numb enough to calculate $M^999$ by $M times M times ...$ would be dumb, we have a smarter way.
+
+We just learned that diagonal matrices behave like scalars in multiplication.
+So, if we can make $M$ a diagonal matrix, then we can easily calculate $M^n$, even when $n$ is very large.
+
+//TODO
+
 == Eigenvalues and Eigenvectors
 If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
 $
@@ -710,5 +786,6 @@ $
     a_(n 1), a_(n 2), dots.c, a_(n n)
   )_(n times n)
 $
+
 
 #termlist
