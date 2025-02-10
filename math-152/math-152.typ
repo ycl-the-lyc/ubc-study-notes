@@ -776,6 +776,42 @@ So, if we can make $M$ a diagonal matrix, then we can easily calculate $M^n$, ev
 
 //TODO
 
+== Linear Transformation
+/ Linear transformation / map / function: a rule that assigns one output to each input.
+
+For example, given $vecb(x) in RR^n$
+$
+  A vecb(x) = vecb(y) in RR^m
+$ indicates that $A$ is a transformation from $RR^n$ to $RR^m$:
+$
+ A: RR^n -> RR^m.
+$
+
+/ Linearity: A transformation $T: RR ^n -> RR^m$ is linear iff
+  $
+    T(alpha vecb(x)_1 + beta vecb(x)_2) = alpha T(vecb(x)_1) + beta T(vecb(x)_2) \
+    "or" \
+    T(vecb(x)_1 + vecb(x)_2) = T(vecb(x)_1) + T(vecb(x)_2) "and" T(alpha vecb(x)) = alpha T(vecb(x)).
+  $
+
+Thus, all matrix multiplications are linear.
+
+For example,
+$
+  mat(0, -1; 1, 0) vec(3, 4).
+$
+In the case above, $vec(0, 1)$ transforms $3$, $vec(-1, 0)$ transforms $4$:
+$
+  mat(0, -1; 1, 0) vec(3, 4) &= vec(vec(0, 1) vec(-1, 0)) vec(3, 4) \
+  &= 3 vec(0, 1) + 4 vec(-1, 0) \
+  &= vec(-4, 3).
+$
+Looks like $vec(3, 4)$ was rotated by $90 degree$ in counterclockwise!
+
+#block(inset: 0.65em, stroke: red)[
+  *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
+]
+
 == Eigenvalues and Eigenvectors
 If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
 $
