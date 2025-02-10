@@ -125,7 +125,7 @@ $
   "RRS"(a, b, n) &= sum_(i=1)^n f(x_i) Delta x \
   "LRS"(a, b, n) &= sum_(i=1)^n f(x_(i-1)) Delta x \
   "MRS"(a, b, n) &= sum_(i=1)^n f((x_(i-1) + x_i) / 2) Delta x \
-  "TRS"(a, b, n) &= sum_(i=1)^n (f(x_(i-1)) + f(x_i)) Delta x / 2,
+  "TRS"(a, b, n) &= sum_(i=1)^n (f(x_(i-1)) + f(x_i)) (Delta x) / 2,
 $
 where $Delta x = (b - a) / n$ and $x_i = a + i Delta x$.
 

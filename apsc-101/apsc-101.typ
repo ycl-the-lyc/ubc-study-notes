@@ -174,7 +174,7 @@ A risk classification table is a tool used to identify and classify risks based 
       [ID],
       [Description],
       [Severity],
-      [Likeli#{sym.space.nobreak;h(-.25em)}hood],
+      [Likeli#{sym.wj}hood], // for some reason it wants to break here
       [Rating],
       [Mitigation],
     ),

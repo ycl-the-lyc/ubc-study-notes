@@ -574,14 +574,14 @@ $
 == Electric Field
 / Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
   $
-    E = veca(F) / q_t = k q_s / r^2 veca(u)_r
+    veca(E) = veca(F) / q_t = k q_s / r^2 veca(u)_r
   $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
 
 #figure(
   caption: [Electric fields],
   grid(
-    columns: 2,
-    column-gutter: 1cm,
+    columns: (1fr,) * 1,
+    align: center+horizon,
     box(
       clip: true,
       width: 5cm,
@@ -599,10 +599,13 @@ $
             set-style(stroke: (paint: std.gray, thickness: .05pt))
             for i in range(-10, 11) {
               if i != 0 {
-                i = calc.pow(i / 5, 3)
-                arc-through(qs, (m, i), qt)
+                if calc.abs(i) in (1, 2, 9) { continue }
+                let j = calc.pow(i / 5, 3)
+                arc-through(qs, (m, j), qt, name: "a" + str(i))
+                mark("a" + str(i) + ".mid", (rel: (1, 0)), symbol: "stealth", fill: std.gray)
               }
-              line((-2, 0), (4, 0))
+              line((-2, 0), (4, 0), name: "l")
+              mark("l.mid", (rel: (1, 0)), symbol: "stealth", fill: std.gray)
             }
           })
 
@@ -613,41 +616,61 @@ $
         }),
       ),
     ),
-    box(
-      clip: true,
-      width: 5cm,
-      height: 5cm,
-      align(
-        center + horizon,
-        canvas({
-          import draw: *
-
-          let qs = (0, 0)
-          let qt = (2, 0)
-          let m = qs.at(0) + qt.at(0) / 2
-
-          group({
-            set-style(stroke: (paint: std.gray, thickness: .05pt))
-            for i in range(-10, 11) {
-              if i != 0 {
-                i = calc.pow(i / 5, 3)
-                //TODO repel lines
-              }
-              line((-2, 0), qs)
-              line((4, 0), qt)
-            }
-          })
-
-          content((m, 0), [TODO])
-
-          circle(qs, radius: .5em, stroke: red)
-          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-          circle(qt, radius: .5em, stroke: red)
-          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-        }),
-      ),
-    ),
+    // box(
+    //   clip: true,
+    //   width: 5cm,
+    //   height: 5cm,
+    //   align(
+    //     center + horizon,
+    //     canvas({
+    //       import draw: *
+    //
+    //       let qs = (0, 0)
+    //       let qt = (2, 0)
+    //       let m = qs.at(0) + qt.at(0) / 2
+    //
+    //       group({
+    //         set-style(stroke: (paint: std.gray, thickness: .05pt))
+    //         for i in range(-10, 11) {
+    //           if i != 0 {
+    //             i = calc.pow(i / 5, 3)
+    //             //TODO repel lines
+    //           }
+    //           line((-2, 0), qs)
+    //           line((4, 0), qt)
+    //         }
+    //       })
+    //
+    //       content((m, 0), [TODO])
+    //
+    //       circle(qs, radius: .5em, stroke: red)
+    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+    //       circle(qt, radius: .5em, stroke: red)
+    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+    //     }),
+    //   ),
+    // ),
   ),
 )
+
+=== Superposition of Electric Fields
+The field at any point is the _vector_ sum of all individual fields passing through that point.
+$
+  veca(E) = veca(E)_1 + veca(E)_2.
+$
+Thus, the fields can be separated into their $x, y, z$ components for computation.
+
+For example, in 2D space, given two charges---a dipole, the combined electric field on a test charge is
+$
+  veca(E) = (veca(E_1)_x + veca(E_2)_x) veca(i) + (veca(E_1)_y + veca(E_2)_y) veca(j).
+$
+If given a charge $q$, the angle between the field line and, say, the x-axis, $theta$, and the test charge is $(x, y)$ away from a charge, then the field on the test charge is
+$
+  veca(E) = (k q) / (x^2 + y^2),
+$ and the $x$ component of that is $
+  veca(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
+  &= (k q) / (x^2 + y^2) x / sqrt(x^2 + y^2) \
+  &= (k q x) / (x^2 + y^2)^(3/2)
+$
 
 #termlist
