@@ -441,7 +441,50 @@ If a support restricts translation, it produces a reaction force, and if it rest
 
 The translation and rotation restricted correspond to the reaction forces and moments produced by the support.
 
-// = Friction
+= Friction
+/ Friction: Force of resistance acting on a body that prevents or retards slipping of body or surface with which it is in contact.
+/ Fluid friction: Contacting surfaces separated by film of fluid (won’t consider here).
+/ Dry friction: No lubricating fluid between surfaces of body in contact.
+/ Coefficient of static friction ($mu_s$): the magnitude of friction per normal force when a body is static.
+
+The cause of dry friction is the rough surfaces in contact.
+There are little, microscopic bumps: 'teeth' and 'valleys', which they clutch into each other to hinder movement.
+Since they have to 'clutch in', there is a component of the resultant force perpendicular to the contact surface, the normal force $vecb(N)$.
+Of course, then there is the friction $vecb(F)$, tangent to the contact surface and opposite to the (intended) movement.
+
+#figure(
+  caption: [Dry friction],
+  image("assets/friction.png", width: 33%)
+)
+
+Look at the example above. Assume the block is in equilibrium, we can determine where $vecb(N)$ is acting, point $O$, by considering moments.
+$
+  vecl(W) x &= vecl(P) h \
+  x &= (vecl(P) h) / vecl(W).
+$
+
+#block(inset: 0.65em, stroke: red)[
+  Other then slip or not slip, the body can also tip!
+]
+
+/ Impending motion: No motion but friction is at its maximum, any larger propelling force will cause the body to slip.
+  Only when at impending motion, $ vecl(F)_s = mu_s vecl(N). $
+/ Angle of static friction: The angle between the resultant force by friction and the normal force and the normal force.
+
+It is important to notice that, only when the body is _about_ to slip, the above formula is true.
+In other cases, $vecl(F)_s$ depends on the propelling force.
+
+/ Kinetic friction: Friction when a body is in motion, typically _smaller_ than its static friction.
+/ Coefficient of kinetic friction ($mu_k$): Similar to $mu_s$ but for kinetic friction.
+
+#block(inset: 0.65em, stroke: red)[
+  When there are multiple ways a body can slip, calculate the $vecl(P)$ required for each case, then choose the one with the _smallest_ $vecl(P)$.
+]
+
+#block(inset: 0.65em, stroke: red)[
+  When using $vecl(F) = mu vecl(N)$, the direction drawn must be correct!
+  Otherwise, no, it can be wrong and we correct it later according to the sign.
+]
 
 // = Kinematics of a Particle
 
