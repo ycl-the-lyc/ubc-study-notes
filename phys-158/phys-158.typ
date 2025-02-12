@@ -673,4 +673,46 @@ $ and the $x$ component of that is $
   &= (k q x) / (x^2 + y^2)^(3/2)
 $
 
+=== Electric Field of a Finite Line of Charge
+Considering a finite line (line segment) of charge, and a test charge on the center perpendicular line of the line charge.
+
+By symmetry, the $x$ components of each $dd(veca(E))$ would cancel out, we are left with the $y$ component.
+Let the horizontal distant be $x$ and vertical distance be $h$, the total length of the line charge is $2a$, then
+$
+  dd(vecl(E))_y &= + dd(vecl(E)) sin(theta) \
+  &= (k Q) / (2a) dd(x) / (x^2 + h^2) h / sqrt(x^2 + h^2) \
+  vecl(E)_y &= (k Q h) / (2a) integral^(+a)_(-a) dd(x) / (x^2 + h^2)^(3/2) \
+  &= (k Q h) / (2a) (a - (-a)) / (h^2 sqrt(a^2 + h^2)) \
+  &= (k Q) / (h sqrt(a^2 + h^2)).
+$
+
+== Electric Dipole
+/ Dipole: Two charges of the same magnitude but opposite charge at a small distance, $d$.
+/ Dipole moment ($veca(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(veca(p)) = q d. $
+
+In an uniform electric field, the net force on a dipole is zero.
+In a non-uniform electric field, the net force on a dipole is not zero.
+
+And, they experience a torque when not aligned to the fields.
+$
+  veca(tau) &= veca(p) times veca(F) \
+  U_e &= - veca(p) dot veca(E).
+$
+
+== Electric Flux
+/ Flux ($Phi_e$): The amount of electric field passing through a surface.
+
+Electric flux for a uniform field on a flat surface is
+$
+  Phi_e &= veca(E) dot veca(A) \
+  &= vecl(E) vecl(A) cos(theta)
+$ where $veca(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $veca(E)$ and $veca(A)$ (not the surface!).
+
+For a curved surface,
+$
+  Phi_e &= integral.surf veca(E) dot dd(veca(A)).
+$
+
+
+
 #termlist
