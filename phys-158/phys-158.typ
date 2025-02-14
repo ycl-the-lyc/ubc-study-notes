@@ -713,6 +713,16 @@ $
   Phi_e &= integral.surf veca(E) dot dd(veca(A)).
 $
 
+== Gauss's Law
+/ Gauss's Law: The flux of the electric field out of an arbitrary closed surface is proportional to the electric charge enclosed by the surface, irrespective of how that charge is distributed.
+  $ Phi_e = Q_"enclosed" / epsilon_0 = integral.surf veca(E) dot dd(veca(A)) $ where $veca(E)$ is the electric field, $dd(veca(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
 
+In most cases, the integral above is not easy to evaluate, there do exist two special cases which we can apply Gauss's law at ease:
+- When $veca(E)$ is tangent to the surface, $veca(E) dot veca(A) = 0$, then $Phi_e = 0$.
+- When $veca(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(veca(A)) = E veca(A)$.
+
+Such ideal cases only occur when
++ The charge distribution has high symmetry.
++ It is possible to construct a Gaussian surface that would match the symmetry.
 
 #termlist
