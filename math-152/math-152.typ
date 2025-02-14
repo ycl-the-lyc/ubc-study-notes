@@ -844,8 +844,10 @@ $
 $
 Then, to project any vector $vecb(a)$ to $vecb(u)$, we can simply
 $
-  "Proj"_vecb(u) vecb(a) = M_T vecb(a)
+  "Proj"_vecb(u) vecb(a) = M_T vecb(a).
 $
+
+To find other transformations, similarly find transformation of each orthogonal vector/basis, then combine them to a column space.
 
 == Eigenvalues and Eigenvectors
 If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
