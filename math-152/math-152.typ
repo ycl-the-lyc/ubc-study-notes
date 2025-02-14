@@ -808,9 +808,44 @@ $
 $
 Looks like $vec(3, 4)$ was rotated by $90 degree$ in counterclockwise!
 
+In the example above, we also notice that the transforming matrix was written in forms of vector columns.
+=== Column Space of Matrix
+Matrix can be expressed as columns space of vectors.
+$
+  mat(x_1, x_2; y_1, y_2) = mat(vec(x_1, y_1), vec(x_2, y_2)).
+$
+Matrix multiplication would be the same as individual "vector multiplication", provided that such operation is defined.
+
+So, for an $M_(m times n)$, its column space will be a row of $n$ vectors.
+Recall that matrix multiplication is only defined when the number of columns of the first matrix is the same as the number of rows of the second matrix!
+$
+  mat(vecb(a)_1, vecb(a)_2, dots.c vecb(a)_n) mat(x_1; x_2; dots.v; x_n) = mat(vecb(a)_1 x_1, vecb(a)_2 x_2, dots.c, vecb(a)_n a_n).
+$
+Write $vecb(a)$ as a transformation, $T(e)$, each column of the result becomes an image/transformation of $x$.
+
 #block(inset: 0.65em, stroke: red)[
   *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
 ]
+
+=== Finding a Transformation
+Say, we are projecting some vector to a vector with $vecb(u)$ at angle $phi$ to the $x$ axis, Of course, we can use the projection formula, but here we want to find the transformation matrix that does the job for us (and it's easier).
+Let $vecb(e)_1$ and $vecb(e)_2$ be vectors on the $x$ and $y$ that projects to $vecb(u)$.
+$
+  M_T &= mat(T(vecb(e)_1), T(vecb(e)_2)) \
+  T(veca(e)_1) &= "Proj"_phi (vecb(e)_1) \
+  &= cos(phi) vecb(u) \
+  &= cos(phi) vec(cos(phi), sin(phi)) \
+  &= vec(cos^2(phi), sin(phi) cos(phi)) \
+  T(vecb(e)_2) &= "Proj"_phi (vecb(e)_2) \
+  &= sin(phi) vecb(u) \
+  &= sin(phi) vec(cos(phi), sin(phi)) \
+  &= vec(sin(phi) cos(phi), sin^2(phi)) \
+  M_T &= mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi))
+$
+Then, to project any vector $vecb(a)$ to $vecb(u)$, we can simply
+$
+  "Proj"_vecb(u) vecb(a) = M_T vecb(a)
+$
 
 == Eigenvalues and Eigenvectors
 If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
