@@ -725,4 +725,40 @@ Such ideal cases only occur when
 + The charge distribution has high symmetry.
 + It is possible to construct a Gaussian surface that would match the symmetry.
 
+By this token, the electric field created by the following special objects can be determined:
+- An infinitely long straight wire with charge density $lambda$ and length $l$.
+  $
+    E A &= Q / epsilon_0 \
+    E (2 pi r l) &= lambda l / epsilon_0 \
+    E &= lambda / (2pi r epsilon_0) \
+    &= (2 k lambda) / r.
+  $
+- An infinitely large plane with charge density $sigma$.
+  $
+    E A &= Q / epsilon_0 \
+    &= (sigma 2 A) / epsilon_0 "(I have 2 sides)"\
+    E &= (2 sigma) / epsilon_0.
+  $
+
+== Conductors in Electrostatic Equilibrium
+Since charges can freely move around in a conductor, there can be no electric field inside when in equilibrium.
+
+Excess charge will only sit on its surface, not inside.
+The electric fields created are all perpendicular to the conducting surface.
+
+#figure(
+  caption: [A conductor in equilibrium],
+  image("assets/conductor-equilibruim.png", width: 67%)
+)
+
+Gauss's Law still holds true, even for inside cavity.
+Faraday cage proves this.
+
+Now, if the conductor is neutral and there are charges in the cavity, in order to fulfill Gauss's Law, the total charge enclosed by the inner surface must be 0, so charges on the inner surface should cancel out with the charges in the cavity.
+
+For example, consider a neutral spherical conductor with an also spherical cavity inside with radius $R$. Some charge $q$ is placed at $r = R/2$.
+
+The distribution of charges on the inner shell would be nonuniform, but the outer shell would have _uniform_ charge distribution!
+This is because the total charge inside is 0, the charges on the outer shell do not care about it---as long as it is in equilibrium.
+
 #termlist
