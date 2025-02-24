@@ -486,7 +486,23 @@ In other cases, $vecl(F)_s$ depends on the propelling force.
   Otherwise, no, it can be wrong and we correct it later according to the sign.
 ]
 
-// = Kinematics of a Particle
+= Kinematics of a Particle
+From now on, we need to consider motion of bodies, which would require a bit of calculus.
+
+/ Velocity: Rate of change of position with respect to time.
+  $ v = dv(s, t) $
+/ Acceleration: Rate of change of velocity with respect to time.
+  $ a = dv(v, t) = dv(s, t, 2) $
+
+For their instantaneous values, take $lim_(Delta t -> 0)$.
+
+Given the definition of acceleration and velocity, we can get that
+$
+  a dd(s) = dd(s) dv(v, t) = dv(s, t) dd(v) = v dd(v).
+$
+
+If acceleration is known as a function of time, the relationship above can help us determine the velocity.
+
 
 // = Kinetics of a Particle: Force and Acceleration
 
