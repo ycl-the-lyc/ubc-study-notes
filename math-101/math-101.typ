@@ -398,8 +398,6 @@ $
 $
 Notably, the LHS converges when both expressions in the RHS converge.
 
-Using the previous conclusion, we can reform improper integrals to determine if they are convergent.
-
 For example, given
 $
   I = integral_0^5 (-cos(1 / x)) / x^2 dd(x),
@@ -418,7 +416,7 @@ $
 $
 The LHS converges when the RHS converge.
 
-Using the conclusion above,
+For example,
 $
   integral_0^oo e^(-x) dd(x) &= lim_(R -> oo) integral_0^R e^(-x) dd(x) \
   &= lim_(R -> oo) [-e^(-x)]_0^R \
@@ -444,5 +442,18 @@ $
   &= (0 - (- pi / 2)) + (pi / 2 - 0) \
   &= pi.
 $
+
+== Determining Convergence
+
+=== Value Comparison Test
+Let function $f, g$ be integrable on any interval contained in $(a, b)$, then:
+- If $abs(f(x)) <= g(x)$ for $x in (a, b)$ and $integral_a^b g(x) dd(x)$ converges, then $integral_a^b f(x) dd(x)$ converges.
+- If $f (x) >= g (x) >= 0$ for $x in (a, b)$ and $integral_a^b g(x) dd(x)$ diverges, then $integral_a^b f(x) dd(x)$ diverges.
+
+=== Limit Comparison Test
+Let $−oo < a < oo$. Let $f, g$ be functions that are defined and continuous for all $x >= a$ and assume that $g(x) >= 0$ for $x >= a$.
+
+- If $integral_a^oo g(x) dd(x)$ converges and $lim_(x -> oo) f(x) / g(x)$ exists, then $integral_a^oo f(x) dd(x)$ converges.
+- If $integral_a^oo g(x) dd(x)$ diverges and $lim_(x -> oo) f(x) / g(x)$ exists and _is nonzero_, then $integral_a^oo f(x) dd(x)$ diverges.
 
 #termlist
