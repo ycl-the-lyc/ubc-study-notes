@@ -434,7 +434,15 @@ To realize this, think of $integral_(-oo)^oo (sin(x) - cos(x)) dd(x)$ geometrica
 
 Instead,
 $
-   integral_(-oo)^oo f(x) dd(x) = lim_(T -> -oo) integral_T^a f(x) dd(x) + lim_(R -> oo) integral_a^R f(x) dd(x).
+   integral_(-oo)^oo f(x) dd(x) = lim_(T -> -oo) integral_T^c f(x) dd(x) + lim_(R -> oo) integral_c^R f(x) dd(x)
+$ where $c in RR$.
+
+For example,
+$
+  integral_(-oo)^oo 1 / (1 + x^2) dd(x) &= lim_(T -> -oo) integral_T^0 1 / (1 + x^2) dd(x) + lim_(R -> oo) integral_0^R 1 / (1 + x^2) dd(x) \
+  &= lim_(T -> -oo) [arctan(x)]_T^0 + lim_(R -> oo) [arctan(x)]_0^R \
+  &= (0 - (- pi / 2)) + (pi / 2 - 0) \
+  &= pi.
 $
 
 #termlist
