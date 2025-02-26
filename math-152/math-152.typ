@@ -7,6 +7,7 @@
   author: "Yecheng Liang",
 )
 #import "@preview/physica:0.9.4": *
+#show: super-T-as-transpose // Render "..^T" as transposed matrix
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
 #set math.equation(numbering: "(1.1)")
@@ -897,6 +898,41 @@ $
 To ensure a one-to-n-one relationship, a transformation matrix's determinant should _not_ be 0.
 To be precise, the determinant must be 1 or -1:
 when multiplying a matrix to a vector, the resultant vector will have its length be $det times "original length"$.
+
+Given 2 linear transformations $S, T$, then their composition $S compose T$ is also linear.
+
+=== Solving for Orthogonal Transformation
+Given
+$
+  vecb(x)_1 = vec(x, y) = c_1 vecb(e)_1 + c_2 vecb(e)_2 \
+  vecb(x)_2 = vec(z, w) = c_3 vecb(e)_1 + c_4 vecb(e)_2.
+$
+We can first find out how to eliminate one of the $vecb(e)$ by solving
+$
+  alpha vecb(x)_1 + beta vecb(x)_2 = vec(1, 0) \
+  gamma vecb(x)_1 + delta vecb(x)_2 = vec(0, 1)
+$ then solve the resulting linear system.
+
+== Transpose of Matrices
+/ Transpose: For a matrix, turning its rows to columns, and columns to rows, notated as $A^T$. In other words, flipping the matrix along its diagonal axis.
+
+For example,
+$
+  A &= mat(1, 2; 3, 4) \
+  A^T &= mat(1, 3; 4, 2)
+$
+
+Some nice conclusions:
+- $(A B)^T = B^T A^T$.
+- If $vecb(x), vecb(y) in RR^n$ and are columns, then $vecb(x) dot vecb(y) = vecb(x)^T vecb(y) = vecb(y)^T vecb(x)$.
+- If $vecb(x), vecb(y) in RR^n, A = A_(m times n)$, then $vecb(y) dot (A vecb(x)) = (A^T vecb(y)) dot vecb(x)$.
+
+Remember again, matrices $A B eq.not B A$.
+
+=== Probability Matrices
+When we have a system with multiple states, each state being not so stable and has probabilities to switch to other states.
+We can represent each state as a probability matrix, $P_(i j)$, for $i$ is the current state, and $j$ is the state that it can switch to.
+//WIP
 
 // == Eigenvalues and Eigenvectors
 // If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
