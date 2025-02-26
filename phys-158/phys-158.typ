@@ -741,14 +741,14 @@ By this token, the electric field created by the following special objects can b
   $
 
 == Conductors in Electrostatic Equilibrium
-Since charges can freely move around in a conductor, there can be no electric field inside when in equilibrium.
+Since charges can freely move around in a conductor, there can be no electric field inside when in equilibrium (no current).
 
 Excess charge will only sit on its surface, not inside.
 The electric fields created are all perpendicular to the conducting surface.
 
 #figure(
   caption: [A conductor in equilibrium],
-  image("assets/conductor-equilibruim.png", width: 67%)
+  image("assets/conductor-equilibruim.png", width: 50%)
 )
 
 Gauss's Law still holds true, even for inside cavity.
@@ -756,9 +756,40 @@ Faraday cage proves this.
 
 Now, if the conductor is neutral and there are charges in the cavity, in order to fulfill Gauss's Law, the total charge enclosed by the inner surface must be 0, so charges on the inner surface should cancel out with the charges in the cavity.
 
+This is called "screening".
+
 For example, consider a neutral spherical conductor with an also spherical cavity inside with radius $R$. Some charge $q$ is placed at $r = R/2$.
 
 The distribution of charges on the inner shell would be nonuniform, but the outer shell would have _uniform_ charge distribution!
 This is because the total charge inside is 0, the charges on the outer shell do not care about it---as long as it is in equilibrium.
+
+=== Application: Coaxial Cable
+Coaxial cable is a type of electrical cable consisting of an inner conductor surrounded by a concentric conducting shield, with the two separated by a dielectric (insulating material); many coaxial cables also have a protective outer sheath or jacket. 
+
+Define the radius of the inner conductor as $R_1$ and the outer coundoctor's as $R_2$.
+A point $P_1$ between the inner and the outer conductors at $r_1$ has
+$
+  Phi_e &= integral.surf veca(E) dd(veca(A)) \
+  &= E(r_1) A_"side" \
+  &= E(r_1) L (2 pi r_1) \
+  Q_"in" &= lambda_1 L \
+  E(r_1) L (2 pi r_1) &= (lambda_1 L) / epsilon_0.
+$
+The situation at point $P_2$ at $r_2$ outside of the outer conductor would be pretty much the same, except
+$
+  E(r_2) L (2 pi r_2) &= ((lambda_1 - lambda_2) L) / epsilon_0
+$ since the charge density would be negative to neutralize the system.
+
+Bonus: The surface charge density is the greatest at the place where the radius of curvature is the smallest, explained later.
+
+== Electric Potential Energy
+The stored ability to do work is potential.
+For a force $veca(F)$ moving an object along path $veca(s)$ with angle $theta$ to the path, the work done is
+$
+  W &= veca(F) dot veca(s) \
+  &= F Delta s cos(theta).
+$
+
+The change in potential energy of the object, in turn, is the negative of work done by the force.
 
 #termlist
