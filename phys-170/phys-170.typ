@@ -503,6 +503,40 @@ $
 
 If acceleration is known as a function of time, the relationship above can help us determine the velocity.
 
+A particle has position vector $vecb(r) = (x vecb(i), y vecb(j), z vecb(k))$, and its velocity is the first derivative of position regarding time, $vecb(v) = dv(vecb(r), t) = (dv(x, t), dv(y, t), dv(z, t))$.
+
+These differentiation with respect to time are notated using overdot, $dot(x) = dv(x, t)$.
+
+Acceleration is then the derivation of velocity, or the second degree derivation of position: $vecb(a) = dv(vecb(v), t) = dv(vecb(r), t, 2) = (dv(v_x, t), dv(v_y, t), dv(v_z, t))$.
+
+== Projectile Motion
+Projectile or trajectory motion, is something being thrown into the air and affected by gravity.
+We ignore air resistance for now.
+
+Velocity on the x-axis will not change, as there is no force acting in that direction,
+$
+  a_x &= 0 \
+  v_x &= (v_0)_x.
+$
+Velocity on the y-axis will change according to the gravitational acceleration, $g = qty(9.81, m/s^2)$,
+$
+  a_y &= -g \
+  v_y &= (v_0)_y - g t \
+  y &= y_0 + (v_0)_y t - 1 / 2 g t^2, \
+  v_y^2 &= (v_0)_y^2 - 2 g (y - y_0)
+$
+
+And generally,
+$
+  v^2 = v_0^2 + 2 a (s - s_0).
+$
+
+Now we can describe a trajectory motion as a function for $y$ of $x$:
+$
+  y(x) &= a (x - x_0)^2 + b (x - x_0) + y_0 \
+  "where" a &= - g / (2 v_0^2 cos^2(theta_0)) \
+  b &= tan(theta_0).
+$
 
 // = Kinetics of a Particle: Force and Acceleration
 
