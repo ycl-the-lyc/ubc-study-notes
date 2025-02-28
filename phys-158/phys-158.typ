@@ -818,7 +818,11 @@ $
 $
 Because the test charge is used as the unit charge, unlike electric forces, this is not mutual.
 
-For a positive charge $q$, it moves along a electric field and loses potential energy.
-For negative charge, it gains potential energy instead.
+For a positive charge $q$, it tends to move along an electric field and lose potential energy.
+For negative charge, it tends to move opposite to an electric field and gain potential energy.
+
+== Equipotential Maps
+Refer to topographic maps.
+#text(fill: std.gray)[Or do sports.]
 
 #termlist
