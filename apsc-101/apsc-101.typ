@@ -282,15 +282,15 @@ A risk classification table is a tool used to identify and classify risks based 
 )
 
 == Streamlined Life Cycle Assessment (SLCA)
-  - for each criterion and for each life cycle stage, evaluate performance of product/process on a qualitative scale
-    - e.g. "very poor" to "very good" or "significant negative impact" to "significant benefit"
-    - #image("assets/slcaResult.png", width: 75%, height: 165pt, fit: "contain")
+  - for each criterion and for each life cycle stage, evaluate performance of product/process on a qualitative scale. \
+    e.g. "very poor" to "very good" or "significant negative impact" to "significant benefit"
+      #image("assets/slcaResult.png", width: 75%, height: 165pt, fit: "contain")
 
   - results usually tabulated in SLCA Matrix
-    - #image("assets/slcaMatrix.png", width: 80%, height: 100pt, fit: "contain")
+    #image("assets/slcaMatrix.png", width: 80%, height: 100pt, fit: "contain")
 
-  - values in matrix then summed to determined environmentally responible product rating ($upright("R")_upright("ERP")$)
-    - equivalent to score in WDM if all weights were 1
+  - values in matrix then summed to determined environmentally responible product rating ($upright("R")_upright("ERP")$). \
+    equivalent to score in WDM if all weights were 1
 
 === Usage of SLCA
   + use $upright("R")_upright("ERP")$ to benchmark performance against other products
@@ -302,3 +302,11 @@ A risk classification table is a tool used to identify and classify risks based 
   - SLCA qualitative (easier to use with criteria which are more difficult to quantify), but also makes results *less precise*
   - SLCA suitable for any stage of design process (especially early where potential influence on design decisions is greatest)
     - LCA suitable for existing products / very late in design process (where precise assessment of impact is required)
+
+= Sunk Cost
+/ Sunk cost: a cost that has already been incurred and cannot be recovered.
+
+Sunk cost usually include equipments already bought, exploration and consultation already done: they would not be reversed to money.
+
+= Duty to Consult
+#link("https://www.rcaanc-cirnac.gc.ca/eng/1331832510888/1609421255810")[The Government of Canada has a duty to consult and, where appropriate, accommodate Indigenous groups when it considers conduct that might adversely impact potential or established Aboriginal or treaty rights.]

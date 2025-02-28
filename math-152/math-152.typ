@@ -7,6 +7,7 @@
   author: "Yecheng Liang",
 )
 #import "@preview/physica:0.9.4": *
+#show: super-T-as-transpose // Render "..^T" as transposed matrix
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
 #set math.equation(numbering: "(1.1)")
@@ -30,6 +31,8 @@
 // #let vec(..body) = $(body.pos().join(", "))$
 #let det = "det"
 #set math.mat(delim: "[")
+#let imat = identitymatrix.with(delim: "[", fill: 0)
+#let ones(order) = identitymatrix(order, delim: "[", fill: 1)
 
 #let all-terms = state("terms", ())
 #show terms.item: it => context {
@@ -827,11 +830,11 @@ Write $vecb(a)$ as a transformation, $T(e)$, each column of the result becomes a
   *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
 ]
 
-=== Finding a Transformation
+=== Finding Transformations in 2D Space
 Say, we are projecting some vector to a vector with $vecb(u)$ at angle $phi$ to the $x$ axis, Of course, we can use the projection formula, but here we want to find the transformation matrix that does the job for us (and it's easier).
 Let $vecb(e)_1$ and $vecb(e)_2$ be vectors on the $x$ and $y$ that projects to $vecb(u)$.
 $
-  M_T &= mat(T(vecb(e)_1), T(vecb(e)_2)) \
+  M_"proj" &= mat(T(vecb(e)_1), T(vecb(e)_2)) \
   T(veca(e)_1) &= "Proj"_phi (vecb(e)_1) \
   &= cos(phi) vecb(u) \
   &= cos(phi) vec(cos(phi), sin(phi)) \
@@ -840,25 +843,107 @@ $
   &= sin(phi) vecb(u) \
   &= sin(phi) vec(cos(phi), sin(phi)) \
   &= vec(sin(phi) cos(phi), sin^2(phi)) \
-  M_T &= mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi))
+  M_"proj" &= mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi)).
 $
-Then, to project any vector $vecb(a)$ to $vecb(u)$, we can simply
+Then, to project any vector $vecb(a)$ to $vecb(u)$, we can simply put
 $
-  "Proj"_vecb(u) vecb(a) = M_T vecb(a).
+  "Proj"_vecb(u) vecb(a) = M_"proj" vecb(a).
 $
 
 To find other transformations, similarly find transformation of each orthogonal vector/basis, then combine them to a column space.
 
-== Eigenvalues and Eigenvectors
-If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
+Here is another example: rotation. Let's say we are to find a rotation matrix of $phi$ counterclockwise.
 $
-  mat(
-    a_(11), a_(12), dots.c, a_(1n);
-    a_(21), a_(22), dots.c, a_(2n);
-    dots.v, dots.v, dots.down, dots.v;
-    a_(n 1), a_(n 2), dots.c, a_(n n)
-  )_(n times n)
+  T(vecb(e)_1) &= vec(cos(phi), sin(phi)) \
+  T(vecb(e)_2) &= vec(-sin(phi), cos(phi)) \
+  M_"rot" &= mat(cos(phi), -sin(phi); sin(phi), cos(phi)).
 $
+
+Yet another one, reflection by function $y = m x$.
+$
+  phi &= acos((vecb(x) dot vecb(y)) / (norm(x) norm(y))) \
+  "Ref"_phi(vecb(x)) &= vecb(x)_parallel - vecb(x)_perp \
+  &= vecb(x)_parallel - (vecb(x)_parallel - vecb(x)) \
+  &= 2 vecb(x)_parallel - vecb(x) \
+  &= 2 "Proj"_phi(vecb(x)) - vecb(x) \
+  &= 2 M_"proj"_phi(vecb(x)) - I vecb(x) \
+  &= (2 M_"proj"_phi - I) vecb(x) \
+  M_"ref"_phi &= 2 M_"proj"_phi - I \
+  &= 2 mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi)) - imat(2) \
+  &= mat(2 cos(2 phi) + 1, sin(2 phi); sin(2 phi), -cos(2 phi) + 1) - imat(2) \
+  &= mat(cos(2 phi), sin(2 phi); sin(2 phi), -cos(2 phi)).
+$
+
+=== Finding Transformations in 3D Space
+Firstly, reflection.
+Given a plane $P: x + y + z = 0$ and a vector $vec(x)$, find the reflection of $vecb(x)$ about the plane.
+$
+  vecb(n) &= vec(1, 1, 1) \
+  vecu(n) &= 1 / sqrt(3) vec(1, 1, 1) \
+  "Ref"_P(vecb(x)) &= vecb(x)_parallel - vecb(x)_perp \
+  &= (vecb(x) - vecb(x)_perp) - vecb(perp) \
+  &= vecb(x) - 2 vecb(x)_perp \
+  &= (I - 2 "Proj"_vecu(n)(x)) vecb(x) \
+  M_"ref"_P &= I - 2 M_T_"proj"_vecu(n)(x) \
+  "Proj"_vecu(n)(vecb(e)) &= (vecb(e) dot vecu(n)) vecu(n) \
+  &= 1 / 3 vec(1, 1, 1) \
+  M_"proj"_vecu(n) &= 1 / 3 ones(3) \
+  M_"proj"_P &= I - M_"proj"_vecu(n) \
+  &= 1 / 3 mat(2, -1, -1; -1, 2, -1; -1, 2, -1) \
+  M_"ref"_P &= I - 2 M_"proj"_vecu(n) \
+  &= 1 / 3 mat(1, -2, -2; -2, 1, -2; -2, -2, 1).
+$
+
+=== Checking for Linearity
+To ensure a one-to-n-one relationship, a transformation matrix's determinant should _not_ be 0.
+To be precise, the determinant must be 1 or -1:
+when multiplying a matrix to a vector, the resultant vector will have its length be $det times "original length"$.
+
+Given 2 linear transformations $S, T$, then their composition $S compose T$ is also linear.
+
+=== Solving for Orthogonal Transformation
+Given
+$
+  vecb(x)_1 = vec(x, y) = c_1 vecb(e)_1 + c_2 vecb(e)_2 \
+  vecb(x)_2 = vec(z, w) = c_3 vecb(e)_1 + c_4 vecb(e)_2.
+$
+We can first find out how to eliminate one of the $vecb(e)$ by solving
+$
+  alpha vecb(x)_1 + beta vecb(x)_2 = vec(1, 0) \
+  gamma vecb(x)_1 + delta vecb(x)_2 = vec(0, 1)
+$ then solve the resulting linear system.
+
+== Transpose of Matrices
+/ Transpose: For a matrix, turning its rows to columns, and columns to rows, notated as $A^T$. In other words, flipping the matrix along its diagonal axis.
+
+For example,
+$
+  A &= mat(1, 2; 3, 4) \
+  A^T &= mat(1, 3; 4, 2)
+$
+
+Some nice conclusions:
+- $(A B)^T = B^T A^T$.
+- If $vecb(x), vecb(y) in RR^n$ and are columns, then $vecb(x) dot vecb(y) = vecb(x)^T vecb(y) = vecb(y)^T vecb(x)$.
+- If $vecb(x), vecb(y) in RR^n, A = A_(m times n)$, then $vecb(y) dot (A vecb(x)) = (A^T vecb(y)) dot vecb(x)$.
+
+Remember again, matrices $A B eq.not B A$.
+
+=== Probability Matrices
+When we have a system with multiple states, each state being not so stable and has probabilities to switch to other states.
+We can represent each state as a probability matrix, $P_(i j)$, for $i$ is the current state, and $j$ is the state that it can switch to.
+//WIP
+
+// == Eigenvalues and Eigenvectors
+// If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
+// $
+//   mat(
+//     a_(11), a_(12), dots.c, a_(1n);
+//     a_(21), a_(22), dots.c, a_(2n);
+//     dots.v, dots.v, dots.down, dots.v;
+//     a_(n 1), a_(n 2), dots.c, a_(n n)
+//   )_(n times n)
+// $
 
 
 #termlist

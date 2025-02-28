@@ -30,13 +30,22 @@
 }
 
 #let all-terms = state("terms", ())
-#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#show terms.item: it => context {
+  let loc = here()
+  all-terms.update(c => c + ((it, loc),))
+  it
+}
 #let termlist = [
   #pagebreak(weak: true)
   #heading(level: 1, numbering: none)[Definitions]
-  #context terms(..all-terms.final().map(el => {
-    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
-  }), tight:false)
+  #context terms(
+    ..all-terms
+      .final()
+      .map(el => {
+        terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+      }),
+    tight: false,
+  )
 ]
 
 = General Principles
@@ -328,7 +337,7 @@ $
   sqrt(a^2 - x^2) &= sqrt(a^2 - a^2 sin^2(theta)) \
   &= sqrt(a^2 cos^2(theta)) \
   &= a abs(cos(theta)) \
-  &= a cos(theta) "when" -pi/2 <= theta <= pi/2.
+  &= a cos(theta) "when" -pi / 2 <= theta <= pi / 2.
 $
 
 We can thus apply it, for example,
@@ -364,5 +373,87 @@ $
   integral u v dd(x) &= u integral v dd(x) - integral u' (integral v dd(x)) dd(x) \
   integral u' v dd(x) &= u v - integral u v' dd(x).
 $
+
+== Simpson's rule
+We already know that integrals can be estimated by Riemann sums, but all those sums can be rather inaccurate.
+What if, instead of using 2 points to form trapezoids or rectangles, we use 3 points to form parabolas?
+
+/ Simpson's rule: $
+    integral_a^b f(x) dd(x) &approx (Delta x) / 3 [f(x_0) + 4 f(x_1) + 2 f(x_2) + 4 f(x_3) + ... \
+      &+ 2 f(x_(n - 2)) + 4 f(x_(n - 1)) + f(x_n)]
+  $ where $n$ is an _even_ number.
+
+= Improper Integrals
+/ Improper integral: An integral either with an unbounded integrand, or taken over an infinite interval.
+
+For example, $integral_(-1)^1 1 / x^2 "and" integral_0^oo e^(-x)$ are improper.
+
+== Redefining Unbounded Improper Integral
+If the integrand is discontinuous at some point or in some region, we can redefine it as one or more integrals with bounds approaching the discontinuities.
+
+For example, given that $f(x)$ has discontinuity at $c in (a, b)$,
+$
+  integral_a^b f(x) dd(x) &= integral_a^c f(x) dd(x) = integral_c^b f(x) dd(x) \
+  &= lim_(s -> a^-) integral_a^s f(x) dd(x) + lim_(t -> c^+) integral_t^b f(x) dd(x).
+$
+Notably, the LHS converges when both expressions in the RHS converge.
+
+For example, given
+$
+  I = integral_0^5 (-cos(1 / x)) / x^2 dd(x),
+$ notice that $I$ discontinues at $x = 0$.
+$
+  I &= lim_(t -> 0^+) integral_t^5 (-cos(1 / x)) / x^2 dd(x) \
+  &= lim_(t -> 0^+) integral_(1 / t)^(1 / 5) -cos(u) dd(u) \
+  &= lim_(t -> 0^+) (sin(1 / 5) - sin(1 / t)).
+$
+The integral does not exist.
+
+== Redefining Improper Integral with Infinite Interval
+$
+  integral_a^oo f(x) dd(x) = lim_(R -> oo) integral_a^R f(x) dd(x) \
+  integral_(-oo)^b f(x) dd(x) = lim_(T -> -oo) integral_T^b f(x) dd(x).
+$
+The LHS converges when the RHS converge.
+
+For example,
+$
+  integral_0^oo e^(-x) dd(x) &= lim_(R -> oo) integral_0^R e^(-x) dd(x) \
+  &= lim_(R -> oo) [-e^(-x)]_0^R \
+  &= lim_(R -> oo) (-e^(-R) + e^0) \
+  &= 1.
+$
+
+=== When Both Bounds Are Infinity
+$
+  integral_(-oo)^oo f(x) dd(x) eq.not lim_(R -> oo) integral_(-R)^(R) f(x) dd(x).
+$
+To realize this, think of $integral_(-oo)^oo (sin(x) - cos(x)) dd(x)$ geometrically.
+
+Instead,
+$
+   integral_(-oo)^oo f(x) dd(x) = lim_(T -> -oo) integral_T^c f(x) dd(x) + lim_(R -> oo) integral_c^R f(x) dd(x)
+$ where $c in RR$.
+
+For example,
+$
+  integral_(-oo)^oo 1 / (1 + x^2) dd(x) &= lim_(T -> -oo) integral_T^0 1 / (1 + x^2) dd(x) + lim_(R -> oo) integral_0^R 1 / (1 + x^2) dd(x) \
+  &= lim_(T -> -oo) [arctan(x)]_T^0 + lim_(R -> oo) [arctan(x)]_0^R \
+  &= (0 - (- pi / 2)) + (pi / 2 - 0) \
+  &= pi.
+$
+
+== Determining Convergence
+
+=== Value Comparison Test
+Let function $f, g$ be integrable on any interval contained in $(a, b)$, then:
+- If $abs(f(x)) <= g(x)$ for $x in (a, b)$ and $integral_a^b g(x) dd(x)$ converges, then $integral_a^b f(x) dd(x)$ converges.
+- If $f (x) >= g (x) >= 0$ for $x in (a, b)$ and $integral_a^b g(x) dd(x)$ diverges, then $integral_a^b f(x) dd(x)$ diverges.
+
+=== Limit Comparison Test
+Let $−oo < a < oo$. Let $f, g$ be functions that are defined and continuous for all $x >= a$ and assume that $g(x) >= 0$ for $x >= a$.
+
+- If $integral_a^oo g(x) dd(x)$ converges and $lim_(x -> oo) f(x) / g(x)$ exists, then $integral_a^oo f(x) dd(x)$ converges.
+- If $integral_a^oo g(x) dd(x)$ diverges and $lim_(x -> oo) f(x) / g(x)$ exists and _is nonzero_, then $integral_a^oo f(x) dd(x)$ diverges.
 
 #termlist
