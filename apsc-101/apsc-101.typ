@@ -108,6 +108,12 @@ harm.
 
 = Drawings (tbd)
 
+== Orthographic
+- dash dot --> center line
+- dash --> hidden lines
+
+
+
 = Feedback
 
 == 7 Cs (recap)
