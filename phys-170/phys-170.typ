@@ -22,8 +22,6 @@
 #let ft = $"ft"$
 #let lb = $"lb"$
 
-#let vecb(body) = $vectorbold(upright(body))$
-#let veca(body) = $vectorarrow(italic(body))$
 #let vecl(body) = $vectorbold(italic(body))$
 #let vecu(body) = $vectorunit(body)$
 
@@ -72,7 +70,7 @@ In this course, we will use $ g = qty(9.81, m/s^2) $ which happens to be true fo
 == Vector Notation
 In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
 
-$ vecb(A) "has a magnitude of" vecl(A) "in direction" vecu(A). $
+$ vb(A) "has a magnitude of" vecl(A) "in direction" vecu(A). $
 
 In manuscript, of course we cannot strike bold, so we use overhead arrow for vectors instead.
 
@@ -94,7 +92,7 @@ Use #quote[tip to tail] for triangular method of addition: draw the vectors head
 
 == Force Components
 $
-  vecb(F) = vecl(x) vecu(i) + vecl(y) vecu(j)
+  vb(F) = vecl(x) vecu(i) + vecl(y) vecu(j)
 $ where $x, y$ are magnitudes of the force in the $vecu(i), vecu(j)$ directions.
 
 
@@ -108,13 +106,13 @@ $ where $x, y$ are magnitudes of the force in the $vecu(i), vecu(j)$ directions.
       set-style(mark: (end: ">", fill: black))
 
       line((0, 0), (2, 3), name: "f")
-      content("f.mid", (rel: (-0.2, 0.2)), $vecb(F)$)
+      content("f.mid", (rel: (-0.2, 0.2)), $vb(F)$)
 
       line((0, 0), (2, 0), name: "fx", stroke: (paint: blue))
-      content("fx.mid", (rel: (0, 0.3)), $vecb(F)_x$)
+      content("fx.mid", (rel: (0, 0.3)), $vb(F)_x$)
 
       line((2, 0), (2, 3), name: "fy", stroke: (paint: red))
-      content("fy.mid", (rel: (-0.35, 0)), $vecb(F)_y$)
+      content("fy.mid", (rel: (-0.35, 0)), $vb(F)_y$)
 
       cetz.angle.angle(
         (0, 0),
@@ -129,14 +127,14 @@ $ where $x, y$ are magnitudes of the force in the $vecu(i), vecu(j)$ directions.
     },
   ),
   align(horizon)[
-    Force $vecb(F)$ can be represented as a combination of $vecb(F)_x$ and $vecb(F)_y$
-    $ vecb(F) = vecb(F)_x + vecb(F)_y $
+    Force $vb(F)$ can be represented as a combination of $vb(F)_x$ and $vb(F)_y$
+    $ vb(F) = vb(F)_x + vb(F)_y $
     or as a polar coordinate of angle $theta = arctan(vecl(F)_y / vecl(F)_x)$ and magnitude $vecl(F)$
-    $ vecb(F) = vecl(F) (cos(theta) + sin(theta)). $
+    $ vb(F) = vecl(F) (cos(theta) + sin(theta)). $
 
     To generalize it, we can write it as
     $
-      vecb(F) &= vecl(F)_x vecu(i) + vecl(F)_y vecu(j) \
+      vb(F) &= vecl(F)_x vecu(i) + vecl(F)_y vecu(j) \
       &= vecl(F) (cos(theta) vecu(i) + sin(theta) vecu(j))
     $
     where $vecu(i), vecu(j)$ are unit vectors in the $x, y$ directions.
@@ -149,10 +147,10 @@ For a force with 2 dimensions, we call it a coplanar force.
 Sometimes, non-linear equations arise from problems involving forces. Gladly use math solvers for those.
 
 == Unit Vector
-To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $vecu(u) = vecb(A) / vecl(A)$.
+To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $vecu(u) = vb(A) / vecl(A)$.
 
 == 3D Forces
-Forces in 3D are $vecb(F) = vecl(F)_x vecu(i) + vecl(F)_y vecu(j) + vecl(F)_z vecu(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
+Forces in 3D are $vb(F) = vecl(F)_x vecu(i) + vecl(F)_y vecu(j) + vecl(F)_z vecu(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
 
 To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
@@ -169,7 +167,7 @@ Therefore,
 $
   vecu(u) &= cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k)
 $ and $
-  vecb(F) &= vecl(F) vecu(u) \
+  vb(F) &= vecl(F) vecu(u) \
   &= vecl(F) (cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k))
 $
 
@@ -199,29 +197,29 @@ $
 Or instead, given 2 ($beta, gamma$) of the 3 Cartesian angles, we can determine the force by
 $
   cos(alpha) = sqrt(1 - cos^2(beta) - cos^2(gamma)) \
-  vecb(F) = vecl(F) (cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k)).
+  vb(F) = vecl(F) (cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k)).
 $
 
 == Position Vectors
 Position vectors are vectors that describe the position of a point in space relative to a reference point.
 
 As obvious, we need 3 coordinates to locate a point in 3D space.
-Point $P(x, y, z)$ has position vector $vecb(r) = x vecu(i) + y vecu(j) + z vecu(k)$ relative to the origin.
+Point $P(x, y, z)$ has position vector $vb(r) = x vecu(i) + y vecu(j) + z vecu(k)$ relative to the origin.
 
 Note that the position vector does not always come from the origin, it can be relative to arbitrary points.
 Given $A(x_A, y_A, z_A)$ and $B(x_B, y_B, z_B)$, the position vector of $B$ relative to $A$ is
 $
-  vecb(r) = (x_B - x_A) vecu(i) + (y_B - y_A) vecu(j) + (z_B - z_A) vecu(k).
+  vb(r) = (x_B - x_A) vecu(i) + (y_B - y_A) vecu(j) + (z_B - z_A) vecu(k).
 $
 
-Connecting to unit vectors, $vecb(u) = vecb(F) / vecl(F)$,
+Connecting to unit vectors, $vb(u) = vb(F) / vecl(F)$,
 $
-  vecb(F) = vecl(F) vecb(u) = vecl(F) vecb(r) / vecl(r).
+  vb(F) = vecl(F) vb(u) = vecl(F) vb(r) / vecl(r).
 $
 
 To simplify calculation, let $X = vecl(F) / vecl(r)$,
 $
-  vecb(F) &= X vecb(r) \
+  vb(F) &= X vb(r) \
   vecl(F) &= X vecl(r).
 $
 
@@ -230,32 +228,32 @@ Mostly taught in MATH 152, but here again anyways.
 
 === Dot Product & Angle Between Vectors
 $
-  vecb(A) dot vecb(B) &= vecl(A) vecl(B) cos(theta) \
+  vb(A) dot vb(B) &= vecl(A) vecl(B) cos(theta) \
   &= A_x B_x + A_y B_y + A_z B_z
 $
 
 === Parallel & Perpendicular Components
 Two vectors are parallel if their cross product is a zero vector, and perpendicular if their dot product is zero.
 
-Given a vector $vecb(A)$, its parallel component is
+Given a vector $vb(A)$, its parallel component is
 $
-  vecb(A)_(parallel) = (vecb(A) dot vecu(u)) vecu(u)
+  vb(A)_(parallel) = (vb(A) dot vecu(u)) vecu(u)
 $
 and its perpendicular component is
 $
-  vecb(A)_(perp) = vecb(A) - vecb(A)_(parallel).
+  vb(A)_(perp) = vb(A) - vb(A)_(parallel).
 $
 
 === Projection
-The projection of $vecb(A)$ onto $vecb(B)$ is
+The projection of $vb(A)$ onto $vb(B)$ is
 $
-  vecb(A)_"proj on B" = (vecb(A) dot vecu(u_B)) vecu(u_B).
+  vb(A)_"proj on B" = (vb(A) dot vecu(u_B)) vecu(u_B).
 $
 Note the similarity to the parallel component formula.
 
 = Equilibrium of a Particle
 This section only concerns static equilibrium, where the particle is at rest.
-In other words, $ sum vecb(F) = 0. $
+In other words, $ sum vb(F) = 0. $
 
 == Free-Body Diagram
 To draw a free-body diagram,
@@ -268,22 +266,22 @@ To draw a free-body diagram,
 == Coplanar Force Systems
 On a 2D plane, forces can be resolved into $x, y$ components.
 $
-  sum vecb(F)_x &= 0 \
-  sum vecb(F)_y &= 0.
+  sum vb(F)_x &= 0 \
+  sum vb(F)_y &= 0.
 $
 
 == 3D Force Systems
 Forces in 3D can be resolved into $x, y, z$ components.
 $
-  sum vecb(F)_x &= 0 \
-  sum vecb(F)_y &= 0 \
-  sum vecb(F)_z &= 0.
+  sum vb(F)_x &= 0 \
+  sum vb(F)_y &= 0 \
+  sum vb(F)_z &= 0.
 $
 
 Be very careful with the signs of the forces.
 
 == Solving Equilibrium Problems
-With multiple forces and their direction vectors (_not unit vectors_) $vecb(r)$, $ F = vecb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$.
+With multiple forces and their direction vectors (_not unit vectors_) $vb(r)$, $ F = vb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$.
 Solving for $X, Y, Z$ gives the forces.
 To solve a typical $X, Y, Z$ system, we can use the `rref` function on a matrix of the coefficients in the equations and their RHS. More in MATH 152.
 
@@ -307,10 +305,10 @@ In this course of statics, we study not the translations or rotations, but the _
 These results combined are called the force system resultants.
 
 == Moment of a Force
-Intuitively, magnitude of the moment of a force $vecb(F)$ about point $O$ is
+Intuitively, magnitude of the moment of a force $vb(F)$ about point $O$ is
 $
   M_O = vecl(F) d
-$ where $d$ is the perpendicular distance from $O$ to the line of action of $vecb(F)$.
+$ where $d$ is the perpendicular distance from $O$ to the line of action of $vb(F)$.
 
 Multiple moments? Just sum them up.
 
@@ -323,38 +321,38 @@ Now, be reminded that the cross product of two vectors produces a vector perpend
 === Cross Product
 Samely, more in MATH 152.
 $
-  vecb(A) times vecb(B) &= matrixdet(
+  vb(A) times vb(B) &= matrixdet(
     vecu(i), vecu(j), vecu(k);
     A_x, A_y, A_z;
     B_x, B_y, B_z;
   ) \
   &= (A_y B_z - A_z B_y) vecu(i) - (A_x B_z - A_z B_x) vecu(j) + (A_x B_y - A_y B_x) vecu(k)
-$ which is perpendicular to both $vecb(A)$ and $vecb(B)$.
+$ which is perpendicular to both $vb(A)$ and $vb(B)$.
 
 And it is non-commutative.
 $
-  vecb(C) &= vecb(A) times vecb(B) \
-  -vecb(C) &= vecb(B) times vecb(A)
+  vb(C) &= vb(A) times vb(B) \
+  -vb(C) &= vb(B) times vb(A)
 $
 
 It is mandated that we show construction of the determinant in exams even if we use calculators.
 
 == Vector Formulation of Moment
 $
-  vecb(M)_O &= vecb(r) times vecb(F)
-$ where $vecb(r)$ is the position vector of the point of application of $vecb(F)$ relative to $O$, in other words, _any_ vector from $O$ to the line of action of $vecb(F)$.
+  vb(M)_O &= vb(r) times vb(F)
+$ where $vb(r)$ is the position vector of the point of application of $vb(F)$ relative to $O$, in other words, _any_ vector from $O$ to the line of action of $vb(F)$.
 
-The magnitude of $vecb(M)_O$ is then
+The magnitude of $vb(M)_O$ is then
 $
   vecl(M)_O &= vecl(r) vecl(F) sin(theta) \
   &= vecl(F) d \
-  vecb(M)_"axis" &= vecb(u)_a_x times (vecb(r) times vecb(F)) \
-  &= vecb(u)_a_x times vecb(M)_O "(this can commutate)".
+  vb(M)_"axis" &= vb(u)_a_x times (vb(r) times vb(F)) \
+  &= vb(u)_a_x times vb(M)_O "(this can commutate)".
 $
 
 Using our recent knowledge of Cartesian vectors and cross products, we can write the moment as
 $
-  vecb(M)_O &= matrixdet(
+  vb(M)_O &= matrixdet(
     vecu(i), vecu(j), vecu(k);
     r_x, r_y, r_z;
     F_x, F_y, F_z;
@@ -365,7 +363,7 @@ $
 / Couple: A pair of forces of equal magnitude, opposite direction, and parallel lines of action.
 
 $
-  vecb(M)_"couple" &= vecb(r)_A times vecb(-F) + vecb(r)_B times vecb(F) \
+  vb(M)_"couple" &= vb(r)_A times vb(-F) + vb(r)_B times vb(F) \
   vecl(M)_"couple" &= vecl(F) d
 $ where $d$ is the perpendicular distance between the lines of action of the forces.
 
@@ -383,7 +381,7 @@ Then, add the couple moment somewhere and cancel the original force.
 
 == Couple of Moments
 $
-  vecb(M)_"couple" &= vecb(M)_A + vecb(M)_B.
+  vb(M)_"couple" &= vb(M)_A + vb(M)_B.
 $
 
 == Simplification of Force Systems
@@ -400,7 +398,7 @@ To simplify a force system, we can
 A parallel force system can be simplified by replacing the forces with a single resultant force and a single resultant moment.
 It can then be further simplified by moving the resultant force to the point of application of the resultant moment.
 $
-  vecb(F)_R "and" vecb(M)_O "at" O = vecb(F)_R "with distance" vecl(M)_O / vecl(F)_R.
+  vb(F)_R "and" vb(M)_O "at" O = vb(F)_R "with distance" vecl(M)_O / vecl(F)_R.
 $
 
 === Reduction to a Wrench
@@ -419,8 +417,8 @@ For equilibrium, we do not consider internal forces, because they always occur i
 
 In equilibrium, the sum of the forces and moments acting on a rigid body is zero, in other words, vanish.
 $
-  sum vecb(F) = 0 \
-  sum vecb(M)_O = 0.
+  sum vb(F) = 0 \
+  sum vb(M)_O = 0.
 $
 It does not matter where the point $O$ is.
 
@@ -449,15 +447,15 @@ The translation and rotation restricted correspond to the reaction forces and mo
 
 The cause of dry friction is the rough surfaces in contact.
 There are little, microscopic bumps: 'teeth' and 'valleys', which they clutch into each other to hinder movement.
-Since they have to 'clutch in', there is a component of the resultant force perpendicular to the contact surface, the normal force $vecb(N)$.
-Of course, then there is the friction $vecb(F)$, tangent to the contact surface and opposite to the (intended) movement.
+Since they have to 'clutch in', there is a component of the resultant force perpendicular to the contact surface, the normal force $vb(N)$.
+Of course, then there is the friction $vb(F)$, tangent to the contact surface and opposite to the (intended) movement.
 
 #figure(
   caption: [Dry friction],
   image("assets/friction.png", width: 33%)
 )
 
-Look at the example above. Assume the block is in equilibrium, we can determine where $vecb(N)$ is acting, point $O$, by considering moments.
+Look at the example above. Assume the block is in equilibrium, we can determine where $vb(N)$ is acting, point $O$, by considering moments.
 $
   vecl(W) x &= vecl(P) h \
   x &= (vecl(P) h) / vecl(W).
@@ -503,11 +501,11 @@ $
 
 If acceleration is known as a function of time, the relationship above can help us determine the velocity.
 
-A particle has position vector $vecb(r) = (x vecb(i), y vecb(j), z vecb(k))$, and its velocity is the first derivative of position regarding time, $vecb(v) = dv(vecb(r), t) = (dv(x, t), dv(y, t), dv(z, t))$.
+A particle has position vector $vb(r) = (x vb(i), y vb(j), z vb(k))$, and its velocity is the first derivative of position regarding time, $vb(v) = dv(vb(r), t) = (dv(x, t), dv(y, t), dv(z, t))$.
 
 These differentiation with respect to time are notated using overdot, $dot(x) = dv(x, t)$.
 
-Acceleration is then the derivation of velocity, or the second degree derivation of position: $vecb(a) = dv(vecb(v), t) = dv(vecb(r), t, 2) = (dv(v_x, t), dv(v_y, t), dv(v_z, t))$.
+Acceleration is then the derivation of velocity, or the second degree derivation of position: $vb(a) = dv(vb(v), t) = dv(vb(r), t, 2) = (dv(v_x, t), dv(v_y, t), dv(v_z, t))$.
 
 == Projectile Motion
 Projectile or trajectory motion, is something being thrown into the air and affected by gravity.
@@ -537,6 +535,39 @@ $
   "where" a &= - g / (2 v_0^2 cos^2(theta_0)) \
   b &= tan(theta_0).
 $
+
+== Position, Velocity and Acceleration
+A particle path can be seen comprising of differential arc of a circle with radius, $rho$, known as the radius of curvature, and a center $O'$, the center of curvature.
+
+In limit of a straight path, $rho -> oo$.
+
+In 2D space, for a particle with path $f(x)$,
+$
+  rho = [1 + (dv(y, x))^2]^(3/2) / dv(y, x, 2).
+$
+
+Velocity of the particle, in such cases, is
+$
+  v &= dd(s, t) = dot(s) \
+  vb(v) &= v vb(u)_t.
+$
+There is no normal component to it.
+
+Acceleration is then
+$
+  vb(a) &= dv(vb(v), t) \
+  &= dv(,t) v vb(u)_t \
+  &= dot(v) vb(u)_t + v dot(vb(u)_t) \
+  dot(vb(u)_t) &= dv(,theta) vb(u)_n  \
+  &= dot(theta) vb(u)_n \
+  dot(theta) &= v / rho \
+  vb(a) &= dot(v) vb(u)_t + v^2 / rho vb(u)_n \
+  a &= norm(vb(a)).
+$
+
+In a straight-line motion, $rho -> oo$, $a_u = 0$.
+In a constant-speed motion, $dot(v) = 0$, $a_t = 0$.
+We can see that the tangential acceleration represents the change in magnitude of velocity, and the normal acceleration represents the change in direction of velocity.
 
 // = Kinetics of a Particle: Force and Acceleration
 
