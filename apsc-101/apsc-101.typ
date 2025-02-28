@@ -108,6 +108,12 @@ harm.
 
 = Drawings (tbd)
 
+== Orthographic
+- dash dot --> center line
+- dash --> hidden lines
+
+
+
 = Feedback
 
 == 7 Cs (recap)
@@ -147,11 +153,9 @@ Another is *reduce*, which is to change behaviours as a society to reduce what w
 - systematic evaluation of the impacts of energy and material inputs and outputs for a product/process across all life cycle stages
 
 + *Goal Definition and Scope*
-
-- System boundary: a description of what elements are included or not included in an LCA
-
-- Functional units: a reference measure of performance to use as a baseline in comparing options
-  - #image("assets/funcUnitImg.png", width: 85%, height: 150pt, fit: "contain")
+  - System boundary: a description of what elements are included or not included in an LCA
+  - Functional units: a reference measure of performance to use as a baseline in comparing options
+    #image("assets/funcUnitImg.png", width: 85%, height: 150pt, fit: "contain")
 
 + *Inventory Analysis*
 
@@ -224,7 +228,7 @@ Another is *reduce*, which is to change behaviours as a society to reduce what w
         rowspan: 4,
         rotate(-90deg, origin: right + top, reflow: true, smallcaps[Risk Category #h(.2em)]),
       ),
-      [Safety], ..([],) * 2, [N/A],
+      [Safety], [], [N/A],[],
       [Technical], ..([],) * 3,
       [Project \ Management], ..([],) * 3,
       [Operational], ..([],) * 3,
