@@ -766,7 +766,7 @@ This is because the total charge inside is 0, the charges on the outer shell do 
 === Application: Coaxial Cable
 Coaxial cable is a type of electrical cable consisting of an inner conductor surrounded by a concentric conducting shield, with the two separated by a dielectric (insulating material); many coaxial cables also have a protective outer sheath or jacket. 
 
-Define the radius of the inner conductor as $R_1$ and the outer coundoctor's as $R_2$.
+Define the radius of the inner conductor as $R_1$ and the outer conductor's as $R_2$.
 A point $P_1$ between the inner and the outer conductors at $r_1$ has
 $
   Phi_e &= integral.surf veca(E) dd(veca(A)) \
@@ -791,5 +791,34 @@ $
 $
 
 The change in potential energy of the object, in turn, is the negative of work done by the force.
+$ W_(i -> f) = - Delta U. $
+
+The work done by a source charge onto a test charge is
+$
+  W &= integral_(x_i)^(x_F) veca(F)_(q_s -> q_t) dd(x) \
+  &= integral_(x_i)^(x_f) F_(q_s -> q_t) dd(x) \
+  &= integral_(x_i)^(x_f) k (q_s q_t) / x^2 dd(x) \
+  &= -k (q_s q_t) / x_f + k (q_s q_t) / x_i \
+  &= - Delta U \
+  &= - (U_f - U_i) \
+  U_(q_s q_t) &= k (q_s q_t) / r_(q_s q_t).
+$
+
+For a system of $n >= 2$ charges,
+$
+  U &= k sum_(i = 1)^(n - 1) (q_i q_(i + 1)) / r_((i) (i + 1)).
+$
+
+== Electric Potential
+/ Electric potential ($V$): potential energy per unit charge.
+
+We can think of electric potential to electric potential energy as electric field to electric force... but a scalar version.
+$
+  V = k q_s / r_(q_s q_t).
+$
+Because the test charge is used as the unit charge, unlike electric forces, this is not mutual.
+
+For a positive charge $q$, it moves along a electric field and loses potential energy.
+For negative charge, it gains potential energy instead.
 
 #termlist
