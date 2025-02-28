@@ -929,12 +929,53 @@ Some nice conclusions:
 
 Remember again, matrices $A B eq.not B A$.
 
-=== Probability Matrices
+== Probability Matrices
 When we have a system with multiple states, each state being not so stable and has probabilities to switch to other states.
 We can represent each state as a probability matrix, $P_(i j)$, for $i$ is the current state, and $j$ is the state that it can switch to.
-//WIP
 
-// == Eigenvalues and Eigenvectors
+=== Markov process
+Consider a particle that jumps among 3 distinct states at predetermined probabilities in discrete time steps.
+
+Let $x_i(n)$ be the probability of being in state $i$ at time $n$ where $i in [1, 2, 3], n in ZZ$.
+
+As time goes to $n + 1$, $x_i(n + 1) = P_(i 1) x_1(n) + P_(i 2) x_2(n) + P_(i 3) x_3(n)$.
+Let $vecb(x)(n) = vec(x_1(n), x_2(n), x_3(n))$, then
+$
+  vecb(x)_(n + 1) &= vec(x_1(n + 1), x_2(n + 1), x_3(n + 1)) \
+  &= vec(P_11 x_1(n) + P_12 x_2(n) + P_13 x_3(n), P_21 x_1(n) + P_22 x_2(n) + P_23 x_3(n), P_31 x_1(n) + P_32 x_2(n) + P_33 x_3(n)) \
+  &= mat(P_11, P_12, P_13; P_21, P_22, P_23; P_31, P_32, P_33) vec(x_1(n), x_2(n), x_3(n)) \
+  &= P vecb(x)_n.
+$
+The $P$ is called a transition matrix.
+The sum of each of its columns is 1.
+
+This $"Probability" times "State"$ action can be iterated for as many times as pleased, but that is kind of inefficient...
+We will talk about that later.
+
+=== Stationary Probability
+For a state $vecb(x)$, if $P vecb(x) = vecb(x)$, the state is called a stationary probability, $vecb(x)_s$.
+
+To find out $vecb(x)_s$ from $P$,
+$
+  P vecb(x)_s &= vecb(x)_s \
+  I vecb(x)_s - P vecb(x)_s &= vecb(0) \
+  (I - P) vecb(x)_s &= vecb(0).
+$
+Then, form a linear system and solve.
+The elements of $vecb(x)_s$ solved are _unlikely to add up to 1_!
+Hence, we should scale them to have a sum of 1.
+
+== Matrix Inverse
+/ One-to-one linear transformation: $T: RR^n -> RR^m "for" vecb(x)_1, vecb(x)_2 in RR^n$ is one-to-one if
+  $
+    T(vecb(x)_1) = T(vecb(x)_2) " iff " vecb(x)_1 = vecb(x)_2.
+  $
+
+It is not to be confused with many-to-one, which that is valid for functions.
+
+/ Matrix inverse: Matrix $A$ is invertible if $det A eq.not 0$. Matrix $B$ is the inverse of $A$ iff $A B = B A  = I$, and $B$ is then notated as $A^(-1)$.
+
+// == Eigenvalues and Eigenvectors 
 // If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
 // $
 //   mat(
