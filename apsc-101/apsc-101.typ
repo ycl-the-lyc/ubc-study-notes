@@ -224,7 +224,7 @@ Another is *reduce*, which is to change behaviours as a society to reduce what w
         rowspan: 4,
         rotate(-90deg, origin: right + top, reflow: true, smallcaps[Risk Category #h(.2em)]),
       ),
-      [Safety], ..([],) * 2, [N/A],
+      [Safety], [], [N/A],[],
       [Technical], ..([],) * 3,
       [Project \ Management], ..([],) * 3,
       [Operational], ..([],) * 3,
