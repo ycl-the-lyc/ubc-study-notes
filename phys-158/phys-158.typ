@@ -7,14 +7,39 @@
   author: "Yecheng Liang",
 )
 
-#import "@preview/circuiteria:0.1.0": *
+#import "@preview/weave:0.2.0": compose_ as c_
+
+#import "@preview/cetz:0.3.1": canvas, draw
+#import "@preview/cetz-plot:0.1.0": plot
 
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
 #import units: *
 #import prefixes: *
 
-= Circuits
+#let all-terms = state("terms", ())
+#show terms.item: it => context {
+  let loc = here()
+  all-terms.update(c => c + ((it, loc),))
+  it
+}
+#let termlist = [
+  #pagebreak(weak: true)
+  #heading(level: 1, numbering: none)[Definitions]
+  #context terms(
+    ..all-terms
+      .final()
+      .map(el => {
+        terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+      }),
+    tight: false,
+  )
+]
+
+#let veca = vectorarrow
+#let vecl = text.with(style: "italic")
+
+= DC Circuits
 
 == Basic Components
 / Power Supplies (DC/AC): Direct Current and Alternating Current.
@@ -22,7 +47,7 @@
 / Resistors (R): Resists current, consumes power.
   Light bulbs, lamps are also resistors.
 
-/ Capacitors (C): Stores electric charge and energy.
+/ #link(<sc:capacitor>)[Capacitors (C)]: Stores electric charge and energy.
   Not to be confused with batteries: \
   Batteries release energy in a slow manner;
   capacitors can discharge energy in a short burst.
@@ -37,20 +62,10 @@
 
 / Voltage (V): The potential difference between two points, measured in Volts (V).
 
-/ Capacitance (C): The ability to store electric charge, measured in Farads (F).
-  $ Q = C V $
-  $ I = dd(Q) / dd(t) = C dd(V) / dd(t) $
-
-  Capacitance of a capacitor depends on its material, area $A$, and distance $d$ between plates.
-  $ C = epsilon A / d $ where $epsilon$ is the permittivity of the material.
-
-  For multiple capacitors,
-  $ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $
-  $ C_"parallel" = C_1 + C_2 + ... $
+/ #link(<sc:capacitance>)[Capacitance (C)]: The ability to store electric charge, measured in Farads (F).
 
 / Resistance (R): The opposition to the flow of electric current, measured in Ohms ($Omega$).
   $ V = I R $
-  $ P = I V = I^2R = V^2 / R $
 
   Resistance of a resistor depends on its material, length $L$, and cross-sectional area $A$.
   $ R = rho L / A $ where $rho$ is the resistivity of the material.
@@ -132,3 +147,582 @@ When traveling against the direction of the current, invert the signs.
 
 These two laws are crucial in analyzing circuits (solving problems), especially when appliances are not clearly connected in series or parallel.
 
+== Short, Open Circuits and Proportionality
+/ Short Circuit: A circuit with no resistance, causing a large current to flow.
+  The voltage drop across a short circuit is zero.
+/ Open Circuit: A circuit with infinite resistance, causing no current to flow.
+
+In case of a parallel circuit, the voltage across each component is the same, while the current is inversely proportional to the resistance.
+While in a series circuit, the current across each component is the same, while the voltage is inversely proportional to the resistance.
+
+For instance, $qty(3, A)$ of current flows through a $qty(2, "Omega")$ and a $qty(1, "Omega")$ resistors, the current through each will be $qty(1, A) "and" qty(2, A)$.
+
+Combining this knowledge with Kirchhoff's laws, we can solve even more complex circuits.
+
+== Real Batteries
+/ Internal Resistance ($r$): The resistance within a battery, causing a voltage drop.
+  $
+    V_"battery" &= epsilon - I r \
+    I &= epsilon / (r + R).
+  $
+
+Hence, the terminal voltage of a battery is
+$
+  V_"terminal" &= epsilon - epsilon / (r + R) r \
+  &= epsilon R / (r + R).
+$
+
+== Power
+/ Power: The rate at which energy is consumed or produced, measured in Watts ($unit(W)$).
+  $ P = I V = I^2 R = V^2 / R $
+
+== Grounding
+/ Ground: A reference point in a circuit, usually at zero voltage.
+  It is used to measure the voltage of other points in the circuit.
+
+/ Grounding: Connecting a circuit to the ground or other big conductors to send away excess energy, usually to prevent electric shock.
+  It is also used to stabilize the voltage of a circuit.
+
+Addition of a ground symbol in a circuit diagram does not affect the circuit itself, our calculations stay the same.
+However, our *zero reference point changes*, and we must measure the voltage of other points in the circuit with respect to the ground!
+
+== Capacitor <sc:capacitor>
+Any collection of conductors that can store electric charge & energy.
+
+== Capacitance ($C$) <sc:capacitance>
+The ability to store electric charge, measured in Farads ($unit(F)$).
+
+$
+  C = Q / V.
+$
+
+Capacitance of a capacitor depends on its material, area $A$, and distance $d$ between plates.
+$ C = epsilon A / d $ where $epsilon$ is the electric permittivity of the material.
+
+$ Q = C V $
+$ I = dd(Q) / dd(t) = C dd(V) / dd(t) $
+
+For multiple capacitors,
+$ C_"series" = 1 / (1 / C_1 + 1 / C_2 + ...) $ <eq:capacitor-series>
+$ C_"parallel" = C_1 + C_2 + ... $ <eq:capacitor-parallel>
+
+=== Capacitors in Parallel
+As they are in parallel, the voltage drop across them should be the same, regardless of the capacitance.
+$
+  V &= V_1 = V_2 = ... \
+  Q &= C_1 V_1 + C_2 V_2 + ... \
+  &= C_1 V + C_2 V + ... \
+  &= (C_1 + C_2 + ...) V \
+  Q / V &= C_1 + C_2 + ...
+$ which leads to @eq:capacitor-parallel.
+
+Imagine all the parallel capacitors as one big capacitor with the sum of capacitances. Now the formula makes sense.
+
+=== Capacitors in Series
+When connected in series, the capacitors can be viewed as one beginning plate with positive charges and one ending plate with negative charges, plus all the plates in between, with charges but adding up to zero.
+
+In this case, charges across the capacitors are the same.
+$
+  Q &= Q_1 = Q_2 = ... \
+  V &= V_1 + V_2 + ... \
+  &= Q / C_1 + Q / C_2 + ... \
+  &= Q (1 / C_1 + 1 / C_2 + ...) \
+  V / Q &= 1 / C_1 + 1 / C_2 + ...
+$ which leads to @eq:capacitor-series.
+
+=== Work and Energy in Capacitors
+Batteries charge capacitors bit by bit, by $dd(q)$.
+Thus, we can say the work done is
+$
+  dd(W) &= Delta V dd(q) \
+  &= q / C dd(q) \
+$
+And energy is
+$
+  U &= 1 / C integral_0^Q q dd(q) = Q^2 / (2 C) \
+  &= (C V^2) / 2.
+$ <eq:capacitor-energy>
+
+=== Energy in C-only Circuits
+It seems curious that, in a circuit with only capacitors, when charge is transferred between capacitors, the energy is _not_ conserved, in other word, lost.
+
+That is because capacitor behaviors cannot be examined without resistors, so even if not shown, the circuit should contain some resistance, probably in the wires.
+
+=== R-C Circuits
+/ R-C Circuits: Circuits with resistors and capacitors.
+  They are used in timing circuits, filters, and oscillators.
+
+Imagine a circuit with a battery, a switch, a resistor and a capacitor.
+The capacitor initially has no charge, and the switch is closed at $t = 0$.
+
++ At $t = 0-$, the capacitor has no charge, and the voltage across it is zero.
++ At $t = 0+$, the switch is _just_ closed, and the capacitor starts charging. The voltage across the capacitor is still zero since it has no charge, and hence act as an ideal wire.
++ As time goes by, the capacitor charges, and the voltage across it increases, while the current decreases.
++ At $t -> oo$, the capacitor is fully charged, and it act as an open circuit, and the current is zero.
+
+By Kirchhoff's Voltage Law, the voltage across the resistor and the capacitor should sum up to the battery voltage.
+$
+  V_"battery" &= V_"resistor" + V_"capacitor" \
+  &= i(t) R + q(t) / C.
+$
+As $i(t) = dv(q, t)$, we can rewrite the equation as
+$
+  epsilon = R dv(q, t) + q / C.
+$ <eq:voltage-rc>
+
+Derive the @eq:voltage-rc in respect to time, we get
+$
+  dv(epsilon, t) &= R dv(q(t), t, 2) + dv(q(t), t) / C \
+  0 &= R dv(i(t), t) + i(t) / C.
+$
+
+=== Charging and Discharging Capacitors
+When a capacitor is charging, the current flows from the battery to the capacitor, and the voltage across the capacitor increases.
+When a capacitor is discharging, the current flows from the capacitor to the circuit, and the voltage across the capacitor decreases.
+
+In an R-C circuit, the energy stored in the capacitor increases and decreases exponentially, respectively.
+#let q-charge = t => 1 - calc.exp(-t / 2)
+#let q-discharge = t => calc.exp(-t / 2)
+$
+  q(t)_"charging" &= C V (1 - e^(-t slash R C)) \
+  i(t)_"charging" &= dv(q(t), t) = V / R e^(-t slash R C),
+$ $C V$ is the final charge that would be stored in the capacitor.
+
+$
+  q(t)_"discharging" &= Q_0 e^(-t slash R C) \
+  i(t)_"discharging" &= dv(q(t), t) = I_0 e^(-t slash R C).
+$ where $Q$ is the maximum charge stored in the capacitor, $R$ is the resistance in series, and $C$ is the capacitance in parallel.
+
+#let plot-options = (
+  axis-style: "left",
+  size: (8, 4),
+  x-label: $t$,
+  y-label: $q$,
+  x-tick-step: none,
+  y-tick-step: none,
+  x-ticks: (),
+  y-ticks: (),
+)
+#let dash-stroke = (dash: "dashed", thickness: .5pt, paint: black.transparentize(75%))
+
+#figure(
+  canvas({
+    import draw: *
+
+    plot.plot(
+      name: "f",
+      ..plot-options,
+      {
+        plot.add(q-charge, domain: (0, 8))
+        plot.add-anchor("charging-tau", (2, q-charge(2)))
+
+        plot.add(q-discharge, domain: (0, 8))
+        plot.add-anchor("discharging-tau", (2, q-discharge(2)))
+      },
+    )
+
+    circle("f.charging-tau", radius: 1pt)
+    line((), (rel: (0, -q-charge(2) * 4)), stroke: dash-stroke)
+    content((rel: (0, -.25)), $tau$)
+    line("f.charging-tau", (rel: (-2, 0)), stroke: dash-stroke)
+    content((rel: (-1, 0)), box(width: 10em, $1 - e^(-1) = 63.2%$))
+
+    circle("f.discharging-tau", radius: 1pt)
+    line("f.discharging-tau", (rel: (-2, 0)), stroke: dash-stroke)
+    content((rel: (-1, 0)), box(width: 7em, $e^(-1) = 36.8%$))
+  }),
+)
+
+
+
+At times, $R C$ is written as $tau$, the time constant of the RC circuit.
+Think: at $t = tau$, how much charge is in the capacitor?
+
+Notice the similarity between these equations and the exponential decay equation for damped oscillations, it will be useful.
+
+
+== Inductors
+/ Inductors: A coil of wire that generates an induced current, opposing the passing current.
+  They are used in transformers, motors, and generators.
+/ Inductance ($L$): The ability to generate an induced current, measured in Henrys ($unit(H)$).
+  $ V = L dd(I) / dd(t) $
+
+Inductors act quite as an opposite to capacitors, consider the prior switch-closed capacitor example:
++ At $t = 0-$, the current is zero, and the voltage across the inductor is zero.
++ At $t = 0+$, the switch is _just_ closed, the voltage across the inductor is $epsilon$ as there is still no current so potential drop across other components (resistor) is zero.
++ As time goes by, the current increases, and the voltage across the inductor decreases.
++ At $t -> oo$, the current is at maximum and constant, and the voltage across the inductor is zero.
+
+$
+  i(t)_"charging" &= I_"max" (1 - e^(-R t slash L)) \
+  i(t)_"discharging" &= I_"max" e^(-R t slash L).
+$
+
+It is more important to know the shape of the graphs: exponential growth and decay, rather than the steps seen in R-only circuits.
+
+Given the current and inductance, the energy stored in the inductor is
+$
+  U = 1 / 2 L I^2.
+$
+
+=== R-L-C Circuits
+In an R-L-C circuit, the function for current reminds us of the damped oscillations equation.
+So recall the damped oscillations equation:
+$
+  x(t) = A e^(-t / tau) cos(omega' t + phi)
+$ where $A$ is the amplitude, $tau$ is the time constant, $omega'$ is the angular frequency, and $phi$ is the phase angle.
+(On formula sheet.)
+
+#figure(
+  canvas({
+    import draw: *
+    plot.plot(
+      name: "f",
+      ..plot-options + (axis-style: "school-book"),
+      {
+        plot.add(t => calc.exp(-t / 3) * calc.cos(2 * calc.pi * t), domain: (0, calc.pi * 3), samples: 300)
+      },
+    )
+  }),
+)
+
+
+= AC Circuits
+You should still read the DC Circuits section before this one.
+
+/ Root Mean Square (RMS): The square root of the mean of the squares of a set of values.
+  For example, the RMS current is the current that would produce the same amount of heat in a resistor as the alternating current which is being derived from.
+
+== Voltage and Current in AC
+$
+  V(t) = V_"max" sin(omega t).
+$
+
+$
+  V_"rms" &= V_"max" / sqrt(2) \
+  I_"rms" &= I_"max" / sqrt(2).
+$
+This can be deduced from $sin(omega t) = 1/2 (1 - cos(2omega t))$.
+
+On an oscilloscope, the "Amplitude" will be double the RMS value, since it is measuring the peak-to-trough value.
+
+== R Circuit
+$
+  i(t) &= V(t) / R \
+  &= V_"max" / R sin(omega t),
+$ in phase with the voltage.
+At times, $R$ is written as $X_R$, the resistance.
+
+== L Circuit
+$
+  V(t) &= L dv(i,t) \
+  dv(i,t) &= V(t) / L \
+  &= V_"max" / L sin(omega t), \
+  i(t) &= - V_"max" / (omega L) cos(omega t) \
+  &= V_"max" / (omega L) cos(omega t - pi / 2) \
+  &= I_"max" sin(omega t - pi / 2),
+$ out of phase with the voltage.
+At times, $omega L$ is written as $X_L$, the inductive reactance.
+
+Note that $X_L &-> 0 "as" omega -> 0, X_L &-> oo "as" omega -> oo.$
+
+== C Circuit
+$
+  q(t) &= C V(t) \
+  i(t) &= dv(q,t) \
+  &= (omega C) V_"max" cos(omega t) \
+  &= (V_"max" omega C) sin(omega t + pi / 2) \
+  &= I_"max" sin(omega t + pi / 2),
+$ out of phase with the voltage.
+At times, $1 slash (omega C)$ is written as $X_C$, the capacitive reactance.
+
+Note that $X_C &-> oo "as" omega -> 0, X_C &-> 0 "as" omega -> oo.$
+
+== Phasors
+Phasors are vectors that represent the amplitude and phase of a sinusoidal function.
+
+#figure(
+  caption: [Phasor diagram],
+  image("assets/phasor.png", width: 67%),
+)
+
+Using projection,
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t + phi).
+$
+
+$
+  tan(phi) = (X_L - X_C) / X_R
+$ is the phase angle between the current and the _source_ voltage.
+
+#figure(
+  caption: [Phasor diagram for R-L-C circuits],
+  image("assets/phasors-rlc.png", width: 50%),
+)
+
+== Impedance
+/ Impedance ($Z$): The total opposition to the flow of current in an AC circuit, measured in Ohms ($unit("Omega")$).
+It is the combination of resistance, inductive reactance, and capacitive reactance.
+
+From the phasor diagram it is clear that, using Pythagoras' theorem,
+$
+  Z &= sqrt(X_R^2 + (X_L - X_C)^2) \
+  &= sqrt(R^2 + (omega L - 1 / (omega C))^2).
+$
+
+Like Ohm's Law, we can write
+$
+  V_"max" = I_"max" Z.
+$
+
+== R-L-C Circuits in Series
+If $X_L > X_C$, the current phasor is behind the voltage phasor, and the circuit is inductive.
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t + phi).
+$
+
+If $X_L < X_C$, the current phasor is ahead of the voltage phasor, and the circuit is capacitive.
+$
+  i(t) &= I_"max" cos(omega t) \
+  v(t) &= V_"max" cos(omega t - abs(phi)).
+$
+
+== R-L-C Circuits in Parallel
+In parallel R-L-C circuits, the voltage across each component is the same, while the current is inversely proportional to the impedance.
+$
+  V &= V_1 = V_2 = ... \
+  I &= I_1 + I_2 + ... \
+  &= V / Z.
+$
+Here, using the phasor diagram ($because X_C > X_L, therefore 1 / X_C < 1 / X_L$), we can find the current and the phase angle.
+Divide each phasor by $V_"max"$, we get
+$
+  1 / Z &= sqrt((1 / R)^2 + (1 / X_L - 1 / X_C)^2) \
+  &= sqrt((1 / R)^2 + (1 / (omega L) - omega C)^2), \
+  tan(phi) &= (1 slash X_L - 1 slash X_C) / (1 slash R).
+$
+
+== Power Dissipation
+In DC circuits, power is $P = I V$ as we all know it.
+Similarly, $P$ is kind of the same in AC circuits, but we need to consider the phase difference between the current and voltage.
+$
+  angle.l P angle.r = angle.l i(t) v(t) angle.r
+$
+
+In R-L-C circuits,
+$
+  angle.l P angle.r &= (V_"peak" I_"peak") / 2 cos(phi) \
+  &= (V_"rms" I_"rms") cos(phi) \
+$ with $V_"peak" I_"peak"$ replaceable with anything equivalent.
+$cos(phi)$ is called the power factor, and it is the ratio of real power to apparent power.
+
+Only the resistor contributes to power dissipation, so in idealized L/C circuits, the power is zero.
+
+== Resonance
+/ Resonance: The frequency at which the impedance of a circuit is at a minimum.
+  It is the frequency at which the inductive and capacitive reactances cancel each other out.
+
+Knowing impedance and the oscillation frequency, the current in AC circuits can be expressed as a function of $omega$.
+$
+  I(omega) &= V_"max" / Z \
+  &= V_"max" / sqrt(R^2 + (omega L - 1 / (omega C))^2).
+$
+
+Hence,
+$
+  I_"max" &= V_"max" / R \
+$ when $
+  omega L &= 1 / (omega C) \
+  omega &= 1 / sqrt(L C).
+$
+
+= Electric Force and Field
+
+Rules of electric charges:
+- Like charges repel, and opposite charges attract.
+- Charges are conserved, they cannot be created or destroyed.
+- When conductors touch, charges redistribute to reach equilibrium.
+
+/ Electric charge: The fundamental property of matter, measured in Coulombs (C).
+  $ q = n e $ where $n$ is the number of charges and $e = qty(1.6 times 10^-19, C)$ is the elementary charge.
+/ Coulomb's Law: The force between two charges is directly proportional to the product of the charges and inversely proportional to the square of the distance between them, this force is _equal in magnitude_ on both charges.
+  $ F = k (abs(q_1) abs(q_2)) / r^2 $
+  where $k = 1 / (4 pi epsilon_0) = qty(8.99 times 10^9, N m^2 / C^2)$ is the Coulomb constant.
+
+We use $k = qty(9 times 10^9, N m^2 / C^2)$ in this course.
+
+== Electrostatic Attraction and Repulsion
+Two charges are simple enough: the forces are equal in magnitude and opposite in direction.
+How about more charges?
+
+/ Principle of Superposition: The force on a charge due to multiple charges is the vector sum of the forces due to each charge individually.
+
+Here again we introduce vectors, the force is a vector, and the direction of the force is along the line connecting the two charges.
+More vectors in MATH 152.
+
+For example, given two point charges with the same charge $Q$ and the same mass $m$ suspended from a point on strings of equal length $L$, the angle between the strings is $theta$ and the distance between the two charges is $r$.
+In this case, $Q$ can be expressed as
+$
+  vecl(F)_e &= m g tan(theta/2) \
+  &= k Q^2 / r^2 \
+  &= k Q^2 / ((2L)^2 sin^2(theta / 2)), \
+  Q &= sqrt((4 L^2) / k m g tan(theta/2) sin^2(theta/2)).
+$
+
+== Electric Field
+/ Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
+  $
+    veca(E) = veca(F) / q_t = k q_s / r^2 veca(u)_r
+  $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
+
+#figure(
+  caption: [Electric fields],
+  grid(
+    columns: (1fr,) * 1,
+    align: center+horizon,
+    box(
+      clip: true,
+      width: 5cm,
+      height: 5cm,
+      align(
+        center + horizon,
+        canvas({
+          import draw: *
+
+          let qs = (0, 0)
+          let qt = (2, 0)
+          let m = qs.at(0) + qt.at(0) / 2
+
+          group({
+            set-style(stroke: (paint: std.gray, thickness: .05pt))
+            for i in range(-10, 11) {
+              if i != 0 {
+                if calc.abs(i) in (1, 2, 9) { continue }
+                let j = calc.pow(i / 5, 3)
+                arc-through(qs, (m, j), qt, name: "a" + str(i))
+                mark("a" + str(i) + ".mid", (rel: (1, 0)), symbol: "stealth", fill: std.gray)
+              }
+              line((-2, 0), (4, 0), name: "l")
+              mark("l.mid", (rel: (1, 0)), symbol: "stealth", fill: std.gray)
+            }
+          })
+
+          circle(qs, radius: .5em, stroke: red)
+          content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+          circle(qt, radius: .5em, stroke: blue)
+          content((rel: (0, .04)), text(stroke: 1.5pt + blue, "-"))
+        }),
+      ),
+    ),
+    // box(
+    //   clip: true,
+    //   width: 5cm,
+    //   height: 5cm,
+    //   align(
+    //     center + horizon,
+    //     canvas({
+    //       import draw: *
+    //
+    //       let qs = (0, 0)
+    //       let qt = (2, 0)
+    //       let m = qs.at(0) + qt.at(0) / 2
+    //
+    //       group({
+    //         set-style(stroke: (paint: std.gray, thickness: .05pt))
+    //         for i in range(-10, 11) {
+    //           if i != 0 {
+    //             i = calc.pow(i / 5, 3)
+    //             //TODO repel lines
+    //           }
+    //           line((-2, 0), qs)
+    //           line((4, 0), qt)
+    //         }
+    //       })
+    //
+    //       content((m, 0), [TODO])
+    //
+    //       circle(qs, radius: .5em, stroke: red)
+    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+    //       circle(qt, radius: .5em, stroke: red)
+    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
+    //     }),
+    //   ),
+    // ),
+  ),
+)
+
+=== Superposition of Electric Fields
+The field at any point is the _vector_ sum of all individual fields passing through that point.
+$
+  veca(E) = veca(E)_1 + veca(E)_2.
+$
+Thus, the fields can be separated into their $x, y, z$ components for computation.
+
+For example, in 2D space, given two charges---a dipole, the combined electric field on a test charge is
+$
+  veca(E) = (veca(E_1)_x + veca(E_2)_x) veca(i) + (veca(E_1)_y + veca(E_2)_y) veca(j).
+$
+If given a charge $q$, the angle between the field line and, say, the x-axis, $theta$, and the test charge is $(x, y)$ away from a charge, then the field on the test charge is
+$
+  veca(E) = (k q) / (x^2 + y^2),
+$ and the $x$ component of that is $
+  veca(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
+  &= (k q) / (x^2 + y^2) x / sqrt(x^2 + y^2) \
+  &= (k q x) / (x^2 + y^2)^(3/2)
+$
+
+=== Electric Field of a Finite Line of Charge
+Considering a finite line (line segment) of charge, and a test charge on the center perpendicular line of the line charge.
+
+By symmetry, the $x$ components of each $dd(veca(E))$ would cancel out, we are left with the $y$ component.
+Let the horizontal distant be $x$ and vertical distance be $h$, the total length of the line charge is $2a$, then
+$
+  dd(vecl(E))_y &= + dd(vecl(E)) sin(theta) \
+  &= (k Q) / (2a) dd(x) / (x^2 + h^2) h / sqrt(x^2 + h^2) \
+  vecl(E)_y &= (k Q h) / (2a) integral^(+a)_(-a) dd(x) / (x^2 + h^2)^(3/2) \
+  &= (k Q h) / (2a) (a - (-a)) / (h^2 sqrt(a^2 + h^2)) \
+  &= (k Q) / (h sqrt(a^2 + h^2)).
+$
+
+== Electric Dipole
+/ Dipole: Two charges of the same magnitude but opposite charge at a small distance, $d$.
+/ Dipole moment ($veca(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(veca(p)) = q d. $
+
+In an uniform electric field, the net force on a dipole is zero.
+In a non-uniform electric field, the net force on a dipole is not zero.
+
+And, they experience a torque when not aligned to the fields.
+$
+  veca(tau) &= veca(p) times veca(F) \
+  U_e &= - veca(p) dot veca(E).
+$
+
+== Electric Flux
+/ Flux ($Phi_e$): The amount of electric field passing through a surface.
+
+Electric flux for a uniform field on a flat surface is
+$
+  Phi_e &= veca(E) dot veca(A) \
+  &= vecl(E) vecl(A) cos(theta)
+$ where $veca(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $veca(E)$ and $veca(A)$ (not the surface!).
+
+For a curved surface,
+$
+  Phi_e &= integral.surf veca(E) dot dd(veca(A)).
+$
+
+== Gauss's Law
+/ Gauss's Law: The flux of the electric field out of an arbitrary closed surface is proportional to the electric charge enclosed by the surface, irrespective of how that charge is distributed.
+  $ Phi_e = Q_"enclosed" / epsilon_0 = integral.surf veca(E) dot dd(veca(A)) $ where $veca(E)$ is the electric field, $dd(veca(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
+
+In most cases, the integral above is not easy to evaluate, there do exist two special cases which we can apply Gauss's law at ease:
+- When $veca(E)$ is tangent to the surface, $veca(E) dot veca(A) = 0$, then $Phi_e = 0$.
+- When $veca(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(veca(A)) = E veca(A)$.
+
+Such ideal cases only occur when
++ The charge distribution has high symmetry.
++ It is possible to construct a Gaussian surface that would match the symmetry.
+
+#termlist
