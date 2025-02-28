@@ -4,7 +4,7 @@
     APSC 101 Study Notes \
     #underline[Intro to Engineering II]
   ],
-  author: "Nathan Lui",
+  author: "",
 )
 
 #set terms(separator: [: ])
