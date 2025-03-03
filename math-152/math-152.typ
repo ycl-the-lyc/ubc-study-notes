@@ -26,7 +26,6 @@
 #set math.vec(delim: "[")
 #let vecb(body) = $vectorbold(body)$
 #let veca(body) = $vectorarrow(body)$
-#let vecl(body) = $||vecb(body)||$
 #let vecu(body) = $vectorunit(body)$
 // #let vec(..body) = $(body.pos().join(", "))$
 #let det = "det"
@@ -73,29 +72,29 @@ A vector is 2 or more scalars arranged in a predetermined order.
 When written, an arrow is placed above the variable to indicate that it is a vector.
 $
   x "is a normal variable," \
-  veca(x) "is a vector."
+  va(x) "is a vector."
 $
 
 In printed media, vectors are often written in boldface.
 $
-  vecb(x) "is a vector."
+  vb(x) "is a vector."
 $
 
 == Vector Dimensions
 The number of scalars in a vector is called the dimension of the vector.
 For example,
 $
-  vecb(a) = vec(1, 2) "is a" RR^2 \
-  vecb(b) = vec(1, 2, 3, 4) "is a" RR^4
+  vb(a) = vec(1, 2) "is a" RR^2 \
+  vb(b) = vec(1, 2, 3, 4) "is a" RR^4
 $
 
 == Linear Combinations
 A linear combination of vectors is the sum of the vectors multiplied by scalars. Each vector is a orthogonal basis vector.
 
-For example, $vecb(a) in RR^3$ can be written as
+For example, $vb(a) in RR^3$ can be written as
 $
-  vecb(a) = x vecb(i) + y vecb(j) + z vecb(k)
-$ where $vecb(i)$, $vecb(j)$, $vecb(k)$ are the orthogonal basis vectors for a 3 dimensional space.
+  vb(a) = x vb(i) + y vb(j) + z vb(k)
+$ where $vb(i)$, $vb(j)$, $vb(k)$ are the orthogonal basis vectors for a 3 dimensional space.
 
 == Vector Operations
 
@@ -120,20 +119,20 @@ Commutate, associate and distribute them.
     y-max: 6,
     {
       let add-vec = plot.add.with(style: style-vec)
-      add-vec(((0, 0), (1, 3)), label: $vecb(a)$)
-      add-vec(((0, 0), (3, 1)), label: $vecb(b)$)
-      add-vec(((1, 3), (5, 5)), label: $vecb(c)$)
-      add-vec(((3, 1), (5, 5)), label: $vecb(d)$)
+      add-vec(((0, 0), (1, 3)), label: $vb(a)$)
+      add-vec(((0, 0), (3, 1)), label: $vb(b)$)
+      add-vec(((1, 3), (5, 5)), label: $vb(c)$)
+      add-vec(((3, 1), (5, 5)), label: $vb(d)$)
 
-      add-vec(((0, 0), (5, 5)), label: $vecb(e)$)
+      add-vec(((0, 0), (5, 5)), label: $vb(e)$)
     },
   )
 })
 
 $
-  vecb(a) + vecb(b) &= vecb(c) + vecb(d) = vecb(e) \
-  vecb(e) - vecb(a) &= vecb(b) \
-  vecb(e) - vecb(c) &= vecb(d)
+  vb(a) + vb(b) &= vb(c) + vb(d) = vb(e) \
+  vb(e) - vb(a) &= vb(b) \
+  vb(e) - vb(c) &= vb(d)
 $
 
 By subtracting vectors, we can find the vector that connects the two vectors.
@@ -144,7 +143,7 @@ The two vectors must have the same size/dimension.
 The dot product of two vectors is the sum of the products of the corresponding scalars.
 
 $
-  vecb(a) dot vecb(b) = a_1 b_1 + a_2 b_2 + a_3 b_3.
+  vb(a) dot vb(b) = a_1 b_1 + a_2 b_2 + a_3 b_3.
 $
 
 Note that the result is a scalar.
@@ -154,67 +153,67 @@ Dot product is commutative (even with scalars) and distributive.
 === Angle Between Vectors
 The angle between two vectors can be found using the dot product.
 $
-  cos(theta) = (vecb(a) dot vecb(b)) / (vecl(a) vecl(b))
+  cos(theta) = (vb(a) dot vb(b)) / (norm(a) norm(b))
 $ where $theta$ is the smallest angle between the two vectors. \
 (This can be proven using Pythagorean theorem.)
 
 If neither of the vectors is the zero vector, and the dot product is 0, then the vectors are orthogonal (perpendicular) to each other.
 
-Given $vecb(a) = vec(1, 1, 1) "and" vecb(b) = vec(1, -1, 1)$, the angle between them is
+Given $vb(a) = vec(1, 1, 1) "and" vb(b) = vec(1, -1, 1)$, the angle between them is
 $
   cos(theta) &= (1 times 1 + 1 times -1 + 1 times 1) / (sqrt(1^2 + 1^2 + 1^2) times sqrt(1^2 + -1^2 + 1^2)) = 1 / 3 \
   theta &approx qty(1.23, rad) = 70.53 degree.
 $
 
-Note: if the dot product of two vectors $vecb(a) dot vecb(b) = 0$, then vectors $vecb(a)$ and $vecb(b)$ are *perbendicular*.
+Note: if the dot product of two vectors $vb(a) dot vb(b) = 0$, then vectors $vb(a)$ and $vb(b)$ are *perbendicular*.
 
 === Vector Length
 The length of a vector is the square root of the sum of the squares of the scalars in the vector, which is also the square root of the dot product of the vector with itself.
-It can be notated as $||vecb(a)||$.
+It can be notated as $||vb(a)||$.
 
 $
-  vecl(a) = sqrt(vecb(a) dot vecb(a)) = sqrt(a_1^2 + a_2^2 + a_3^2).
+  norm(a) = sqrt(vb(a) dot vb(a)) = sqrt(a_1^2 + a_2^2 + a_3^2).
 $
 
-For example, $||vecb(x) - vecb(c)|| = 1$ means all points which are 1 unit away from $vecb(c)$, a circle.
+For example, $||vb(x) - vb(c)|| = 1$ means all points which are 1 unit away from $vb(c)$, a circle.
 
 === Projection
-The projection of $vecb(a)$ onto $vecb(b)$ is the vector that is parallel to $vecb(b)$ and has the same length as the projection of $vecb(a)$ onto $vecb(b)$.
+The projection of $vb(a)$ onto $vb(b)$ is the vector that is parallel to $vb(b)$ and has the same length as the projection of $vb(a)$ onto $vb(b)$.
 $
-  "proj"_vecb(b) vecb(a) &= "'shadow' length of" vecb(a) "on" vecb(b) times "direction of" vecb(b) \
-  &= (vecb(a) dot vecb(b)) vecb(b) / vecl(b)^2 \
-  &= (vecb(a) dot hat(b)) hat(b)
+  "proj"_vb(b) vb(a) &= "'shadow' length of" vb(a) "on" vb(b) times "direction of" vb(b) \
+  &= (vb(a) dot vb(b)) vb(b) / norm(b)^2 \
+  &= (vb(a) dot hat(b)) hat(b)
 $
 
 Here's a proof:
 
-The projection of $vecb(a)$ onto $vecb(b)$ can be represented as a scalar multipled by $vecb(b)$, where $vecb(b) != 0$.
-$ "proj"_vecb(b) vecb(a) = s vecb(b) $ <eq:projection>
+The projection of $vb(a)$ onto $vb(b)$ can be represented as a scalar multipled by $vb(b)$, where $vb(b) != 0$.
+$ "proj"_vb(b) vb(a) = s vb(b) $ <eq:projection>
 
-We know that the perpendicular vector, connecting point on $vecb(b)$ to the end of $vecb(a)$, can be denoted as $vecb(a) - s vecb(b)$.
+We know that the perpendicular vector, connecting point on $vb(b)$ to the end of $vb(a)$, can be denoted as $vb(a) - s vb(b)$.
 
 Hence, we know that
-$ (vecb(a) - s vecb(b)) dot vecb(b) = 0 $
-$ vecb(a) dot vecb(b) - s (vecb(b) dot vecb(b)) = 0 $
-$ s = (vecb(a) dot vecb(b)) / (vecb(b) dot vecb(b)) $
+$ (vb(a) - s vb(b)) dot vb(b) = 0 $
+$ vb(a) dot vb(b) - s (vb(b) dot vb(b)) = 0 $
+$ s = (vb(a) dot vb(b)) / (vb(b) dot vb(b)) $
 Plugging back into @eq:projection, we hence get:
-$ "proj"_vecb(b) vecb(a) = (vecb(a) dot vecb(b)) / vecl(b)^2 vecb(b) $
+$ "proj"_vb(b) vb(a) = (vb(a) dot vb(b)) / norm(b)^2 vb(b) $
 
-Further, a vector $vecb(a)$ has $vecb(a) / vecl(a) = hat(a)$, so
+Further, a vector $vb(a)$ has $vb(a) / norm(a) = hat(a)$, so
 $
-  (vecb(a) dot vecb(b)) / vecl(b)^2 vecb(b) &= (vecb(a) dot hat(b)) hat(b).
+  (vb(a) dot vb(b)) / norm(b)^2 vb(b) &= (vb(a) dot hat(b)) hat(b).
 $
 
 === Parallelogram
 A parallelogram is a quadrilateral with opposite sides parallel.
-Given two vectors $vecb(a)$ and $vecb(b)$, the area of the parallelogram formed by them is
+Given two vectors $vb(a)$ and $vb(b)$, the area of the parallelogram formed by them is
 $
   A &= "base" times "height" \
-  &= vecl(a) vecl(b) sin(theta) \
-  &= vecl(a) vecl(b) cos(pi / 2 - theta) \
-  &= vecb(a_perp) dot vecb(b)
+  &= norm(a) norm(b) sin(theta) \
+  &= norm(a) norm(b) cos(pi / 2 - theta) \
+  &= vecb(a_perp) dot vb(b)
 $
-where $vecb(a_perp)$ is the vector perpendicular to $vecb(a)$.
+where $vecb(a_perp)$ is the vector perpendicular to $vb(a)$.
 
 == Matrices
 A matrix is a rectangular array of scalars.
@@ -224,9 +223,9 @@ $
 $
 
 === Determinant of 2x2 Matrix
-Given a matrix $vecb(a) = mat(a, b; c, d)$, the determinant of a 2x2 matrix is
+Given a matrix $vb(a) = mat(a, b; c, d)$, the determinant of a 2x2 matrix is
 $
-  det vecb(a) equiv matrixdet(a, b; c, d) &= a d - b c.
+  det vb(a) equiv matrixdet(a, b; c, d) &= a d - b c.
 $
 
 === Determinant of 3x3 Matrix
@@ -277,12 +276,12 @@ This can be visualised as putting copying the first two columns onto the right, 
 // may add smth here //
 
 
-For a parallelogram formed by two vectors $vecb(a) "and" vecb(b)$, the area is the absolute value of the determinant of the matrix formed by the vectors:
+For a parallelogram formed by two vectors $vb(a) "and" vb(b)$, the area is the absolute value of the determinant of the matrix formed by the vectors:
 $
   A_"parallelogram" = matrixdet(a_1, a_2; b_1, b_2).
 $
 
-For example, for $vecb(a) = vec(1, -2) "and" vecb(b) = vec(3, 5)$, the area of the parallelogram is
+For example, for $vb(a) = vec(1, -2) "and" vb(b) = vec(3, 5)$, the area of the parallelogram is
 $
   A_"parallelogram" = matrixdet(1, 3; -2, 5) = 11.
 $
@@ -299,33 +298,33 @@ The cross product of two vectors is a vector that is orthogonal to the two vecto
 a.k.a. the normal vector of the plane formed by the two vectors, \
 a.k.a. the vector that is perpendicular to the two vectors.
 
-Given $vecb(a) = vec(a_1, a_2, a_3) "and" vecb(b) = vec(b_1, b_2, b_3)$, the cross product is
+Given $vb(a) = vec(a_1, a_2, a_3) "and" vb(b) = vec(b_1, b_2, b_3)$, the cross product is
 $
-  vecb(a) times vecb(b) &= matrixdet(vecu(i), vecu(j), vecu(k); a_1, a_2, a_3; b_1, b_2, b_3) \
+  vb(a) times vb(b) &= matrixdet(vu(i), vu(j), vu(k); a_1, a_2, a_3; b_1, b_2, b_3) \
   &= vec(a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1).
 $
 
-In a Right Hand (RH) coordinate system, the cross product is the vector that points in the direction of the thumb when the fingers of the right hand curl from $vecb(a)$ to $vecb(b)$.
+In a Right Hand (RH) coordinate system, the cross product is the vector that points in the direction of the thumb when the fingers of the right hand curl from $vb(a)$ to $vb(b)$.
 In other words, the cross product is the vector that is orthogonal/perpendicular to the two vectors.
-$ vecb(a) dot (vecb(a) times vecb(b)) = 0 $
+$ vb(a) dot (vb(a) times vb(b)) = 0 $
 
 === Volume of Parallelepiped
-The volume of a parallelepiped formed by three vectors $vecb(a)$, $vecb(b)$, and $vecb(c)$ is the absolute value of the determinant of the matrix formed by the vectors.
+The volume of a parallelepiped formed by three vectors $vb(a)$, $vb(b)$, and $vb(c)$ is the absolute value of the determinant of the matrix formed by the vectors.
 $
   V_"parallelepiped" &= "base area" times "height" \
-  &= A_"parallelogram" times cos(theta) vecl(c) \
+  &= A_"parallelogram" times cos(theta) norm(c) \
   &= matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) \
-  &= abs(vecb(a) dot (vecb(b) times vecb(c))).
+  &= abs(vb(a) dot (vb(b) times vb(c))).
 $
 
 = Lines, Curves and Planes in Vector Form
 
 == Lines in 2D Space
 There is a line $L$.
-Take a point on the line, $vecb(p) = vec(x_0, y_0)$, then take a vector that is parallel to the line, $vecb(l) = vec(i, j)$.
+Take a point on the line, $vb(p) = vec(x_0, y_0)$, then take a vector that is parallel to the line, $vb(l) = vec(i, j)$.
 The line can be represented as
 $
-  vecb(x) = vecb(p) + t vecb(l)
+  vb(x) = vb(p) + t vb(l)
 $
 where $t in RR$.
 
@@ -337,52 +336,52 @@ $
 )
 $
 
-The directional vector $vecb(l)$ is can be compared to other vectors to determine if they are parallel or perpendicular, or neither.
-- If $vecb(l)_1 dot vecb(l)_2 = 0$, then the two vectors are perpendicular.
-- Else, if $vecb(l)_1 = c vecb(l)_2$ where $c$ is a scalar constant, then the two vectors are parallel.
+The directional vector $vb(l)$ is can be compared to other vectors to determine if they are parallel or perpendicular, or neither.
+- If $vb(l)_1 dot vb(l)_2 = 0$, then the two vectors are perpendicular.
+- Else, if $vb(l)_1 = c vb(l)_2$ where $c$ is a scalar constant, then the two vectors are parallel.
 
-Where there is a line, there is a normal vector to the line, $vecb(n)$.
+Where there is a line, there is a normal vector to the line, $vb(n)$.
 Thus the line can also be represented as
 $
-  vecb(n) dot (vecb(x) - vecb(p)) &= 0 \
-  vecb(n) dot vecb(x) &= vecb(n) dot vecb(p).
+  vb(n) dot (vb(x) - vb(p)) &= 0 \
+  vb(n) dot vb(x) &= vb(n) dot vb(p).
 $
 
-If we have a line $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vecb(n) dot vecb(p) = 0$, $vecb(p) = vec(0, 0, 0)$, so the line must pass through the origin.
+If we have a line $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vb(n) dot vb(p) = 0$, $vb(p) = vec(0, 0, 0)$, so the line must pass through the origin.
 Additionally, the normal vector is $vec(1, -2, 3)$.
 
 == Planes in 3D Space
 There is a plane $S "in" RR^3$.
-Take a point on the plane, $vecb(p) = vec(x_0, y_0, z_0)$.
-If $vecb(x)$ is a point on the plane, $vecb(x) - vecb(p)$ must be perpendicular to the normal vector of the plane from origin, $vecb(n)$.
+Take a point on the plane, $vb(p) = vec(x_0, y_0, z_0)$.
+If $vb(x)$ is a point on the plane, $vb(x) - vb(p)$ must be perpendicular to the normal vector of the plane from origin, $vb(n)$.
 Thus the plane can be represented as
 $
-  vecb(n) dot (vecb(x) - vecb(p)) = 0 " or " vecb(n) dot vecb(x) = vecb(n) dot vecb(p).
+  vb(n) dot (vb(x) - vb(p)) = 0 " or " vb(n) dot vb(x) = vb(n) dot vb(p).
 $
-Similarly, if we have a plane $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vecb(n) dot vecb(p) = 0$, $vecb(p) = vec(0, 0, 0)$, so the plane must pass through the origin.
+Similarly, if we have a plane $x - 2y + 3z = 0$, we know that the LHS is not 0, while the RHS $vb(n) dot vb(p) = 0$, $vb(p) = vec(0, 0, 0)$, so the plane must pass through the origin.
 Additionally, the normal vector is $vec(1, -2, 3)$.
 
 The plane can also be seen as:
 $
   a x + b y + c z = d.
 $
-where $vec(a, b, c) = vecb(n)$ and $d = vecb(n) dot vecb(p)$.
-We can see that this is an expansion of the $vecb(n) dot vecb(x) = vecb(n) dot vecb(p)$ form.
+where $vec(a, b, c) = vb(n)$ and $d = vb(n) dot vb(p)$.
+We can see that this is an expansion of the $vb(n) dot vb(x) = vb(n) dot vb(p)$ form.
 
 Alternatively, we can use the parametric form:
 $
-  vecb(x) - vecb(p) = s vecb(u) + t vecb(v)
+  vb(x) - vb(p) = s vb(u) + t vb(v)
 $
-where $vecb(u)$ and $vecb(v)$ are two vectors on the plane and $s, t in RR$.
+where $vb(u)$ and $vb(v)$ are two vectors on the plane and $s, t in RR$.
 
 For example, a plane $S$ has parametric form
 $
-  vecb(x) = vec(1, 2, 1) + s vec(1, 0, 1) + t vec(1, 1, 0).
+  vb(x) = vec(1, 2, 1) + s vec(1, 0, 1) + t vec(1, 1, 0).
 $
 To find the normal representation, we can do a cross product of the two vectors on the plane to get the normal vector.
 $
-  vecb(n) &= vec(1, 0, 1) times vec(1, 1, 0) \
-  &= matrixdet(vecu(i), vecu(j), vecu(k); 1, 0, 1; 1, 1, 0) \
+  vb(n) &= vec(1, 0, 1) times vec(1, 1, 0) \
+  &= matrixdet(vu(i), vu(j), vu(k); 1, 0, 1; 1, 1, 0) \
   &= vec(1, -1, -1).
 $
 
@@ -396,7 +395,7 @@ $
   x &= 6 - 2y - 3z \
   &= 6 - 2s - 3t.
 $ $
-  vecb(x) = vec(6, 0, 0) + s vec(-2, 1, 0) + t vec(-3, 0, 1).
+  vb(x) = vec(6, 0, 0) + s vec(-2, 1, 0) + t vec(-3, 0, 1).
 $
 
 === Distance from Point to Plane
@@ -409,16 +408,16 @@ $
 == Lines in 3D Space
 3D line $L$ can be written as
 $
-  vecb(x) = vecb(p) + t vecb(l),
+  vb(x) = vb(p) + t vb(l),
 $ the same as in 2D space.
 
 The line can also be represented as the intersection of two planes.
 $
   cases(
-    vecb(n)_1 dot vecb(x) = vecb(n)_1 dot vecb(p)_1,
-    vecb(n)_2 dot vecb(x) = vecb(n)_2 dot vecb(p)_2
+    vb(n)_1 dot vb(x) = vb(n)_1 dot vb(p)_1,
+    vb(n)_2 dot vb(x) = vb(n)_2 dot vb(p)_2
   ) \
-  vecb(l) = vecb(n)_1 times vecb(n)_2.
+  vb(l) = vb(n)_1 times vb(n)_2.
 $
 
 Example: given a line $L$ with
@@ -430,12 +429,12 @@ $
 $
 Firstly, the planes' normals are obviously
 $
-  vecb(n)_1 = vec(1, 1, 1) \
-  vecb(n)_2 = vec(1, -1, 2).
+  vb(n)_1 = vec(1, 1, 1) \
+  vb(n)_2 = vec(1, -1, 2).
 $
-So we can have $vecb(l)$
+So we can have $vb(l)$
 $
-  vecb(l) = vecb(n)_1 times vecb(n)_2 = matrixdet(vecu(i), vecu(j), vecu(k); 1, 1, 1; 1, -1, 2) = vec(3, -1, -2).
+  vb(l) = vb(n)_1 times vb(n)_2 = matrixdet(vu(i), vu(j), vu(k); 1, 1, 1; 1, -1, 2) = vec(3, -1, -2).
 $
 Let $z = 0$,
 $
@@ -448,31 +447,31 @@ $
     y = 5
   ).
 $
-Thus, $vecb(p) = vec(-2, 5, 0)$ is on $L$.
+Thus, $vb(p) = vec(-2, 5, 0)$ is on $L$.
 $
-  vecb(x) = vec(-2, 5, 0) + t vec(3, -1, -2).
+  vb(x) = vec(-2, 5, 0) + t vec(3, -1, -2).
 $
 
 Inversely, given a line $L$ with
 $
-  vecb(x) = vec(1, 2, 1) + t vec(1, 1, 2),
+  vb(x) = vec(1, 2, 1) + t vec(1, 1, 2),
 $
 we can find two planes that intersect at the line.
 Look for two combinations of $t = x, y, z$ that when plugged in, will remove $t$ from the equation.
 That will give us two planes.
 
 === Projection of a Line onto A Plane
-Let $vecb(a)$ be a line and $S$ be a plane in 3D space.
+Let $vb(a)$ be a line and $S$ be a plane in 3D space.
 
 In case that $S$ is one of the coordinate planes, the projection is simple enough (taught in PHYS 170).
 $
-  vecb(a)_"proj on xy-plane" = vec(a_1, a_2, 0)
+  vb(a)_"proj on xy-plane" = vec(a_1, a_2, 0)
 $ and so for the other two planes.
 
 In general, the projection in 3D space resembles the projection in 2D space.
 $
-  vecb(a)_parallel &= vecb(a) - vecb(a)_perp \
-  &= vecb(a)_"proj"
+  vb(a)_parallel &= vb(a) - vb(a)_perp \
+  &= vb(a)_"proj"
 $
 
 = Systems of Linear Equations
@@ -489,7 +488,7 @@ Notice that each equation defines a plane in 3D space.
 The planes can intersect at a point, form a line, or (have 2 or more of them) be parallel.
 
 == Linear Dependence and Independence
-/ Linear Dependence (LD): Non-zero vectors which are parallel to each other, or can be expressed as a scalar multiple of each other, or most generally, $s_1 vecb(a)_1 + s_2 vecb(a)_2 + ... = vecb(0)$ can be true when _not all_ $s$'s are 0. \
+/ Linear Dependence (LD): Non-zero vectors which are parallel to each other, or can be expressed as a scalar multiple of each other, or most generally, $s_1 vb(a)_1 + s_2 vb(a)_2 + ... = vb(0)$ can be true when _not all_ $s$'s are 0. \
   In 2D geometry, the parallelogram formed by two LD vectors would have 0 area.
 / Linear Independence (LI): Non-zero vectors which satisfy none of the LD requirements.
 / Linear Combination: A vector expressed as a sum of scalar multiples of other vectors.
@@ -515,7 +514,7 @@ $
   matrixdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
 $ so $vec(1, 0, 1), vec(1, -1, 2) "and" vec(1, 1, 1)$ are LI.
 
-For 3 3D vectors, the other way is to check the volume of the parallelepiped formed by the vectors, $abs(vecb(a) times (vecb(b) dot vecb(c)))$.
+For 3 3D vectors, the other way is to check the volume of the parallelepiped formed by the vectors, $abs(vb(a) times (vb(b) dot vb(c)))$.
 If the volume is not 0, then the vectors are LI.
 
 == Solving Systems of Linear Equations
@@ -640,16 +639,16 @@ The distance between the two lines is the length of the vector that connects the
 
 Thus, a cross product of the two directional vectors of the lines gives the direction of the connecting vector.
 
-For example, given $L_1: vecb(x) = vec(1, 2, 3) + t vec(1, 0, 0)$ and $L_2: vecb(x) = s vec(1, 1, 1)$, one can first get the direction of the connecting vector by taking the cross product of the two directional vectors. Then find a point on each line and the connecting vector.
+For example, given $L_1: vb(x) = vec(1, 2, 3) + t vec(1, 0, 0)$ and $L_2: vb(x) = s vec(1, 1, 1)$, one can first get the direction of the connecting vector by taking the cross product of the two directional vectors. Then find a point on each line and the connecting vector.
 
 Alternatively, we can find two arbitrary points on each line, connect them, and find the projection of the connecting vector onto the direction of the perpendicular line from one of the points.
 
 == Rank and Solution Structure
 / Rank: The number of LI (non-zero) rows in the REF of matrix, including augmentation.
 
-- If $rank[A] = rank[A|vecb(b)]$ and $rank[A] = n$, then the system has a unique solution.
-- If $rank[A] < rank[A|vecb(b)]$, then the system has no solution.
-- If $rank[A] = rank[A|vecb(b)] < n$, then the system has infinite solutions.
+- If $rank[A] = rank[A|vb(b)]$ and $rank[A] = n$, then the system has a unique solution.
+- If $rank[A] < rank[A|vb(b)]$, then the system has no solution.
+- If $rank[A] = rank[A|vb(b)] < n$, then the system has infinite solutions.
 
 / Homogeneous System: A system where the RHS is all zeros.
   0 is always a solution.
@@ -760,7 +759,7 @@ $
 $
 Such form has a simple notation:
 $
-  A vecb(x) = vecb(b).
+  A vb(x) = vb(b).
 $ which $A$ is called the coefficient matrix.
 
 === Properties of Matrix Multiplication
@@ -782,9 +781,9 @@ So, if we can make $M$ a diagonal matrix, then we can easily calculate $M^n$, ev
 == Linear Transformation
 / Linear transformation / map / function: a rule that assigns one output to each input.
 
-For example, given $vecb(x) in RR^n$
+For example, given $vb(x) in RR^n$
 $
-  A vecb(x) = vecb(y) in RR^m
+  A vb(x) = vb(y) in RR^m
 $ indicates that $A$ is a transformation from $RR^n$ to $RR^m$:
 $
  A: RR^n -> RR^m.
@@ -792,9 +791,9 @@ $
 
 / Linearity: A transformation $T: RR ^n -> RR^m$ is linear iff
   $
-    T(alpha vecb(x)_1 + beta vecb(x)_2) = alpha T(vecb(x)_1) + beta T(vecb(x)_2) \
+    T(alpha vb(x)_1 + beta vb(x)_2) = alpha T(vb(x)_1) + beta T(vb(x)_2) \
     "or" \
-    T(vecb(x)_1 + vecb(x)_2) = T(vecb(x)_1) + T(vecb(x)_2) "and" T(alpha vecb(x)) = alpha T(vecb(x)).
+    T(vb(x)_1 + vb(x)_2) = T(vb(x)_1) + T(vb(x)_2) "and" T(alpha vb(x)) = alpha T(vb(x)).
   $
 
 Thus, all matrix multiplications are linear.
@@ -822,52 +821,52 @@ Matrix multiplication would be the same as individual "vector multiplication", p
 So, for an $M_(m times n)$, its column space will be a row of $n$ vectors.
 Recall that matrix multiplication is only defined when the number of columns of the first matrix is the same as the number of rows of the second matrix!
 $
-  mat(vecb(a)_1, vecb(a)_2, dots.c vecb(a)_n) mat(x_1; x_2; dots.v; x_n) = mat(vecb(a)_1 x_1, vecb(a)_2 x_2, dots.c, vecb(a)_n a_n).
+  mat(vb(a)_1, vb(a)_2, dots.c vb(a)_n) mat(x_1; x_2; dots.v; x_n) = mat(vb(a)_1 x_1, vb(a)_2 x_2, dots.c, vb(a)_n a_n).
 $
-Write $vecb(a)$ as a transformation, $T(e)$, each column of the result becomes an image/transformation of $x$.
+Write $vb(a)$ as a transformation, $T(e)$, each column of the result becomes an image/transformation of $x$.
 
 #block(inset: 0.65em, stroke: red)[
   *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
 ]
 
 === Finding Transformations in 2D Space
-Say, we are projecting some vector to a vector with $vecb(u)$ at angle $phi$ to the $x$ axis, Of course, we can use the projection formula, but here we want to find the transformation matrix that does the job for us (and it's easier).
-Let $vecb(e)_1$ and $vecb(e)_2$ be vectors on the $x$ and $y$ that projects to $vecb(u)$.
+Say, we are projecting some vector to a vector with $vb(u)$ at angle $phi$ to the $x$ axis, Of course, we can use the projection formula, but here we want to find the transformation matrix that does the job for us (and it's easier).
+Let $vb(e)_1$ and $vb(e)_2$ be vectors on the $x$ and $y$ that projects to $vb(u)$.
 $
-  M_"proj" &= mat(T(vecb(e)_1), T(vecb(e)_2)) \
-  T(veca(e)_1) &= "Proj"_phi (vecb(e)_1) \
-  &= cos(phi) vecb(u) \
+  M_"proj" &= mat(T(vb(e)_1), T(vb(e)_2)) \
+  T(vb(e)_1) &= "Proj"_phi (vb(e)_1) \
+  &= cos(phi) vb(u) \
   &= cos(phi) vec(cos(phi), sin(phi)) \
   &= vec(cos^2(phi), sin(phi) cos(phi)) \
-  T(vecb(e)_2) &= "Proj"_phi (vecb(e)_2) \
-  &= sin(phi) vecb(u) \
+  T(vb(e)_2) &= "Proj"_phi (vb(e)_2) \
+  &= sin(phi) vb(u) \
   &= sin(phi) vec(cos(phi), sin(phi)) \
   &= vec(sin(phi) cos(phi), sin^2(phi)) \
   M_"proj" &= mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi)).
 $
-Then, to project any vector $vecb(a)$ to $vecb(u)$, we can simply put
+Then, to project any vector $vb(a)$ to $vb(u)$, we can simply put
 $
-  "Proj"_vecb(u) vecb(a) = M_"proj" vecb(a).
+  "Proj"_vb(u) vb(a) = M_"proj" vb(a).
 $
 
 To find other transformations, similarly find transformation of each orthogonal vector/basis, then combine them to a column space.
 
 Here is another example: rotation. Let's say we are to find a rotation matrix of $phi$ counterclockwise.
 $
-  T(vecb(e)_1) &= vec(cos(phi), sin(phi)) \
-  T(vecb(e)_2) &= vec(-sin(phi), cos(phi)) \
+  T(vb(e)_1) &= vec(cos(phi), sin(phi)) \
+  T(vb(e)_2) &= vec(-sin(phi), cos(phi)) \
   M_"rot" &= mat(cos(phi), -sin(phi); sin(phi), cos(phi)).
 $
 
 Yet another one, reflection by function $y = m x$.
 $
-  phi &= acos((vecb(x) dot vecb(y)) / (norm(x) norm(y))) \
-  "Ref"_phi(vecb(x)) &= vecb(x)_parallel - vecb(x)_perp \
-  &= vecb(x)_parallel - (vecb(x)_parallel - vecb(x)) \
-  &= 2 vecb(x)_parallel - vecb(x) \
-  &= 2 "Proj"_phi(vecb(x)) - vecb(x) \
-  &= 2 M_"proj"_phi(vecb(x)) - I vecb(x) \
-  &= (2 M_"proj"_phi - I) vecb(x) \
+  phi &= acos((vb(x) dot vb(y)) / (norm(x) norm(y))) \
+  "Ref"_phi(vb(x)) &= vb(x)_parallel - vb(x)_perp \
+  &= vb(x)_parallel - (vb(x)_parallel - vb(x)) \
+  &= 2 vb(x)_parallel - vb(x) \
+  &= 2 "Proj"_phi(vb(x)) - vb(x) \
+  &= 2 M_"proj"_phi(vb(x)) - I vb(x) \
+  &= (2 M_"proj"_phi - I) vb(x) \
   M_"ref"_phi &= 2 M_"proj"_phi - I \
   &= 2 mat(cos^2(phi), sin(phi) cos(phi); sin(phi) cos(phi), sin^2(phi)) - imat(2) \
   &= mat(2 cos(2 phi) + 1, sin(2 phi); sin(2 phi), -cos(2 phi) + 1) - imat(2) \
@@ -876,21 +875,21 @@ $
 
 === Finding Transformations in 3D Space
 Firstly, reflection.
-Given a plane $P: x + y + z = 0$ and a vector $vec(x)$, find the reflection of $vecb(x)$ about the plane.
+Given a plane $P: x + y + z = 0$ and a vector $vec(x)$, find the reflection of $vb(x)$ about the plane.
 $
-  vecb(n) &= vec(1, 1, 1) \
-  vecu(n) &= 1 / sqrt(3) vec(1, 1, 1) \
-  "Ref"_P(vecb(x)) &= vecb(x)_parallel - vecb(x)_perp \
-  &= (vecb(x) - vecb(x)_perp) - vecb(perp) \
-  &= vecb(x) - 2 vecb(x)_perp \
-  &= (I - 2 "Proj"_vecu(n)(x)) vecb(x) \
-  M_"ref"_P &= I - 2 M_T_"proj"_vecu(n)(x) \
-  "Proj"_vecu(n)(vecb(e)) &= (vecb(e) dot vecu(n)) vecu(n) \
+  vb(n) &= vec(1, 1, 1) \
+  vu(n) &= 1 / sqrt(3) vec(1, 1, 1) \
+  "Ref"_P(vb(x)) &= vb(x)_parallel - vb(x)_perp \
+  &= (vb(x) - vb(x)_perp) - vecb(perp) \
+  &= vb(x) - 2 vb(x)_perp \
+  &= (I - 2 "Proj"_vu(n)(x)) vb(x) \
+  M_"ref"_P &= I - 2 M_T_"proj"_vu(n)(x) \
+  "Proj"_vu(n)(vb(e)) &= (vb(e) dot vu(n)) vu(n) \
   &= 1 / 3 vec(1, 1, 1) \
-  M_"proj"_vecu(n) &= 1 / 3 ones(3) \
-  M_"proj"_P &= I - M_"proj"_vecu(n) \
+  M_"proj"_vu(n) &= 1 / 3 ones(3) \
+  M_"proj"_P &= I - M_"proj"_vu(n) \
   &= 1 / 3 mat(2, -1, -1; -1, 2, -1; -1, 2, -1) \
-  M_"ref"_P &= I - 2 M_"proj"_vecu(n) \
+  M_"ref"_P &= I - 2 M_"proj"_vu(n) \
   &= 1 / 3 mat(1, -2, -2; -2, 1, -2; -2, -2, 1).
 $
 
@@ -904,13 +903,13 @@ Given 2 linear transformations $S, T$, then their composition $S compose T$ is a
 === Solving for Orthogonal Transformation
 Given
 $
-  vecb(x)_1 = vec(x, y) = c_1 vecb(e)_1 + c_2 vecb(e)_2 \
-  vecb(x)_2 = vec(z, w) = c_3 vecb(e)_1 + c_4 vecb(e)_2.
+  vb(x)_1 = vec(x, y) = c_1 vb(e)_1 + c_2 vb(e)_2 \
+  vb(x)_2 = vec(z, w) = c_3 vb(e)_1 + c_4 vb(e)_2.
 $
-We can first find out how to eliminate one of the $vecb(e)$ by solving
+We can first find out how to eliminate one of the $vb(e)$ by solving
 $
-  alpha vecb(x)_1 + beta vecb(x)_2 = vec(1, 0) \
-  gamma vecb(x)_1 + delta vecb(x)_2 = vec(0, 1)
+  alpha vb(x)_1 + beta vb(x)_2 = vec(1, 0) \
+  gamma vb(x)_1 + delta vb(x)_2 = vec(0, 1)
 $ then solve the resulting linear system.
 
 == Transpose of Matrices
@@ -924,8 +923,8 @@ $
 
 Some nice conclusions:
 - $(A B)^T = B^T A^T$.
-- If $vecb(x), vecb(y) in RR^n$ and are columns, then $vecb(x) dot vecb(y) = vecb(x)^T vecb(y) = vecb(y)^T vecb(x)$.
-- If $vecb(x), vecb(y) in RR^n, A = A_(m times n)$, then $vecb(y) dot (A vecb(x)) = (A^T vecb(y)) dot vecb(x)$.
+- If $vb(x), vb(y) in RR^n$ and are columns, then $vb(x) dot vb(y) = vb(x)^T vb(y) = vb(y)^T vb(x)$.
+- If $vb(x), vb(y) in RR^n, A = A_(m times n)$, then $vb(y) dot (A vb(x)) = (A^T vb(y)) dot vb(x)$.
 
 Remember again, matrices $A B eq.not B A$.
 
@@ -939,12 +938,12 @@ Consider a particle that jumps among 3 distinct states at predetermined probabil
 Let $x_i(n)$ be the probability of being in state $i$ at time $n$ where $i in [1, 2, 3], n in ZZ$.
 
 As time goes to $n + 1$, $x_i(n + 1) = P_(i 1) x_1(n) + P_(i 2) x_2(n) + P_(i 3) x_3(n)$.
-Let $vecb(x)(n) = vec(x_1(n), x_2(n), x_3(n))$, then
+Let $vb(x)(n) = vec(x_1(n), x_2(n), x_3(n))$, then
 $
-  vecb(x)_(n + 1) &= vec(x_1(n + 1), x_2(n + 1), x_3(n + 1)) \
+  vb(x)_(n + 1) &= vec(x_1(n + 1), x_2(n + 1), x_3(n + 1)) \
   &= vec(P_11 x_1(n) + P_12 x_2(n) + P_13 x_3(n), P_21 x_1(n) + P_22 x_2(n) + P_23 x_3(n), P_31 x_1(n) + P_32 x_2(n) + P_33 x_3(n)) \
   &= mat(P_11, P_12, P_13; P_21, P_22, P_23; P_31, P_32, P_33) vec(x_1(n), x_2(n), x_3(n)) \
-  &= P vecb(x)_n.
+  &= P vb(x)_n.
 $
 The $P$ is called a transition matrix.
 The sum of each of its columns is 1.
@@ -953,27 +952,49 @@ This $"Probability" times "State"$ action can be iterated for as many times as p
 We will talk about that later.
 
 === Stationary Probability
-For a state $vecb(x)$, if $P vecb(x) = vecb(x)$, the state is called a stationary probability, $vecb(x)_s$.
+For a state $vb(x)$, if $P vb(x) = vb(x)$, the state is called a stationary probability, $vb(x)_s$.
 
-To find out $vecb(x)_s$ from $P$,
+To find out $vb(x)_s$ from $P$,
 $
-  P vecb(x)_s &= vecb(x)_s \
-  I vecb(x)_s - P vecb(x)_s &= vecb(0) \
-  (I - P) vecb(x)_s &= vecb(0).
+  P vb(x)_s &= vb(x)_s \
+  I vb(x)_s - P vb(x)_s &= vb(0) \
+  (I - P) vb(x)_s &= vb(0).
 $
 Then, form a linear system and solve.
-The elements of $vecb(x)_s$ solved are _unlikely to add up to 1_!
+The elements of $vb(x)_s$ solved are _unlikely to add up to 1_!
 Hence, we should scale them to have a sum of 1.
 
 == Matrix Inverse
-/ One-to-one linear transformation: $T: RR^n -> RR^m "for" vecb(x)_1, vecb(x)_2 in RR^n$ is one-to-one if
+/ One-to-one linear transformation: $T: RR^n -> RR^m "for" vb(x)_1, vb(x)_2 in RR^n$ is one-to-one if
   $
-    T(vecb(x)_1) = T(vecb(x)_2) " iff " vecb(x)_1 = vecb(x)_2.
+    T(vb(x)_1) = T(vb(x)_2) " iff " vb(x)_1 = vb(x)_2.
   $
 
 It is not to be confused with many-to-one, which that is valid for functions.
 
 / Matrix inverse: Matrix $A$ is invertible if $det A eq.not 0$. Matrix $B$ is the inverse of $A$ iff $A B = B A  = I$, and $B$ is then notated as $A^(-1)$.
+
+For a matrix to be invertible, its determinant has to _not be 0_.
+
+A matrix's inverse $A^(-1)$ is the augmented part of the RREF of $[A|I]$,
+$
+  A: vb(x) -> vb(y) space.quad &<=> space.quad A^(-1): vb(y) -> vb(x) \
+  A vb(x) = I vb(y) space.quad &<=> space.quad I vb(x) = A^(-1) vb(y). \
+  "rref"[A|I] &= [I|A^(-1)].
+$
+
+For $2 times 2$ matrices, there is the other formula:
+$
+  A &= mat(a, b; c, d) \
+  A^(-1) &= 1 / det[A] mat(d, -b; -c, a).
+$
+
+An invertible matrix $A_(n times n)$ implies that
+- $A: RR^n -> RR^n$ is a one-to-one transformation.
+- $vb(x) = vb(0)$ is the unique solution of $A vb(x) = vb(0)$.
+- $rank[A] = n$.
+- $"rref"[A] = I$.
+- Columns or rows of $A$ are LI and forms a basis of $RR^n$.
 
 // == Eigenvalues and Eigenvectors 
 // If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
