@@ -297,7 +297,7 @@ A risk classification table is a tool used to identify and classify risks based 
     equivalent to score in WDM if all weights were 1
 
 === Usage of SLCA
-  + use $upright("R")_upright("ERP")$ to benchmark performance against other products
+  + use $upright("R")_"ERP"$ to benchmark performance against other products
   + use SLCA ratings to determine areas of greatest negative impact 
 
 === Benefits of SLCA
@@ -307,10 +307,32 @@ A risk classification table is a tool used to identify and classify risks based 
   - SLCA suitable for any stage of design process (especially early where potential influence on design decisions is greatest)
     - LCA suitable for existing products / very late in design process (where precise assessment of impact is required)
 
-= Sunk Cost
+== Sunk Cost
 / Sunk cost: a cost that has already been incurred and cannot be recovered.
 
 Sunk cost usually include equipments already bought, exploration and consultation already done: they would not be reversed to money.
 
-= Duty to Consult
+== Duty to Consult
 #link("https://www.rcaanc-cirnac.gc.ca/eng/1331832510888/1609421255810")[The Government of Canada has a duty to consult and, where appropriate, accommodate Indigenous groups when it considers conduct that might adversely impact potential or established Aboriginal or treaty rights.]
+
+= Design Specification
+
+== Design Parameter
+The engineering factors of a product or service, e.g. "battery capacity".
+
+== Attribute
+The apparent properties affecting user experience, e.g. "battery life".
+
+== Requirements
+"Yes" or "no" questions, used mostly in screening.
+Typically expressed in forms of thresholds, e.g. "germ level lower than 300", "potable".
+
+== Satisfaction
+"Extent" questions, used mostly in ranking and scoring.
+Typically shown as a curve, with satisfaction changing with attribute value, e.g. "3-8 hours of battery life, the higher the better".
+Sometimes, the higher the value, the worse the satisfaction.
+
+The satisfaction line is curved because consumers perception of improvements at different level vary.
+For example, an 1 to 2 hours battery life improvement will likely be strongly felt by users, but a 7 to 8 hours battery life extension would not have such positive reception, as the users are already pretty satisfied with 7 hours.
+
+Building satisfaction curve involves market analysis, consumer/customer interview, experiments and more.
