@@ -11,6 +11,7 @@
 
 #import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0": plot
+#import "@preview/fletcher:0.5.5" as fletcher: diagram, node, edge
 
 #import "@preview/physica:0.9.4": *
 #import "@preview/metro:0.3.0": *
@@ -35,9 +36,6 @@
     tight: false,
   )
 ]
-
-#let veca = vectorarrow
-#let vecl = text.with(style: "italic")
 
 = DC Circuits
 
@@ -565,7 +563,7 @@ More vectors in MATH 152.
 For example, given two point charges with the same charge $Q$ and the same mass $m$ suspended from a point on strings of equal length $L$, the angle between the strings is $theta$ and the distance between the two charges is $r$.
 In this case, $Q$ can be expressed as
 $
-  vecl(F)_e &= m g tan(theta/2) \
+  F_e &= m g tan(theta/2) \
   &= k Q^2 / r^2 \
   &= k Q^2 / ((2L)^2 sin^2(theta / 2)), \
   Q &= sqrt((4 L^2) / k m g tan(theta/2) sin^2(theta/2)).
@@ -574,14 +572,14 @@ $
 == Electric Field
 / Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
   $
-    veca(E) = veca(F) / q_t = k q_s / r^2 veca(u)_r
+    va(E) = va(F) / q_t = k q_s / r^2 va(u)_r
   $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
 
 #figure(
   caption: [Electric fields],
   grid(
     columns: (1fr,) * 1,
-    align: center+horizon,
+    align: center + horizon,
     box(
       clip: true,
       width: 5cm,
@@ -656,19 +654,19 @@ $
 === Superposition of Electric Fields
 The field at any point is the _vector_ sum of all individual fields passing through that point.
 $
-  veca(E) = veca(E)_1 + veca(E)_2.
+  va(E) = va(E)_1 + va(E)_2.
 $
 Thus, the fields can be separated into their $x, y, z$ components for computation.
 
 For example, in 2D space, given two charges---a dipole, the combined electric field on a test charge is
 $
-  veca(E) = (veca(E_1)_x + veca(E_2)_x) veca(i) + (veca(E_1)_y + veca(E_2)_y) veca(j).
+  va(E) = (va(E_1)_x + va(E_2)_x) va(i) + (va(E_1)_y + va(E_2)_y) va(j).
 $
 If given a charge $q$, the angle between the field line and, say, the x-axis, $theta$, and the test charge is $(x, y)$ away from a charge, then the field on the test charge is
 $
-  veca(E) = (k q) / (x^2 + y^2),
+  va(E) = (k q) / (x^2 + y^2),
 $ and the $x$ component of that is $
-  veca(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
+  va(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
   &= (k q) / (x^2 + y^2) x / sqrt(x^2 + y^2) \
   &= (k q x) / (x^2 + y^2)^(3/2)
 $
@@ -676,27 +674,27 @@ $
 === Electric Field of a Finite Line of Charge
 Considering a finite line (line segment) of charge, and a test charge on the center perpendicular line of the line charge.
 
-By symmetry, the $x$ components of each $dd(veca(E))$ would cancel out, we are left with the $y$ component.
+By symmetry, the $x$ components of each $dd(va(E))$ would cancel out, we are left with the $y$ component.
 Let the horizontal distant be $x$ and vertical distance be $h$, the total length of the line charge is $2a$, then
 $
-  dd(vecl(E))_y &= + dd(vecl(E)) sin(theta) \
+  dd(E)_y &= + dd(E) sin(theta) \
   &= (k Q) / (2a) dd(x) / (x^2 + h^2) h / sqrt(x^2 + h^2) \
-  vecl(E)_y &= (k Q h) / (2a) integral^(+a)_(-a) dd(x) / (x^2 + h^2)^(3/2) \
+  E_y &= (k Q h) / (2a) integral^(+a)_(-a) dd(x) / (x^2 + h^2)^(3 / 2) \
   &= (k Q h) / (2a) (a - (-a)) / (h^2 sqrt(a^2 + h^2)) \
   &= (k Q) / (h sqrt(a^2 + h^2)).
 $
 
 == Electric Dipole
 / Dipole: Two charges of the same magnitude but opposite charge at a small distance, $d$.
-/ Dipole moment ($veca(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(veca(p)) = q d. $
+/ Dipole moment ($va(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(va(p)) = q d. $
 
 In an uniform electric field, the net force on a dipole is zero.
 In a non-uniform electric field, the net force on a dipole is not zero.
 
 And, they experience a torque when not aligned to the fields.
 $
-  veca(tau) &= veca(p) times veca(F) \
-  U_e &= - veca(p) dot veca(E).
+  va(tau) &= va(p) times va(F) \
+  U_e &= - va(p) dot va(E).
 $
 
 == Electric Flux
@@ -704,22 +702,24 @@ $
 
 Electric flux for a uniform field on a flat surface is
 $
-  Phi_e &= veca(E) dot veca(A) \
-  &= vecl(E) vecl(A) cos(theta)
-$ where $veca(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $veca(E)$ and $veca(A)$ (not the surface!).
+  Phi_e &= va(E) dot va(A) \
+  &= E A cos(theta)
+$ where $va(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $va(E)$ and $va(A)$ (not the surface!).
 
 For a curved surface,
 $
-  Phi_e &= integral.surf veca(E) dot dd(veca(A)).
+  Phi_e &= integral.surf va(E) dot dd(va(A)).
 $
 
 == Gauss's Law
 / Gauss's Law: The flux of the electric field out of an arbitrary closed surface is proportional to the electric charge enclosed by the surface, irrespective of how that charge is distributed.
-  $ Phi_e = Q_"enclosed" / epsilon_0 = integral.surf veca(E) dot dd(veca(A)) $ where $veca(E)$ is the electric field, $dd(veca(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
+  $
+    Phi_e = Q_"enclosed" / epsilon_0 = integral.surf va(E) dot dd(va(A))
+  $ where $va(E)$ is the electric field, $dd(va(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
 
 In most cases, the integral above is not easy to evaluate, there do exist two special cases which we can apply Gauss's law at ease:
-- When $veca(E)$ is tangent to the surface, $veca(E) dot veca(A) = 0$, then $Phi_e = 0$.
-- When $veca(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(veca(A)) = E veca(A)$.
+- When $va(E)$ is tangent to the surface, $va(E) dot va(A) = 0$, then $Phi_e = 0$.
+- When $va(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(va(A)) = E va(A)$.
 
 Such ideal cases only occur when
 + The charge distribution has high symmetry.
@@ -748,7 +748,7 @@ The electric fields created are all perpendicular to the conducting surface.
 
 #figure(
   caption: [A conductor in equilibrium],
-  image("assets/conductor-equilibruim.png", width: 50%)
+  image("assets/conductor-equilibruim.png", width: 50%),
 )
 
 Gauss's Law still holds true, even for inside cavity.
@@ -764,12 +764,12 @@ The distribution of charges on the inner shell would be nonuniform, but the oute
 This is because the total charge inside is 0, the charges on the outer shell do not care about it---as long as it is in equilibrium.
 
 === Application: Coaxial Cable
-Coaxial cable is a type of electrical cable consisting of an inner conductor surrounded by a concentric conducting shield, with the two separated by a dielectric (insulating material); many coaxial cables also have a protective outer sheath or jacket. 
+Coaxial cable is a type of electrical cable consisting of an inner conductor surrounded by a concentric conducting shield, with the two separated by a dielectric (insulating material); many coaxial cables also have a protective outer sheath or jacket.
 
 Define the radius of the inner conductor as $R_1$ and the outer conductor's as $R_2$.
 A point $P_1$ between the inner and the outer conductors at $r_1$ has
 $
-  Phi_e &= integral.surf veca(E) dd(veca(A)) \
+  Phi_e &= integral.surf va(E) dd(va(A)) \
   &= E(r_1) A_"side" \
   &= E(r_1) L (2 pi r_1) \
   Q_"in" &= lambda_1 L \
@@ -784,9 +784,9 @@ Bonus: The surface charge density is the greatest at the place where the radius 
 
 == Electric Potential Energy
 The stored ability to do work is potential.
-For a force $veca(F)$ moving an object along path $veca(s)$ with angle $theta$ to the path, the work done is
+For a force $va(F)$ moving an object along path $va(s)$ with angle $theta$ to the path, the work done is
 $
-  W &= veca(F) dot veca(s) \
+  W &= va(F) dot va(s) \
   &= F Delta s cos(theta).
 $
 
@@ -795,7 +795,7 @@ $ W_(i -> f) = - Delta U. $
 
 The work done by a source charge onto a test charge is
 $
-  W &= integral_(x_i)^(x_F) veca(F)_(q_s -> q_t) dd(x) \
+  W &= integral_(x_i)^(x_F) va(F)_(q_s -> q_t) dd(x) \
   &= integral_(x_i)^(x_f) F_(q_s -> q_t) dd(x) \
   &= integral_(x_i)^(x_f) k (q_s q_t) / x^2 dd(x) \
   &= -k (q_s q_t) / x_f + k (q_s q_t) / x_i \
@@ -824,5 +824,21 @@ For negative charge, it tends to move opposite to an electric field and gain pot
 == Equipotential Maps
 Refer to topographic maps.
 #text(fill: std.gray)[Or do sports.]
+
+On Equipotential maps, hills mean positive potential, and crates mean negative potential.
+
+Similar to electric fields lines, the equipotential lines are denser where the electric fields is stronger.
+Electric field lines always intersect perpendicularly with the equipotential lines, and always point downhill.
+
+== Electric Force, Fields, Potential Energy and Potential
+#figure(
+  caption: [The Electrical Match Up],
+  diagram(spacing: 12em, $
+    va(F) edge("d", va(F) = plus.minus q va(E), <->)
+    edge(- Delta U = integral_"path" va(F) dot dd(va(s)), <->)
+    & Delta U edge("d", Delta U = plus.minus q Delta V, <->) \
+    va(E) edge(Delta V = integral_"path" va(E) dd(va(s)), <->) & Delta V
+  $),
+)
 
 #termlist
