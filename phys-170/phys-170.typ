@@ -26,13 +26,22 @@
 #let vecu(body) = $vectorunit(body)$
 
 #let all-terms = state("terms", ())
-#show terms.item: it => context { let loc = here(); all-terms.update(c => c + ((it, loc),)); it }
+#show terms.item: it => context {
+  let loc = here()
+  all-terms.update(c => c + ((it, loc),))
+  it
+}
 #let termlist = [
   #pagebreak(weak: true)
   #heading(level: 1, numbering: none)[Definitions]
-  #context terms(..all-terms.final().map(el => {
-    terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
-  }), tight:false)
+  #context terms(
+    ..all-terms
+      .final()
+      .map(el => {
+        terms.item(link(el.at(1), el.at(0).term), el.at(0).description)
+      }),
+    tight: false,
+  )
 ]
 
 = General Principles
@@ -452,7 +461,7 @@ Of course, then there is the friction $vb(F)$, tangent to the contact surface an
 
 #figure(
   caption: [Dry friction],
-  image("assets/friction.png", width: 33%)
+  image("assets/friction.png", width: 33%),
 )
 
 Look at the example above. Assume the block is in equilibrium, we can determine where $vb(N)$ is acting, point $O$, by considering moments.
@@ -536,14 +545,14 @@ $
   b &= tan(theta_0).
 $
 
-== Position, Velocity and Acceleration
+= Kinetics of a Particle: Force and Acceleration
 A particle path can be seen comprising of differential arc of a circle with radius, $rho$, known as the radius of curvature, and a center $O'$, the center of curvature.
 
 In limit of a straight path, $rho -> oo$.
 
 In 2D space, for a particle with path $f(x)$,
 $
-  rho = [1 + (dv(y, x))^2]^(3/2) / dv(y, x, 2).
+  rho = [1 + (dv(y, x))^2]^(3 / 2) / dv(y, x, 2).
 $
 
 Velocity of the particle, in such cases, is
@@ -558,7 +567,7 @@ $
   vb(a) &= dv(vb(v), t) \
   &= dv(,t) v vb(u)_t \
   &= dot(v) vb(u)_t + v dot(vb(u)_t) \
-  dot(vb(u)_t) &= dv(,theta) vb(u)_n  \
+  dot(vb(u)_t) &= dv(,theta) vb(u)_n \
   &= dot(theta) vb(u)_n \
   dot(theta) &= v / rho \
   vb(a) &= dot(v) vb(u)_t + v^2 / rho vb(u)_n \
@@ -569,7 +578,40 @@ In a straight-line motion, $rho -> oo$, $a_u = 0$.
 In a constant-speed motion, $dot(v) = 0$, $a_t = 0$.
 We can see that the tangential acceleration represents the change in magnitude of velocity, and the normal acceleration represents the change in direction of velocity.
 
-// = Kinetics of a Particle: Force and Acceleration
+== Polar and Cylindrical Coordinates
+Instead of $x, y$, a polar coordinate system holds $r and theta$, which $r$ is the distance from the origin and $theta$ is the angle from the positive x-axis.
+The position vector would be $vb(r) = r vb(u)_r$.
+
+For an object which position is described by $vb(r)$,
+$
+  vb(v) &= dot(vb(r)) \
+  &= dot((r vb(u)_r)) \
+  &= dot(r) vb(u)_r + r dot(vb(u)_r),
+  dot(vb(u)_r) &= dot(theta) vb(u)_theta, \
+  vb(v) &= v_r vb(u)_r + v_theta vb(u)_theta.
+$
+
+Separating the velocity,
+$
+  v_r &= dot(r) \
+  v_theta &= r dot(theta) \
+  vb(v)_r &= dot(r) vb(u)_r \
+  vb(v)_theta &= (r dot(theta)) vb(u)_theta.
+$
+
+And knowing that
+$
+  dot(vb(u)_theta) &= - dot(theta) vb(u)_r \
+  dot(vb(u)_r) &= dot(theta) vb(u)_theta.
+$
+We have
+$
+  vb(a) &= (dot.double(r) - r dot(theta)^2) vb(u)_r + (r dot.double(theta) + r dot(r) dot(theta)) vb(u)_theta \
+  a_r &= dot.double(r) - r dot(theta)^2 \
+  a_theta &= r dot.double(theta) + 2 dot(r) dot(theta).
+$
+
+Note that usually $theta$ is a functions of time, so when deriving functions of $theta$, e.g. $r$, we should apply chain rule properly.
 
 // = Kinetics of a Particle: Work and Energy
 
