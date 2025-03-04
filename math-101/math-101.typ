@@ -456,4 +456,23 @@ Let $−oo < a < oo$. Let $f, g$ be functions that are defined and continuous fo
 - If $integral_a^oo g(x) dd(x)$ converges and $lim_(x -> oo) f(x) / g(x)$ exists, then $integral_a^oo f(x) dd(x)$ converges.
 - If $integral_a^oo g(x) dd(x)$ diverges and $lim_(x -> oo) f(x) / g(x)$ exists and _is nonzero_, then $integral_a^oo f(x) dd(x)$ diverges.
 
+= Random Variables and Probability Density Functions
+/ Probability Density Function (PDF): A function describing distribution of probabilities.
+
+Some important properties of PDFs:
+- The integral of a PDF is always 1.
+- Any point of a PDF _cannot_ be negative.
+- But any point of a PDF can be greater than 1.
+
+== Expected Value
+/ Expected value: Also called expectation, is the sum of all possible values with their possibility.
+  $ EE(X) = sum x dot "Pr"(X = x). $
+
+Given a _continuous_ random variable $X$,
+$
+  EE(X) = integral_(-oo)^oo x dot f(x) dd(x)
+$ where $f(x)$ is the PDF.
+
+A quick sanity check for such expectation is to see the area of PDF as an uniform object, and try finding a point where the object can balance on.
+
 #termlist
