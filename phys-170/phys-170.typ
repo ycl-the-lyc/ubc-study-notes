@@ -613,6 +613,12 @@ $
 
 Note that usually $theta$ is a functions of time, so when deriving functions of $theta$, e.g. $r$, we should apply chain rule properly.
 
+== Absolute Dependent Motion: Two Particles
+/ Datum: A fixed location from where displacement is measured.
+
+In a pulley system consists ropes and pulleys.
+Note that the lengths of the ropes do not change, this can form equations in solving problems.
+
 // = Kinetics of a Particle: Work and Energy
 
 // = Kinetics of a Particle: Impulse and Momentum
