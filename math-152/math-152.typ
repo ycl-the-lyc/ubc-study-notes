@@ -246,7 +246,7 @@ $ mat(+,-,+;-,+,-;+,-,+) $
 
 If you pick row 1:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2).
+  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2). #<eq:det-3x3>
 $
 
 If you pick row 2:
@@ -995,6 +995,57 @@ An invertible matrix $A_(n times n)$ implies that
 - $rank[A] = n$.
 - $"rref"[A] = I$.
 - Columns or rows of $A$ are LI and forms a basis of $RR^n$.
+
+== Determinant
+We have used determinant for a long time, but what exactly is a determinant?
+
+/ Determinant: The 'magnitude' or 'size' of _square_ matrices.
+
+For an $n times n$ matrix, the determinant is the sum of all products of elements at $i j$ where $j$ is permutations of $j in (ZZ^+ <= n)$, meaning that there are $n!$ terms.
+Keeping $i$ and permute $i$ also works.
+
+For example,
+$
+  matrixdet(a_11, a_12; a_21, a_22) &= a_11 a_22 - a_12 a_21 \
+  "has" 2! &= 2 "terms" \
+  matrixdet(a_11, a_12, a_13; a_21, a_22, a_23; a_31, a_32, a_33) &= ... \
+  "has" 3! &= 6 "terms".
+$
+
+/ Number of permutation: For each permutation $(j_1 j_2 ... j_n)$ of integers $(1, 2, ..., n)$, $sigma(j_1 j_2 ... j_n)$ is the minimal number of pairwise exchanges between the numbers to recover the order $(1 space.sixth 2 ... n)$.
+
+/ Even/odd permutation: The permutations which their permutation number is even/odd.
+
+An odd permutation number adds a negative sign to the term.
+
+But it would be troublesome to calculate the permutation number of each arrangement...
+
+Now recall the row expansion formula like @eq:det-3x3.
+How do we know which term to add a minus sign to?
+$
+  det =& a_(i 1) (-1)^(i + 1) matrixdet(A_(i 1)) \
+  &+ a_(i 2) (-1)^(i + 2) matrixdet(A_(i 2)) \
+  &dots.v \
+  &+ a_(i j) (-1)^(i + j) matrixdet(A_(i j))
+$ where $A_(i j)$ is the (i, j)th minor matrix of $A$.
+The factor of $a_(i j)$ is called the (i, j)th cofactor.
+$
+  det[A] = sum_(j = 1)^n a_(i j) c_(i j).
+$
+
+Fixing $j$ and progressing $i$ _also works_.
+
+Using this formula, we can get determinants of square matrices of any size!
+A reminder that picking the _row or column_ with the most 0s would make the computation easier.
+
+...but, but what if there are not enough 0s in any row or column? I don't want to do math!
+In that case, you can instead compute the determinant of an alternate matrix, which is the original matrix, but with a row $(a)$ being itself subtracted by a multiple of another row, $c (b)$, which gives you $(a) = (a) - c (b)$. The determinant will stay the same. Use this rule to construct a row with many 0s to your advantage.
+
+Important properties of determinants:
+- $det[A] = det[A^T]$.
+- $det[A_(k <-> l)] = - det[A]$ where $A_(k <-> l)$ is $A$ with the $k$th and the $l$th row/column swapped.
+- $det[A_(k = l)] = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
+- $det[alpha A] = a^n det[A]$ where $A$ is $n times n$.
 
 // == Eigenvalues and Eigenvectors 
 // If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
