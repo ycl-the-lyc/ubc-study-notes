@@ -833,12 +833,39 @@ Electric field lines always intersect perpendicularly with the equipotential lin
 == Electric Force, Fields, Potential Energy and Potential
 #figure(
   caption: [The Electrical Match Up],
-  diagram(spacing: 12em, $
-    va(F) edge("d", va(F) = plus.minus q va(E), <->)
-    edge(- Delta U = integral_"path" va(F) dot dd(va(s)), <->)
-    & Delta U edge("d", Delta U = plus.minus q Delta V, <->) \
-    va(E) edge(Delta V = integral_"path" va(E) dd(va(s)), <->) & Delta V
-  $),
+  diagram(
+    spacing: 12em,
+    $
+      va(F) edge("d", va(F) = plus.minus q va(E), <->)
+      edge(- Delta U = integral_"path" va(F) dot dd(va(s)), <->)
+      & Delta U edge("d", Delta U = plus.minus q Delta V, <->) \
+      va(E) edge(Delta V = integral_"path" va(E) dot dd(va(s)), <->) & Delta V
+    $,
+  ),
 )
+
+== Finding Electric Fields From Electric Potential
+$
+  Delta V(r) &= - integral_i^f va(E) dd(va(r)) \
+  dd(V) &= - va(E) dot dd(va(r)) \
+  &= - E_r dd(r) \
+  E_r &= - dv(V, r).
+$
+Looks nice, but $dv(V, r)$ in more-than-one-dimension spaces is a multi-variable derivative!
+In 3D, $dv(V, r) = pdv(V, x, y, z)$.
+
+We can only differentiate with respect to one of the variables,
+$
+  E_x &= pdv(V(x, y, z), x) \
+  E_y &= pdv(V(x, y, z), y) \
+  E_z &= pdv(V(x, y, z), z) \
+$
+Or written as
+$
+  va(E) &= - nabla V(x, y, z) \
+  &= -va(i) pdv(V, x) - va(j) pdv(V, y) - va(k) pdv(V, z).
+$
+
+It can be easier to get $va(E)$ through $V$, as $V$ is a scalar that is usually easy to compute, while the other method is to integrate with the surface, which is usually harder.
 
 #termlist
