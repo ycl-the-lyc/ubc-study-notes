@@ -572,7 +572,7 @@ $
 == Electric Field
 / Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
   $
-    va(E) = va(F) / q_t = k q_s / r^2 va(u)_r
+    vb(E) = vb(F) / q_t = k q_s / r^2 vb(u)_r
   $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
 
 #figure(
@@ -654,19 +654,19 @@ $
 === Superposition of Electric Fields
 The field at any point is the _vector_ sum of all individual fields passing through that point.
 $
-  va(E) = va(E)_1 + va(E)_2.
+  vb(E) = vb(E)_1 + vb(E)_2.
 $
 Thus, the fields can be separated into their $x, y, z$ components for computation.
 
 For example, in 2D space, given two charges---a dipole, the combined electric field on a test charge is
 $
-  va(E) = (va(E_1)_x + va(E_2)_x) va(i) + (va(E_1)_y + va(E_2)_y) va(j).
+  vb(E) = (vb(E_1)_x + vb(E_2)_x) vb(i) + (vb(E_1)_y + vb(E_2)_y) vb(j).
 $
 If given a charge $q$, the angle between the field line and, say, the x-axis, $theta$, and the test charge is $(x, y)$ away from a charge, then the field on the test charge is
 $
-  va(E) = (k q) / (x^2 + y^2),
+  vb(E) = (k q) / (x^2 + y^2),
 $ and the $x$ component of that is $
-  va(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
+  vb(E)_x &= (k q) / (x^2 + y^2) cos(theta) \
   &= (k q) / (x^2 + y^2) x / sqrt(x^2 + y^2) \
   &= (k q x) / (x^2 + y^2)^(3/2)
 $
@@ -674,7 +674,7 @@ $
 === Electric Field of a Finite Line of Charge
 Considering a finite line (line segment) of charge, and a test charge on the center perpendicular line of the line charge.
 
-By symmetry, the $x$ components of each $dd(va(E))$ would cancel out, we are left with the $y$ component.
+By symmetry, the $x$ components of each $dd(vb(E))$ would cancel out, we are left with the $y$ component.
 Let the horizontal distant be $x$ and vertical distance be $h$, the total length of the line charge is $2a$, then
 $
   dd(E)_y &= + dd(E) sin(theta) \
@@ -686,15 +686,15 @@ $
 
 == Electric Dipole
 / Dipole: Two charges of the same magnitude but opposite charge at a small distance, $d$.
-/ Dipole moment ($va(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(va(p)) = q d. $
+/ Dipole moment ($vb(p)$): Naturally, the opposite charges attract each other. The dipole moment is defined as the moment pointing from the negative charge to the positive charge, $ norm(vb(p)) = q d. $
 
 In an uniform electric field, the net force on a dipole is zero.
 In a non-uniform electric field, the net force on a dipole is not zero.
 
 And, they experience a torque when not aligned to the fields.
 $
-  va(tau) &= va(p) times va(F) \
-  U_e &= - va(p) dot va(E).
+  vb(tau) &= vb(p) times vb(F) \
+  U_e &= - vb(p) dot vb(E).
 $
 
 == Electric Flux
@@ -702,24 +702,24 @@ $
 
 Electric flux for a uniform field on a flat surface is
 $
-  Phi_e &= va(E) dot va(A) \
+  Phi_e &= vb(E) dot vb(A) \
   &= E A cos(theta)
-$ where $va(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $va(E)$ and $va(A)$ (not the surface!).
+$ where $vb(A)$ is the area vector of the surface (normal to the surface) and $theta$ is the angle between $vb(E)$ and $vb(A)$ (not the surface!).
 
 For a curved surface,
 $
-  Phi_e &= integral.surf va(E) dot dd(va(A)).
+  Phi_e &= integral.surf vb(E) dot dd(vb(A)).
 $
 
 == Gauss's Law
 / Gauss's Law: The flux of the electric field out of an arbitrary closed surface is proportional to the electric charge enclosed by the surface, irrespective of how that charge is distributed.
   $
-    Phi_e = Q_"enclosed" / epsilon_0 = integral.surf va(E) dot dd(va(A))
-  $ where $va(E)$ is the electric field, $dd(va(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
+    Phi_e = Q_"enclosed" / epsilon_0 = integral.surf vb(E) dot dd(vb(A))
+  $ where $vb(E)$ is the electric field, $dd(vb(A))$ is the vector of an infinitesimal surface and $epsilon_0$ is the electric constant.
 
 In most cases, the integral above is not easy to evaluate, there do exist two special cases which we can apply Gauss's law at ease:
-- When $va(E)$ is tangent to the surface, $va(E) dot va(A) = 0$, then $Phi_e = 0$.
-- When $va(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(va(A)) = E va(A)$.
+- When $vb(E)$ is tangent to the surface, $vb(E) dot vb(A) = 0$, then $Phi_e = 0$.
+- When $vb(E)$ is normal to the surface and _constant at every point_ of that surface, then $Phi_e = E integral.surf dd(vb(A)) = E vb(A)$.
 
 Such ideal cases only occur when
 + The charge distribution has high symmetry.
@@ -735,9 +735,10 @@ By this token, the electric field created by the following special objects can b
   $
 - An infinitely large plane with charge density $sigma$.
   $
-    E A &= Q / epsilon_0 \
-    &= (sigma 2 A) / epsilon_0 "(I have 2 sides)"\
-    E &= (2 sigma) / epsilon_0.
+    E_"tot" 2A &= Q / epsilon_0 "(I have 2 sides)" \
+    &= (sigma 2 A) / epsilon_0 \
+    E_"tot" &= sigma / epsilon_0 \
+    vb(E) &= sigma / (2 epsilon_0) "(Gaussian surface here also has 2 sides)".
   $
 
 == Conductors in Electrostatic Equilibrium
@@ -769,7 +770,7 @@ Coaxial cable is a type of electrical cable consisting of an inner conductor sur
 Define the radius of the inner conductor as $R_1$ and the outer conductor's as $R_2$.
 A point $P_1$ between the inner and the outer conductors at $r_1$ has
 $
-  Phi_e &= integral.surf va(E) dd(va(A)) \
+  Phi_e &= integral.surf vb(E) dd(vb(A)) \
   &= E(r_1) A_"side" \
   &= E(r_1) L (2 pi r_1) \
   Q_"in" &= lambda_1 L \
@@ -784,9 +785,9 @@ Bonus: The surface charge density is the greatest at the place where the radius 
 
 == Electric Potential Energy
 The stored ability to do work is potential.
-For a force $va(F)$ moving an object along path $va(s)$ with angle $theta$ to the path, the work done is
+For a force $vb(F)$ moving an object along path $vb(s)$ with angle $theta$ to the path, the work done is
 $
-  W &= va(F) dot va(s) \
+  W &= vb(F) dot vb(s) \
   &= F Delta s cos(theta).
 $
 
@@ -795,7 +796,7 @@ $ W_(i -> f) = - Delta U. $
 
 The work done by a source charge onto a test charge is
 $
-  W &= integral_(x_i)^(x_F) va(F)_(q_s -> q_t) dd(x) \
+  W &= integral_(x_i)^(x_F) vb(F)_(q_s -> q_t) dd(x) \
   &= integral_(x_i)^(x_f) F_(q_s -> q_t) dd(x) \
   &= integral_(x_i)^(x_f) k (q_s q_t) / x^2 dd(x) \
   &= -k (q_s q_t) / x_f + k (q_s q_t) / x_i \
@@ -836,18 +837,18 @@ Electric field lines always intersect perpendicularly with the equipotential lin
   diagram(
     spacing: 12em,
     $
-      va(F) edge("d", va(F) = plus.minus q va(E), <->)
-      edge(- Delta U = integral_"path" va(F) dot dd(va(s)), <->)
+      vb(F) edge("d", vb(F) = plus.minus q vb(E), <->)
+      edge(- Delta U = integral_"path" vb(F) dot dd(vb(s)), <->)
       & Delta U edge("d", Delta U = plus.minus q Delta V, <->) \
-      va(E) edge(Delta V = integral_"path" va(E) dot dd(va(s)), <->) & Delta V
+      vb(E) edge(Delta V = integral_"path" vb(E) dot dd(vb(s)), <->) & Delta V
     $,
   ),
 )
 
 == Finding Electric Fields From Electric Potential
 $
-  Delta V(r) &= - integral_i^f va(E) dd(va(r)) \
-  dd(V) &= - va(E) dot dd(va(r)) \
+  Delta V(r) &= - integral_i^f vb(E) dd(vb(r)) \
+  dd(V) &= - vb(E) dot dd(vb(r)) \
   &= - E_r dd(r) \
   E_r &= - dv(V, r).
 $
@@ -862,10 +863,10 @@ $
 $
 Or written as
 $
-  va(E) &= - nabla V(x, y, z) \
-  &= -va(i) pdv(V, x) - va(j) pdv(V, y) - va(k) pdv(V, z).
+  vb(E) &= - nabla V(x, y, z) \
+  &= -vb(i) pdv(V, x) - vb(j) pdv(V, y) - vb(k) pdv(V, z).
 $
 
-It can be easier to get $va(E)$ through $V$, as $V$ is a scalar that is usually easy to compute, while the other method is to integrate with the surface, which is usually harder.
+It can be easier to get $vb(E)$ through $V$, as $V$ is a scalar that is usually easy to compute, while the other method is to integrate with the surface, which is usually harder.
 
 #termlist
