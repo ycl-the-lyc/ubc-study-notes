@@ -1023,7 +1023,7 @@ But it would be troublesome to calculate the permutation number of each arrangem
 Now recall the row expansion formula like @eq:det-3x3.
 How do we know which term to add a minus sign to?
 $
-  det =& a_(i 1) (-1)^(i + 1) matrixdet(A_(i 1)) \
+  det[A] =& a_(i 1) (-1)^(i + 1) matrixdet(A_(i 1)) \
   &+ a_(i 2) (-1)^(i + 2) matrixdet(A_(i 2)) \
   &dots.v \
   &+ a_(i j) (-1)^(i + j) matrixdet(A_(i j))
@@ -1040,12 +1040,27 @@ A reminder that picking the _row or column_ with the most 0s would make the comp
 
 ...but, but what if there are not enough 0s in any row or column? I don't want to do math!
 In that case, you can instead compute the determinant of an alternate matrix, which is the original matrix, but with a row $(a)$ being itself subtracted by a multiple of another row, $c (b)$, which gives you $(a) = (a) - c (b)$. The determinant will stay the same. Use this rule to construct a row with many 0s to your advantage.
+_If you happen to time $(a)$ by a coefficient, all its terms should also multiplied with the same coefficient._
 
 Important properties of determinants:
 - $det[A] = det[A^T]$.
 - $det[A_(k <-> l)] = - det[A]$ where $A_(k <-> l)$ is $A$ with the $k$th and the $l$th row/column swapped.
 - $det[A_(k = l)] = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
 - $det[alpha A] = a^n det[A]$ where $A$ is $n times n$.
+  $ matrixdet(c x_1, c x_2; c y_1, c y_2) &= c^2 matrixdet(x_1, x_2; y_1, y_2). $
+- $det[A_(k = k + alpha l)] = det[A]$.
+- $det[A B C D] = det[A] det[B] det[C] det[D]$.
+
+Fun fact,
+$
+  matrixdet(c x_1, c x_2; y_1, y_2) &= c matrixdet(x_1, x_2; y_1, y_2) \
+$
+
+== Matrix Inverse With Determinant
+Finally, the ultimate formula for any matrix inverse:
+$
+  A^(-1) = (1 / det[A]) C^T
+$ where $C$ is the cofactor matrix of $A$.
 
 // == Eigenvalues and Eigenvectors 
 // If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
