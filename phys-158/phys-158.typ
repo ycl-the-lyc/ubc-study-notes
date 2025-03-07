@@ -869,4 +869,53 @@ $
 
 It can be easier to get $vb(E)$ through $V$, as $V$ is a scalar that is usually easy to compute, while the other method is to integrate with the surface, which is usually harder.
 
+=== Application: Capacitor
+In a cylindrical capacitor, recall that
+$
+  E_R &= - dv(V, r) \
+  &= (2 k lambda) / r \
+  dv(ln(r), r) &= 1 / r.
+$
+Hence
+$
+  V(r) = -2 k lambda ln(r) + "const".
+$
+
+Now, say the outer surface of the inner part has radius $a$, and the inner surface of the outer part has radius $b$,
+$
+  V(b) &= -2 k lambda ln(b) + "const" \
+  &= 0 \
+  "const" &= 2 k lambda ln(b). \
+  V(r) &= -2 k lambda ln(r) + 2 k lambda ln(b).
+$
+
+For a parallel plate capacitor, in between the two plates with distance $d$,
+$
+  E_+ = E_- &= sigma / (2 epsilon_0) \
+  abs(vb(E)) &= sigma / epsilon_0 \
+  Delta V &= E d \
+  &= (sigma d) / epsilon_0 \
+  &= Q / A d / epsilon_0 \
+  &= Q / C \
+  C_parallel &= Q / (Delta V) \
+  &= (A epsilon_0) / d.
+$
+
+== Electric properties of dielectrics and Polarization
+When a dielectric material is in an electric field $vb(E)_0$, it is polarized and produces an induced electric field $vb(E)$.
+$
+  vb(E) = vb(E)_0 / K
+$ where $K > 1$ is a constant dependant on the material, is the dielectric constant.
+
+Given a parallel plate capacitor with distance $z$ between the two plates,
+$
+  C(z) &= (A epsilon_0) / z \
+  &= A / (4 pi k z) \
+  U(z) &= Q^2 / (2C) \
+  &= Q^2 / 2 (4 pi k z) / A \
+  &= (Q^2 z) / (2 A epsilon_0) \
+  abs(F_z) &= Q^2 / 2 (4 pi k) / A \
+  &= Q^2 / (2 A epsilon_0).
+$
+
 #termlist
