@@ -8,20 +8,24 @@
 )
 #import "@preview/physica:0.9.4": *
 #show: super-T-as-transpose // Render "..^T" as transposed matrix
+#let conj= math.overline
+
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
 #set math.equation(numbering: "(1.1)")
+
 #import "@preview/metro:0.3.0": *
 #import units: *
 #import prefixes: *
 
-#import "@preview/cetz:0.3.1"
+#import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0"
 #let style-vec = (
   mark: (
     end: "stealth",
   ),
 )
+#let add-vec = cetz-plot.plot.add.with(style: style-vec)
 
 #set math.vec(delim: "[")
 #let vecb(body) = $vectorbold(body)$
@@ -106,8 +110,7 @@ Yeah just do it.
 For addition and subtraction, simply add or subtract the corresponding scalars.
 Commutate, associate and distribute them.
 
-#cetz.canvas({
-  import cetz: *
+#canvas({
   import cetz-plot: *
 
   plot.plot(
@@ -118,7 +121,6 @@ Commutate, associate and distribute them.
     x-max: 6,
     y-max: 6,
     {
-      let add-vec = plot.add.with(style: style-vec)
       add-vec(((0, 0), (1, 3)), label: $vb(a)$)
       add-vec(((0, 0), (3, 1)), label: $vb(b)$)
       add-vec(((1, 3), (5, 5)), label: $vb(c)$)
@@ -225,7 +227,7 @@ $
 === Determinant of 2x2 Matrix
 Given a matrix $vb(a) = mat(a, b; c, d)$, the determinant of a 2x2 matrix is
 $
-  det vb(a) equiv matrixdet(a, b; c, d) &= a d - b c.
+  det vb(a) equiv mdet(a, b; c, d) &= a d - b c.
 $
 
 === Determinant of 3x3 Matrix
@@ -246,19 +248,19 @@ $ mat(+,-,+;-,+,-;+,-,+) $
 
 If you pick row 1:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 matrixdet(b_2, b_3; c_2, c_3) - a_2 matrixdet(b_1, b_3; c_1, c_3) + a_3 matrixdet(b_1, b_2; c_1, c_2). #<eq:det-3x3>
+  mdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &= a_1 mdet(b_2, b_3; c_2, c_3) - a_2 mdet(b_1, b_3; c_1, c_3) + a_3 mdet(b_1, b_2; c_1, c_2). #<eq:det-3x3>
 $
 
 If you pick row 2:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
-  - b_1 matrixdet(a_2, a_3; c_2, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - b_3 matrixdet(a_1, a_2; c_1, c_2).
+  mdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
+  - b_1 mdet(a_2, a_3; c_2, c_3) + b_2 mdet(a_1, a_3; c_1, c_3) - b_3 mdet(a_1, a_2; c_1, c_2).
 $
 
 If you pick column 2:
 $
-  matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
-  -a_2 matrixdet(b_1, b_3; c_1, c_3) + b_2 matrixdet(a_1, a_3; c_1, c_3) - c_2 matrixdet(a_1, a_3; b_1, b_3).
+  mdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) &=
+  -a_2 mdet(b_1, b_3; c_1, c_3) + b_2 mdet(a_1, a_3; c_1, c_3) - c_2 mdet(a_1, a_3; b_1, b_3).
 $
 
 *Tip*: pick any row / column with the *most zeroes*.
@@ -266,7 +268,7 @@ $
 
 The determinant of a 3x3 matrix is
 $
-  matrixdet(a, b, c; d, e, f; g, h, i) = a e i + b f g + c d h - c e g - b d i - a f h \
+  mdet(a, b, c; d, e, f; g, h, i) = a e i + b f g + c d h - c e g - b d i - a f h \
   "(try find a pattern here!)"
 $
 
@@ -278,12 +280,12 @@ This can be visualised as putting copying the first two columns onto the right, 
 
 For a parallelogram formed by two vectors $vb(a) "and" vb(b)$, the area is the absolute value of the determinant of the matrix formed by the vectors:
 $
-  A_"parallelogram" = matrixdet(a_1, a_2; b_1, b_2).
+  A_"parallelogram" = mdet(a_1, a_2; b_1, b_2).
 $
 
 For example, for $vb(a) = vec(1, -2) "and" vb(b) = vec(3, 5)$, the area of the parallelogram is
 $
-  A_"parallelogram" = matrixdet(1, 3; -2, 5) = 11.
+  A_"parallelogram" = mdet(1, 3; -2, 5) = 11.
 $
 
 
@@ -300,7 +302,7 @@ a.k.a. the vector that is perpendicular to the two vectors.
 
 Given $vb(a) = vec(a_1, a_2, a_3) "and" vb(b) = vec(b_1, b_2, b_3)$, the cross product is
 $
-  vb(a) times vb(b) &= matrixdet(vu(i), vu(j), vu(k); a_1, a_2, a_3; b_1, b_2, b_3) \
+  vb(a) times vb(b) &= mdet(vu(i), vu(j), vu(k); a_1, a_2, a_3; b_1, b_2, b_3) \
   &= vec(a_2 b_3 - a_3 b_2, a_3 b_1 - a_1 b_3, a_1 b_2 - a_2 b_1).
 $
 
@@ -313,7 +315,7 @@ The volume of a parallelepiped formed by three vectors $vb(a)$, $vb(b)$, and $vb
 $
   V_"parallelepiped" &= "base area" times "height" \
   &= A_"parallelogram" times cos(theta) norm(c) \
-  &= matrixdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) \
+  &= mdet(a_1, a_2, a_3; b_1, b_2, b_3; c_1, c_2, c_3) \
   &= abs(vb(a) dot (vb(b) times vb(c))).
 $
 
@@ -381,7 +383,7 @@ $
 To find the normal representation, we can do a cross product of the two vectors on the plane to get the normal vector.
 $
   vb(n) &= vec(1, 0, 1) times vec(1, 1, 0) \
-  &= matrixdet(vu(i), vu(j), vu(k); 1, 0, 1; 1, 1, 0) \
+  &= mdet(vu(i), vu(j), vu(k); 1, 0, 1; 1, 1, 0) \
   &= vec(1, -1, -1).
 $
 
@@ -434,7 +436,7 @@ $
 $
 So we can have $vb(l)$
 $
-  vb(l) = vb(n)_1 times vb(n)_2 = matrixdet(vu(i), vu(j), vu(k); 1, 1, 1; 1, -1, 2) = vec(3, -1, -2).
+  vb(l) = vb(n)_1 times vb(n)_2 = mdet(vu(i), vu(j), vu(k); 1, 1, 1; 1, -1, 2) = vec(3, -1, -2).
 $
 Let $z = 0$,
 $
@@ -511,7 +513,7 @@ If the determinant is not 0, then the vectors are LI.
 
 For example,
 $
-  matrixdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
+  mdet(1, 0, 1; 1, -1, 2; 1, 1, 1) = 1 eq.not 0,
 $ so $vec(1, 0, 1), vec(1, -1, 2) "and" vec(1, 1, 1)$ are LI.
 
 For 3 3D vectors, the other way is to check the volume of the parallelepiped formed by the vectors, $abs(vb(a) times (vb(b) dot vb(c)))$.
@@ -786,7 +788,7 @@ $
   A vb(x) = vb(y) in RR^m
 $ indicates that $A$ is a transformation from $RR^n$ to $RR^m$:
 $
- A: RR^n -> RR^m.
+  A: RR^n -> RR^m.
 $
 
 / Linearity: A transformation $T: RR ^n -> RR^m$ is linear iff
@@ -1006,9 +1008,9 @@ Keeping $i$ and permute $i$ also works.
 
 For example,
 $
-  matrixdet(a_11, a_12; a_21, a_22) &= a_11 a_22 - a_12 a_21 \
+  mdet(a_11, a_12; a_21, a_22) &= a_11 a_22 - a_12 a_21 \
   "has" 2! &= 2 "terms" \
-  matrixdet(a_11, a_12, a_13; a_21, a_22, a_23; a_31, a_32, a_33) &= ... \
+  mdet(a_11, a_12, a_13; a_21, a_22, a_23; a_31, a_32, a_33) &= ... \
   "has" 3! &= 6 "terms".
 $
 
@@ -1023,37 +1025,46 @@ But it would be troublesome to calculate the permutation number of each arrangem
 Now recall the row expansion formula like @eq:det-3x3.
 How do we know which term to add a minus sign to?
 $
-  det[A] =& a_(i 1) (-1)^(i + 1) matrixdet(A_(i 1)) \
-  &+ a_(i 2) (-1)^(i + 2) matrixdet(A_(i 2)) \
+  det[A] =& a_(i 1) (-1)^(i + 1) mdet(A_(i 1)) \
+  &+ a_(i 2) (-1)^(i + 2) mdet(A_(i 2)) \
   &dots.v \
-  &+ a_(i j) (-1)^(i + j) matrixdet(A_(i j))
+  &+ a_(i j) (-1)^(i + j) mdet(A_(i j))
 $ where $A_(i j)$ is the (i, j)th minor matrix of $A$.
 The factor of $a_(i j)$ is called the (i, j)th cofactor.
 $
   det[A] = sum_(j = 1)^n a_(i j) c_(i j).
 $
 
-Fixing $j$ and progressing $i$ _also works_.
+/ Cofactor: A number that is obtained by multiplying the minor of the element of any given matrix with -1 raised to the power of the sum of the row and column number to which that element belongs.
+  $ c_(i j) = (-1)^(i + j) mdet(A_(i j)) $
 
+Fixing $j$ and progressing $i$ _also works_.
 Using this formula, we can get determinants of square matrices of any size!
 A reminder that picking the _row or column_ with the most 0s would make the computation easier.
 
 ...but, but what if there are not enough 0s in any row or column? I don't want to do math!
-In that case, you can instead compute the determinant of an alternate matrix, which is the original matrix, but with a row $(a)$ being itself subtracted by a multiple of another row, $c (b)$, which gives you $(a) = (a) - c (b)$. The determinant will stay the same. Use this rule to construct a row with many 0s to your advantage.
+
+In that case, you can instead compute the determinant of an alternate matrix, which is the original matrix, but with a row $(a)$ being itself subtracted by a multiple of another row, $c (b)$, which gives you $(a) = (a) - c (b)$.
+The determinant will stay the same.
+Use this rule to construct a row with many 0s to your advantage.
 _If you happen to time $(a)$ by a coefficient, all its terms should also multiplied with the same coefficient._
+
+This is because determinant is linear in each row or column.
 
 Important properties of determinants:
 - $det[A] = det[A^T]$.
 - $det[A_(k <-> l)] = - det[A]$ where $A_(k <-> l)$ is $A$ with the $k$th and the $l$th row/column swapped.
-- $det[A_(k = l)] = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
 - $det[alpha A] = a^n det[A]$ where $A$ is $n times n$.
-  $ matrixdet(c x_1, c x_2; c y_1, c y_2) &= c^2 matrixdet(x_1, x_2; y_1, y_2). $
+  $ mdet(c x_1, c x_2; c y_1, c y_2) &= c^2 mdet(x_1, x_2; y_1, y_2). $
+- $det[A_(k = l)] = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
+  This can assist in proving the next property by
+  $ mdet(x_1, x_2; y_1 + a, y_2 + b) = mdet(x_1, x_2; y_1, y_2) + mdet(x_1, x_2; a, b). $
 - $det[A_(k = k + alpha l)] = det[A]$.
 - $det[A B C D] = det[A] det[B] det[C] det[D]$.
 
 Fun fact,
 $
-  matrixdet(c x_1, c x_2; y_1, y_2) &= c matrixdet(x_1, x_2; y_1, y_2) \
+  mdet(c x_1, c x_2; y_1, y_2) &= c mdet(x_1, x_2; y_1, y_2) \
 $
 
 == Matrix Inverse With Determinant
@@ -1062,16 +1073,92 @@ $
   A^(-1) = (1 / det[A]) C^T
 $ where $C$ is the cofactor matrix of $A$.
 
-// == Eigenvalues and Eigenvectors 
-// If a matrix has $n$ rows and $n$ columns, we can get many interesting properties from it.
-// $
-//   mat(
-//     a_(11), a_(12), dots.c, a_(1n);
-//     a_(21), a_(22), dots.c, a_(2n);
-//     dots.v, dots.v, dots.down, dots.v;
-//     a_(n 1), a_(n 2), dots.c, a_(n n)
-//   )_(n times n)
-// $
+= Complex Numbers
+Starting with the infamous square root.
+We know that
+$
+  sqrt(a) "has" cases(
+    2 "real roots if" a > 0,
+    1 "real root if" a = 0,
+    "no real root if" a < 0
+  ).
+$
 
+So, we define
+$
+  sqrt(-1) &equiv i \
+  i^2 &= -1.
+$
+The $i$ is the "1" of _imaginary numbers_.
+Every imaginary number is a real-valued multiple of $i$, and are usually represented by $z$.
+
+#figure(
+  caption: [Complex number],
+  canvas({
+    import draw: *
+    import cetz-plot: *
+    plot.plot(
+      name: "ri",
+      size: (4, 4),
+      axis-style: "school-book",
+      x-min: 0,
+      x-max: 2,
+      y-min: -2,
+      y-max: 2,
+      x-label: $Re{z}$,
+      y-label: $Im{z}$,
+      x-ticks: (),
+      x-tick-step: none,
+      y-ticks: (),
+      y-tick-step: none,
+      {
+        plot.add-anchor("a", (1, 1))
+        plot.add-anchor("b", (1, -1))
+      },
+    )
+    circle("ri.a", radius: 1pt)
+    content((rel: (.5, -.5)), $z_1 (1, 1)$)
+    content((rel: (0, .5)), $1 + i$)
+    circle("ri.b", radius: 1pt)
+    content((rel: (.5, -.5)), $z_2 (1, -1)$)
+    content((rel: (0, .5)), $1 - i$)
+  }),
+)
+We call $z_2$ the complex conjugate of $z_1$, or $z_2 = conj(z)_1$.
+
+== Complex Number Operations
+
+=== With Scalars
+Just do it as usual, with $i$, of course.
+
+=== Multiplication
+Same.
+
+=== Length
+For $z = a + b i$,
+$
+  abs(z) &= sqrt(a^2 + b^2) \
+  &= sqrt(a^2 - (-1) b^2) \
+  &= sqrt(a^2 - (b i)^2) \
+  &= sqrt((a + b i)(a - b i)) \
+  &= sqrt(z conj(z)).
+$
+
+=== Division
+For $z_1 = a_1 + b_1 i, z_2 = a_2 + b_2 i$,
+$
+  z_1 / z_2 &= (a_1 + b_1 i) / (a_2 + b_2 i) \
+  &= (z_1 conj(z)_2) / (z_2 conj(z)_2) \
+  &= (z_1 conj(z)_2) / abs(z_2)^2 \
+  &= ((a_1 a_2 + b_1 b_2) + (a_2 b_1 - a_1 b_2) i) / (a_2^2 + b_2^2).
+$
+
+== Euler's Formula
+$
+  e^(i t) = cos(y) + i sin(t).
+$
+//WIP
+
+// == Eigenvalues and Eigenvectors
 
 #termlist
