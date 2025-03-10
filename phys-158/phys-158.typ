@@ -894,8 +894,7 @@ $
   E_+ = E_- &= sigma / (2 epsilon_0) \
   abs(vb(E)) &= sigma / epsilon_0 \
   Delta V &= E d \
-  &= (sigma d) / epsilon_0 \
-  &= Q / A d / epsilon_0 \
+  &= (sigma d) / epsilon_0 = Q / A d / epsilon_0 \
   &= Q / C \
   C_parallel &= Q / (Delta V) \
   &= (A epsilon_0) / d.
@@ -911,11 +910,32 @@ Given a parallel plate capacitor with distance $z$ between the two plates,
 $
   C(z) &= (A epsilon_0) / z \
   &= A / (4 pi k z) \
-  U(z) &= Q^2 / (2C) \
-  &= Q^2 / 2 (4 pi k z) / A \
+  U(z) &= Q^2 / (2C) = Q^2 / 2 (4 pi k z) / A \
   &= (Q^2 z) / (2 A epsilon_0) \
   abs(F_z) &= Q^2 / 2 (4 pi k) / A \
   &= Q^2 / (2 A epsilon_0).
 $
+
+= Magnetism
+
+== Magnetic Field
+Static charges create electric fields, _moving_ charges create magnetic fields.
+
+/ Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit(T)$.
+  $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
+
+#figure(
+  caption: [Right-hand rule for vector cross-product],
+  image("assets/cross-product-right-hand.png", width: 33%)
+)
+
+Magnetic field _left-hand_ trick: \
+Counting a core family from thumb to the middle finger, (F)ather, (M)other and (C)hild, they are (F)orce, (M)agnetic field ($B$) and (C)urrent.
+
+We would see electric monopoles, but never a magnetic monopole---they are always in dipoles.
+And, the magnetic fields always from closed loops.
+
+== Magnetic Force
+
 
 #termlist
