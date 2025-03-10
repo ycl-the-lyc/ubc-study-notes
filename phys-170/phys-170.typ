@@ -550,7 +550,7 @@ A particle path can be seen comprising of differential arc of a circle with radi
 
 In limit of a straight path, $rho -> oo$.
 
-In 2D space, for a particle with path $f(x)$,
+In 2D space, for a particle with path $f(x)$, the radius of the fractional path curvature is
 $
   rho = [1 + (dv(y, x))^2]^(3 / 2) / dv(y, x, 2).
 $
@@ -571,7 +571,9 @@ $
   &= dot(theta) vb(u)_n \
   dot(theta) &= v / rho \
   vb(a) &= dot(v) vb(u)_t + v^2 / rho vb(u)_n \
-  a &= norm(vb(a)).
+  a_n &= v^2 / rho \
+  a_t &= dot(v) \
+  a &= norm(vb(a)) \
 $
 
 In a straight-line motion, $rho -> oo$, $a_u = 0$.
@@ -618,6 +620,21 @@ Note that usually $theta$ is a functions of time, so when deriving functions of 
 
 In a pulley system consists ropes and pulleys.
 Note that the lengths of the ropes do not change, this can form equations in solving problems.
+
+== Translating Axis
+For observer A and B,
+$
+  vb(v)_(B slash A) &= vb(v)_B - vb(v)_A \
+  vb(a)_(B slash A) &= vb(a)_B - vb(a)_A.
+$
+
+Hence, in perspective of A,
+$
+  vb(v)_B &= vb(v)_(B slash A) + vb(v)_A \
+  vb(a)_B &= vb(a)_(B slash A) + vb(a)_A.
+$
+
+Knowing objects' angle velocity to their axis can help us triangulate their velocity to other observers.
 
 // = Kinetics of a Particle: Work and Energy
 
