@@ -475,4 +475,56 @@ $ where $f(x)$ is the PDF.
 
 A quick sanity check for such expectation is to see the area of PDF as an uniform object, and try finding a point where the object can balance on.
 
+== Variance and Standard Deviation
+/ Variance: The expected value of the squared deviation from the mean of $X$
+  $
+    "Var"(X) &= E[(X - E(X))^2] \
+    &= E(X^2) - E(X)^2,
+  $
+  usually represented by $sigma^2$.
+/ Standard deviation: The square root of variance, usually represented by $sigma$.
+
+How do we do $E(X^2)$?
+
+=== Law of the Unconscious Statistician
+$
+  E[g(X)] integral_(-oo)^oo g(x) f_X (x) dd(x)
+$ where $f_X$ is the PDF of $X$.
+
+= Sequence and Series
+/ Sequence: An enumerated collection of objects in which repetitions are allowed and order matters.
+  It looks like ${a_0, a_1, a_2, ...}$.
+/ Series: An addition of infinitely many terms, one after the other.
+  Or defined as a limit of partial sums, $lim_(N -> oo) sum_(n = 0)^N S_N$.
+
+A sequence can take in values of a function, ${f(x_i)}_a^b = {f(x_a), f(x_(a + 1)), ... f(x_b)}$.
+And just like functions, a sequence can diverge or converge.
+However, a sequence of a function converges does not imply that the function also converges.
+
+#block(stroke: red, inset: 0.65em)[
+  The order of summation in series is important!
+]
+
+We may add or subtract series with each other by adding or subtracting their results, but cannot do so with multiplication or division.
+
+== Divergence Test
+Given the sequence ${a_n}_1^oo$, if $lim_(n -> oo) a_n eq.not 0$, then $sum_(n = 1)^oo a_n$ diverges.
+If it does apply, then the other way around is also true.
+
+#block(stroke: red, inset: 0.65em)[
+  The divergence test does not tell us anything about convergence.
+  In other words, if $lim_(n -> oo) a_n = 0$, it is useless.
+]
+
+== Integral Test
+For a series $s = lim_(N -> oo) sum_(n = 1)^N f(n)$, if $lim_(N -> oo) integral_1^(N + 1) f(x) dd(x) < s$ and diverges, $s$ also diverges.
+Take note of the $N + 1$ integral upper bound, that means our series is actually a Left Riemann Sum of the function!
+
+Similarly, if we instead use $N$ for the upper bound, we get a Right Riemann Sum.
+
+Use them on $1 / n$ and $1 / n^2$ from $1$ to see for yourself!
+
+Well, $N + 1$ or $N$, when $N -> oo$ they are all infinity.
+Hence, if $integral_(N_0)^oo f(x) dd(x)$ diverges/converges, $sum {f(x) | x in ZZ and x >= N_0}$ also diverges/converges.
+
 #termlist
