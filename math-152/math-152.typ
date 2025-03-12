@@ -1155,9 +1155,52 @@ $
 
 == Euler's Formula
 $
-  e^(i t) = cos(y) + i sin(t).
+  e^(i t) = cos(t) + i sin(t).
 $
-//WIP
+
+Through this, we have a way of obtaining $sin$ and $cos$ values:
+$
+  e^(i t) &= cos(t) + i sin(t) \
+  e^(-i t) &= cos(t) - i sin(t) \
+  cos(t) &= (e^(i t) + e^(-i t)) / 2 \
+  sin(t) &= (e^(i t) - e^(-i t)) / (2i).
+$
+
+Now, substitute $t = pi$:
+$
+  e^(i pi) + 1 = 0
+$ because for some reason people love it.
+
+== Polar Representation of Complex Numbers
+Put an imaginary number into a $x-y$ coordinate system, let it be $z = x + i y$.
+
+Thus, it has a polar representation
+$
+  z = rho e^(i theta)
+$ where $rho$ is its length and $theta in [0, 2pi]$ is its angle to the positive x-axis.
+Why? Use Euler's formula.
+
+To rotate an imaginary number, simply manipulate $theta$, to change its length, modify $rho$.
+
+More specifically, for rotation,
+$
+  e^(i phi) rho e^(i theta) = rho e^(i (theta + phi))
+$
+
+You should be able to convert between the two forms.
+Hint: compute length using Pythagoras theorem, angle using $atan$, also, Euler's formula.
+
+== Finding Imaginary Roots
+Multiples of $2pi$ would round back to the original angle, hence a root can have multiple solutions.
+
+For example,
+$
+  z &= root(3, 1) \
+  &= e^(i theta) \
+  z^3 &= 1 \
+  &= (e^(i theta))^3 \
+  theta &= 0 "or" (2pi) / 3 "or" (4pi) / 3.
+$
 
 // == Eigenvalues and Eigenvectors
 
