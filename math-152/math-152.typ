@@ -1199,7 +1199,7 @@ $
   &= e^(i theta) \
   z^3 &= 1 \
   &= (e^(i theta))^3 \
-  theta &= 0 "or" (2pi) / 3 "or" (4pi) / 3.
+  theta &= 0 "or" plus.minus (2pi) / 3 "or" plus.minus (4pi) / 3.
 $
 
 // == Eigenvalues and Eigenvectors
