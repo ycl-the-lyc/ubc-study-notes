@@ -918,24 +918,49 @@ $
 
 = Magnetism
 
-== Magnetic Field
-Static charges create electric fields, _moving_ charges create magnetic fields.
+== Magnetic Field and Magnetic Force
+Charges create electric fields, _moving_ charges create magnetic fields.
 
 / Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit(T)$.
   $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
 
+It should look similar to the electric force formula, because they are actually one, as we would later learn.
+
 #figure(
   caption: [Right-hand rule for vector cross-product],
-  image("assets/cross-product-right-hand.png", width: 33%)
+  image("assets/cross-product-right-hand.png", width: 33%),
 )
 
+By using the curly right-hand rule from _the current_ to _the field_, we can figure out direction of the force.
+
 Magnetic field _left-hand_ trick: \
-Counting a core family from thumb to the middle finger, (F)ather, (M)other and (C)hild, they are (F)orce, (M)agnetic field ($B$) and (C)urrent.
+Counting a core family from thumb to the middle finger, [F]ather, [M]other and [C]hild, they are [F]orce, [M]agnetic field and [C]urrent.
 
 We would see electric monopoles, but never a magnetic monopole---they are always in dipoles.
 And, the magnetic fields always from closed loops.
 
-== Magnetic Force
+As the magnetic force is always perpendicular to the trajectory of an object, the work done by that force is 0.
 
+If a moving charged particle never lose its energy, then the motion due to an magnetic field would be a circle, we call it _cyclotron motion_.
+
+Base on $F = m a$,
+$
+  q v B = m v^2 / r
+$ where $v^2 / r$ is the centripetal acceleration.
+Also, since $t = s / v$,
+$
+  1 / T = v / (2 pi (m v slash q B))
+$ where $2 pi (m v slash q B)$ is the circumference of the cyclotron motion.
+
+To conclude,
+$
+  r_"cyc" &= (m v) / (q B) \
+  f_"cyc" &= (q B) / (2 pi m).
+$
+
+== Lorentz Force
+At this point, you should have noticed that the magnetic force and electric force are integrated with each other: charges create electric fields, electric fields move charges, moving charges create magnetic fields, magnetic fields move charges...
+
+For this reason, we mostly consider both the electric fields and the magnetic field when computing for charge motions.
 
 #termlist
