@@ -74,7 +74,7 @@ $
   F &= m a
 $
 
-In this course, we will use $ g = qty(9.81, m/s^2) $ which happens to be true for Vancouver.
+In this course, we will use $ g = qty(9.81, m/s^2) = qty(32.2, ft/s^2) $ which happens to be true for Vancouver.
 
 == Vector Notation
 In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
@@ -636,7 +636,33 @@ $
 
 Knowing objects' angle velocity to their axis can help us triangulate their velocity to other observers.
 
+== The Equation of Motion
+A reminder that, in FPS system, the unit of mass is slug, in $unit(ft/s)$.
+
+The Newton's Second Law, known as the equation of motion, is
+$
+  vb(F) = m vb(a).
+$
+
+Different from before, the equation is vectorized so to include the directions of force and acceleration.
+
+For multiple accelerations, the resultant force is the vector sum of each force, like usual:
+$
+  sum vb(F) = m vb(a).
+$
+
+The forces include gravitational force, friction and others manually exerted.
+
+== Pulley Systems
+To analyse a pulley system, there are a few equalities we need to know:
+- Tension in a rope is constant.
+- Length of a rope is constant.
+- Position of a fixed gear is constant.
+
+These may seem too obvious, but recounting can really help in solving problems.
+
 // = Kinetics of a Particle: Work and Energy
+
 
 // = Kinetics of a Particle: Impulse and Momentum
 
