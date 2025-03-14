@@ -28,10 +28,6 @@
 #let add-vec = cetz-plot.plot.add.with(style: style-vec)
 
 #set math.vec(delim: "[")
-#let vecb(body) = $vectorbold(body)$
-#let veca(body) = $vectorarrow(body)$
-#let vecu(body) = $vectorunit(body)$
-// #let vec(..body) = $(body.pos().join(", "))$
 #let det = "det"
 #set math.mat(delim: "[")
 #let imat = identitymatrix.with(delim: "[", fill: 0)
@@ -213,9 +209,9 @@ $
   A &= "base" times "height" \
   &= norm(a) norm(b) sin(theta) \
   &= norm(a) norm(b) cos(pi / 2 - theta) \
-  &= vecb(a_perp) dot vb(b)
+  &= vb(a_perp) dot vb(b)
 $
-where $vecb(a_perp)$ is the vector perpendicular to $vb(a)$.
+where $vb(a_perp)$ is the vector perpendicular to $vb(a)$.
 
 == Matrices
 A matrix is a rectangular array of scalars.
@@ -882,7 +878,7 @@ $
   vb(n) &= vec(1, 1, 1) \
   vu(n) &= 1 / sqrt(3) vec(1, 1, 1) \
   "Ref"_P(vb(x)) &= vb(x)_parallel - vb(x)_perp \
-  &= (vb(x) - vb(x)_perp) - vecb(perp) \
+  &= (vb(x) - vb(x)_perp) - vb(perp) \
   &= vb(x) - 2 vb(x)_perp \
   &= (I - 2 "Proj"_vu(n)(x)) vb(x) \
   M_"ref"_P &= I - 2 M_T_"proj"_vu(n)(x) \
@@ -988,7 +984,7 @@ $
 For $2 times 2$ matrices, there is the other formula:
 $
   A &= mat(a, b; c, d) \
-  A^(-1) &= 1 / det[A] mat(d, -b; -c, a).
+  A^(-1) &= 1 / det(A) mat(d, -b; -c, a).
 $
 
 An invertible matrix $A_(n times n)$ implies that
@@ -1025,14 +1021,14 @@ But it would be troublesome to calculate the permutation number of each arrangem
 Now recall the row expansion formula like @eq:det-3x3.
 How do we know which term to add a minus sign to?
 $
-  det[A] =& a_(i 1) (-1)^(i + 1) mdet(A_(i 1)) \
+  det(A) =& a_(i 1) (-1)^(i + 1) mdet(A_(i 1)) \
   &+ a_(i 2) (-1)^(i + 2) mdet(A_(i 2)) \
   &dots.v \
   &+ a_(i j) (-1)^(i + j) mdet(A_(i j))
 $ where $A_(i j)$ is the (i, j)th minor matrix of $A$.
 The factor of $a_(i j)$ is called the (i, j)th cofactor.
 $
-  det[A] = sum_(j = 1)^n a_(i j) c_(i j).
+  det(A) = sum_(j = 1)^n a_(i j) c_(i j).
 $
 
 / Cofactor: A number that is obtained by multiplying the minor of the element of any given matrix with -1 raised to the power of the sum of the row and column number to which that element belongs.
@@ -1052,15 +1048,15 @@ _If you happen to time $(a)$ by a coefficient, all its terms should also multipl
 This is because determinant is linear in each row or column.
 
 Important properties of determinants:
-- $det[A] = det[A^T]$.
-- $det[A_(k <-> l)] = - det[A]$ where $A_(k <-> l)$ is $A$ with the $k$th and the $l$th row/column swapped.
-- $det[alpha A] = a^n det[A]$ where $A$ is $n times n$.
+- $det(A) = det(A^T)$.
+- $det(A_(k <-> l)) = - det(A)$ where $A_(k <-> l)$ is $A$ with the $k$th and the $l$th row/column swapped.
+- $det(alpha A) = a^n det(A)$ where $A$ is $n times n$.
   $ mdet(c x_1, c x_2; c y_1, c y_2) &= c^2 mdet(x_1, x_2; y_1, y_2). $
-- $det[A_(k = l)] = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
+- $det(A_(k = l)) = 0$ where $A_(k = l)$ is a matrix with the $k$th and the $l$th row/column identical.
   This can assist in proving the next property by
   $ mdet(x_1, x_2; y_1 + a, y_2 + b) = mdet(x_1, x_2; y_1, y_2) + mdet(x_1, x_2; a, b). $
-- $det[A_(k = k + alpha l)] = det[A]$.
-- $det[A B C D] = det[A] det[B] det[C] det[D]$.
+- $det(A_(k = k + alpha l)) = det(A)$.
+- $det(A B C D) = det(A) det(B) det(C) det(D)$.
 
 Fun fact,
 $
@@ -1070,7 +1066,7 @@ $
 == Matrix Inverse With Determinant
 Finally, the ultimate formula for any matrix inverse:
 $
-  A^(-1) = (1 / det[A]) C^T
+  A^(-1) = (1 / det(A)) C^T
 $ where $C$ is the cofactor matrix of $A$.
 
 = Complex Numbers
@@ -1202,6 +1198,33 @@ $
   theta &= 0 "or" plus.minus (2pi) / 3 "or" plus.minus (4pi) / 3.
 $
 
-// == Eigenvalues and Eigenvectors
+== Eigenvalues and Eigenvectors
+/ Eigenvalue and Eigenvector: For a matrix $A$ that defines $RR^n -> RR^n$, a scalar $lambda$ and a vector $vb(v)$ which
+  $
+    vb(v) &eq.not vb(0) \
+    A vb(v) &= lambda vb(v)
+  $ are called an eigen-pair, where $lambda$ is the eigenvalue, and $vb(v)$ is the eigenvector.
+
+- An eigenvector is _never_ $vb(0)$.
+- The image of an eigenvector is to the same direction as itself, with length factored by $lambda$.
+- $vb(v)$ can be replaced by $vu(v)$ and the equality still holds true.
+- An $n times n$ matrix often has $n$ eigen-pairs.
+
+=== Solving for Eigen-pairs
+$
+  A vb(v) &= lambda vb(v) \
+  A vb(v) - lambda vb(v) &= vb(0) \
+  (A - lambda I) vb(v) &= vb(0)
+$
+$det(A - lambda I)$ must be $0$, else $vb(v)$ would be $vb(0)$, which is not an eigenvector.
+Say, $A in RR^2$,
+$
+  det(A - lambda I) &= vb(0) \
+  &= mdet(mat(a_11, a_12; a_21, a_22) - imat(2)) \
+  &= (a_11 - lambda) (a_22 - lambda) - a_12 a_21 \
+  &= lambda^2 - Tr lambda + det(A)
+$ where $Tr = trace(A) = a_11 + a_22$.
+
+Solving this 1-variable 2-degree equation will give you $lambda$.
 
 #termlist
