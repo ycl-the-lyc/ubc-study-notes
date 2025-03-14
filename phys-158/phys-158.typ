@@ -924,6 +924,8 @@ Charges create electric fields, _moving_ charges create magnetic fields.
 / Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit(T)$.
   $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
 
+As you see, a stationary charge with $vb(v) = vec(0, 0)$ experiences no magnetic force.
+
 It should look similar to the electric force formula, because they are actually one, as we would later learn.
 
 #figure(
@@ -962,5 +964,16 @@ $
 At this point, you should have noticed that the magnetic force and electric force are integrated with each other: charges create electric fields, electric fields move charges, moving charges create magnetic fields, magnetic fields move charges...
 
 For this reason, we mostly consider both the electric fields and the magnetic field when computing for charge motions.
+$
+  vb(F) = plus.minus q vb(E) + plus.minus q vb(v) times vb(B).
+$
+
+== Charge Motions
+For a charge entering a uniform magnetic field with an angle, that is, not perpendicular to the field lines, it will perform a helix motion along the field lines.
+To find the radius of a helix motion, we must split velocity to parallel and perpendicular components, the cyclotron part of the helix motion is caused by the perpendicular component only.
+
+== Hall Effect
+A potential difference ("the Hall voltage") develops across a plane conductor in a perpendicular magnetic field when current is passing through the conductor.
+Thus, an electric field builds up in the conductor.
 
 #termlist
