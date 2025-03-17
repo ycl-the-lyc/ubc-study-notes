@@ -1203,7 +1203,7 @@ $
     A vb(v) &= lambda vb(v)
   $ are called an eigen-pair, where $lambda$ is the eigenvalue, and $vb(v)$ is the eigenvector.
 
-- An eigenvector is _never_ $vb(0)$.
+- An eigenvector is never $vb(0)$.
 - The image of an eigenvector is to the same direction as itself, with length factored by $lambda$.
 - $vb(v)$ can be replaced by $vu(v)$ and the equality still holds true.
 - An $n times n$ matrix often has $n$ eigen-pairs.
@@ -1223,6 +1223,16 @@ $
   &= lambda^2 - Tr lambda + det(A)
 $ where $Tr = trace(A) = a_11 + a_22$.
 
-Solving this 1-variable 2-degree equation will give you $lambda$.
+Solving this equation gives us $lambda$.
+
+Then, plug $lambda$ back in, $(A - lambda I) vb(v) = vb(0)$ to form a linear system,.
+Solving this linear system (using $"rref"(mat(A - lambda I, vb(0), augment: #1)$) will give you $vb(v)$.
+Note that your $lambda$ should depend on an unbounded variable, $t$, as there would be infinite number of solutions, i.e. would solve to a row of 0.
+We take the simplest pair, which usually involves an 1.
+
+#block(stroke: red, inset: 0.65em)[
+  When solving a homogeneous system, the augmented $vb(0)$ can be omitted.
+  Also, multiplying a row by a coefficient would not change the result, as the RHS is all 0.
+]
 
 #termlist
