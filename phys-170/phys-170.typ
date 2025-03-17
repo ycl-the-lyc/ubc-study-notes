@@ -73,7 +73,7 @@ $
 In this course, we will use $ g = qty("9.81", "m/s^2") = qty("32.2", "ft/s^2") $ which happens to be true for Vancouver.
 
 == Vector Notation
-In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
+In this course, vectors are upright bold, and vector magnitudes are italicized, while unit vectors are bold italics with an hat over.
 
 $ vb(A) "has a magnitude of" A "in direction" vu(A). $
 

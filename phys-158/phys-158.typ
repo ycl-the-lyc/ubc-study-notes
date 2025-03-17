@@ -1002,6 +1002,29 @@ $
   U_B = - vb(mu)_B dot vb(B)
 $
 
+A reminder again that magnetic fields are loops, they _do not stop_ at the poles.
 
+== Gauss's Law for Magnetism
+$
+  Phi_B = integral.surf vb(B) dot dd(vb(A)) = 0.
+$
+The magnetic flux of any closed surface is 0, as there is no single magnetic pole.
+
+== Biot-Savart Law
+As we know by now, moving charge, a.k.a current, generates magnetic fields.
+But how much exactly?
+
+With a component of current $I$ on $dd(vb(l))$, at certain distance from the current component, represented by position vector $vb(r)$, the component of magnetic field generated is
+$
+  dd(vb(B)) = mu_0 / (4pi) (I dd(vb(l)) times vu(r)) / r^2
+$ where $mu_0 = 4pi dot 10^(-7) unit("Tm / A")$ is the magnetic constant.
+
+=== Application: Magnetic Field of A Circular Ring
+Imagine a ring carrying current $I$ sitting on the origin, facing the x-axis.
+We would examine $dd(vb(B))$ by the ring in two different cases:
+- $x = 0$
+- $x > 0$
+
+WIP
 
 #termlist
