@@ -900,7 +900,12 @@ $
   &= (A epsilon_0) / d.
 $
 
-== Electric properties of dielectrics and Polarization
+== Electric Properties of Dielectrics and Polarization
+
+*_Rework pending!_*
+//TODO
+// rework this part
+
 When a dielectric material is in an electric field $vb(E)_0$, it is polarized and produces an induced electric field $vb(E)$.
 $
   vb(E) = vb(E)_0 / K
