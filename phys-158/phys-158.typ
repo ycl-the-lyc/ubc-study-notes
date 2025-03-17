@@ -14,9 +14,7 @@
 #import "@preview/fletcher:0.5.5" as fletcher: diagram, node, edge
 
 #import "@preview/physica:0.9.4": *
-#import "@preview/metro:0.3.0": *
-#import units: *
-#import prefixes: *
+#import "@preview/unify:0.7.1": unit, qty, qtyrange, num, numrange
 
 #let all-terms = state("terms", ())
 #show terms.item: it => context {
@@ -153,7 +151,7 @@ These two laws are crucial in analyzing circuits (solving problems), especially 
 In case of a parallel circuit, the voltage across each component is the same, while the current is inversely proportional to the resistance.
 While in a series circuit, the current across each component is the same, while the voltage is inversely proportional to the resistance.
 
-For instance, $qty(3, A)$ of current flows through a $qty(2, "Omega")$ and a $qty(1, "Omega")$ resistors, the current through each will be $qty(1, A) "and" qty(2, A)$.
+For instance, $qty("3", "A")$ of current flows through a $qty("2", "Omega")$ and a $qty("1", "Omega")$ resistors, the current through each will be $qty("1", "A") "and" qty("2", "A")$.
 
 Combining this knowledge with Kirchhoff's laws, we can solve even more complex circuits.
 
@@ -171,7 +169,7 @@ $
 $
 
 == Power
-/ Power: The rate at which energy is consumed or produced, measured in Watts ($unit(W)$).
+/ Power: The rate at which energy is consumed or produced, measured in Watts ($unit("W")$).
   $ P = I V = I^2 R = V^2 / R $
 
 == Grounding
@@ -188,7 +186,7 @@ However, our *zero reference point changes*, and we must measure the voltage of 
 Any collection of conductors that can store electric charge & energy.
 
 == Capacitance ($C$) <sc:capacitance>
-The ability to store electric charge, measured in Farads ($unit(F)$).
+The ability to store electric charge, measured in Farads ($unit("F")$).
 
 $
   C = Q / V.
@@ -342,7 +340,7 @@ Notice the similarity between these equations and the exponential decay equation
 == Inductors
 / Inductors: A coil of wire that generates an induced current, opposing the passing current.
   They are used in transformers, motors, and generators.
-/ Inductance ($L$): The ability to generate an induced current, measured in Henrys ($unit(H)$).
+/ Inductance ($L$): The ability to generate an induced current, measured in Henrys ($unit("H")$).
   $ V = L dd(I) / dd(t) $
 
 Inductors act quite as an opposite to capacitors, consider the prior switch-closed capacitor example:
@@ -544,12 +542,12 @@ Rules of electric charges:
 - When conductors touch, charges redistribute to reach equilibrium.
 
 / Electric charge: The fundamental property of matter, measured in Coulombs (C).
-  $ q = n e $ where $n$ is the number of charges and $e = qty(1.6 times 10^-19, C)$ is the elementary charge.
+  $ q = n e $ where $n$ is the number of charges and $e = qty("1.6e-19", "C")$ is the elementary charge.
 / Coulomb's Law: The force between two charges is directly proportional to the product of the charges and inversely proportional to the square of the distance between them, this force is _equal in magnitude_ on both charges.
   $ F = k (abs(q_1) abs(q_2)) / r^2 $
-  where $k = 1 / (4 pi epsilon_0) = qty(8.99 times 10^9, N m^2 / C^2)$ is the Coulomb constant.
+  where $k = 1 / (4 pi epsilon_0) = qty("8.99e9", "N m^2 / C^2")$ is the Coulomb constant.
 
-We use $k = qty(9 times 10^9, N m^2 / C^2)$ in this course.
+We use $k = qty("9e9", "N m^2 / C^2")$ in this course.
 
 == Electrostatic Attraction and Repulsion
 Two charges are simple enough: the forces are equal in magnitude and opposite in direction.
@@ -570,7 +568,7 @@ $
 $
 
 == Electric Field
-/ Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit(N/C)$).
+/ Electric Field: The force per unit charge at a point in space, measured in Newtons per Coulomb ($unit("N/C")$).
   $
     vb(E) = vb(F) / q_t = k q_s / r^2 vb(u)_r
   $ where $F$ is the force on the test charge $q_t$, and $q_s$ is the source of the field.
@@ -926,7 +924,7 @@ $
 == Magnetic Field and Magnetic Force
 Charges create electric fields, _moving_ charges create magnetic fields.
 
-/ Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit(T)$.
+/ Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit("T")$.
   $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
 
 As you see, a stationary charge with $vb(v) = vec(0, 0)$ experiences no magnetic force.
@@ -980,5 +978,30 @@ To find the radius of a helix motion, we must split velocity to parallel and per
 == Hall Effect
 A potential difference ("the Hall voltage") develops across a plane conductor in a perpendicular magnetic field when current is passing through the conductor.
 Thus, an electric field builds up in the conductor.
+
+== Magnetic Dipole
+In a current-carrying loop, the magnitude magnetic dipole moment is
+$
+  mu = I A.
+$ where $A$ is the area of the loop.
+
+Note that $vb(mu)$ is a vector, pointing perpendicular to the loop surface by the curl right-hand rule.
+
+The magnetic torque produced by the dipole moment is
+$
+  vb(tau)_B = vb(mu) times vb(B).
+$
+
+Since the loop would like to align with the magnetic fields, the magnitude of the torque is
+$
+  tau_B = mu B sin(theta)
+$ where $theta$ is the angle between the magnetic fields and $vb(mu)$.
+
+The potential energy of the magnetic dipole is
+$
+  U_B = - vb(mu)_B dot vb(B)
+$
+
+
 
 #termlist

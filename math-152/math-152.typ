@@ -14,9 +14,7 @@
 #show: equate.with(breakable: true, sub-numbering: true)
 #set math.equation(numbering: "(1.1)")
 
-#import "@preview/metro:0.3.0": *
-#import units: *
-#import prefixes: *
+#import "@preview/unify:0.7.1": unit, qty, qtyrange, num, numrange
 
 #import "@preview/cetz:0.3.1": canvas, draw
 #import "@preview/cetz-plot:0.1.0"
@@ -160,10 +158,10 @@ If neither of the vectors is the zero vector, and the dot product is 0, then the
 Given $vb(a) = vec(1, 1, 1) "and" vb(b) = vec(1, -1, 1)$, the angle between them is
 $
   cos(theta) &= (1 times 1 + 1 times -1 + 1 times 1) / (sqrt(1^2 + 1^2 + 1^2) times sqrt(1^2 + -1^2 + 1^2)) = 1 / 3 \
-  theta &approx qty(1.23, rad) = 70.53 degree.
+  theta &approx qty("1.23", "rad") = 70.53 degree.
 $
 
-Note: if the dot product of two vectors $vb(a) dot vb(b) = 0$, then vectors $vb(a)$ and $vb(b)$ are *perbendicular*.
+Note: if the dot product of two vectors $vb(a) dot vb(b) = 0$, then vectors $vb(a)$ and $vb(b)$ are *perpendicular*.
 
 === Vector Length
 The length of a vector is the square root of the sum of the squares of the scalars in the vector, which is also the square root of the dot product of the vector with itself.
