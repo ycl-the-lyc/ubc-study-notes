@@ -11,19 +11,15 @@
 #import "@preview/cetz-plot:0.1.0"
 
 #import "@preview/physica:0.9.4": *
-#import "@preview/metro:0.3.0": *
-#import units: *
-#import prefixes: *
-#let ui = unit
+
+#import "@preview/unify:0.7.1": unit, qty, qtyrange, num, numrange
+
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
 #set math.equation(numbering: "(1.1)")
 
 #let ft = $"ft"$
 #let lb = $"lb"$
-
-#let vecl(body) = $vectorbold(italic(body))$
-#let vecu(body) = $vectorunit(body)$
 
 #let all-terms = state("terms", ())
 #show terms.item: it => context {
@@ -63,8 +59,8 @@ So you basically take three of them and solve the 1 left.
     align: center + horizon,
     inset: (x, y) => if y == 0 { (x: 2em, y: 0.65em) } else { 1.3em },
     [Length], [Mass], [Time], [Force],
-    [meter \ $ui(m)$], [kilogram \ $ui(kg)$], [second \ $ui(s)$], [force \ $ui(kg m / s^2)$],
-    [foot \ $ui(ft)$], [slug \ $ui(lb s^2 / ft)$], [second \ $ui(s)$], [pound \ $ui(lb)$],
+    [meter \ $unit("m")$], [kilogram \ $unit("kg")$], [second \ $unit("s")$], [force \ $unit("kg m / s^2")$],
+    [foot \ $unit("ft")$], [slug \ $unit("lb s^2 / ft")$], [second \ $unit("s")$], [pound \ $unit("lb")$],
   ),
 )
 
@@ -74,12 +70,12 @@ $
   F &= m a
 $
 
-In this course, we will use $ g = qty(9.81, m/s^2) = qty(32.2, ft/s^2) $ which happens to be true for Vancouver.
+In this course, we will use $ g = qty("9.81", "m/s^2") = qty("32.2", "ft/s^2") $ which happens to be true for Vancouver.
 
 == Vector Notation
 In this course, vectors are upright bold, and vector magnitudes are italicized bold, while unit vectors are italics with an hat over.
 
-$ vb(A) "has a magnitude of" vecl(A) "in direction" vecu(A). $
+$ vb(A) "has a magnitude of" A "in direction" vu(A). $
 
 In manuscript, of course we cannot strike bold, so we use overhead arrow for vectors instead.
 
@@ -101,8 +97,8 @@ Use #quote[tip to tail] for triangular method of addition: draw the vectors head
 
 == Force Components
 $
-  vb(F) = vecl(x) vecu(i) + vecl(y) vecu(j)
-$ where $x, y$ are magnitudes of the force in the $vecu(i), vecu(j)$ directions.
+  vb(F) = x vu(i) + y vu(j)
+$ where $x, y$ are magnitudes of the force in the $vu(i), vu(j)$ directions.
 
 
 #grid(
@@ -138,15 +134,15 @@ $ where $x, y$ are magnitudes of the force in the $vecu(i), vecu(j)$ directions.
   align(horizon)[
     Force $vb(F)$ can be represented as a combination of $vb(F)_x$ and $vb(F)_y$
     $ vb(F) = vb(F)_x + vb(F)_y $
-    or as a polar coordinate of angle $theta = arctan(vecl(F)_y / vecl(F)_x)$ and magnitude $vecl(F)$
-    $ vb(F) = vecl(F) (cos(theta) + sin(theta)). $
+    or as a polar coordinate of angle $theta = arctan(F_y / F_x)$ and magnitude $F$
+    $ vb(F) = F (cos(theta) + sin(theta)). $
 
     To generalize it, we can write it as
     $
-      vb(F) &= vecl(F)_x vecu(i) + vecl(F)_y vecu(j) \
-      &= vecl(F) (cos(theta) vecu(i) + sin(theta) vecu(j))
+      vb(F) &= F_x vu(i) + F_y vu(j) \
+      &= F (cos(theta) vu(i) + sin(theta) vu(j))
     $
-    where $vecu(i), vecu(j)$ are unit vectors in the $x, y$ directions.
+    where $vu(i), vu(j)$ are unit vectors in the $x, y$ directions.
     This is the Cartesian form of a vector.
   ],
 )
@@ -156,10 +152,10 @@ For a force with 2 dimensions, we call it a coplanar force.
 Sometimes, non-linear equations arise from problems involving forces. Gladly use math solvers for those.
 
 == Unit Vector
-To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $vecu(u) = vb(A) / vecl(A)$.
+To disregard magnitude and only focus on direction, we use unit vector, which we divide a vector by its magnitude, $vu(u) = vb(A) / A$.
 
 == 3D Forces
-Forces in 3D are $vb(F) = vecl(F)_x vecu(i) + vecl(F)_y vecu(j) + vecl(F)_z vecu(k)$, with their magnitudes being $vecl(F) = sqrt(vecl(F)_x^2 + vecl(F)_y^2 + vecl(F)_z^2)$.
+Forces in 3D are $vb(F) = F_x vu(i) + F_y vu(j) + F_z vu(k)$, with their magnitudes being $F = sqrt(F_x^2 + F_y^2 + F_z^2)$.
 
 To determine orientation of the axis, we use the right-hand rule: make a thumb up using your right hand, the side of the curling fingers is $x$, the arm is $y$, and the thumb is $z$.
 
@@ -167,17 +163,17 @@ To determine orientation of the axis, we use the right-hand rule: make a thumb u
 The direction of a Cartesian vector is the angles between the vector and the *positive* axis.
 $alpha, beta, gamma$ each corresponds to the angle from the positive $x, y, z$ axis.
 $
-  cos(alpha) &= vecl(F)_x / vecl(F) \
-  cos(beta) &= vecl(F)_y / vecl(F) \
-  cos(gamma) &= vecl(F)_z / vecl(F)
+  cos(alpha) &= F_x / F \
+  cos(beta) &= F_y / F \
+  cos(gamma) &= F_z / F
 $
 
 Therefore,
 $
-  vecu(u) &= cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k)
+  vu(u) &= cos(alpha) vu(i) + cos(beta) vu(j) + cos(gamma) vu(k)
 $ and $
-  vb(F) &= vecl(F) vecu(u) \
-  &= vecl(F) (cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k))
+  vb(F) &= F vu(u) \
+  &= F (cos(alpha) vu(i) + cos(beta) vu(j) + cos(gamma) vu(k))
 $
 
 #block(stroke: red, inset: 0.8em)[
@@ -195,41 +191,41 @@ $
   //REF Engineering Mechanics: Statics, 15th Edition, Hibbeler
 )
 
-With magnitude $vecl(F)$ and angles from the positive z-axis $phi$ and from the positive x-axis $theta$, we can determine the force components by first solving for $vecl(F)_z$, then $vecl(F)_(x y)$ followed by $vecl(F)_x$ and $vecl(F)_y$.
+With magnitude $F$ and angles from the positive z-axis $phi$ and from the positive x-axis $theta$, we can determine the force components by first solving for $F_z$, then $F_(x y)$ followed by $F_x$ and $F_y$.
 $
-  vecl(F)_z &= vecl(F) cos(phi) \
-  vecl(F)_(x y) &= vecl(F) sin(phi) \
-  vecl(F)_x &= vecl(F)_(x y) cos(theta) \
-  vecl(F)_y &= vecl(F)_(x y) sin(theta)
+  F_z &= F cos(phi) \
+  F_(x y) &= F sin(phi) \
+  F_x &= F_(x y) cos(theta) \
+  F_y &= F_(x y) sin(theta)
 $
 
 Or instead, given 2 ($beta, gamma$) of the 3 Cartesian angles, we can determine the force by
 $
   cos(alpha) = sqrt(1 - cos^2(beta) - cos^2(gamma)) \
-  vb(F) = vecl(F) (cos(alpha) vecu(i) + cos(beta) vecu(j) + cos(gamma) vecu(k)).
+  vb(F) = F (cos(alpha) vu(i) + cos(beta) vu(j) + cos(gamma) vu(k)).
 $
 
 == Position Vectors
 Position vectors are vectors that describe the position of a point in space relative to a reference point.
 
 As obvious, we need 3 coordinates to locate a point in 3D space.
-Point $P(x, y, z)$ has position vector $vb(r) = x vecu(i) + y vecu(j) + z vecu(k)$ relative to the origin.
+Point $P(x, y, z)$ has position vector $vb(r) = x vu(i) + y vu(j) + z vu(k)$ relative to the origin.
 
 Note that the position vector does not always come from the origin, it can be relative to arbitrary points.
 Given $A(x_A, y_A, z_A)$ and $B(x_B, y_B, z_B)$, the position vector of $B$ relative to $A$ is
 $
-  vb(r) = (x_B - x_A) vecu(i) + (y_B - y_A) vecu(j) + (z_B - z_A) vecu(k).
+  vb(r) = (x_B - x_A) vu(i) + (y_B - y_A) vu(j) + (z_B - z_A) vu(k).
 $
 
-Connecting to unit vectors, $vb(u) = vb(F) / vecl(F)$,
+Connecting to unit vectors, $vb(u) = vb(F) / F$,
 $
-  vb(F) = vecl(F) vb(u) = vecl(F) vb(r) / vecl(r).
+  vb(F) = F vb(u) = F vb(r) / r.
 $
 
-To simplify calculation, let $X = vecl(F) / vecl(r)$,
+To simplify calculation, let $X = F / r$,
 $
   vb(F) &= X vb(r) \
-  vecl(F) &= X vecl(r).
+  F &= X r.
 $
 
 == Vector Operations
@@ -237,7 +233,7 @@ Mostly taught in MATH 152, but here again anyways.
 
 === Dot Product & Angle Between Vectors
 $
-  vb(A) dot vb(B) &= vecl(A) vecl(B) cos(theta) \
+  vb(A) dot vb(B) &= A B cos(theta) \
   &= A_x B_x + A_y B_y + A_z B_z
 $
 
@@ -246,7 +242,7 @@ Two vectors are parallel if their cross product is a zero vector, and perpendicu
 
 Given a vector $vb(A)$, its parallel component is
 $
-  vb(A)_(parallel) = (vb(A) dot vecu(u)) vecu(u)
+  vb(A)_(parallel) = (vb(A) dot vu(u)) vu(u)
 $
 and its perpendicular component is
 $
@@ -256,7 +252,7 @@ $
 === Projection
 The projection of $vb(A)$ onto $vb(B)$ is
 $
-  vb(A)_"proj on B" = (vb(A) dot vecu(u_B)) vecu(u_B).
+  vb(A)_"proj on B" = (vb(A) dot vu(u_B)) vu(u_B).
 $
 Note the similarity to the parallel component formula.
 
@@ -290,7 +286,7 @@ $
 Be very careful with the signs of the forces.
 
 == Solving Equilibrium Problems
-With multiple forces and their direction vectors (_not unit vectors_) $vb(r)$, $ F = vb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = vecl(F) / vecl(r)$.
+With multiple forces and their direction vectors (_not unit vectors_) $vb(r)$, $ F = vb(r) X "or" Y "or" Z ... $ where $X, Y, Z... = F / r$.
 Solving for $X, Y, Z$ gives the forces.
 To solve a typical $X, Y, Z$ system, we can use the `rref` function on a matrix of the coefficients in the equations and their RHS. More in MATH 152.
 
@@ -316,7 +312,7 @@ These results combined are called the force system resultants.
 == Moment of a Force
 Intuitively, magnitude of the moment of a force $vb(F)$ about point $O$ is
 $
-  M_O = vecl(F) d
+  M_O = F d
 $ where $d$ is the perpendicular distance from $O$ to the line of action of $vb(F)$.
 
 Multiple moments? Just sum them up.
@@ -331,11 +327,11 @@ Now, be reminded that the cross product of two vectors produces a vector perpend
 Samely, more in MATH 152.
 $
   vb(A) times vb(B) &= matrixdet(
-    vecu(i), vecu(j), vecu(k);
+    vu(i), vu(j), vu(k);
     A_x, A_y, A_z;
     B_x, B_y, B_z;
   ) \
-  &= (A_y B_z - A_z B_y) vecu(i) - (A_x B_z - A_z B_x) vecu(j) + (A_x B_y - A_y B_x) vecu(k)
+  &= (A_y B_z - A_z B_y) vu(i) - (A_x B_z - A_z B_x) vu(j) + (A_x B_y - A_y B_x) vu(k)
 $ which is perpendicular to both $vb(A)$ and $vb(B)$.
 
 And it is non-commutative.
@@ -353,8 +349,8 @@ $ where $vb(r)$ is the position vector of the point of application of $vb(F)$ re
 
 The magnitude of $vb(M)_O$ is then
 $
-  vecl(M)_O &= vecl(r) vecl(F) sin(theta) \
-  &= vecl(F) d \
+  M_O &= r F sin(theta) \
+  &= F d \
   vb(M)_"axis" &= vb(u)_a_x times (vb(r) times vb(F)) \
   &= vb(u)_a_x times vb(M)_O "(this can commutate)".
 $
@@ -362,7 +358,7 @@ $
 Using our recent knowledge of Cartesian vectors and cross products, we can write the moment as
 $
   vb(M)_O &= matrixdet(
-    vecu(i), vecu(j), vecu(k);
+    vu(i), vu(j), vu(k);
     r_x, r_y, r_z;
     F_x, F_y, F_z;
   )
@@ -373,7 +369,7 @@ $
 
 $
   vb(M)_"couple" &= vb(r)_A times vb(-F) + vb(r)_B times vb(F) \
-  vecl(M)_"couple" &= vecl(F) d
+  M_"couple" &= F d
 $ where $d$ is the perpendicular distance between the lines of action of the forces.
 
 The moment of a couple is independent of the point about which it is taken it is a _free vector_.
@@ -407,12 +403,12 @@ To simplify a force system, we can
 A parallel force system can be simplified by replacing the forces with a single resultant force and a single resultant moment.
 It can then be further simplified by moving the resultant force to the point of application of the resultant moment.
 $
-  vb(F)_R "and" vb(M)_O "at" O = vb(F)_R "with distance" vecl(M)_O / vecl(F)_R.
+  vb(F)_R "and" vb(M)_O "at" O = vb(F)_R "with distance" M_O / F_R.
 $
 
 === Reduction to a Wrench
 Given arbitrary forces and moments, we can reduce them to a single force and a single moment.
-+ Regard the resultant force as a baseline, moments parallel to the force can be eliminated by moving the force to a distance $d = vecl(M)_perp slash vecl(F)_R$.
++ Regard the resultant force as a baseline, moments parallel to the force can be eliminated by moving the force to a distance $d = M_perp slash F_R$.
 + Move the parallel moment to the resultant force.
 
 When solving for the resultant force, first setup an imaginary point $P$ as our resultant force point, then solve for the resultant force and moment about $P$.
@@ -466,8 +462,8 @@ Of course, then there is the friction $vb(F)$, tangent to the contact surface an
 
 Look at the example above. Assume the block is in equilibrium, we can determine where $vb(N)$ is acting, point $O$, by considering moments.
 $
-  vecl(W) x &= vecl(P) h \
-  x &= (vecl(P) h) / vecl(W).
+  W x &= P h \
+  x &= (P h) / W.
 $
 
 #block(inset: 0.65em, stroke: red)[
@@ -475,21 +471,21 @@ $
 ]
 
 / Impending motion: No motion but friction is at its maximum, any larger propelling force will cause the body to slip.
-  Only when at impending motion, $ vecl(F)_s = mu_s vecl(N). $
+  Only when at impending motion, $ F_s = mu_s N. $
 / Angle of static friction: The angle between the resultant force by friction and the normal force and the normal force.
 
 It is important to notice that, only when the body is _about_ to slip, the above formula is true.
-In other cases, $vecl(F)_s$ depends on the propelling force.
+In other cases, $F_s$ depends on the propelling force.
 
 / Kinetic friction: Friction when a body is in motion, typically _smaller_ than its static friction.
 / Coefficient of kinetic friction ($mu_k$): Similar to $mu_s$ but for kinetic friction.
 
 #block(inset: 0.65em, stroke: red)[
-  When there are multiple ways a body can slip, calculate the $vecl(P)$ required for each case, then choose the one with the _smallest_ $vecl(P)$.
+  When there are multiple ways a body can slip, calculate the $P$ required for each case, then choose the one with the _smallest_ $P$.
 ]
 
 #block(inset: 0.65em, stroke: red)[
-  When using $vecl(F) = mu vecl(N)$, the direction drawn must be correct!
+  When using $F = mu N$, the direction drawn must be correct!
   Otherwise, no, it can be wrong and we correct it later according to the sign.
 ]
 
@@ -525,7 +521,7 @@ $
   a_x &= 0 \
   v_x &= (v_0)_x.
 $
-Velocity on the y-axis will change according to the gravitational acceleration, $g = qty(9.81, m/s^2)$,
+Velocity on the y-axis will change according to the gravitational acceleration, $g = qty("9.81", "m/s^2")$,
 $
   a_y &= -g \
   v_y &= (v_0)_y - g t \
@@ -637,7 +633,7 @@ $
 Knowing objects' angle velocity to their axis can help us triangulate their velocity to other observers.
 
 == The Equation of Motion
-A reminder that, in FPS system, the unit of mass is slug, in $unit(ft/s)$.
+A reminder that, in FPS system, the unit of mass is slug, in $unit("ft/s")$.
 
 The Newton's Second Law, known as the equation of motion, is
 $
