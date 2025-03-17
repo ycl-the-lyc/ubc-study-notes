@@ -178,7 +178,7 @@ The projection of $vb(a)$ onto $vb(b)$ is the vector that is parallel to $vb(b)$
 $
   "proj"_vb(b) vb(a) &= "'shadow' length of" vb(a) "on" vb(b) times "direction of" vb(b) \
   &= (vb(a) dot vb(b)) vb(b) / norm(b)^2 \
-  &= (vb(a) dot hat(b)) hat(b)
+  &= (vb(a) dot vu(b)) vu(b)
 $
 
 Here's a proof:
@@ -195,9 +195,9 @@ $ s = (vb(a) dot vb(b)) / (vb(b) dot vb(b)) $
 Plugging back into @eq:projection, we hence get:
 $ "proj"_vb(b) vb(a) = (vb(a) dot vb(b)) / norm(b)^2 vb(b) $
 
-Further, a vector $vb(a)$ has $vb(a) / norm(a) = hat(a)$, so
+Further, a vector $vb(a)$ has $vb(a) / norm(a) = vu(a)$, so
 $
-  (vb(a) dot vb(b)) / norm(b)^2 vb(b) &= (vb(a) dot hat(b)) hat(b).
+  (vb(a) dot vb(b)) / norm(b)^2 vb(b) &= (vb(a) dot vu(b)) vu(b).
 $
 
 === Parallelogram
