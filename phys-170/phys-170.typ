@@ -576,7 +576,7 @@ In a straight-line motion, $rho -> oo$, $a_u = 0$.
 In a constant-speed motion, $dot(v) = 0$, $a_t = 0$.
 We can see that the tangential acceleration represents the change in magnitude of velocity, and the normal acceleration represents the change in direction of velocity.
 
-== Polar and Cylindrical Coordinates
+== Polar Coordinates
 Instead of $x, y$, a polar coordinate system holds $r and theta$, which $r$ is the distance from the origin and $theta$ is the angle from the positive x-axis.
 The position vector would be $vb(r) = r vb(u)_r$.
 
@@ -656,6 +656,25 @@ To analyse a pulley system, there are a few equalities we need to know:
 - Position of a fixed gear is constant.
 
 These may seem too obvious, but recounting can really help in solving problems.
+
+== Cylindrical Coordinates
+It is like a polar coordinate system, but with a z-axis, forming a right-angled triangle with $r$.
+$
+  vb(u)_z = vb(u)_theta times vb(u)_r.
+$
+
+All previous rules apply similarly.
+$
+  sum vb(F) &= sum vb(F)_theta + sum vb(F)_r + sum vb(F)_z \
+  &= m vb(a)_theta + m vb(a)_r + m vb(a)_z.
+$
+
+== Converting Between Polar and Tangential Components
+We introduce an angle, $psi$.
+It is the angle from an object's position vector $vb(r)$ to its tangential vector property (e.g. force), counterclockwise as positive.
+$
+  tan(psi) = r / dv(r, theta).
+$
 
 // = Kinetics of a Particle: Work and Energy
 
