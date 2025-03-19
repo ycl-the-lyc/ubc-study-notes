@@ -1019,12 +1019,61 @@ $
   dd(vb(B)) = mu_0 / (4pi) (I dd(vb(l)) times vu(r)) / r^2
 $ where $mu_0 = 4pi dot 10^(-7) unit("Tm / A")$ is the magnetic constant.
 
-=== Application: Magnetic Field of A Circular Ring
-Imagine a ring carrying current $I$ sitting on the origin, facing the x-axis.
-We would examine $dd(vb(B))$ by the ring in two different cases:
-- $x = 0$
-- $x > 0$
+=== Application: Magnetic Field of a Circular Ring
+Imagine a ring with radius $a$ carrying current $I$ sitting on the origin, facing the x-axis.
+By symmetry, magnetic fields in y or z direction cancel out.
 
-WIP
+We would examine $dd(vb(B))$ by the ring in two different cases:
+- $x = 0$,
+- $x > 0$.
+
+When $x = 0$, meaning the test point is on the same plane as the ring,
+$
+  dd(B) &= mu_0 / (4pi) (I dd(l)) / a^2 \
+  B_x &= mu_0 / (4pi) (I (2pi a)) / a^2 \
+  &= (mu_0 I) / (2a)
+$ with $2pi a$ being the circumference, is the magnetic field strength in the x-direction.
+
+When $x > 0$,
+$
+  dd(B) &= mu_0 / (4pi) (I dd(l)) / (x^2 + a^2)
+$ with $x^2 + a^2$ being $r^2$.
+
+Let the angle between each $dd(vb(B))$ (_not_ $vb(r)$!) and the x-axis be $theta$,
+$
+  dd(B)_x &= cos(theta) dd(B) \
+  cos(theta) &= a / r \
+  &= a / sqrt(x^2 + a^2) \
+  B_x &= mu_0 / (4pi) (I (2pi a)) / (x^2 + a^2) a / sqrt(x^2 + a^2) \
+  &= mu_0 / 2 (I a^2) / (x^2 + a^2)^(3 / 2).
+$
+
+=== Application: Magnetic Field of a Wire
+Given a wire with length $2a$ and current from $-a$ to $a$, and a point $P$ with distance $r$ to the wire, and the perpendicular point happens to be $0$ of the $-a -> a$.
+
+First, we assume the wire is infinitely long.
+In that case, the decay of its magnetic field would resemble decay of its electric field, just in magnitude.
+$
+  vb(B)_P &= plus.minus (mu_0 I) / (2pi r) vb(k) \
+  B_P &= (mu_0 I) / (2pi r)
+$ where the direction depends on orientation of the wire and the test point.
+
+Many wires are not infinitely long (obviously), so we need to integrate over it.
+First, to understand the magnitude of the magnetic field,
+$
+  abs(I dd(vb(l)) times vu(r)) &= I dd(l) abs(vu(r)) sin(theta) \
+  &= I dd(y) sin(theta)
+$ where $theta$ is the angle from the current to $vb(r)$ of $P$.
+$
+  vb(B)_P &= integral dd(vb(B)) \
+  &= integral mu_0 / (4pi) (d dd(vb(l)) times vu(r)) / r^2 \
+  &= plus.minus vb(k) (mu_0 I) / (4pi) integral (sin(theta) dd(y)) / r^2 \
+  &= plus.minus vb(k) (mu_0 I) / (4pi) integral (x dd(y)) / r^3 \
+  &= plus.minus vb(k) (mu_0 I x) / (4pi) integral_(-a)^a dd(y) / (x^2 + y^2)^(3 / 2) \
+  &= plus.minus (mu_0 I) / (4pi) (2a) / (x sqrt(x^2 + a^2)) vb(k).
+$
+
+How about semi-infinite long wire, lie antenna?
+Just half of the infinite's.
 
 #termlist
