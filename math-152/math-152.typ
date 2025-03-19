@@ -6,9 +6,10 @@
   ],
   author: "Yecheng Liang",
 )
-#import "@preview/physica:0.9.4": *
+#import "@preview/physica:0.9.5": *
 #show: super-T-as-transpose // Render "..^T" as transposed matrix
-#let conj= math.overline
+#let conj = math.overline
+#let kern = math.cal([N])
 
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
@@ -1234,5 +1235,74 @@ We take the simplest pair, which usually involves an 1.
   When solving a homogeneous system, the augmented $vb(0)$ can be omitted.
   Also, multiplying a row by a coefficient would not change the result, as the RHS is all 0.
 ]
+
+=== Complex-valued Eigen-pairs
+Eigenvalue or eigenvector can contain imaginary numbers.
+
+For example,
+$
+  A &= mat(1, 2; -1, 3) \
+  trace(A) &= 4 \
+  det(A) &= 5 \
+  lambda^2 - 4 lambda + 1 &= 0 \
+  (lambda - 2)^2 &= -1 \
+  lambda &= 2 plus.minus i.
+$
+
+Thus, we have
+$
+cases(
+  lambda_+ = 2 + i,
+  lambda_- = 2 - i
+)
+$
+
+Solve the corresponding eigenvectors:
+$
+  (A - lambda_+ I) v_+ &= vb(0) \
+  "rref"(A - lambda_+ I) &= mat(-1 - i, 2; 0, 0)
+$
+Let $v_+_2 = t$,
+$
+  (-1 - i) v_+_1 + 2t &= 0 \
+  v_+_1 &= (2t) / (i + 1) \
+  &= (1 - i) t \
+  vb(v_+) &= vec((1 - i) t, t) \
+  &= vec(1 - i, 1).
+$
+
+Since $lambda_- = conj(lambda_+)$,
+$
+  v_- = conj(v_+) = vec(1 + i, 1).
+$
+
+=== Solving for Eigen-pairs by Linear Relations
+/ Null space / kernel: For all matrix $A_(n times n)$, its kernel is the set of all vectors that are mapped to zero by $A$.
+  $ ker(A) := kern(A) := {vb(x) in RR^n: A vb(x) = vb(0)} $
+
+We are supposed to solve
+$
+  (A - lambda_i I) vb(v) = vb(0).
+$
+...which is
+$
+  ker(A - lambda_i I).
+$
+
+/ Linear relation (LR): Given a set of $n$ vectors ${vb(c)_1, vb(c)_2, vb(c)_3, ...}$, a linear relation is an _ordered_ set of scalars ${a_1, a_2, a_3, ...}$ that satisfies
+  $ a_1 vb(c)_1 + a_2 vb(c)_2 + a_3 vb(c)_3 + ... = vb(0). $
+  Thus, we define $vb(a) = mat(a_1, a_2, ..., a_n)^T$ as a LR of vectors above.
+  If $vb(a) equiv vb(0)$, then the LR is trivial.
+
+Now, look:
+
+For all $A_(n times n)$,
+$
+  ker(A) := kern(A) := { "LRs of columns of" A }.
+$
+
+A non-trivial kernel is the eigenvector.
+Just "notice" that you can cancel out the columns...
+Can't notice? RREF.
 
 #termlist
