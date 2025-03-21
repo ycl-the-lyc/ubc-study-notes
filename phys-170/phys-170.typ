@@ -676,6 +676,18 @@ $
   tan(psi) = r / dv(r, theta).
 $
 
+Additionally, we may want to setup
+$
+  eta = 90 degree - psi
+$ which can be seen as the angle between different orthogonal axis, for conversion of their components.
+
+Say, there are two cross-like force systems, with direction $vb(u)_r, vb(u)_s$, the angle between the axis is $eta$.
+$
+  vb(u)_s = vb(u)_r cos(eta).
+$
+
+It is crucial to have consistent angle setup for the more and more complex problems we are to solve.
+
 // = Kinetics of a Particle: Work and Energy
 
 
