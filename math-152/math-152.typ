@@ -915,7 +915,7 @@ $ then solve the resulting linear system.
 For example,
 $
   A &= mat(1, 2; 3, 4) \
-  A^T &= mat(1, 3; 4, 2)
+  A^T &= mat(1, 3; 2, 4)
 $
 
 Some nice conclusions:
@@ -1197,7 +1197,7 @@ $
   theta &= 0 "or" plus.minus (2pi) / 3 "or" plus.minus (4pi) / 3.
 $
 
-== Eigenvalues and Eigenvectors
+= Eigenvalues and Eigenvectors
 / Eigenvalue and Eigenvector: For a matrix $A$ that defines $RR^n -> RR^n$, a scalar $lambda$ and a vector $vb(v)$ which
   $
     vb(v) &eq.not vb(0) \
@@ -1209,14 +1209,15 @@ $
 - $vb(v)$ can be replaced by $vu(v)$ and the equality still holds true.
 - An $n times n$ matrix often has $n$ eigen-pairs.
 
-=== Solving for Eigen-pairs
+== Solving for Eigen-pairs
 $
   A vb(v) &= lambda vb(v) \
   A vb(v) - lambda vb(v) &= vb(0) \
   (A - lambda I) vb(v) &= vb(0)
 $
 $det(A - lambda I)$ must be $0$, else $vb(v)$ would be $vb(0)$, which is not an eigenvector.
-Say, $A in RR^2$,
+
+=== 2D Matrices
 $
   det(A - lambda I) &= vb(0) \
   &= mdet(mat(a_11, a_12; a_21, a_22) - imat(2)) \
@@ -1236,7 +1237,13 @@ We take the simplest pair, which usually involves an 1.
   Also, multiplying a row by a coefficient would not change the result, as the RHS is all 0.
 ]
 
-=== Complex-valued Eigen-pairs
+=== 3D Matrices
+$
+  det(A - lambda I) &= vb(0) \
+  &= lambda^3 - Tr lambda^2 + c_2 lambda
+$ where $c_2$ is the product of any two of the diagonal entries.
+
+== Complex-valued Eigen-pairs
 Eigenvalue or eigenvector can contain imaginary numbers.
 
 For example,
@@ -1276,7 +1283,11 @@ $
   v_- = conj(v_+) = vec(1 + i, 1).
 $
 
-=== Solving for Eigen-pairs by Linear Relations
+#block(stroke: red, inset: 0.65em)[
+  For conjugate eigenvalues, their eigenvectors are also conjugate.
+]
+
+== Solving for Eigen-pairs by Linear Relations
 / Null space / kernel: For all matrix $A_(n times n)$, its kernel is the set of all vectors that are mapped to zero by $A$.
   $ ker(A) := kern(A) := {vb(x) in RR^n: A vb(x) = vb(0)} $
 
@@ -1303,6 +1314,34 @@ $
 
 A non-trivial kernel is the eigenvector.
 Just "notice" that you can cancel out the columns...
-Can't notice? RREF.
+Can't notice? RREF, you may even spot the LR midway.
+
+For example,
+$
+  mat(-1 - i, 2; -1, 1 - i) ->& (-1 - i) underline((1 - i)) = -2 \
+  & (-1) underline((1 - i)) = i - 1 \
+  ker mat(-1 - i, 2; -1, 1 - i) =& vec(1 - i, 1 - i).
+$
+
+== Special Eigen Cases
+If the $j$th column of $A$ is $a vb(e)_j$, then ${a, vb(e)_j}$ is an eigen-pair. 
+
+Let $x$ be arbitrary values.
+For
+$
+  A = mat(a, x, 0; 0, x, 0; 0, x, b),
+$ ${a, vb(e)_1}, {b, vb(e)_3}$ are eigen-pairs.
+
+For
+$
+  A = mat(a, 0, 0; 0, b, 0; 0, 0, c),
+$ ${a, vb(e)_1}, {b, vb(e)_2}, {c, vb(e)_3}$ are eigen-pairs.
+
+For
+$
+  A = mat(0, 0, a; 0, b, 0; c, 0, 0),
+$ only ${b, vb(e)_2}$ is an eigen-pair.
+
+For upper/lower triangular matrices, the head/tail of each row are eigenvalues, and the column of $a vb(e)_n$ makes ${a, vb(e)_n}$ an eigen-pair.
 
 #termlist
