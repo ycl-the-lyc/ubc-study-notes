@@ -936,7 +936,9 @@ It should look similar to the electric force formula, because they are actually 
   image("assets/cross-product-right-hand.png", width: 33%),
 )
 
-By using the curly right-hand rule from _the current_ to _the field_, we can figure out direction of the force.
+#block(stroke: red, inset: 0.65em)[
+  By using the curly right-hand rule from _the current_ to _the field_, we can figure out direction of the force.
+]
 
 Magnetic field _left-hand_ trick: \
 Counting a core family from thumb to the middle finger, [F]ather, [M]other and [C]hild, they are [F]orce, [M]agnetic field and [C]urrent.
@@ -1073,7 +1075,54 @@ $
   &= plus.minus (mu_0 I) / (4pi) (2a) / (x sqrt(x^2 + a^2)) vb(k).
 $
 
-How about semi-infinite long wire, lie antenna?
+How about semi-infinite "long wire", lie antenna?
 Just half of the infinite's.
+
+== Ampère's Law
+Consider a circular current-carrying line.
+#figure(
+  caption: [Ampèrian loop],
+  image("assets/amperes-law-loop.png", width: 67%)
+)
+
+Integrate the magnetic field along it:
+$
+  integral.surf vb(B) dot dd(vb(l)) &= integral.surf B dd(l) \
+  &= B integral.surf dd(l) \
+  &= B dot 2 pi r \
+  &= (mu_0 I) / (2 pi r) 2 pi r \
+  &= mu_0 I_"enclosed".
+$
+Unlike Gauss's Law, we choose an Ampère _circular loop_ instead of a surface for evaluation.
+For a loop with radius $R$ and current $I_0$, any loop inside of it with a radius $r$ has
+$
+  I = I_0 r^2 / R^2.
+$
+
+Hence, knowing the original loop current $I$, the other loop with a different $r$ has
+$
+  integral.surf vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  B_"in" (r) dot 2 pi r &= (mu_0 I r^2) / R^2 \
+  B_"in" (r) &= (mu_0 I r) / (2 pi R^2); \
+  B_"out" (r) &= (mu_0 I) / (2 pi r).
+$
+
+Thus, inside the loop, $B prop r$, outside the loop, $B prop 1 / r$.
+
+== Solenoid
+/ Solenoid: A sequence of circular loops, tilted together very tightly.
+
+Notably, there is no magnetic field by a solenoid outside the loops.
+This is because each group of three loops would have the middle one's field cancelling the other two's at right above the middle loop.
+
+Take a section with length $L$ and $n$ loops along the solenoid, apply Ampère's Law,
+$
+  integral.surf vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  B_"in" L &= mu_0 I n L \
+  B_"in" &= mu_0 I n.
+$
+
+However, solenoids are often not with infinite length, so we would have to integrate along it.
+//WTP
 
 #termlist
