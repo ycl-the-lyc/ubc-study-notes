@@ -1217,6 +1217,13 @@ $
 $
 $det(A - lambda I)$ must be $0$, else $vb(v)$ would be $vb(0)$, which is not an eigenvector.
 
+$ det(A - lambda I) = vb(0) $ is called the characteristic equation.
+
+/ Algebraic multiplicity (AM): The number of times the _same_ eigenvalue occurs as a root of the characteristic equation.
+/ Geometric multiplicity (GM): The number of LI eigenvectors corresponding to an _repeated_ eigenvalue.
+
+For an eigenvalue $lambda$, if $"AM"(lambda) = "GM"(lambda)$, then we found all its eigenvectors!
+
 === 2D Matrices
 $
   det(A - lambda I) &= vb(0) \
@@ -1241,7 +1248,7 @@ We take the simplest pair, which usually involves an 1.
 $
   det(A - lambda I) &= vb(0) \
   &= lambda^3 - Tr lambda^2 + c_2 lambda
-$ where $c_2$ is the product of any two of the diagonal entries.
+$ where $c_2 = a_11 a_22 + a_22 a_33 + a_33 a_11 - a_12 a_21 - a_13 a_31 - a_23 a_32$.
 
 == Complex-valued Eigen-pairs
 Eigenvalue or eigenvector can contain imaginary numbers.
