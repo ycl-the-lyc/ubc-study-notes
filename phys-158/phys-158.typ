@@ -1125,4 +1125,33 @@ $
 However, solenoids are often not with infinite length, so we would have to integrate along it.
 //WTP
 
+== Faraday's Law
+Recall Gauss's Law for magnetism states that
+$
+  Phi_B &= integral.surf vb(B) dot dd(vb(A)) \
+  dd(Phi_B) &= vb(B) dot dd(A) \
+  &= vb(B)_perp dd(A) \
+  &= B dd(A) cos(phi).
+$
+
+Faraday's law states that
+$
+  epsilon = - dv(Phi_B, t)
+$ where $epsilon$ is the induced EMF in a closed loop.
+
+#figure(
+  caption: [Curl right-hand rule for Faraday's law],
+  image("assets/faradays-law-right-hand.png", width: 85%)
+)
+
+=== Lenz's Law
+Faraday's hands are too confusing?
+Have this!
+
+The induced current should produce a magnetic field that _opposes_ the magnetic field changes.
+#figure(
+  caption: [Lenz's law by Farday's law],
+  image("assets/lenzs-law-right-hand.png")
+)
+
 #termlist
