@@ -1232,6 +1232,8 @@ $
   &= lambda^2 - Tr lambda + det(A)
 $ where $Tr = trace(A) = a_11 + a_22$.
 
+/ Trace: Only for $A_(n times n)$, the sum of all main diagonal entries.
+
 Solving this equation gives us $lambda$.
 
 Then, plug $lambda$ back in, $(A - lambda I) vb(v) = vb(0)$ to form a linear system,.
