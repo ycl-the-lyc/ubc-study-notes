@@ -688,7 +688,43 @@ $
 
 It is crucial to have consistent angle setup for the more and more complex problems we are to solve.
 
-// = Kinetics of a Particle: Work and Energy
+= Kinetics of a Particle: Work and Energy
+Work is, in a simple form, $W = F s$, where $s$ is the displacement along the direction of the force.
+
+== Work of Variable Force
+In this case, we would have to integrate along the path,
+$
+  U_(a-b) &= integral_a^b vb(F) dot dd(vb(r)) \
+  &= integral_a^b F cos(theta) dd(s).
+$
+
+== Work of a Constant Force
+On a straight line from $a$ to $b$,
+$
+  U_(a-b) &= F_c cos(theta) integral_a^b dd(s) \
+  &= F_c cos(theta) (b - a)
+$
+
+If not, we should only consider the displacement on the direction of the force.
+For example, work done by a force should only take displacement in the $z$-axis into account.
+
+== Work of a Spring Force
+A spring is elongated from $s_a$ to $s_b$,
+$
+  F_s &= k s \
+  U_(a-b) &= integral_a^b F_s dd(s) \
+  &= integral_a^b k s dd(s) \
+  &= 1/2 k s_b^2 - 1/2 k s_a^2
+$
+
+== Kinetic Energy
+$
+  T = 1/2 m v^2.
+$
+Kinetic energy is also a form of energy, like work.
+$
+  T_b = T_a + sum U_(a-b).
+$
 
 
 // = Kinetics of a Particle: Impulse and Momentum
