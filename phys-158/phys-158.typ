@@ -900,24 +900,37 @@ $
 
 == Electric Properties of Dielectrics and Polarization
 
-*_Rework pending!_*
-//TODO
-// rework this part
-
 When a dielectric material is in an electric field $vb(E)_0$, it is polarized and produces an induced electric field $vb(E)$.
 $
   vb(E) = vb(E)_0 / K
 $ where $K > 1$ is a constant dependant on the material, is the dielectric constant.
 
-Given a parallel plate capacitor with distance $z$ between the two plates,
-$
-  C(z) &= (A epsilon_0) / z \
-  &= A / (4 pi k z) \
-  U(z) &= Q^2 / (2C) = Q^2 / 2 (4 pi k z) / A \
-  &= (Q^2 z) / (2 A epsilon_0) \
-  abs(F_z) &= Q^2 / 2 (4 pi k) / A \
-  &= Q^2 / (2 A epsilon_0).
-$
+Given a parallel plate capacitor with distance $z$ between the two plates, a dielectric block is then inserted in between the plates.
+#grid(
+  columns: (1fr, 1fr),
+  inset: 0.65em,
+  [
+    If the plates _are connected_ to a battery, the voltage difference remains constant,
+    $
+      Delta V &= "const" \
+      E &= (Delta V) / d = "const" \
+      Q &= Q_0 K arrow.t \
+      C &= Q / (Delta V) = (Q_0 K) / (Delta V) = C_0 K arrow.t \
+      U &= (C Delta V^2) / 2 = (K C_0 Delta V^2) / 2 = U_0 K arrow.t.
+    $
+  ],
+  [
+    If the plates are _not_ connected to battery, the charge difference stays the same,
+    $
+      Q &= "const" \
+      E &= E_0 / K arrow.b \
+      Delta V &= E d = E_0 / K d = V_0 / K arrow.b \
+      C &= Q / (Delta V) = Q / (V_0 slash K) = C_0 K arrow.t \
+      U &= Q^2 / (2C) = Q^2 / (2 C_0 K) = U_0 / K arrow.b.
+    $
+  ],
+)
+
 
 = Magnetism
 
@@ -1082,7 +1095,7 @@ Just half of the infinite's.
 Consider a circular current-carrying line.
 #figure(
   caption: [Ampèrian loop],
-  image("assets/amperes-law-loop.png", width: 67%)
+  image("assets/amperes-law-loop.png", width: 67%),
 )
 
 Integrate the magnetic field along it:
@@ -1115,6 +1128,7 @@ Thus, inside the loop, $B prop r$, outside the loop, $B prop 1 / r$.
 Notably, there is no magnetic field by a solenoid outside the loops.
 This is because each group of three loops would have the middle one's field cancelling the other two's at right above the middle loop.
 
+=== Ideal Solenoid
 Take a section with length $L$ and $n$ loops along the solenoid, apply Ampère's Law,
 $
   integral.surf vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
@@ -1123,9 +1137,34 @@ $
 $
 
 However, solenoids are often not with infinite length, so we would have to integrate along it.
-//WTP
+
+=== Real Solenoid
+Given point $P$ on the center line of the solenoid,
+$
+  B_"real solenoid" (P) =mu_0 / 2 n I (cos(alpha_R) - cos(alpha_L))
+$ where $alpha_L$ and $alpha_R$ are angles from the positive $x$-axis to the line connecting $P$ and the left/right edge of the solenoid.
+
+If the solenoid goes back to infinitely long, $alpha_R = cos(0) = 1, alpha_L = cos(180 degree) = -1$, that gives us the ideal solenoid formula.
+
+== Toroid
+If we bend a solenoid into a circle and connect the ends, we get a doughnut-shaped _toroid_.
+
+Say, a toroid has inner radius $a$, outer radius $b$ and a radius of the circle $a <= r <= b$.
+$
+  integral.surf vb(B) dot dd(vb(l)) &= 2 pi r B_t \
+  &= mu_0 I_"enclosed" \
+  &= mu_0 I n
+$ where $B_t$ is the tangential component of magnetic field produced and $n$ is the number of loops.
+$
+  B_t = (mu_0 I n) / (2 pi r).
+$
+
+For other places, specifically $r < a$ or $r > b$, $B tilde.equiv 0$.
 
 == Faraday's Law
+We know that current comes with magnetic field.
+O does magnetic field want a come back.
+
 Recall Gauss's Law for magnetism states that
 $
   Phi_B &= integral.surf vb(B) dot dd(vb(A)) \
@@ -1139,9 +1178,11 @@ $
   epsilon = - dv(Phi_B, t)
 $ where $epsilon$ is the induced EMF in a closed loop.
 
+If we have a closed loop circuit experiencing changing magnetic field, $abs(epsilon)$ is the magnitude of the induced EMF, and the sign denotes direction, with positive being counterclockwise.
+
 #figure(
   caption: [Curl right-hand rule for Faraday's law],
-  image("assets/faradays-law-right-hand.png", width: 85%)
+  image("assets/faradays-law-right-hand.png", width: 67%),
 )
 
 === Lenz's Law
@@ -1151,7 +1192,7 @@ Have this!
 The induced current should produce a magnetic field that _opposes_ the magnetic field changes.
 #figure(
   caption: [Lenz's law by Farday's law],
-  image("assets/lenzs-law-right-hand.png")
+  image("assets/lenzs-law-right-hand.png"),
 )
 
 #termlist
