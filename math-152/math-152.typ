@@ -1267,7 +1267,7 @@ $
 
 Thus, we have
 $
-cases(
+  cases(
   lambda_+ = 2 + i,
   lambda_- = 2 - i
 )
@@ -1333,7 +1333,7 @@ $
 $
 
 == Special Eigen Cases
-If the $j$th column of $A$ is $a vb(e)_j$, then ${a, vb(e)_j}$ is an eigen-pair. 
+If the $j$th column of $A$ is $a vb(e)_j$, then ${a, vb(e)_j}$ is an eigen-pair.
 
 Let $x$ be arbitrary values.
 For
@@ -1352,5 +1352,60 @@ $
 $ only ${b, vb(e)_2}$ is an eigen-pair.
 
 For upper/lower triangular matrices, the head/tail of each row are eigenvalues, and the column of $a vb(e)_n$ makes ${a, vb(e)_n}$ an eigen-pair.
+
+== Application: Probability
+Using probability matrix to evaluate the probabilities after a few iteration, we would have to compute
+$
+  A^k vb(v)
+$ where $A$ is the probability matrix.
+
+If ${lambda, vb(v)}$ is an eigen-pair of $A$, then
+$
+  A^k vb(v) = lambda^k vb(v).
+$
+But this is kind of useless, as the coincidence can hardly happen.
+
+Remember that, any $n$-length vector can be expressed as a linear combination of $n$ other vectors with the same length (refer to LI and LD).
+Oh, if an $n times n$ matrix has $n$ eigenvectors...
+
+If two eigenvalues are different, their eigenvectors are linearly independent, which means they can be used to construct any vector in the same space.
+
+For example, $A in RR^2, vb(a) = vec(a_1, a_2), lambda_1 eq.not lambda_2$,
+$
+  vb(a) &= alpha vb(v)_1 + beta vb(v)_2 \
+  A^k vb(a) &= A^k (alpha vb(v)_1 + beta vb(v)_2) \
+  &= alpha A^k vb(v)_1 + beta A^k vb(v)_2 \
+  &= alpha lambda_1^k vb(v)_1 + beta lambda_2^k vb(v)_2.
+$
+
+== Application: Differential Equation
+For instance, $m dv(vb(x), t, 2)(t) + c dv(vb(x), t)(t) + k vb(x)(t) = 0$ where $vb(x)(t) = vec(x_1(t), x_2(t))$ is position, and the equation describes a motion.
+
+It can be written as two 1st-degree differentials:
+$
+  cases(
+    x'(t) = v(t),
+    v'(t) = -k / m x(t) - c / m v(t)
+  ).
+$
+
+Let $vb(x) = vec(x(t), v(t))$,
+$
+  vb(x)' &= vec(x'_1, x'_2) \
+  x'_1(t) &= c_11 x_1(t) + c_12 x_2(t) \
+  x'_2(t) &= c_21 x_1(t) + c_22 x_2(t) \
+  vec(x'_1, x'_2) &= mat(a_11, a_12; a_21, a_22) vec(x_1(t), x_2(t)).
+$
+Let $A$ be the matrix of $a$'s.
+If $A$ has eigen pairs ${lambda_1, vb(v)_1}, {lambda_2, vb(v)_2}$ and $lambda_1 eq.not lambda_2$ or $(lambda_1 = lambda_2 = lambda) and ("AM"(lambda) = "GM"(lambda))$, there exists a general solution to the differential equations
+$
+  cases(
+    vb(x)_1 = e^(lambda_1 t) vb(v)_1,
+    vb(x)_2 = e^(lambda_2 t) vb(v)_2
+  ) \
+  vb(x)(t) = c_1 e^(lambda_1 t) vb(v)_1 + c_2 e^(lambda_2 t) vb(v)_2
+$ where $c_1, c_2$ are arbitrary constants.
+
+Given initial value $vb(x)(0)$, the constants can be solved.
 
 #termlist
