@@ -527,4 +527,54 @@ Use them on $1 / n$ and $1 / n^2$ from $1$ to see for yourself!
 Well, $N + 1$ or $N$, when $N -> oo$ they are all infinity.
 Hence, if $integral_(N_0)^oo f(x) dd(x)$ diverges/converges, $sum {f(x) | x in ZZ and x >= N_0}$ also diverges/converges.
 
+== Geometric Series
+TODO
+
+== Ratio Test
+To test if a series eventually looks geometric, we use the ratio test.
+
+Given $sum_(n = c)^oo a_n$,
+$
+  r = lim_(n -> oo) abs((a_n + 1) / a_n).
+$
+If $r < 0$, the series converges.
+If $r > 0$ or $r = +oo$, the series diverges.
+If $r = 1$ or $r$ DNE, this test is useless.
+
+The ratio test is useful when terms in the series involves $n$ as an exponent, and/or factorials, like
+$
+  sum_(n = 1)^oo e^n / n!,
+$
+and is useless when
+$
+  sum_(n = 1)^oo P(n) / Q(n)
+$ where $P(n)$ and $Q(n)$ are polynomials, as $r = 1$.
+
+== Power Series
+The power series is like a geometric series, with varying bases.
+$
+  f(x) = sum_(n = 1)^oo (x - c)^n
+$
+There exists a number $R$, where if $abs(x - c) < R$, the power series converges.
+We call it the radius of convergence.
+
+The ratio test is still the most promising test for power series.
+
+Like the ratio test, we do not know what happens when $abs(x - c) = R$.
+But within the radius of convergence, we rock.
+
+=== Differentiation and Integration
+Given $S(x) = sum_(n = 1)^oo A_n (x - c)^n$, for $x$ such that $abs(x - c) < R$,
+$
+  S'(x) &= sum_(n = 1) n A_n (x - c)^(n - 1) \
+  integral S(x) dd(x) &= sum_(n = 0)^oo A_n (x - c)^(n + 1) / (n + 1) + C.
+$
+Note that the differentiation index starts at $1$, since $(A_0)' = 0$.
+
+=== Other Operations
+Additionally, we can
+- add series to each other,
+- multiply a series by a constant,
+- multiply a series by a power of $x$.
+
 #termlist
