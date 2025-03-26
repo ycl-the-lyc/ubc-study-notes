@@ -1159,7 +1159,7 @@ $
   B_t = (mu_0 I n) / (2 pi r).
 $
 
-For other places, specifically $r < a$ or $r > b$, $B tilde.equiv 0$.
+For other places, specifically $r < a$ or $r > b$, $B approx 0$.
 
 == Faraday's Law
 We know that current comes with magnetic field.
@@ -1178,12 +1178,21 @@ $
   epsilon = - dv(Phi_B, t)
 $ where $epsilon$ is the induced EMF in a closed loop.
 
-If we have a closed loop circuit experiencing changing magnetic field, $abs(epsilon)$ is the magnitude of the induced EMF, and the sign denotes direction, with positive being counterclockwise.
+Well it actually says
+$
+  abs(epsilon) &= abs(dv(Phi_B, t)) \
+  &= abs(dv(, t) B A cos(theta)) \
+  &= abs("TODO") //TODO
+$
+
+If we have a closed loop circuit experiencing changing magnetic flux, $abs(epsilon)$ is the magnitude of the induced EMF, and the sign denotes direction, with positive being counterclockwise.
 
 #figure(
   caption: [Curl right-hand rule for Faraday's law],
   image("assets/faradays-law-right-hand.png", width: 67%),
 )
+
+Note that if a loop is simply moving in a magnetic field, it may not experience changing magnetic flux!
 
 === Lenz's Law
 Faraday's hands are too confusing?
@@ -1194,5 +1203,7 @@ The induced current should produce a magnetic field that _opposes_ the magnetic 
   caption: [Lenz's law by Farday's law],
   image("assets/lenzs-law-right-hand.png"),
 )
+
+This is how inductors work.
 
 #termlist
