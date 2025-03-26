@@ -718,12 +718,28 @@ $
 $
 
 == Kinetic Energy
+An energy associated with motion.
 $
   T = 1/2 m v^2.
 $
 Kinetic energy is also a form of energy, like work.
 $
   T_b = T_a + sum U_(a-b).
+$
+
+== Potential Energy
+An energy associated with position.
+An objects' capability to move to an datum.
+
+Particularly, there are gravitational potential energy and elastic potential energy.
+$
+  V_g &= W h = m g h \
+  V_s &= + 1 / 2 k s^2
+$ with $V_s$ always being positive.
+
+In relation to work, the work done moving an object from $a$ to $b$ is
+$
+  U_(a-b) = V_a - V_b.
 $
 
 
