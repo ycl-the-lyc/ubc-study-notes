@@ -1379,7 +1379,7 @@ $
 $
 
 == Application: Differential Equation
-For instance, $m dv(vb(x), t, 2)(t) + c dv(vb(x), t)(t) + k vb(x)(t) = 0$ where $vb(x)(t) = vec(x_1(t), x_2(t))$ is position, and the equation describes a motion.
+For instance, $m dv(vb(x), t, 2)(t) + c dv(vb(x), t)(t) + k vb(x)(t) = 0$ describes a motion.
 
 It can be written as two 1st-degree differentials:
 $
@@ -1407,5 +1407,18 @@ $
 $ where $c_1, c_2$ are arbitrary constants.
 
 Given initial value $vb(x)(0)$, the constants can be solved.
+
+If the $lambda$'s found are conjugates, then the solutions are real:
+$
+  vb(x)_1 &= Re{vb(z)_1 (t)} = (vb(z)_1 + vb(z)_2) / 2 \
+  vb(x)_2 &= Im{vb(z)_1 (t)} = (vb(z)_1 - vb(z)_2) / (2i)
+$ where $z$ are the imaginary numbers formed by $e^(lambda t) vb(v)$.
+Note that the "imaginary" solution is _real_, no $i$!
+
+In short, if $vb(x)' = A vb(x), lambda_(1, 2) = alpha plus.minus beta i, (alpha, beta in RR)$,
+$
+  vb(x)(t) &= c_1 e^(lambda_1 t) vb(v)_1 + c_2 conj(e^(lambda_2 t) vb(v)_2) \
+  &= c_1 Re{e^(lambda_1 t) vb(v)_1} + c_2 Im{e^(lambda_1 t) vb(v)_1}
+$
 
 #termlist
