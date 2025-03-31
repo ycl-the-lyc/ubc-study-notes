@@ -742,9 +742,51 @@ $
   U_(a-b) = V_a - V_b.
 $
 
+= Kinetics of a Particle: Impulse and Momentum
+Recall that
+$
+    sum vb(F) = m vb(a) = m dv(vb(v), t).
+$
+Rearrange it as
+$
+  sum vb(F) dd(t) = m d vb(v)
+$ and give some time interval $(t_1, t_2)$.
+Thus,
+$
+  sum integral_(t_1)^(t_2) vb(F) dd(t) = m integral_(vb(v)_1)^(vb(v)_2) dd(vb(v)) = m vb(v)_2 - m vb(v)_1.
+$
+This is the principle of impulse momentum.
 
-// = Kinetics of a Particle: Impulse and Momentum
+/ Linear momentum: A vector $vb(L)$ that $ vb(L) = m vb(v). $
+/ Linear impulse: Given a time-dependent force and a time interval, impulse is a vector $vb(I)$ representing change in momentum that $ vb(I) = integral_(t_1)^(t_2) vb(F))(t) dd(t). $
+  Or, for a constant force, $ vb(I) = vb(F)_c (t_2 - t_1). $
 
+From the definition,
+$
+  m vb(v)_1 + sum integral_(t_1)^(t_2) vb(F) dd(t) = m vb(v)_2.
+$
 
+/ Center of mass: Consider a system of particles with individual position vector $vb(r)_i$ and mass $m_i$.
+  The center of mass is given by $ vb(r)_G = (sum m_i vb(r)_i) / (sum m_i). $
+
+Then, movement of the system can be seen as
+$
+  vb(v)_G =& dv(vb(r)_G, t) \
+  =& (sum m_i dv(vb(r)_i, t)) / (sum m_i) \
+  =& (sum m_i vb(v)_i) / (sum m_i).
+$
+
+Apply center of mass to the momentum equation, the momentum after a time interval can be obtained by
+$
+  m (vb(v)_G)_2 = m (vb(v)_G)_1 + sum integral_(t_1)^(t_2) vb(F)_i dd(t).
+$
+
+== Conservation of Linear Momentum
+If there is no external impulse, linear momentum of a system is conserved.
+$
+  sum m_i (vb(v)_i)_1 = sum m_i (vb(v)_i)_2 \
+  m (vb(v)_G)_1 = m (vb(v)_G)_2 \
+  (vb(v)_G)_1 = (vb(v)_G)_2.
+$
 
 #termlist
