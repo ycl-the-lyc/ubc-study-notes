@@ -773,7 +773,7 @@ One numb enough to calculate $M^999$ by $M times M times ...$ would be dumb, we 
 We just learned that diagonal matrices behave like scalars in multiplication.
 So, if we can make $M$ a diagonal matrix, then we can easily calculate $M^n$, even when $n$ is very large.
 
-//TODO
+How? See @sc:mat-similarity.
 
 == Linear Transformation
 / Linear transformation / map / function: a rule that assigns one output to each input.
@@ -1232,7 +1232,9 @@ $
   &= lambda^2 - Tr lambda + det(A)
 $ where $Tr = trace(A) = a_11 + a_22$.
 
-/ Trace: Only for $A_(n times n)$, the sum of all main diagonal entries.
+/ Trace: Only for $A_(n times n)$, the sum of all main diagonal entries, also the sum of all eigenvalues.
+
+Also, determinant is the product of all eigenvalues.
 
 Solving this equation gives us $lambda$.
 
@@ -1420,5 +1422,48 @@ $
   vb(x)(t) &= c_1 e^(lambda_1 t) vb(v)_1 + c_2 conj(e^(lambda_2 t) vb(v)_2) \
   &= c_1 Re{e^(lambda_1 t) vb(v)_1} + c_2 Im{e^(lambda_1 t) vb(v)_1}
 $
+
+== Application: Vector Transformation
+Let $A$ be a matrix that reflects vectors in $RR^2$ in the line at angle $pi / 3$.
+This is not the easiest, but learn.
+$
+  phi =& pi / 3 \
+  vb(u) =& vec(1, sqrt(3)) \
+  vb(u)_perp =& vec(sqrt(3), -1).
+$
+Let $vb(v)_1 = vb(u), vb(v)_2 = vb(u)_perp$, notice that
+$
+  vb(e)_1 =& vec(1, 0) = 1 / 4 vec(1, sqrt(3)) + sqrt(3) / 4 vec(sqrt(3), -1) = 1 / 4 vb(v)_1 + sqrt(3) / 4 vb(v)_2
+$
+Notice the same for $vb(e)_2$.
+Then compute $A vb(e)$:
+$
+  A vb(e)_1 =& A (1 / 4 vb(v)_1 + sqrt(3) / 4 vb(v)_2) \
+  =& 1 / 4 lambda_1 vb(v)_1 + sqrt(3) / 4 lambda_2 vb(v)_2.
+$
+Same for $A vb(e)_2$.
+
+== Application: Probability
+For every probability matrix, it always has an eigenvalue $lambda = 1$.
+Skimmed for some reason.
+
+== Matrix Similarity and Diagonalization <sc:mat-similarity>
+/ Similar matrices: Matrices $A, B$ are similar if there exists an invertible matrix $T$ that
+  $ B = T A T^(-1). $
+  Similar matrices have
+  - $rank(A) = rank(B)$
+  - $det(A) = det(B)$
+  - $trace(A) = trace(B)$
+  - Identical eigenvalues, but _not necessarily_ eigenvectors.
+
+Using similarity, we can finally rewrite matrix powers as
+$
+  A^k =& (T D T^(-1))^k \
+  =& T D T^(-1) \
+  =& T mat(lambda_1^k, 0, dots.c, 0; 0, lambda_2^k, dots.c, 0; dots.v, dots.v, dots.down, dots.v; 0, 0, dots.c, lambda_n^k) T^(-1)
+$ where $D$ is the diagonal matrix made of $A$'s eigenvalues, and $T$ is the matrix made of eigenvector columns, _in order_ of the eigenvalues in $D$.
+
+/ Diagonalizable matrix: For an $n times n$ matrix, if there exist $n$ LI eigenvectors, i.e. when all eigenvalues ate unique or each repeated eigenvalue has $"AM"(lambda) = "GM"(lambda)$, then the matrix is diagonalizable.
+
 
 #termlist
