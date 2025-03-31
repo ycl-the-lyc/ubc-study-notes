@@ -1264,8 +1264,19 @@ $
 $
   epsilon = integral.surf vb(E) dot dd(vb(l)) = -dv(Phi_B, t).
 $
-This says that _changing magnetic field_ is a source of electric field.
-#text(gray)[Trivia: this is the first time electric field and magnetic field appear in the same equation.]
+This integral form says that _changing magnetic field_ is a source of electric field.
+#text(gray)[This is the first time electric field and magnetic field appear in the same equation.]
+
+== Re: Ampère's Law
+Previously, the law says that
+$
+  integral.surf vb(B) dot dd(vb(l)) = mu_0 I_"net".
+$
+This means, if two surfaces are bound by the same closed curve, the current through them must be the same.
+
+However, there is a problem.
+
+Consider a charging capacitor, if we enclose one of the plate by a flat surface before the plate, and a bulging surface between the plates, the current through the flat one is not 0, but the current through the bulging one is 0.
 
 //TODO
 // Further Ampere's
