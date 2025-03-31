@@ -1182,7 +1182,7 @@ Well it actually says
 $
   abs(epsilon) &= abs(dv(Phi_B, t)) \
   &= abs(dv(, t) B A cos(theta)) \
-  &= abs("TODO") //TODO
+  &= abs(dv(B, t) A cos(theta) + B dv(A, t) cos(theta) + B A dv(cos(theta), t))
 $
 
 If we have a closed loop circuit experiencing changing magnetic flux, $abs(epsilon)$ is the magnitude of the induced EMF, and the sign denotes direction, with positive being counterclockwise.
@@ -1193,6 +1193,20 @@ If we have a closed loop circuit experiencing changing magnetic flux, $abs(epsil
 )
 
 Note that if a loop is simply moving in a magnetic field, it may not experience changing magnetic flux!
+
+=== Application: Faraday Dick Dynamo
+Recall that magnetic force $vb(F)_B = plus.minus q vb(v) times vb(B)$.
+
+Imagine a rotating disk with radius $R$ at angular velocity $omega$, with uniform magnetic field perpendicular passing through it.
+The rotation moves the electrons on radius $r$ in the disk by velocity $vb(v)$
+$
+  dd(epsilon) &= vb(E) dot dd(vb(r)) = (vb(v) times vb(B)) dot dd(vb(r)) = v B dd(r) \
+  epsilon &= integral_0^R dd(epsilon) = integral_0^R v B dd(r) \
+  v &= omega r \
+  epsilon &= B integral_0^R (omega r) dd(r) = (omega B R^2) / 2
+$ which is called the motional EMF.
+
+This can generate DC power with a brush on the edge of the disk, and the other connected to the center of the disk.
 
 === Lenz's Law
 Faraday's hands are too confusing?
@@ -1205,5 +1219,56 @@ The induced current should produce a magnetic field that _opposes_ the magnetic 
 )
 
 This is how inductors work.
+
+== Mutual Inductance
+Given two coils 1 and 2,
+$
+  i_1 ==> B_(1-2) ==> Phi_2 ==> epsilon_2 ==> -dv(Phi_2, t) \
+  i_2 ==> B_(2-1) ==> Phi_1 ==> epsilon_1 ==> -dv(Phi_1, t).
+$
+
+It is easy to see that the magnetic flux in one coil is proportional to the current in the other coil.
+Hence, their induced EMF would be a ratio to the changes in current of each other.
+$
+  epsilon &= -dv(Phi_B, t), \
+  Phi_1 &= M_(2-1) i_2(t) \
+  epsilon_1 &= -M_(2-1) dv(i_2, t) \
+  Phi_2 &= M_(1-2) i_1(t) \
+  epsilon_2 &= -M_(1-2) dv(i_2, t)
+$ where $M$'s are some constants.
+Turns out, $M_(1-2) = M_(2-1)$, is the mutual induction coefficient.
+
+=== Application: Transformer
+There is a iron core, a cube with a cubical hole through.
+Two sets of coils wind around opposite sides.
+One with AC power, the "primary winding", the other do not, the "secondary winding", called the "load".
+
+Let $Phi_B$ be the magnetic flux through each turn of a coil.
+$
+  epsilon_1 &= -dv(Phi_(B 1), t) = -N_1 dv(Phi_B, t) \
+  epsilon_2 &= -dv(Phi_(B 2), t) = -N_2 dv(Phi_B, t) \
+  epsilon_1 / epsilon_2 &= N_1 / N_2
+$ where $N$'s are the number of rounds of coils on each side.
+
+== Self-inductance
+For similar reasons, when current in a solenoid changes, $Phi_B$ changes, and $epsilon$ is induced.
+$
+  epsilon &= -dv(Phi_B, t) \
+  Phi_B &= N dot B(t) A \
+  B(t) &= mu_0 N / L I(t) \
+  epsilon &= - (mu_0 A N^2) / L_s dv(i, t) \
+  &= -L dv(i, t).
+$
+
+== Re: Faraday's Law
+$
+  epsilon = integral.surf vb(E) dot dd(vb(l)) = -dv(Phi_B, t).
+$
+This says that _changing magnetic field_ is a source of electric field.
+#text(gray)[Trivia: this is the first time electric field and magnetic field appear in the same equation.]
+
+//TODO
+// Further Ampere's
+// Match-up
 
 #termlist
