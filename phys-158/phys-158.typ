@@ -1021,7 +1021,7 @@ A reminder again that magnetic fields are loops, they _do not stop_ at the poles
 
 == Gauss's Law for Magnetism
 $
-  Phi_B = integral.surf vb(B) dot dd(vb(A)) = 0.
+  Phi_B = integral.cont vb(B) dot dd(vb(A)) = 0.
 $
 The magnetic flux of any closed surface is 0, as there is no single magnetic pole.
 
@@ -1100,8 +1100,8 @@ Consider a circular current-carrying line.
 
 Integrate the magnetic field along it:
 $
-  integral.surf vb(B) dot dd(vb(l)) &= integral.surf B dd(l) \
-  &= B integral.surf dd(l) \
+  integral.cont vb(B) dot dd(vb(l)) &= integral.cont B dd(l) \
+  &= B integral.cont dd(l) \
   &= B dot 2 pi r \
   &= (mu_0 I) / (2 pi r) 2 pi r \
   &= mu_0 I_"enclosed".
@@ -1114,7 +1114,7 @@ $
 
 Hence, knowing the original loop current $I$, the other loop with a different $r$ has
 $
-  integral.surf vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  integral.cont vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
   B_"in" (r) dot 2 pi r &= (mu_0 I r^2) / R^2 \
   B_"in" (r) &= (mu_0 I r) / (2 pi R^2); \
   B_"out" (r) &= (mu_0 I) / (2 pi r).
@@ -1131,7 +1131,7 @@ This is because each group of three loops would have the middle one's field canc
 === Ideal Solenoid
 Take a section with length $L$ and $n$ loops along the solenoid, apply Ampère's Law,
 $
-  integral.surf vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  integral.cont vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
   B_"in" L &= mu_0 I n L \
   B_"in" &= mu_0 I n.
 $
@@ -1151,7 +1151,7 @@ If we bend a solenoid into a circle and connect the ends, we get a doughnut-shap
 
 Say, a toroid has inner radius $a$, outer radius $b$ and a radius of the circle $a <= r <= b$.
 $
-  integral.surf vb(B) dot dd(vb(l)) &= 2 pi r B_t \
+  integral.cont vb(B) dot dd(vb(l)) &= 2 pi r B_t \
   &= mu_0 I_"enclosed" \
   &= mu_0 I n
 $ where $B_t$ is the tangential component of magnetic field produced and $n$ is the number of loops.
@@ -1167,7 +1167,7 @@ O does magnetic field want a come back.
 
 Recall Gauss's Law for magnetism states that
 $
-  Phi_B &= integral.surf vb(B) dot dd(vb(A)) \
+  Phi_B &= integral.cont vb(B) dot dd(vb(A)) \
   dd(Phi_B) &= vb(B) dot dd(A) \
   &= vb(B)_perp dd(A) \
   &= B dd(A) cos(phi).
@@ -1268,7 +1268,7 @@ This integral form says that _changing magnetic field_ is a source of electric f
 #text(gray)[This is the first time electric field and magnetic field appear in the same equation.]
 
 == Re: Ampère's Law
-Previously, the law says that $integral.surf vb(B) dot dd(vb(l)) = mu_0 I_"net"$.
+Previously, the law says that $integral.cont vb(B) dot dd(vb(l)) = mu_0 I_"net"$.
 This means, if two surfaces are bound by the same closed curve, the current through them must be the same.
 However, there is a problem.
 
@@ -1291,7 +1291,7 @@ We define a "displacement current" which is not a current nor a displacement...
 
 Now, the Ampère's Law is complete:
 $
-  integral.surf vb(B) dot dd(vb(l)) =& mu_0 (I + I_D).
+  integral.cont vb(B) dot dd(vb(l)) =& mu_0 (I + I_D).
 $
 With this definition, even if there is no current, an increasing electric field still denotes an increasing magnetic field.
 
