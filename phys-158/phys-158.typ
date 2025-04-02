@@ -935,7 +935,7 @@ Given a parallel plate capacitor with distance $z$ between the two plates, a die
 = Magnetism
 
 == Magnetic Field and Magnetic Force
-Charges create electric fields, _moving_ charges create magnetic fields.
+Charges create electric fields, _moving_ charges create magnetic fields, yes, including magnets.
 
 / Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit("T")$.
   $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
@@ -1268,18 +1268,51 @@ This integral form says that _changing magnetic field_ is a source of electric f
 #text(gray)[This is the first time electric field and magnetic field appear in the same equation.]
 
 == Re: Ampère's Law
-Previously, the law says that
-$
-  integral.surf vb(B) dot dd(vb(l)) = mu_0 I_"net".
-$
+Previously, the law says that $integral.surf vb(B) dot dd(vb(l)) = mu_0 I_"net"$.
 This means, if two surfaces are bound by the same closed curve, the current through them must be the same.
-
 However, there is a problem.
 
-Consider a charging capacitor, if we enclose one of the plate by a flat surface before the plate, and a bulging surface between the plates, the current through the flat one is not 0, but the current through the bulging one is 0.
+#grid(
+  columns: 2,
+  [
+    Consider a charging capacitor, if we enclose one of the plate by a flat surface before the plate, and a bulging surface between the plates based on the same path (like a half-ball), the current through the flat one is not 0, but the current through the bulging one is 0.
+    Our current Ampère's Law is incomplete.
+  ],
+  figure(
+    caption: [A paradoxical situation],
+    image("assets/ampere-buldge-surface-paradox.png", width: 67%),
+  ),
+)
 
-//TODO
-// Further Ampere's
-// Match-up
+So there must be something through the bulging surface.
+We define a "displacement current" which is not a current nor a displacement...
+/ Displacement current: An imaginary current to cover increasing potential difference but no current cases for Ampère's Law.
+  $ I_D =& epsilon_0 dv(Phi_E, t) = epsilon_0 A dv(E, t) $ with the direction being the sign product of the direction of the $vb(E)$ and its value.
+
+Now, the Ampère's Law is complete:
+$
+  integral.surf vb(B) dot dd(vb(l)) =& mu_0 (I + I_D).
+$
+With this definition, even if there is no current, an increasing electric field still denotes an increasing magnetic field.
+
+== Magnetic Materials
+
+=== Diamagnetism
+Diamagnetism appears in all materials and is the tendency of a material to oppose an applied magnetic field, and therefore, to be repelled by a magnetic field.
+
+=== Paramagnetism
+In a paramagnetic material there are unpaired electrons; i.e., atomic or molecular orbitals with exactly one electron in them. While paired electrons are required by the Pauli exclusion principle to have their intrinsic ('spin') magnetic moments pointing in opposite directions, causing their magnetic fields to cancel out, an unpaired electron is free to align its magnetic moment in any direction. When an external magnetic field is applied, these magnetic moments will tend to align themselves in the same direction as the applied field, thus reinforcing it.
+
+#text(gray)[Yes, Wikipedia.]
+
+== Superconductivity
+From experience, we know that as electrical appliances get hotter, their performance drops.
+
+A normal conductor's resistance increases with temperature rise, and decreases with temperature drop, but it does not drop to zero.
+
+For a superconducting material, its resistance do drops to (near) zero at a certain temperature.
+At that point, the current inside is so pure that it rejects all magnetic fields.
+If there is impurity inside the superconductor, some magnetic fields would penetrate it.
+
 
 #termlist
