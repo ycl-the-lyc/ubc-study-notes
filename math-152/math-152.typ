@@ -824,6 +824,9 @@ Write $vb(a)$ as a transformation, $T(e)$, each column of the result becomes an 
 
 #block(inset: 0.65em, stroke: red)[
   *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
+
+  Inverse of a reflection matrix is itself.
+  $ A A = A A^(-1) = I. $
 ]
 
 === Finding Transformations in 2D Space
@@ -1223,6 +1226,7 @@ $ det(A - lambda I) = vb(0) $ is called the characteristic equation.
 / Geometric multiplicity (GM): The number of LI eigenvectors corresponding to an _repeated_ eigenvalue.
 
 For an eigenvalue $lambda$, if $"AM"(lambda) = "GM"(lambda)$, then we found all its eigenvectors!
+This also implies that the eigenvectors are LI, hence the basis of all possible eigenvectors.
 
 === 2D Matrices
 $
@@ -1445,7 +1449,7 @@ Same for $A vb(e)_2$.
 
 == Application: Probability
 For every probability matrix, it always has an eigenvalue $lambda = 1$.
-Skimmed for some reason.
+The equilibrium is the eigenvector to the eigenvalue that is 1.
 
 == Matrix Similarity and Diagonalization <sc:mat-similarity>
 / Similar matrices: Matrices $A, B$ are similar if there exists an invertible matrix $T$ that
@@ -1465,5 +1469,39 @@ $ where $D$ is the diagonal matrix made of $A$'s eigenvalues, and $T$ is the mat
 
 / Diagonalizable matrix: For an $n times n$ matrix, if there exist $n$ LI eigenvectors, i.e. when all eigenvalues ate unique or each repeated eigenvalue has $"AM"(lambda) = "GM"(lambda)$, then the matrix is diagonalizable.
 
+== Matrix Exponential
+So... what the heck is that?
+$
+  e^A
+$
+
+Recall our previous differential euqation:
+$
+  cases(
+    x'(t) = a x(t),
+    x(0) = x_0
+  ) \
+  x(t) = e^(a t) x_0
+$
+Instead of scalar $a$, we now give it a matrix "coefficient":
+$
+  cases(
+    vb(x)'(t) = A vb(x)(t),
+    vb(x)(0) = vb(x)_0
+  ) \
+  vb(x)(t) = ?
+$
+
+/ Matrix exponential ($e^A$): For an $n times n$ matrix $A$,
+  $
+    e^(A t) =& sum_(k = 0)^oo )(A t)^k / k! \
+    =& I + A t + 1 / 2! A^2t^2 + 1 / 3! A^3 t^3 ...
+  $
+
+There are two cases:
+- $A$ is diagonalizable,
+- $A$ is not diagonalizable.
+Regardless, we can get the exponential, but the approaches vary.
+//WIP
 
 #termlist
