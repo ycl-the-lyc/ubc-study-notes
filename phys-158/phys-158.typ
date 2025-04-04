@@ -1351,6 +1351,13 @@ With this definition, even if there is no current, an increasing electric field 
 
 //TODO
 // elec-mag wave form
+Using the Maxwell's equations, we are able to deduce the generic wave equation with the direction of propagation, $x$, direction of $vb(E)$, $y$, and direction of $vb(B)$, $z$.
+$
+  pdv(u(x, t), t, 2) =& v^2 pdv(u(x, t), x, 2) \
+  pdv(E_y (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(E_y, x, 2) \
+  pdv(B_z (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(B_z, x, 2)
+$ where the $u$'s are scalar function describing the magnitude of the wave in certain directions and $v$ is the wave velocity.
+The $1 / (epsilon_0 mu_0)$ is the velocity of electromagnetic waves in vacuum!
 
 == Magnetic Materials
 
