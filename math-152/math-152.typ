@@ -1406,8 +1406,8 @@ Let $A$ be the matrix of $a$'s.
 If $A$ has eigen pairs ${lambda_1, vb(v)_1}, {lambda_2, vb(v)_2}$ and $lambda_1 eq.not lambda_2$ or $(lambda_1 = lambda_2 = lambda) and ("AM"(lambda) = "GM"(lambda))$, there exists a general solution to the differential equations
 $
   cases(
-    vb(x)_1 = e^(lambda_1 t) vb(v)_1,
-    vb(x)_2 = e^(lambda_2 t) vb(v)_2
+    x_1 = e^(lambda_1 t) vb(v)_1,
+    x_2 = e^(lambda_2 t) vb(v)_2
   ) \
   vb(x)(t) = c_1 e^(lambda_1 t) vb(v)_1 + c_2 e^(lambda_2 t) vb(v)_2
 $ where $c_1, c_2$ are arbitrary constants.
@@ -1489,19 +1489,62 @@ $
     vb(x)'(t) = A vb(x)(t),
     vb(x)(0) = vb(x)_0
   ) \
-  vb(x)(t) = ?
+  vb(x)(t) = e^(A t) vb(x)_0 = ?
 $
 
 / Matrix exponential ($e^A$): For an $n times n$ matrix $A$,
   $
-    e^(A t) =& sum_(k = 0)^oo )(A t)^k / k! \
-    =& I + A t + 1 / 2! A^2t^2 + 1 / 3! A^3 t^3 ...
+    e^(A t) =& sum_(k = 0)^oo (A t)^k / k! \
+    =& I + A t + 1 / 2! A^2 t^2 + 1 / 3! A^3 t^3 + ...
   $
+  The result is a matrix of the same size as $A$.
+  Note that the same applies to $A$ replaced with a scalar $a$.
 
 There are two cases:
 - $A$ is diagonalizable,
 - $A$ is not diagonalizable.
 Regardless, we can get the exponential, but the approaches vary.
-//WIP
+
+=== Diagonalizable Matrix as Power
+Let $A$ be a diagonalizable $3 times 3$ matrix.
+$
+  A =& T D T^(-1) \
+  T =& mat(vb(v)_1, vb(v)_2, vb(v)_3) \
+  D =& mat(lambda_1, 0, 0; 0, lambda_2, 0; 0, 0, lambda_3) \
+  e^(A t) =& sum_(k = 0)^oo ((T D T^(-1))^k t^k) / k! \
+  =& I + (T D T^(-1)) t + 1 / 2! (T D T^(-1))^2 t^2 + 1 / 3! (T D T^(-1))^3 t^3 + ...
+$
+
+Notice that
+$
+  sum_(k = 0)^oo (D^k t^k) / k! =& sum_(k = 0)^oo mat((lambda_1 t)^k / k!, 0, 0; 0, (lambda_2 t)^k / k!, 0; 0, 0, (lambda_3 t)^k / k! ) \
+  =& mat(sum_(k = 0)^oo (lambda_1 t)^k / k!, 0, 0; 0, sum_(k = 0)^oo (lambda_2 t)^k / k!, 0; 0, 0, sum_(k = 0)^oo (lambda_3 t)^k / k! ) \
+  =& mat(e^(lambda_1 t), 0, 0; 0, e^(lambda_2 t), 0; 0, 0, e^(lambda_3 t)).
+$
+
+By the same token we used in prior power of matrices, all the in-between $T^(-1) T$ cancel out,
+$
+  e^(A t) =& T mat(e^(lambda_1 t), 0, 0; 0, e^(lambda_2 t), 0; 0, 0, e^(lambda_3 t)) T^(-1) \
+  =& T e^(D t) T^(-1).
+$
+
+Now, given a linear system,
+$
+  cases(
+    x'_1(x) = a_11 x_1(t) + a_12 x_2(t),
+    x'_2(x) = a_21 x_1(t) + a_22 x_2(t),
+  ),
+$
+we can write is as
+$
+  A =& mat(a_11, a_12; a_21, a_22) \
+  vb(x')(t) =& A vb(x)(t) \
+  vb(x)(t) =& e^(A t) vb(x)_0 \
+  =& T e^(D t) T^(-1) vb(x)_0.
+$
+Elegantly solved.
+
+=== Non-diagonalizable Matrix as Power
+See textbook lol.
 
 #termlist
