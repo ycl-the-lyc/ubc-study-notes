@@ -604,7 +604,7 @@ $
 $
 We have
 $
-  vb(a) &= (dot.double(r) - r dot(theta)^2) vb(u)_r + (r dot.double(theta) + r dot(r) dot(theta)) vb(u)_theta \
+  vb(a) &= (dot.double(r) - r dot(theta)^2) vb(u)_r + (r dot.double(theta) + 2 dot(r) dot(theta)) vb(u)_theta \
   a_r &= dot.double(r) - r dot(theta)^2 \
   a_theta &= r dot.double(theta) + 2 dot(r) dot(theta).
 $
@@ -681,9 +681,9 @@ $
   eta = 90 degree - psi
 $ which can be seen as the angle between different orthogonal axis, for conversion of their components.
 
-Say, there are two cross-like force systems, with direction $vb(u)_r, vb(u)_s$, the angle between the axis is $eta$.
+Say, there are two cross-like force systems, with direction $vb(u)_r, vb(u)_N$, the angle between the axis is $eta$.
 $
-  vb(u)_s = vb(u)_r cos(eta).
+  vb(u)_N = vb(u)_r cos(eta).
 $
 
 It is crucial to have consistent angle setup for the more and more complex problems we are to solve.
@@ -714,13 +714,18 @@ $
   F_s &= k s \
   U_(a-b) &= integral_a^b F_s dd(s) \
   &= integral_a^b k s dd(s) \
-  &= 1/2 k s_b^2 - 1/2 k s_a^2
+  &= 1 / 2 k s_b^2 - 1 / 2 k s_a^2
+$
+
+== Work of Sliding Friction
+$
+  U_(a-b) =& mu_s N s //TODO
 $
 
 == Kinetic Energy
 An energy associated with motion.
 $
-  T = 1/2 m v^2.
+  T = 1 / 2 m v^2.
 $
 Kinetic energy is also a form of energy, like work.
 $
@@ -745,7 +750,7 @@ $
 = Kinetics of a Particle: Impulse and Momentum
 Recall that
 $
-    sum vb(F) = m vb(a) = m dv(vb(v), t).
+  sum vb(F) = m vb(a) = m dv(vb(v), t).
 $
 Rearrange it as
 $
@@ -758,7 +763,7 @@ $
 This is the principle of impulse momentum.
 
 / Linear momentum: A vector $vb(L)$ that $ vb(L) = m vb(v). $
-/ Linear impulse: Given a time-dependent force and a time interval, impulse is a vector $vb(I)$ representing change in momentum that $ vb(I) = integral_(t_1)^(t_2) vb(F))(t) dd(t). $
+/ Linear impulse: Given a time-dependent force and a time interval, impulse is a vector $vb(I)$ representing change in momentum that $ vb(I) = integral_(t_1)^(t_2) vb(F)(t) dd(t). $
   Or, for a constant force, $ vb(I) = vb(F)_c (t_2 - t_1). $
 
 From the definition,
