@@ -612,40 +612,6 @@ $
         }),
       ),
     ),
-    // box(
-    //   clip: true,
-    //   width: 5cm,
-    //   height: 5cm,
-    //   align(
-    //     center + horizon,
-    //     canvas({
-    //       import draw: *
-    //
-    //       let qs = (0, 0)
-    //       let qt = (2, 0)
-    //       let m = qs.at(0) + qt.at(0) / 2
-    //
-    //       group({
-    //         set-style(stroke: (paint: std.gray, thickness: .05pt))
-    //         for i in range(-10, 11) {
-    //           if i != 0 {
-    //             i = calc.pow(i / 5, 3)
-    //             //TODO repel lines
-    //           }
-    //           line((-2, 0), qs)
-    //           line((4, 0), qt)
-    //         }
-    //       })
-    //
-    //       content((m, 0), [TODO])
-    //
-    //       circle(qs, radius: .5em, stroke: red)
-    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-    //       circle(qt, radius: .5em, stroke: red)
-    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-    //     }),
-    //   ),
-    // ),
   ),
 )
 
@@ -1297,6 +1263,14 @@ $
 $ where $I_C$ is the real current.
 With this definition, even if there is no current, an increasing electric field still denotes an increasing magnetic field.
 
+=== Application: Magnetic Field In Capacitors
+For a point between capacitor plates, there is no (conventional) current flowing through, but the displacement current we just defined.
+Given that the plates are circles with radius $R$, and the test point sits at radius $r$.
+$
+  integral.cont vb(B) dot dd(vb(l)) =& mu_0 I_D = epsilon_0 A dv(E, t) = epsilon_0 pi R^2 dv(E, t) \
+  E(t) =& //TODO see post- slides
+$
+
 == Maxwell's Equations
 #figure(
   caption: [Maxwell's Equations],
@@ -1310,14 +1284,14 @@ With this definition, even if there is no current, an increasing electric field 
         if x == 0 {
           text.with(size: 0.8em)
         } else if x == 3 {
-          text.with(size: 0.6em)
+          text.with(size: 0.8em)
         } else { c => c }
       }
       rule(c.x, c.y)(c)
     }
 
     table(
-      columns: (1fr,) + (auto,) * 2 + (1.5fr,),
+      columns: (0.9fr,) + (auto,) * 2 + (1.5fr,),
       align: center + horizon,
       table.header(
         [Law],
@@ -1334,7 +1308,7 @@ With this definition, even if there is no current, an increasing electric field 
       [Gauss's #{sym.wj}law for magnetism],
       $ integral.surf vb(B) dot dd(vb(A)) = 0 $,
       $ div vb(B) = 0 $,
-      [There are no magnetic monopoles (“magnetic charges”).],
+      [There are no \ magnetic monopoles.],
 
       [Faraday's law],
       $ integral.cont vb(E) dot dd(vb(l)) = - dv(Phi_B, t) $,
@@ -1342,22 +1316,26 @@ With this definition, even if there is no current, an increasing electric field 
       [Electric field can be also produced by changing magnetic field.],
 
       [Ampère-Maxwell's law],
-      $ integral.cont vb(B) dot dd(vb(l)) = mu_0 I_"ext" + mu_0 epsilon_0 dv(Phi_E, t) $,
+      $ integral.cont vb(B) dot dd(vb(l)) = mu_0 dv(q, t) + mu_0 epsilon_0 dv(Phi_E, t) $,
       $ curl vb(B) = mu_0 (J + epsilon_0 pdv(vb(E), t)) $,
       [Magnetic field is produced by electric currents and changing electric field.]
     )
   },
 )
 
-//TODO
-// elec-mag wave form
 Using the Maxwell's equations, we are able to deduce the generic wave equation with the direction of propagation, $x$, direction of $vb(E)$, $y$, and direction of $vb(B)$, $z$.
 $
   pdv(u(x, t), t, 2) =& v^2 pdv(u(x, t), x, 2) \
   pdv(E_y (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(E_y, x, 2) \
   pdv(B_z (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(B_z, x, 2)
 $ where the $u$'s are scalar function describing the magnitude of the wave in certain directions and $v$ is the wave velocity.
-The $1 / (epsilon_0 mu_0)$ is the velocity of electromagnetic waves in vacuum!
+The $1 / (epsilon_0 mu_0)$ is the velocity of electromagnetic waves in vacuum, $c$!
+
+The equation is solved to
+$
+  B_z =& B_0 sin(k x - omega t) \
+  E_y =& E_) sin(k x - omega t)
+$ where $k = 2pi slash lambda, omega = c k$.
 
 == Magnetic Materials
 

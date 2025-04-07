@@ -1424,8 +1424,9 @@ Note that the "imaginary" solution is _real_, no $i$!
 In short, if $vb(x)' = A vb(x), lambda_(1, 2) = alpha plus.minus beta i, (alpha, beta in RR)$,
 $
   vb(x)(t) &= c_1 e^(lambda_1 t) vb(v)_1 + c_2 conj(e^(lambda_2 t) vb(v)_2) \
-  &= c_1 Re{e^(lambda_1 t) vb(v)_1} + c_2 Im{e^(lambda_1 t) vb(v)_1}
+  &= c_1 Re{e^(lambda_1 t) vb(v)_1} + c_2 Im{e^(lambda_1 t) vb(v)_1}.
 $
+Then, you will compute each value, distribute them to two vectors of the either the real or imaginary the part.
 
 == Application: Vector Transformation
 Let $A$ be a matrix that reflects vectors in $RR^2$ in the line at angle $pi / 3$.
