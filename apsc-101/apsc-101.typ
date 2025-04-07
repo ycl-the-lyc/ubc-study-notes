@@ -13,9 +13,7 @@
 #import fletcher.shapes: diamond
 
 #import "@preview/physica:0.9.4": *
-#import "@preview/metro:0.3.0": *
-#import units: *
-#import prefixes: *
+#import "@preview/unify:0.7.1": unit, num, qty, numrange, qtyrange
 
 = Professional Skills / Working in a team
 
@@ -336,3 +334,29 @@ The satisfaction line is curved because consumers perception of improvements at 
 For example, an 1 to 2 hours battery life improvement will likely be strongly felt by users, but a 7 to 8 hours battery life extension would not have such positive reception, as the users are already pretty satisfied with 7 hours.
 
 Building satisfaction curve involves market analysis, consumer/customer interview, experiments and more.
+
+= Mining
+
+== TODO: processes
+
+= Rainwater Harvesting System
+
+== Factors of Flow Rate
+TODO
+
+== System Pressure
+$
+  P_"pump" = rho g h_"storage" + underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
+$
+
+- $C_f$ filters' friction coefficient.
+  Changed by filters on the _rising_ edge.
+- $L$ is the pipe length, and it _does not necessarily_ change if $x, y, z$ of the tanks are changed.
+
+== Maintenance
+- Filters \
+  Life of a filter is determined by the filter size immediately larger than itself.
+  E.g. life of a $qty("1", "micro m")$ filter is affected by the presence of a $qty("5", "micro m")$ filter, but not by the $qty("200", "micro m")$ if the prior is already present.
+- Power sources \
+  Can be either diesel fuel engine or solar panels and battery.
+  Solar has outstandingly low risk exposure, but might be less reliable.
