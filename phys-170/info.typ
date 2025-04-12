@@ -74,7 +74,7 @@
     $
       tan(psi) &= (r dot(theta)) / dot(r) = r / dv(r, theta) \
       eta =& 90 degree - psi \
-      va(u)_n =& va(u)_r cos(eta)
+      va(u)_r =& va(u)_n cos(eta)
     $
   ],
   cell(colspan: 8, rowspan: 4)[
@@ -128,7 +128,7 @@
   cell(colspan: 10, rowspan: 4)[
     #underline[*Moment*]
     $
-      va(M) -& va(r) times va(F) \
+      va(M) =& va(r) times va(F) \
       M =& r F sin(theta) = F d
     $
     Vector moments of the same point add up like forces.
