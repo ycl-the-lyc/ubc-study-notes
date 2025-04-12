@@ -83,7 +83,7 @@
       va(v) =& dot(va(r)) \
       =& v_r va(u)_r + v_theta va(u)_theta \
       =& dot(r) va(u)_r + r dot(theta) va(u)_theta \
-      va(a) =& (dot.double(r) - r dot(theta)^2) va(u)_r + (r dot.double(theta) + 2 dot(r) dot(theta))
+      va(a) =& (dot.double(r) - r dot(theta)^2) va(u)_r + (r dot.double(theta) + 2 dot(r) dot(theta)) va(u)_theta
     $
   ],
   cell(colspan: 12, rowspan: 4)[
