@@ -1255,7 +1255,7 @@ We take the simplest pair, which usually involves an 1.
 === 3D Matrices
 $
   det(A - lambda I) &= vb(0) \
-  &= lambda^3 - Tr lambda^2 + c_2 lambda + det(A)
+  &= lambda^3 - Tr lambda^2 + c_2 lambda - det(A)
 $ where $c_2 = a_11 a_22 + a_22 a_33 + a_33 a_11 - a_12 a_21 - a_13 a_31 - a_23 a_32$.
 
 == Complex-valued Eigen-pairs
