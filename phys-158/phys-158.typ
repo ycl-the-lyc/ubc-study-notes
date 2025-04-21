@@ -1334,7 +1334,7 @@ The $1 / (epsilon_0 mu_0)$ is the velocity of electromagnetic waves in vacuum, $
 The equation is solved to
 $
   B_z =& B_0 sin(k x - omega t) \
-  E_y =& E_) sin(k x - omega t)
+  E_y =& E_0 sin(k x - omega t)
 $ where $k = 2pi slash lambda, omega = c k$.
 
 == Magnetic Materials
