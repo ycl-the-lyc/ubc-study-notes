@@ -604,7 +604,7 @@ $
 $
 We have
 $
-  vb(a) &= (dot.double(r) - r dot(theta)^2) vb(u)_r + (r dot.double(theta) + r dot(r) dot(theta)) vb(u)_theta \
+  vb(a) &= (dot.double(r) - r dot(theta)^2) vb(u)_r + (r dot.double(theta) + 2 dot(r) dot(theta)) vb(u)_theta \
   a_r &= dot.double(r) - r dot(theta)^2 \
   a_theta &= r dot.double(theta) + 2 dot(r) dot(theta).
 $
@@ -676,11 +676,122 @@ $
   tan(psi) = r / dv(r, theta).
 $
 
-// = Kinetics of a Particle: Work and Energy
+Additionally, we may want to setup
+$
+  eta = 90 degree - psi
+$ which can be seen as the angle between different orthogonal axis, for conversion of their components.
 
+Say, there are two cross-like force systems, with direction $vb(u)_r, vb(u)_N$, the angle between the axis is $eta$.
+$
+  vb(u)_N = vb(u)_r cos(eta).
+$
 
-// = Kinetics of a Particle: Impulse and Momentum
+It is crucial to have consistent angle setup for the more and more complex problems we are to solve.
 
+= Kinetics of a Particle: Work and Energy
+Work is, in a simple form, $W = F s$, where $s$ is the displacement along the direction of the force.
 
+== Work of Variable Force
+In this case, we would have to integrate along the path,
+$
+  U_(a-b) &= integral_a^b vb(F) dot dd(vb(r)) \
+  &= integral_a^b F cos(theta) dd(s).
+$
+
+== Work of a Constant Force
+On a straight line from $a$ to $b$,
+$
+  U_(a-b) &= F_c cos(theta) integral_a^b dd(s) \
+  &= F_c cos(theta) (b - a)
+$
+
+If not, we should only consider the displacement on the direction of the force.
+For example, work done by a force should only take displacement in the $z$-axis into account.
+
+== Work of a Spring Force
+A spring is elongated from $s_a$ to $s_b$,
+$
+  F_s &= k s \
+  U_(a-b) &= integral_a^b F_s dd(s) \
+  &= integral_a^b k s dd(s) \
+  &= 1 / 2 k s_b^2 - 1 / 2 k s_a^2
+$
+
+== Work of Sliding Friction
+$
+  U_(a-b) =& mu_s N s //TODO
+$
+
+== Kinetic Energy
+An energy associated with motion.
+$
+  T = 1 / 2 m v^2.
+$
+Kinetic energy is also a form of energy, like work.
+$
+  T_b = T_a + sum U_(a-b).
+$
+
+== Potential Energy
+An energy associated with position.
+An objects' capability to move to an datum.
+
+Particularly, there are gravitational potential energy and elastic potential energy.
+$
+  V_g &= W h = m g h \
+  V_s &= + 1 / 2 k s^2
+$ with $V_s$ always being positive.
+
+In relation to work, the work done moving an object from $a$ to $b$ is
+$
+  U_(a-b) = V_a - V_b.
+$
+
+= Kinetics of a Particle: Impulse and Momentum
+Recall that
+$
+  sum vb(F) = m vb(a) = m dv(vb(v), t).
+$
+Rearrange it as
+$
+  sum vb(F) dd(t) = m d vb(v)
+$ and give some time interval $(t_1, t_2)$.
+Thus,
+$
+  sum integral_(t_1)^(t_2) vb(F) dd(t) = m integral_(vb(v)_1)^(vb(v)_2) dd(vb(v)) = m vb(v)_2 - m vb(v)_1.
+$
+This is the principle of impulse momentum.
+
+/ Linear momentum: A vector $vb(L)$ that $ vb(L) = m vb(v). $
+/ Linear impulse: Given a time-dependent force and a time interval, impulse is a vector $vb(I)$ representing change in momentum that $ vb(I) = integral_(t_1)^(t_2) vb(F)(t) dd(t). $
+  Or, for a constant force, $ vb(I) = vb(F)_c (t_2 - t_1). $
+
+From the definition,
+$
+  m vb(v)_1 + sum integral_(t_1)^(t_2) vb(F) dd(t) = m vb(v)_2.
+$
+
+/ Center of mass: Consider a system of particles with individual position vector $vb(r)_i$ and mass $m_i$.
+  The center of mass is given by $ vb(r)_G = (sum m_i vb(r)_i) / (sum m_i). $
+
+Then, movement of the system can be seen as
+$
+  vb(v)_G =& dv(vb(r)_G, t) \
+  =& (sum m_i dv(vb(r)_i, t)) / (sum m_i) \
+  =& (sum m_i vb(v)_i) / (sum m_i).
+$
+
+Apply center of mass to the momentum equation, the momentum after a time interval can be obtained by
+$
+  m (vb(v)_G)_2 = m (vb(v)_G)_1 + sum integral_(t_1)^(t_2) vb(F)_i dd(t).
+$
+
+== Conservation of Linear Momentum
+If there is no external impulse, linear momentum of a system is conserved.
+$
+  sum m_i (vb(v)_i)_1 = sum m_i (vb(v)_i)_2 \
+  m (vb(v)_G)_1 = m (vb(v)_G)_2 \
+  (vb(v)_G)_1 = (vb(v)_G)_2.
+$
 
 #termlist

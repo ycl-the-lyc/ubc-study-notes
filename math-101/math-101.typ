@@ -432,7 +432,7 @@ To realize this, think of $integral_(-oo)^oo (sin(x) - cos(x)) dd(x)$ geometrica
 
 Instead,
 $
-   integral_(-oo)^oo f(x) dd(x) = lim_(T -> -oo) integral_T^c f(x) dd(x) + lim_(R -> oo) integral_c^R f(x) dd(x)
+  integral_(-oo)^oo f(x) dd(x) = lim_(T -> -oo) integral_T^c f(x) dd(x) + lim_(R -> oo) integral_c^R f(x) dd(x)
 $ where $c in RR$.
 
 For example,
@@ -526,5 +526,100 @@ Use them on $1 / n$ and $1 / n^2$ from $1$ to see for yourself!
 
 Well, $N + 1$ or $N$, when $N -> oo$ they are all infinity.
 Hence, if $integral_(N_0)^oo f(x) dd(x)$ diverges/converges, $sum {f(x) | x in ZZ and x >= N_0}$ also diverges/converges.
+
+== Geometric Series
+Instead of having a constant interval, a geometric series has a constant _ratio_ to the next element.
+
+/ Geometric series: A series summing the terms of an infinite geometric sequence, in which the ratio of consecutive terms is constant.
+  $ a + a r + a r^2 + ... + a r^k = sum_(k = 0)^n a r^k. $
+
+We usually deal with $n -> oo$ here:
+- If $abs(r) < 1$, the series converges with a partial sum of $S_n = a / (1 - r)$.
+- If $abs(r) > 1$, the series diverges.
+- If $r = 1$, the partial sum still goes to infinity.
+- If $r = -1$, the partial sum oscillates.
+
+The general formula for partial sum is
+$
+  S_n = cases(
+  a (n + 1) quad &r = 1,
+  a (1 - r^(n + 1) / (1 - r)) quad &"otherwise".
+)
+$
+
+== Ratio Test
+To test if a series eventually looks geometric, we use the ratio test.
+
+Given $sum_(n = c)^oo a_n$,
+$
+  r = lim_(n -> oo) abs((a_n + 1) / a_n).
+$
+If $r < 0$, the series converges.
+If $r > 0$ or $r = +oo$, the series diverges.
+If $r = 1$ or $r$ DNE, this test is useless.
+
+The ratio test is useful when terms in the series involves $n$ as an exponent, and/or factorials, like
+$
+  sum_(n = 1)^oo e^n / n!,
+$
+and is useless when
+$
+  sum_(n = 1)^oo P(n) / Q(n)
+$ where $P(n)$ and $Q(n)$ are polynomials, as $r = 1$.
+
+== Power Series
+The power series is like a geometric series, with varying bases.
+$
+  f(x) = sum_(n = 1)^oo (x - c)^n
+$
+There exists a number $R$, where if $abs(x - c) < R$, the power series converges.
+We call it the radius of convergence.
+
+/ Radius of convergence: For a power series, the radius of convergence is the radius of the largest disk at the center of the series in which the series converges. It is either a non-negative real number or $oo$.
+  The differentials of the series has the same radius of convergence.
+
+The ratio test is still the most promising test for power series.
+
+Like the ratio test, we do not know what happens when $abs(x - c) = R$.
+But within the radius of convergence, we rock.
+
+=== Differentiation and Integration
+Given $S(x) = sum_(n = 1)^oo A_n (x - c)^n$, for $x$ such that $abs(x - c) < R$,
+$
+  S'(x) &= sum_(n = 1) n A_n (x - c)^(n - 1) \
+  integral S(x) dd(x) &= sum_(n = 0)^oo A_n (x - c)^(n + 1) / (n + 1) + C.
+$
+Note that the differentiation index starts at $1$, since $(A_0)' = 0$.
+
+Again, $R$ does not change with differentiation or integration.
+
+=== Other Operations
+Additionally, we can:
+- Add series to each other.
+- Multiply a series by a constant.
+- Multiply a series by a power of $x$. \
+  This operation is especially useful when solving for integrals of a complicated integrand which is a product of $x^c$ and something else.
+
+== Comparing Series Elements
+At times, we need to compare elements between series, like solving for some differential of a function that has a Taylor series.
+
+Do not compare terms which has the same $n$, but do with terms of the same power of $x$.
+
+For example,
+$
+  f(x) =& arctan(x^2) \
+  arctan(x) =& sum_(n = 0)^oo (-1)^n x^(2n + 1) / (2n + 1) quad "for" abs(x^2 <= 1) \
+  f(x) =& sum_(n = 0)^oo (-1)^n x^(4n + 2) / (2n + 1), \
+  =& sum_(n = 0)^oo (f^n (x)) / n! x^n.
+$
+Let $x = 0$,
+$
+  cases(
+    f^10 (0) =& x^(4n + 2) / (2n + 1) n! / x^n quad &<- n = 2,
+    f^11 (0) =& 0 &<- n "DNE"
+  )
+$
+Here, we have to make sure the power in the specific Taylor series matches with the one we want, hence $4n +2 = 10 "or" 11$.
+
 
 #termlist

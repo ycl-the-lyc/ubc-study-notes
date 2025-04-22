@@ -612,40 +612,6 @@ $
         }),
       ),
     ),
-    // box(
-    //   clip: true,
-    //   width: 5cm,
-    //   height: 5cm,
-    //   align(
-    //     center + horizon,
-    //     canvas({
-    //       import draw: *
-    //
-    //       let qs = (0, 0)
-    //       let qt = (2, 0)
-    //       let m = qs.at(0) + qt.at(0) / 2
-    //
-    //       group({
-    //         set-style(stroke: (paint: std.gray, thickness: .05pt))
-    //         for i in range(-10, 11) {
-    //           if i != 0 {
-    //             i = calc.pow(i / 5, 3)
-    //             //TODO repel lines
-    //           }
-    //           line((-2, 0), qs)
-    //           line((4, 0), qt)
-    //         }
-    //       })
-    //
-    //       content((m, 0), [TODO])
-    //
-    //       circle(qs, radius: .5em, stroke: red)
-    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-    //       circle(qt, radius: .5em, stroke: red)
-    //       content((rel: (0, .04)), text(stroke: 1.5pt + red, "+"))
-    //     }),
-    //   ),
-    // ),
   ),
 )
 
@@ -900,29 +866,42 @@ $
 
 == Electric Properties of Dielectrics and Polarization
 
-*_Rework pending!_*
-//TODO
-// rework this part
-
 When a dielectric material is in an electric field $vb(E)_0$, it is polarized and produces an induced electric field $vb(E)$.
 $
   vb(E) = vb(E)_0 / K
 $ where $K > 1$ is a constant dependant on the material, is the dielectric constant.
 
-Given a parallel plate capacitor with distance $z$ between the two plates,
-$
-  C(z) &= (A epsilon_0) / z \
-  &= A / (4 pi k z) \
-  U(z) &= Q^2 / (2C) = Q^2 / 2 (4 pi k z) / A \
-  &= (Q^2 z) / (2 A epsilon_0) \
-  abs(F_z) &= Q^2 / 2 (4 pi k) / A \
-  &= Q^2 / (2 A epsilon_0).
-$
+Given a parallel plate capacitor with distance $z$ between the two plates, a dielectric block is then inserted in between the plates.
+#grid(
+  columns: (1fr, 1fr),
+  inset: 0.65em,
+  [
+    If the plates _are connected_ to a battery, the voltage difference remains constant,
+    $
+      Delta V &= "const" \
+      E &= (Delta V) / d = "const" \
+      Q &= Q_0 K arrow.t \
+      C &= Q / (Delta V) = (Q_0 K) / (Delta V) = C_0 K arrow.t \
+      U &= (C Delta V^2) / 2 = (K C_0 Delta V^2) / 2 = U_0 K arrow.t.
+    $
+  ],
+  [
+    If the plates are _not_ connected to battery, the charge difference stays the same,
+    $
+      Q &= "const" \
+      E &= E_0 / K arrow.b \
+      Delta V &= E d = E_0 / K d = V_0 / K arrow.b \
+      C &= Q / (Delta V) = Q / (V_0 slash K) = C_0 K arrow.t \
+      U &= Q^2 / (2C) = Q^2 / (2 C_0 K) = U_0 / K arrow.b.
+    $
+  ],
+)
+
 
 = Magnetism
 
 == Magnetic Field and Magnetic Force
-Charges create electric fields, _moving_ charges create magnetic fields.
+Charges create electric fields, _moving_ charges create magnetic fields, yes, including magnets.
 
 / Magnetic field (B): Force per charge per velocity by magnetism, measured in Tesla, $unit("T")$.
   $ vb(F) = plus.minus q vb(v) times vb(B) $ where the $plus.minus$ depends on sign of the charge.
@@ -936,7 +915,9 @@ It should look similar to the electric force formula, because they are actually 
   image("assets/cross-product-right-hand.png", width: 33%),
 )
 
-By using the curly right-hand rule from _the current_ to _the field_, we can figure out direction of the force.
+#block(stroke: red, inset: 0.65em)[
+  By using the curly right-hand rule from _the current_ to _the field_, we can figure out direction of the force.
+]
 
 Magnetic field _left-hand_ trick: \
 Counting a core family from thumb to the middle finger, [F]ather, [M]other and [C]hild, they are [F]orce, [M]agnetic field and [C]urrent.
@@ -1006,7 +987,7 @@ A reminder again that magnetic fields are loops, they _do not stop_ at the poles
 
 == Gauss's Law for Magnetism
 $
-  Phi_B = integral.surf vb(B) dot dd(vb(A)) = 0.
+  Phi_B = integral.cont vb(B) dot dd(vb(A)) = 0.
 $
 The magnetic flux of any closed surface is 0, as there is no single magnetic pole.
 
@@ -1019,12 +1000,363 @@ $
   dd(vb(B)) = mu_0 / (4pi) (I dd(vb(l)) times vu(r)) / r^2
 $ where $mu_0 = 4pi dot 10^(-7) unit("Tm / A")$ is the magnetic constant.
 
-=== Application: Magnetic Field of A Circular Ring
-Imagine a ring carrying current $I$ sitting on the origin, facing the x-axis.
-We would examine $dd(vb(B))$ by the ring in two different cases:
-- $x = 0$
-- $x > 0$
+=== Application: Magnetic Field of a Circular Ring
+Imagine a ring with radius $a$ carrying current $I$ sitting on the origin, facing the x-axis.
+By symmetry, magnetic fields in y or z direction cancel out.
 
-WIP
+We would examine $dd(vb(B))$ by the ring in two different cases:
+- $x = 0$,
+- $x > 0$.
+
+When $x = 0$, meaning the test point is on the same plane as the ring,
+$
+  dd(B) &= mu_0 / (4pi) (I dd(l)) / a^2 \
+  B_x &= mu_0 / (4pi) (I (2pi a)) / a^2 \
+  &= (mu_0 I) / (2a)
+$ with $2pi a$ being the circumference, is the magnetic field strength in the x-direction.
+
+When $x > 0$,
+$
+  dd(B) &= mu_0 / (4pi) (I dd(l)) / (x^2 + a^2)
+$ with $x^2 + a^2$ being $r^2$.
+
+Let the angle between each $dd(vb(B))$ (_not_ $vb(r)$!) and the x-axis be $theta$,
+$
+  dd(B)_x &= cos(theta) dd(B) \
+  cos(theta) &= a / r \
+  &= a / sqrt(x^2 + a^2) \
+  B_x &= mu_0 / (4pi) (I (2pi a)) / (x^2 + a^2) a / sqrt(x^2 + a^2) \
+  &= mu_0 / 2 (I a^2) / (x^2 + a^2)^(3 / 2).
+$
+
+=== Application: Magnetic Field of a Wire
+Given a wire with length $2a$ and current from $-a$ to $a$, and a point $P$ with distance $r$ to the wire, and the perpendicular point happens to be $0$ of the $-a -> a$.
+
+First, we assume the wire is infinitely long.
+In that case, the decay of its magnetic field would resemble decay of its electric field, just in magnitude.
+$
+  vb(B)_P &= plus.minus (mu_0 I) / (2pi r) vb(k) \
+  B_P &= (mu_0 I) / (2pi r)
+$ where the direction depends on orientation of the wire and the test point.
+
+Many wires are not infinitely long (obviously), so we need to integrate over it.
+First, to understand the magnitude of the magnetic field,
+$
+  abs(I dd(vb(l)) times vu(r)) &= I dd(l) abs(vu(r)) sin(theta) \
+  &= I dd(y) sin(theta)
+$ where $theta$ is the angle from the current to $vb(r)$ of $P$.
+$
+  vb(B)_P &= integral dd(vb(B)) \
+  &= integral mu_0 / (4pi) (d dd(vb(l)) times vu(r)) / r^2 \
+  &= plus.minus vb(k) (mu_0 I) / (4pi) integral (sin(theta) dd(y)) / r^2 \
+  &= plus.minus vb(k) (mu_0 I) / (4pi) integral (x dd(y)) / r^3 \
+  &= plus.minus vb(k) (mu_0 I x) / (4pi) integral_(-a)^a dd(y) / (x^2 + y^2)^(3 / 2) \
+  &= plus.minus (mu_0 I) / (4pi) (2a) / (x sqrt(x^2 + a^2)) vb(k).
+$
+
+How about semi-infinite "long wire", lie antenna?
+Just half of the infinite's.
+
+== Ampère's Law
+Consider a circular current-carrying line.
+#figure(
+  caption: [Ampèrian loop],
+  image("assets/amperes-law-loop.png", width: 67%),
+)
+
+Integrate the magnetic field along it:
+$
+  integral.cont vb(B) dot dd(vb(l)) &= integral.cont B dd(l) \
+  &= B integral.cont dd(l) \
+  &= B dot 2 pi r \
+  &= (mu_0 I) / (2 pi r) 2 pi r \
+  &= mu_0 I_"enclosed".
+$
+Unlike Gauss's Law, we choose an Ampère _circular loop_ instead of a surface for evaluation.
+For a loop with radius $R$ and current $I_0$, any loop inside of it with a radius $r$ has
+$
+  I = I_0 r^2 / R^2.
+$
+
+Hence, knowing the original loop current $I$, the other loop with a different $r$ has
+$
+  integral.cont vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  B_"in" (r) dot 2 pi r &= (mu_0 I r^2) / R^2 \
+  B_"in" (r) &= (mu_0 I r) / (2 pi R^2); \
+  B_"out" (r) &= (mu_0 I) / (2 pi r).
+$
+
+Thus, inside the loop, $B prop r$, outside the loop, $B prop 1 / r$.
+
+== Solenoid
+/ Solenoid: A sequence of circular loops, tilted together very tightly.
+
+Notably, there is no magnetic field by a solenoid outside the loops.
+This is because each group of three loops would have the middle one's field cancelling the other two's at right above the middle loop.
+
+=== Ideal Solenoid
+Take a section with length $L$ and $n$ loops along the solenoid, apply Ampère's Law,
+$
+  integral.cont vb(B) dot dd(vb(l)) &= mu_0 I_"enclosed" \
+  B_"in" L &= mu_0 I n L \
+  B_"in" &= mu_0 I n.
+$
+
+However, solenoids are often not with infinite length, so we would have to integrate along it.
+
+=== Real Solenoid
+Given point $P$ on the center line of the solenoid,
+$
+  B_"real solenoid" (P) =mu_0 / 2 n I (cos(alpha_R) - cos(alpha_L))
+$ where $alpha_L$ and $alpha_R$ are angles from the positive $x$-axis to the line connecting $P$ and the left/right edge of the solenoid.
+
+If the solenoid goes back to infinitely long, $alpha_R = cos(0) = 1, alpha_L = cos(180 degree) = -1$, that gives us the ideal solenoid formula.
+
+== Toroid
+If we bend a solenoid into a circle and connect the ends, we get a doughnut-shaped _toroid_.
+
+Say, a toroid has inner radius $a$, outer radius $b$ and a radius of the circle $a <= r <= b$.
+$
+  integral.cont vb(B) dot dd(vb(l)) &= 2 pi r B_t \
+  &= mu_0 I_"enclosed" \
+  &= mu_0 I n
+$ where $B_t$ is the tangential component of magnetic field produced and $n$ is the number of loops.
+$
+  B_t = (mu_0 I n) / (2 pi r).
+$
+
+For other places, specifically $r < a$ or $r > b$, $B approx 0$.
+
+== Faraday's Law
+We know that current comes with magnetic field.
+O does magnetic field want a come back.
+
+Recall Gauss's Law for magnetism states that
+$
+  Phi_B &= integral.cont vb(B) dot dd(vb(A)) \
+  dd(Phi_B) &= vb(B) dot dd(A) \
+  &= vb(B)_perp dd(A) \
+  &= B dd(A) cos(phi).
+$
+
+Faraday's law states that
+$
+  epsilon = - dv(Phi_B, t)
+$ where $epsilon$ is the induced EMF in a closed loop.
+
+Well it actually says
+$
+  abs(epsilon) &= abs(dv(Phi_B, t)) \
+  &= abs(dv(, t) B A cos(theta)) \
+  &= abs(dv(B, t) A cos(theta) + B dv(A, t) cos(theta) + B A dv(cos(theta), t))
+$
+
+If we have a closed loop circuit experiencing changing magnetic flux, $abs(epsilon)$ is the magnitude of the induced EMF, and the sign denotes direction, with positive being counterclockwise.
+
+#figure(
+  caption: [Curl right-hand rule for Faraday's law],
+  image("assets/faradays-law-right-hand.png", width: 67%),
+)
+
+Note that if a loop is simply moving in a magnetic field, it may not experience changing magnetic flux!
+
+=== Application: Faraday Dick Dynamo
+Recall that magnetic force $vb(F)_B = plus.minus q vb(v) times vb(B)$.
+
+Imagine a rotating disk with radius $R$ at angular velocity $omega$, with uniform magnetic field perpendicular passing through it.
+The rotation moves the electrons on radius $r$ in the disk by velocity $vb(v)$
+$
+  dd(epsilon) &= vb(E) dot dd(vb(r)) = (vb(v) times vb(B)) dot dd(vb(r)) = v B dd(r) \
+  epsilon &= integral_0^R dd(epsilon) = integral_0^R v B dd(r) \
+  v &= omega r \
+  epsilon &= B integral_0^R (omega r) dd(r) = (omega B R^2) / 2
+$ which is called the motional EMF.
+
+This can generate DC power with a brush on the edge of the disk, and the other connected to the center of the disk.
+
+=== Lenz's Law
+Faraday's hands are too confusing?
+Have this!
+
+The induced current should produce a magnetic field that _opposes_ the magnetic field changes.
+#figure(
+  caption: [Lenz's law by Farday's law],
+  image("assets/lenzs-law-right-hand.png"),
+)
+
+This is how inductors work.
+
+== Mutual Inductance
+Given two coils 1 and 2,
+$
+  i_1 ==> B_(1-2) ==> Phi_2 ==> epsilon_2 ==> -dv(Phi_2, t) \
+  i_2 ==> B_(2-1) ==> Phi_1 ==> epsilon_1 ==> -dv(Phi_1, t).
+$
+
+It is easy to see that the magnetic flux in one coil is proportional to the current in the other coil.
+Hence, their induced EMF would be a ratio to the changes in current of each other.
+$
+  epsilon &= -dv(Phi_B, t), \
+  Phi_1 &= M_(2-1) i_2(t) \
+  epsilon_1 &= -M_(2-1) dv(i_2, t) \
+  Phi_2 &= M_(1-2) i_1(t) \
+  epsilon_2 &= -M_(1-2) dv(i_2, t)
+$ where $M$'s are some constants.
+Turns out, $M_(1-2) = M_(2-1)$, is the mutual induction coefficient.
+
+=== Application: Transformer
+There is a iron core, a cube with a cubical hole through.
+Two sets of coils wind around opposite sides.
+One with AC power, the "primary winding", the other do not, the "secondary winding", called the "load".
+
+Let $Phi_B$ be the magnetic flux through each turn of a coil.
+$
+  epsilon_1 &= -dv(Phi_(B 1), t) = -N_1 dv(Phi_B, t) \
+  epsilon_2 &= -dv(Phi_(B 2), t) = -N_2 dv(Phi_B, t) \
+  epsilon_1 / epsilon_2 &= N_1 / N_2
+$ where $N$'s are the number of rounds of coils on each side.
+
+== Self-inductance
+For similar reasons, when current in a solenoid changes, $Phi_B$ changes, and $epsilon$ is induced.
+$
+  epsilon &= -dv(Phi_B, t) \
+  Phi_B &= N dot B(t) A \
+  B(t) &= mu_0 N / L I(t) \
+  epsilon &= - (mu_0 A N^2) / L_s dv(i, t) \
+  &= -L dv(i, t).
+$
+
+== Re: Faraday's Law
+$
+  epsilon = integral.cont vb(E) dot dd(vb(l)) = -dv(Phi_B, t).
+$
+This integral form says that _changing magnetic field_ is a source of electric field.
+#text(gray)[This is the first time electric field and magnetic field appear in the same equation.]
+
+== Re: Ampère's Law
+Previously, the law says that $integral.cont vb(B) dot dd(vb(l)) = mu_0 I_"net"$.
+This means, if two surfaces are bound by the same closed curve, the current through them must be the same.
+However, there is a problem.
+
+#grid(
+  columns: 2,
+  [
+    Consider a charging capacitor, if we enclose one of the plate by a flat surface before the plate, and a bulging surface between the plates based on the same path (like a half-ball), the current through the flat one is not 0, but the current through the bulging one is 0.
+    Our current Ampère's Law is incomplete.
+  ],
+  figure(
+    caption: [A paradoxical situation],
+    image("assets/ampere-buldge-surface-paradox.png", width: 67%),
+  ),
+)
+
+So there must be something through the bulging surface.
+We define a "displacement current" which is not a current nor a displacement...
+/ Displacement current: An imaginary current to cover increasing potential difference but no current cases for Ampère's Law.
+  $
+    I_D =& epsilon_0 dv(Phi_E, t) = epsilon_0 A dv(E, t)
+  $ with the direction being the sign product of the direction of the $vb(E)$ and its value.
+
+Now, the Ampère's Law, or Ampère-Maxwell's Law is complete:
+$
+  integral.cont vb(B) dot dd(vb(l)) =& mu_0 (I_C + I_D)
+$ where $I_C$ is the real current.
+With this definition, even if there is no current, an increasing electric field still denotes an increasing magnetic field.
+
+=== Application: Magnetic Field In Capacitors
+For a point between capacitor plates, there is no (conventional) current flowing through, but the displacement current we just defined.
+Given that the plates are circles with radius $R$, and the test point sits at radius $r$.
+$
+  integral.cont vb(B) dot dd(vb(l)) =& mu_0 I_D = epsilon_0 A dv(E, t) = epsilon_0 pi R^2 dv(E, t) \
+  E(t) =& //TODO see post- slides
+$
+
+== Maxwell's Equations
+#figure(
+  caption: [Maxwell's Equations],
+  {
+    set math.equation(numbering: none)
+    show math.equation: set text(size: 0.8em)
+    set par(justify: false)
+    show table.cell: c => {
+      let rule(x, y) = {
+        if y == 0 { return c => c }
+        if x == 0 {
+          text.with(size: 0.8em)
+        } else if x == 3 {
+          text.with(size: 0.8em)
+        } else { c => c }
+      }
+      rule(c.x, c.y)(c)
+    }
+
+    table(
+      columns: (0.9fr,) + (auto,) * 2 + (1.5fr,),
+      align: center + horizon,
+      table.header(
+        [Law],
+        [Integral Form],
+        [Differential Form],
+        [Meaning],
+      ),
+
+      [Gauss's law],
+      $ integral.surf vb(E) dot dd(vb(A)) = Q_"in" / epsilon_0 $,
+      $ div vb(E) rho / epsilon_0 $,
+      [Electric charges produce \ electric field.],
+
+      [Gauss's #{sym.wj}law for magnetism],
+      $ integral.surf vb(B) dot dd(vb(A)) = 0 $,
+      $ div vb(B) = 0 $,
+      [There are no \ magnetic monopoles.],
+
+      [Faraday's law],
+      $ integral.cont vb(E) dot dd(vb(l)) = - dv(Phi_B, t) $,
+      $ curl vb(E) = - pdv(vb(B), t) $,
+      [Electric field can be also produced by changing magnetic field.],
+
+      [Ampère-Maxwell's law],
+      $ integral.cont vb(B) dot dd(vb(l)) = mu_0 dv(q, t) + mu_0 epsilon_0 dv(Phi_E, t) $,
+      $ curl vb(B) = mu_0 (J + epsilon_0 pdv(vb(E), t)) $,
+      [Magnetic field is produced by electric currents and changing electric field.]
+    )
+  },
+)
+
+Using the Maxwell's equations, we are able to deduce the generic wave equation with the direction of propagation, $x$, direction of $vb(E)$, $y$, and direction of $vb(B)$, $z$.
+$
+  pdv(u(x, t), t, 2) =& v^2 pdv(u(x, t), x, 2) \
+  pdv(E_y (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(E_y, x, 2) \
+  pdv(B_z (x), t, 2) =& 1 / (epsilon_0 mu_0) pdv(B_z, x, 2)
+$ where the $u$'s are scalar function describing the magnitude of the wave in certain directions and $v$ is the wave velocity.
+The $1 / (epsilon_0 mu_0)$ is the velocity of electromagnetic waves in vacuum, $c$!
+
+The equation is solved to
+$
+  B_z =& B_0 sin(k x - omega t) \
+  E_y =& E_0 sin(k x - omega t)
+$ where $k = 2pi slash lambda, omega = c k$.
+
+== Magnetic Materials
+
+=== Diamagnetism
+Diamagnetism appears in all materials and is the tendency of a material to oppose an applied magnetic field, and therefore, to be repelled by a magnetic field.
+
+=== Paramagnetism
+In a paramagnetic material there are unpaired electrons; i.e., atomic or molecular orbitals with exactly one electron in them. While paired electrons are required by the Pauli exclusion principle to have their intrinsic ('spin') magnetic moments pointing in opposite directions, causing their magnetic fields to cancel out, an unpaired electron is free to align its magnetic moment in any direction. When an external magnetic field is applied, these magnetic moments will tend to align themselves in the same direction as the applied field, thus reinforcing it.
+
+#text(gray)[Yes, Wikipedia.]
+
+== Superconductivity
+From experience, we know that as electrical appliances get hotter, their performance drops.
+
+A normal conductor's resistance increases with temperature rise, and decreases with temperature drop, but it does not drop to zero.
+
+For a superconducting material, its resistance do drops to (near) zero at a certain temperature.
+At that point, the current inside is so pure that it rejects all magnetic fields.
+If there is impurity inside the superconductor, some magnetic fields would penetrate it.
+
+
+
 
 #termlist

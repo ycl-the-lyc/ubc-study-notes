@@ -6,9 +6,10 @@
   ],
   author: "Yecheng Liang",
 )
-#import "@preview/physica:0.9.4": *
+#import "@preview/physica:0.9.5": *
 #show: super-T-as-transpose // Render "..^T" as transposed matrix
-#let conj= math.overline
+#let conj = math.overline
+#let kern = math.cal([N])
 
 #import "@preview/equate:0.2.1": equate
 #show: equate.with(breakable: true, sub-numbering: true)
@@ -772,7 +773,7 @@ One numb enough to calculate $M^999$ by $M times M times ...$ would be dumb, we 
 We just learned that diagonal matrices behave like scalars in multiplication.
 So, if we can make $M$ a diagonal matrix, then we can easily calculate $M^n$, even when $n$ is very large.
 
-//TODO
+How? See @sc:mat-similarity.
 
 == Linear Transformation
 / Linear transformation / map / function: a rule that assigns one output to each input.
@@ -823,6 +824,9 @@ Write $vb(a)$ as a transformation, $T(e)$, each column of the result becomes an 
 
 #block(inset: 0.65em, stroke: red)[
   *Sanity check*: _projection_ is not a one-to-one operation, so the matrix you use must have a determinant of 0.
+
+  Inverse of a reflection matrix is itself.
+  $ A A = A A^(-1) = I. $
 ]
 
 === Finding Transformations in 2D Space
@@ -914,7 +918,7 @@ $ then solve the resulting linear system.
 For example,
 $
   A &= mat(1, 2; 3, 4) \
-  A^T &= mat(1, 3; 4, 2)
+  A^T &= mat(1, 3; 2, 4)
 $
 
 Some nice conclusions:
@@ -1196,7 +1200,7 @@ $
   theta &= 0 "or" plus.minus (2pi) / 3 "or" plus.minus (4pi) / 3.
 $
 
-== Eigenvalues and Eigenvectors
+= Eigenvalues and Eigenvectors
 / Eigenvalue and Eigenvector: For a matrix $A$ that defines $RR^n -> RR^n$, a scalar $lambda$ and a vector $vb(v)$ which
   $
     vb(v) &eq.not vb(0) \
@@ -1208,20 +1212,33 @@ $
 - $vb(v)$ can be replaced by $vu(v)$ and the equality still holds true.
 - An $n times n$ matrix often has $n$ eigen-pairs.
 
-=== Solving for Eigen-pairs
+== Solving for Eigen-pairs
 $
   A vb(v) &= lambda vb(v) \
   A vb(v) - lambda vb(v) &= vb(0) \
   (A - lambda I) vb(v) &= vb(0)
 $
 $det(A - lambda I)$ must be $0$, else $vb(v)$ would be $vb(0)$, which is not an eigenvector.
-Say, $A in RR^2$,
+
+$ det(A - lambda I) = vb(0) $ is called the characteristic equation.
+
+/ Algebraic multiplicity (AM): The number of times the _same_ eigenvalue occurs as a root of the characteristic equation.
+/ Geometric multiplicity (GM): The number of LI eigenvectors corresponding to an _repeated_ eigenvalue.
+
+For an eigenvalue $lambda$, if $"AM"(lambda) = "GM"(lambda)$, then we found all its eigenvectors!
+This also implies that the eigenvectors are LI, hence the basis of all possible eigenvectors.
+
+=== 2D Matrices
 $
   det(A - lambda I) &= vb(0) \
   &= mdet(mat(a_11, a_12; a_21, a_22) - imat(2)) \
   &= (a_11 - lambda) (a_22 - lambda) - a_12 a_21 \
   &= lambda^2 - Tr lambda + det(A)
 $ where $Tr = trace(A) = a_11 + a_22$.
+
+/ Trace: Only for $A_(n times n)$, the sum of all main diagonal entries, also the sum of all eigenvalues.
+
+Also, determinant is the product of all eigenvalues.
 
 Solving this equation gives us $lambda$.
 
@@ -1234,5 +1251,301 @@ We take the simplest pair, which usually involves an 1.
   When solving a homogeneous system, the augmented $vb(0)$ can be omitted.
   Also, multiplying a row by a coefficient would not change the result, as the RHS is all 0.
 ]
+
+=== 3D Matrices
+$
+  det(A - lambda I) &= vb(0) \
+  &= lambda^3 - Tr lambda^2 + c_2 lambda - det(A)
+$ where $c_2 = a_11 a_22 + a_22 a_33 + a_33 a_11 - a_12 a_21 - a_13 a_31 - a_23 a_32$.
+
+== Complex-valued Eigen-pairs
+Eigenvalue or eigenvector can contain imaginary numbers.
+
+For example,
+$
+  A &= mat(1, 2; -1, 3) \
+  trace(A) &= 4 \
+  det(A) &= 5 \
+  lambda^2 - 4 lambda + 1 &= 0 \
+  (lambda - 2)^2 &= -1 \
+  lambda &= 2 plus.minus i.
+$
+
+Thus, we have
+$
+  cases(
+  lambda_+ = 2 + i,
+  lambda_- = 2 - i
+)
+$
+
+Solve the corresponding eigenvectors:
+$
+  (A - lambda_+ I) v_+ &= vb(0) \
+  "rref"(A - lambda_+ I) &= mat(-1 - i, 2; 0, 0)
+$
+Let $v_+_2 = t$,
+$
+  (-1 - i) v_+_1 + 2t &= 0 \
+  v_+_1 &= (2t) / (i + 1) \
+  &= (1 - i) t \
+  vb(v_+) &= vec((1 - i) t, t) \
+  &= vec(1 - i, 1).
+$
+
+Since $lambda_- = conj(lambda_+)$,
+$
+  v_- = conj(v_+) = vec(1 + i, 1).
+$
+
+#block(stroke: red, inset: 0.65em)[
+  For conjugate eigenvalues, their eigenvectors are also conjugate.
+]
+
+== Solving for Eigen-pairs by Linear Relations
+/ Null space / kernel: For all matrix $A_(n times n)$, its kernel is the set of all vectors that are mapped to zero by $A$.
+  $ ker(A) := kern(A) := {vb(x) in RR^n: A vb(x) = vb(0)} $
+
+We are supposed to solve
+$
+  (A - lambda_i I) vb(v) = vb(0).
+$
+...which is
+$
+  ker(A - lambda_i I).
+$
+
+/ Linear relation (LR): Given a set of $n$ vectors ${vb(c)_1, vb(c)_2, vb(c)_3, ...}$, a linear relation is an _ordered_ set of scalars ${a_1, a_2, a_3, ...}$ that satisfies
+  $ a_1 vb(c)_1 + a_2 vb(c)_2 + a_3 vb(c)_3 + ... = vb(0). $
+  Thus, we define $vb(a) = mat(a_1, a_2, ..., a_n)^T$ as a LR of vectors above.
+  If $vb(a) equiv vb(0)$, then the LR is trivial.
+
+Now, look:
+
+For all $A_(n times n)$,
+$
+  ker(A) := kern(A) := { "LRs of columns of" A }.
+$
+
+A non-trivial kernel is the eigenvector.
+Just "notice" that you can cancel out the columns...
+Can't notice? RREF, you may even spot the LR midway.
+
+For example,
+$
+  mat(-1 - i, 2; -1, 1 - i) ->& (-1 - i) underline((1 - i)) = -2 \
+  & (-1) underline((1 - i)) = i - 1 \
+  ker mat(-1 - i, 2; -1, 1 - i) =& vec(1 - i, 1 - i).
+$
+
+== Special Eigen Cases
+If the $j$th column of $A$ is $a vb(e)_j$, then ${a, vb(e)_j}$ is an eigen-pair.
+
+Let $x$ be arbitrary values.
+For
+$
+  A = mat(a, x, 0; 0, x, 0; 0, x, b),
+$ ${a, vb(e)_1}, {b, vb(e)_3}$ are eigen-pairs.
+
+For
+$
+  A = mat(a, 0, 0; 0, b, 0; 0, 0, c),
+$ ${a, vb(e)_1}, {b, vb(e)_2}, {c, vb(e)_3}$ are eigen-pairs.
+
+For
+$
+  A = mat(0, 0, a; 0, b, 0; c, 0, 0),
+$ only ${b, vb(e)_2}$ is an eigen-pair.
+
+For upper/lower triangular matrices, the head/tail of each row are eigenvalues, and the column of $a vb(e)_n$ makes ${a, vb(e)_n}$ an eigen-pair.
+
+== Application: Probability
+Using probability matrix to evaluate the probabilities after a few iteration, we would have to compute
+$
+  A^k vb(v)
+$ where $A$ is the probability matrix.
+
+If ${lambda, vb(v)}$ is an eigen-pair of $A$, then
+$
+  A^k vb(v) = lambda^k vb(v).
+$
+But this is kind of useless, as the coincidence can hardly happen.
+
+Remember that, any $n$-length vector can be expressed as a linear combination of $n$ other vectors with the same length (refer to LI and LD).
+Oh, if an $n times n$ matrix has $n$ eigenvectors...
+
+If two eigenvalues are different, their eigenvectors are linearly independent, which means they can be used to construct any vector in the same space.
+
+For example, $A in RR^2, vb(a) = vec(a_1, a_2), lambda_1 eq.not lambda_2$,
+$
+  vb(a) &= alpha vb(v)_1 + beta vb(v)_2 \
+  A^k vb(a) &= A^k (alpha vb(v)_1 + beta vb(v)_2) \
+  &= alpha A^k vb(v)_1 + beta A^k vb(v)_2 \
+  &= alpha lambda_1^k vb(v)_1 + beta lambda_2^k vb(v)_2.
+$
+
+== Application: Differential Equation
+For instance, $m dv(vb(x), t, 2)(t) + c dv(vb(x), t)(t) + k vb(x)(t) = 0$ describes a motion.
+
+It can be written as two 1st-degree differentials:
+$
+  cases(
+    x'(t) = v(t),
+    v'(t) = -k / m x(t) - c / m v(t)
+  ).
+$
+
+Let $vb(x) = vec(x(t), v(t))$,
+$
+  vb(x)' &= vec(x'_1, x'_2) \
+  x'_1(t) &= c_11 x_1(t) + c_12 x_2(t) \
+  x'_2(t) &= c_21 x_1(t) + c_22 x_2(t) \
+  vec(x'_1, x'_2) &= mat(a_11, a_12; a_21, a_22) vec(x_1(t), x_2(t)).
+$
+Let $A$ be the matrix of $a$'s.
+If $A$ has eigen pairs ${lambda_1, vb(v)_1}, {lambda_2, vb(v)_2}$ and $lambda_1 eq.not lambda_2$ or $(lambda_1 = lambda_2 = lambda) and ("AM"(lambda) = "GM"(lambda))$, there exists a general solution to the differential equations
+$
+  cases(
+    x_1 = e^(lambda_1 t) vb(v)_1,
+    x_2 = e^(lambda_2 t) vb(v)_2
+  ) \
+  vb(x)(t) = c_1 e^(lambda_1 t) vb(v)_1 + c_2 e^(lambda_2 t) vb(v)_2
+$ where $c_1, c_2$ are arbitrary constants.
+
+Given initial value $vb(x)(0)$, the constants can be solved.
+
+If the $lambda$'s found are conjugates, then the solutions are real:
+$
+  vb(x)_1 &= Re{vb(z)_1 (t)} = (vb(z)_1 + vb(z)_2) / 2 \
+  vb(x)_2 &= Im{vb(z)_1 (t)} = (vb(z)_1 - vb(z)_2) / (2i)
+$ where $z$ are the imaginary numbers formed by $e^(lambda t) vb(v)$.
+Note that the "imaginary" solution is _real_, no $i$!
+
+In short, if $vb(x)' = A vb(x), lambda_(1, 2) = alpha plus.minus beta i, (alpha, beta in RR)$,
+$
+  vb(x)(t) &= c_1 e^(lambda_1 t) vb(v)_1 + c_2 conj(e^(lambda_2 t) vb(v)_2) \
+  &= c_1 Re{e^(lambda_1 t) vb(v)_1} + c_2 Im{e^(lambda_1 t) vb(v)_1}.
+$
+Then, you will compute each value, distribute them to two vectors of the either the real or imaginary the part.
+
+== Application: Vector Transformation
+Let $A$ be a matrix that reflects vectors in $RR^2$ in the line at angle $pi / 3$.
+This is not the easiest, but learn.
+$
+  phi =& pi / 3 \
+  vb(u) =& vec(1, sqrt(3)) \
+  vb(u)_perp =& vec(sqrt(3), -1).
+$
+Let $vb(v)_1 = vb(u), vb(v)_2 = vb(u)_perp$, notice that
+$
+  vb(e)_1 =& vec(1, 0) = 1 / 4 vec(1, sqrt(3)) + sqrt(3) / 4 vec(sqrt(3), -1) = 1 / 4 vb(v)_1 + sqrt(3) / 4 vb(v)_2
+$
+Notice the same for $vb(e)_2$.
+Then compute $A vb(e)$:
+$
+  A vb(e)_1 =& A (1 / 4 vb(v)_1 + sqrt(3) / 4 vb(v)_2) \
+  =& 1 / 4 lambda_1 vb(v)_1 + sqrt(3) / 4 lambda_2 vb(v)_2.
+$
+Same for $A vb(e)_2$.
+
+== Application: Probability
+For every probability matrix, it always has an eigenvalue $lambda = 1$.
+The equilibrium is the eigenvector to the eigenvalue that is 1.
+
+== Matrix Similarity and Diagonalization <sc:mat-similarity>
+/ Similar matrices: Matrices $A, B$ are similar if there exists an invertible matrix $T$ that
+  $ B = T A T^(-1). $
+  Similar matrices have
+  - $rank(A) = rank(B)$
+  - $det(A) = det(B)$
+  - $trace(A) = trace(B)$
+  - Identical eigenvalues, but _not necessarily_ eigenvectors.
+
+Using similarity, we can finally rewrite matrix powers as
+$
+  A^k =& (T D T^(-1))^k \
+  =& T D T^(-1) \
+  =& T mat(lambda_1^k, 0, dots.c, 0; 0, lambda_2^k, dots.c, 0; dots.v, dots.v, dots.down, dots.v; 0, 0, dots.c, lambda_n^k) T^(-1)
+$ where $D$ is the diagonal matrix made of $A$'s eigenvalues, and $T$ is the matrix made of eigenvector columns, _in order_ of the eigenvalues in $D$.
+
+/ Diagonalizable matrix: For an $n times n$ matrix, if there exist $n$ LI eigenvectors, i.e. when all eigenvalues ate unique or each repeated eigenvalue has $"AM"(lambda) = "GM"(lambda)$, then the matrix is diagonalizable.
+
+== Matrix Exponential
+So... what the heck is that?
+$
+  e^A
+$
+
+Recall our previous differential euqation:
+$
+  cases(
+    x'(t) = a x(t),
+    x(0) = x_0
+  ) \
+  x(t) = e^(a t) x_0
+$
+Instead of scalar $a$, we now give it a matrix "coefficient":
+$
+  cases(
+    vb(x)'(t) = A vb(x)(t),
+    vb(x)(0) = vb(x)_0
+  ) \
+  vb(x)(t) = e^(A t) vb(x)_0 = ?
+$
+
+/ Matrix exponential ($e^A$): For an $n times n$ matrix $A$,
+  $
+    e^(A t) =& sum_(k = 0)^oo (A t)^k / k! \
+    =& I + A t + 1 / 2! A^2 t^2 + 1 / 3! A^3 t^3 + ...
+  $
+  The result is a matrix of the same size as $A$.
+  Note that the same applies to $A$ replaced with a scalar $a$.
+
+There are two cases:
+- $A$ is diagonalizable,
+- $A$ is not diagonalizable.
+Regardless, we can get the exponential, but the approaches vary.
+
+=== Diagonalizable Matrix as Power
+Let $A$ be a diagonalizable $3 times 3$ matrix.
+$
+  A =& T D T^(-1) \
+  T =& mat(vb(v)_1, vb(v)_2, vb(v)_3) \
+  D =& mat(lambda_1, 0, 0; 0, lambda_2, 0; 0, 0, lambda_3) \
+  e^(A t) =& sum_(k = 0)^oo ((T D T^(-1))^k t^k) / k! \
+  =& I + (T D T^(-1)) t + 1 / 2! (T D T^(-1))^2 t^2 + 1 / 3! (T D T^(-1))^3 t^3 + ...
+$
+
+Notice that
+$
+  sum_(k = 0)^oo (D^k t^k) / k! =& sum_(k = 0)^oo mat((lambda_1 t)^k / k!, 0, 0; 0, (lambda_2 t)^k / k!, 0; 0, 0, (lambda_3 t)^k / k! ) \
+  =& mat(sum_(k = 0)^oo (lambda_1 t)^k / k!, 0, 0; 0, sum_(k = 0)^oo (lambda_2 t)^k / k!, 0; 0, 0, sum_(k = 0)^oo (lambda_3 t)^k / k! ) \
+  =& mat(e^(lambda_1 t), 0, 0; 0, e^(lambda_2 t), 0; 0, 0, e^(lambda_3 t)).
+$
+
+By the same token we used in prior power of matrices, all the in-between $T^(-1) T$ cancel out,
+$
+  e^(A t) =& T mat(e^(lambda_1 t), 0, 0; 0, e^(lambda_2 t), 0; 0, 0, e^(lambda_3 t)) T^(-1) \
+  =& T e^(D t) T^(-1).
+$
+
+Now, given a linear system,
+$
+  cases(
+    x'_1(x) = a_11 x_1(t) + a_12 x_2(t),
+    x'_2(x) = a_21 x_1(t) + a_22 x_2(t),
+  ),
+$
+we can write is as
+$
+  A =& mat(a_11, a_12; a_21, a_22) \
+  vb(x')(t) =& A vb(x)(t) \
+  vb(x)(t) =& e^(A t) vb(x)_0 \
+  =& T e^(D t) T^(-1) vb(x)_0.
+$
+Elegantly solved.
+
+=== Non-diagonalizable Matrix as Power
+See textbook lol.
 
 #termlist
