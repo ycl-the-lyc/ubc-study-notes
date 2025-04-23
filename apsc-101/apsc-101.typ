@@ -75,6 +75,26 @@ _Good teams change their style as situation demands._
 
 Does not depend on skills of team members.
 
+== Business Letters
+- Letter Structure
+  - Address
+  - Date month day, year
+  - Receiver's Address (title after name)
+  - Salutation with colon: not common (ms. mr. dr. prof.)
+  - Introduction and purpose
+  - Details
+  - Restate purpose and request action
+  - Sincerely,
+  - Signature
+  - Name
+
+- Extra elements
+  - Letterhead: only on first page, address in letterhead not body
+  - Long title recipient as second line
+  - Bolded reference line before salutation re: this letter is important
+  - Enclosures below signature
+  - cc section (stating the other recipients)
+  - cc. bob and rob
 
 
 = Risk Management
@@ -104,11 +124,33 @@ harm.
 #image("assets/safetyControlHierarchy.png", width: 103%, height: 220pt, fit: "contain")
 
 
-= Drawings (tbd)
+= Engineering Drawings 
 
 == Orthographic
-- dash dot --> center line
-- dash --> hidden lines
+A drawing that depicts an object’s axis, with no perspective \ 
+
+/ Center line of hole: dash dot lines, + symbol in center
+/ Hidden features: dashed lines
+=== First Angle Projection
+- Front, left side, bottom
+=== Third Angle Projection
+- Front, right side, top
+
+#image("assets/firstthirdangleproj.png", width: 70%, height: 85pt, fit: "contain")
+note: any orientation of the symbols are fine
+
+== Title Block and Border:
+- Border has measurements 
+- Title block has: name, author, company, revision, scale, units, tolerances, materials, drawing number, third angle symbol
+
+== Dimensions:
+- best to be outside of part
+- extension lines: connecting dimension line to part
+- *NO REDUNDANT DIMENSIONS*
+- dimension *VISIBLE FEATURES* when possible
+- If two dimensions can be solved from the other, choose the most important and the other
+- Extension lines can cross, dimension lines cannot
+ 
 
 
 
@@ -326,6 +368,8 @@ The apparent properties affecting user experience, e.g. "battery life".
 Typically expressed in forms of thresholds, e.g. "germ level lower than 300", "potable".
 
 == Satisfaction
+Curves are *quantifiable and defensible* models of the relationship between attributes and stakeholder satisfaction. 
+
 "Extent" questions, used mostly in ranking and scoring.
 Typically shown as a curve, with satisfaction changing with attribute value, e.g. "3-8 hours of battery life, the higher the better".
 Sometimes, the higher the value, the worse the satisfaction.
@@ -339,12 +383,42 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 
 == TODO: processes
 
-= Rainwater Harvesting System
+= Module 7 Rainwater Harvesting System
 
-== Factors of Flow Rate
-TODO
+== Overview
+=== Prototype Classification
+- Consumption model: focused virtual
+- Early catchment model: focused virtual
+- Cf lab: focused physical
+- System model: comprehensive virtual
+
+=== RWH Collection Side
+- Catchment collects
+- Collection tank near house leads to pump
+- Filtration, chlorination
+- Pump provides pressure to elevated tank, which can then distribute water
+#image("assets/rwhcollection.png", width: 70%, height: 32%, fit: "contain")
+
+=== RWH Storage Side
+- Storage tank holds
+- filter (if not already used), UV treatment
+- Minimum on-demand flowrate and sustained average flow rate must be met
+#image("assets/rwhstorage.png", width: 70%, height: 32%, fit: "contain")
+
+
+== FLOW PHYSICS!!
+
+=== Hydrostatic Pressure
+$ p = rho g h $
+
+=== Flowrate / velocity / pressure out of a tank
+$ Q_"out" = A_"nozzle" sqrt((2 p)/rho) $
+$ v_"out" = sqrt((2 p)/rho) $
+Rearrange to get:
+$ p = (rho (v_"out")^2) / 2 $
 
 == System Pressure
+=== Supply Side
 $
   P_"pump" = rho g h_"storage" + underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
 $
@@ -352,11 +426,30 @@ $
 - $C_f$ filters' friction coefficient.
   Changed by filters on the _rising_ edge.
 - $L$ is the pipe length, and it _does not necessarily_ change if $x, y, z$ of the tanks are changed.
+\
+- As pump pressure increases, flow rate decreases
+- The pump operates at the intersection of these two curves for maximum flow rate
+#image("assets/pressureFlowrateIntersection.png", width: 70%, height: 22%, fit: "contain")
+- Must overcome storage height and all resistance and restrictions for water to flow towards the tank
+
+
+=== Storage Side
+$
+  rho g h_"storage" = underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
+$
+- The tank provide a constant flow rate dependent on height
+- Must match the same quantities as the pump (save the possibility of filters)
+
 
 == Maintenance
 - Filters \
   Life of a filter is determined by the filter size immediately larger than itself.
   E.g. life of a $qty("1", "micro m")$ filter is affected by the presence of a $qty("5", "micro m")$ filter, but not by the $qty("200", "micro m")$ if the prior is already present.
+ 
 - Power sources \
   Can be either diesel fuel engine or solar panels and battery.
   Solar has outstandingly low risk exposure, but might be less reliable.
+
+== Water Treatment
+- Filters
+  - Finer filter --> higher flow resistance, faster fouling
