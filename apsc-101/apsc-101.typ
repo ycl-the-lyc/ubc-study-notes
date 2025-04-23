@@ -96,6 +96,13 @@ Does not depend on skills of team members.
   - cc section (stating the other recipients)
   - cc. bob and rob
 
+== Recommendation Report
++ Problem statement
++ Engagement and implementation strategies
++ Description of possible solutions
++ Final selection and justification
+
+
 
 = Risk Management
 
@@ -171,6 +178,15 @@ note: any orientation of the symbols are fine
 
 
 = Systems Thinking (covered in APSC100, will be tested again in 101)
+== Sustainability Framework
+#image("assets/susFramework.png", width: 60%, height: 165pt, fit: "contain")
+
+== Resiliency
+/ Resiliency: capacity to *adapt* to changing conditions and to *maintain* or regain functionality and vitality in the face of stress or *disturbance*
+- usually the more simple the more resilient
+- can be analyzed using a CLD
+
+
 
 
 = Life Cycle Thinking
@@ -355,6 +371,10 @@ Sunk cost usually include equipments already bought, exploration and consultatio
 == Duty to Consult
 #link("https://www.rcaanc-cirnac.gc.ca/eng/1331832510888/1609421255810")[The Government of Canada has a duty to consult and, where appropriate, accommodate Indigenous groups when it considers conduct that might adversely impact potential or established Aboriginal or treaty rights.]
 
+
+
+
+
 = Design Specification
 
 == Design Parameter
@@ -381,11 +401,44 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 
 = Mining
 
+== Mine Development
+#image("assets/minedevcycle.png", width: 65%, height: 21%, fit: "contain")
+#image("assets/decisionmakingcycle.png", width: 65%, height: 21%, fit: "contain")
+
+== Definitions
+/ Mineral: a substance that occurs naturally in the earth; the material we are trying to obtain through Mining
+/ Ore: material containing a mix of valuable minerals and economically valueless materials (_*gangue*_) to be separated in proessing
+/ Waste rock: material that does not contain sufficient minerals to viably process
+/ Tailings: material rejected after minerals have been extracted in processing; usually a mix of fine particles and water
+/ Concentrate: contains valuable mineral and a product from which most waste has been removed
+
+== Mineral Deposits
+2D approximation
+#image("assets/mineralDeposits.png", width: 74%, height: 17%, fit: "contain")
+
+== Mining Methods
+=== Open pit mine 
+
+=== Underground mining
+
+
+== treatment for waste water and Tailings (TODO)
+
+== GHG emission? (TODO)
+
 == TODO: processes
+
+
+
 
 = Module 7 Rainwater Harvesting System
 
 == Overview
+
+=== Objective
+- To provide enough clean water to a 2 person house
+- Full rwh system:
+#image("assets/fullrwh.png", width: 65%, height: 21%, fit: "contain")
 === Prototype Classification
 - Consumption model: focused virtual
 - Early catchment model: focused virtual
@@ -408,21 +461,31 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 
 == FLOW PHYSICS!!
 
-=== Hydrostatic Pressure
+=== basics
+Hydrostatic Pressure:
 $ p = rho g h $
+Flow rate and velocity
+$ Q_"out" = A_"nozzle" v_"out" $
+- Q: volume flow rate
 
 === Flowrate / velocity / pressure out of a tank
 $ Q_"out" = A_"nozzle" sqrt((2 p)/rho) $
 $ v_"out" = sqrt((2 p)/rho) $
-Rearrange to get:
-$ p = (rho (v_"out")^2) / 2 $
+Rearrange to get: (because only a pressure *difference* will encourage a flow)
+$ p_1 - p_2 = (rho (v_"out")^2) / 2 $
+where $p_1$ is pressure inside water inside tank, $p_2$ is pressure outside (usually equal to atmospheric pressure, but we set as 0 (as kind of a datum))
+- Flow/Velocity from *high pressure* (height) to *low pressure* (height)
+
+
 
 == System Pressure
-=== Supply Side
-$
-  P_"pump" = rho g h_"storage" + underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
-$
+=== Collection Side
+- you want a pump to drive water from catchment (house roof) up to storage tank
 
+$
+  p_"pump" (v) = rho g h_"storage" + underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
+$
+- equation solves for the intersection point of the following #text(red.darken(15%))[pump] and #text(blue.darken(10%))[system] curve
 - $C_f$ filters' friction coefficient.
   Changed by filters on the _rising_ edge.
 - $L$ is the pipe length, and it _does not necessarily_ change if $x, y, z$ of the tanks are changed.
@@ -431,15 +494,41 @@ $
 - The pump operates at the intersection of these two curves for maximum flow rate
 #image("assets/pressureFlowrateIntersection.png", width: 70%, height: 22%, fit: "contain")
 - Must overcome storage height and all resistance and restrictions for water to flow towards the tank
+\
+To improve performance:
+- Move system curve:
+  - Reduce elevation (moves system curve right/down)
+  - Reduce pressure losses (by bringing storage tank closer to pump, or by removing filters from the line)
+- Move pump curve:
+  - Use a better pump
 
 
-=== Storage Side
+=== Storage (on demand) Side
+- Line from storage to house
+- No pump, driving pressure is elevation from storage tank
+
 $
   rho g h_"storage" = underbrace(f L / D (rho v^2) / 2, "friction") + underbrace(K (rho v^2) / 2, "restrictions") + underbrace(C_f v, "filter")
 $
 - The tank provide a constant flow rate dependent on height
 - Must match the same quantities as the pump (save the possibility of filters)
 
+Consider the worst case scenario, when water in tank is nearly empty:
+#image("assets/rwhdown1.png", width: 70%, height: 14%, fit: "contain")
+
+And assume constant water level:
+
+*Storage Tank and System Curve*
+#image("assets/rwhdown2.png", width: 70%, height: 21%, fit: "contain")
+
+- #text(blue.darken(40%))[on demand supply system curve] starts at origin, as we defined height of house to be 0
+- flow rate is intersection
+- to improve:
+  - increase elevation of storage tank (moves storage pressure curve up)
+  - reduce losses in supply system curve (move storage tank closer, remove filters)
+
+- Storage tank height must overcome all restrictions
+- *So the tank must be high enough to meet on-demand flow rate, but low enough to allow the pump to match its pressure!*
 
 == Maintenance
 - Filters \
@@ -451,5 +540,68 @@ $
   Solar has outstandingly low risk exposure, but might be less reliable.
 
 == Water Treatment
-- Filters
+
+*Order*:
++ Chemical before storage
++ Filters (before or after storage)
++ UV (post filter)
+
+=== Filters
+  - Can be on line to or from storage
   - Finer filter --> higher flow resistance, faster fouling
+  - Put large filters first
+  - Filter life depends on previous filters
+
+=== Non chemical treatment (UV)
+- Pros
+  - No residue
+  - Kills pathogens
+- Cons 
+  - Need pre-pure water (dirt blocks UV)
+  - Uses electric power
+
+=== Chemical Treatment
+*Chlorine*
+- Pros
+  - Kills pathogens
+  - Well developed and inexpensive
+- Cons
+  - Needs time to chlorinate
+  - Hazardous
+
+*Ozone*
+- Pros
+  - Kills pathogens
+  - On-site production (from air)
+- Cons
+  - Cost
+  - Needs electric power
+  - Contact time
+
+
+== Power
+=== Solar System
+- Operates pump and ozone during day
+- Since this is only supply side, it can turn off and leave the battery to run the UV at night
+- Pros:
+  - No emissions
+  - Silent
+  - No fuel transportation
+
+=== Diesel System
+- Operates pump and ozone, while charging UV battery for 24/7 use
+- Chemical E converted to mechanical w/ given efficiency
+- Risk transporting fuel
+
+=== Equations (TODO PUT MORE)
+$ E_"water" = p_"pump" V_"catch" $
+- Energy *output* needed to raise catchment water to storage tank w/ pump
+
+= Risk Modelling
+#image("assets/rwhrisktabl2.png", width: 77%, height: 30%, fit: "contain")
+#image("assets/rwhriskcurve1.png", width: 77%, height: 30%, fit: "contain")
+
+
+= Other things mentioned
+#image("assets/realFilters.png", width: 60%, height: 21%, fit: "contain")
+
