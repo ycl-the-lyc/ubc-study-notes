@@ -418,15 +418,38 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 
 == Mining Methods
 === Open pit mine 
+- diameter (or radius) of pit roughly proportional to depth
+- area roughly proportional to depth#super[2]
+- volume roughly proportional to depth#super[3]
+
+Pros:
+- good when deposit near surface
+- faster and can use bigger equipment
+- cost effective for lower grade Deposits
+Cons:
+- must remove and handle large amoutns of waste
+- may not be feasible in environmentally or culturally sensitive strategies
+- significant changes to landform
+
 
 === Underground mining
+Pros:
+- good for deep Deposits
+- way less waste rock removed
+- lower environmental footprint
+- less space on surface required
+Cons:
+- additional safety considerations required (stability, ventilation, radiation)
+- more expensive to remove material
+- slower due to less room and smaller equipment
 
-
-== treatment for waste water and Tailings (TODO)
+== treatment for waste water and tailings 
+- Tailings dams
+- dry stack tailings (remove most of the water from the tailings before storing)
+  - take up less space than dam
+  - reduces risk of contamination / dam breach
 
 == GHG emission? (TODO)
-
-== TODO: processes
 
 
 
@@ -600,6 +623,37 @@ $ E_"water" = p_"pump" V_"catch" $
 = Risk Modelling
 #image("assets/rwhrisktabl2.png", width: 77%, height: 30%, fit: "contain")
 #image("assets/rwhriskcurve1.png", width: 77%, height: 30%, fit: "contain")
+
+= Content from APSC100 (TODO PUT MORE)
+== Stakeholders / Salience
+/ Power: stakeholder's ability to influence a project
+/ Legitimacy: stakeholder's *moral* or *legal* right to have a say in a project
+/ Urgency: how critical or time sensitive a stakeholder perceives their needs in a project to be
+
+Primary stakeholders: has all 3 \
+Secondary stakeholders: has 2 \
+Tertiary: has 1 \
+Non stakeholder: 0 \
+\
+Note: stakeholder salience can change over time
+
+=== Needs
+/ Needs: capture teh wants and wishes of thes takeholders and the things that will increase/decrease stakeholder satisfaction
+/ Expressed needs: needs stakeholders are aware of and freely share (usually through consultations)
+/ Latent needs: needs stakeholders might not be aware of
+/ Threshold needs: needs stakeholders expect but dont mentioned
+
+== Target Design Specifications
+/ Requirements: collection of min. thresholds our design must achieve to satisfy stakeholders
+/ Evaluation criteria: attributes of importance to stakeholders that determines satisfaction beyond min requirements
+
+
+
+== Validation and Verification
+/ Validation: ensuring correct design specfications
+  - are we solving the correct problem?
+/ Verification: check solution meets requirements and maximizes overall stakeholder satisfaction
+  - did we solve the problem correctly?
 
 
 = Other things mentioned
