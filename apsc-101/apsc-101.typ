@@ -49,7 +49,7 @@
 
 _Good teams change their style as situation demands._
 
-== Equity Diversion Inclusion (EDI)
+== Equity Diversity Inclusion (EDI)
 
 / Equity: Everyone has same opportunities and outcomes
 / Diversity: recognizing and valuing different background, identity, experiences, and different points of view
