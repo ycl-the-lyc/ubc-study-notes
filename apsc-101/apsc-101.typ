@@ -186,6 +186,11 @@ note: any orientation of the symbols are fine
 - usually the more simple the more resilient
 - can be analyzed using a CLD
 
+- characteristics of resilient systems:
+  - redundancies
+  - interaction of elements within a system
+  - made from lcoally available resources
+  - system complexity *DOES NOT MATTER*
 
 
 
@@ -681,3 +686,5 @@ Note: stakeholder salience can change over time
 = Other things mentioned
 #image("assets/realFilters.png", width: 60%, height: 21%, fit: "contain")
 
+= Some mistakes I (nathan) made
+- If two tanks have different diameter/radius/area, but volume same, when subject to constant rainfall, the water depth in the tanks *increase at the same _rate_* 
