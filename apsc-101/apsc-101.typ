@@ -616,9 +616,31 @@ And assume constant water level:
 - Chemical E converted to mechanical w/ given efficiency
 - Risk transporting fuel
 
-=== Equations (TODO PUT MORE)
+=== Equations 
+
+$ E_"water" = m g h $
+- $E$ is power required to raise water to storage tank of height $h$
+
+Using the following equations:
+$ p_"storage" = rho g h $
+$ "mass" = rho V_"collected" $
+
+To get:
 $ E_"water" = p_"pump" V_"catch" $
 - Energy *output* needed to raise catchment water to storage tank w/ pump
+
+- Recall that pump pressure must match the height differential and systemic losses.
+- $E_"water"$ is an output value and efficiency must be accounted for
+$ E_"input" * "Efficiency" = E_"water (output)" $
+$ "Pump power" = "flowrate" * "pressure" $
+
+- *Finding operational flow of system*
+  - Where the pressure/flow rate curves intersect
+  + Find total time $= V / Q_"intersect"$ units: $"volume"/"volume per time" = "time"$
+  + Convert $p_"pump"$ into $E_"water"$
+  + Convert $E_"water"$ into input (divide by efficiency)
+  + Convert $E$ to power by dividing by time
+
 
 = Risk Modelling
 #image("assets/rwhrisktabl2.png", width: 77%, height: 30%, fit: "contain")
