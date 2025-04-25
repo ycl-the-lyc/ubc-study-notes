@@ -114,6 +114,8 @@ $"Risk" eq.not "Hazard"$
 / Hazard: _Capacity_ of equipment, material, or processes to cause
 harm.
 
+- The risk management process should be repeated from the beginning whenever a risk is mitigated
+
 == Risk Sources
 
 / Preventable: Controllable. \
@@ -191,6 +193,7 @@ note: any orientation of the symbols are fine
   - interaction of elements within a system
   - made from lcoally available resources
   - system complexity *DOES NOT MATTER*
+  - functions across different scales?
 
 
 
@@ -421,6 +424,11 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 2D approximation
 #image("assets/mineralDeposits.png", width: 74%, height: 17%, fit: "contain")
 
+== Block models
+[05112] What does the APSC 101 Block Model most directly incorporate into its calculations and outputs?
+- Estimating economic values of mineral and waste materials for different mine designs
+
+
 == Mining Methods
 === Open pit mine 
 - diameter (or radius) of pit roughly proportional to depth
@@ -453,9 +461,6 @@ Cons:
 - dry stack tailings (remove most of the water from the tailings before storing)
   - take up less space than dam
   - reduces risk of contamination / dam breach
-
-== GHG emission? (TODO)
-
 
 
 
