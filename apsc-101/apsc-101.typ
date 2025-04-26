@@ -55,9 +55,9 @@ _Good teams change their style as situation demands._
 / Diversity: recognizing and valuing different background, identity, experiences, and different points of view
 
 == Biases
-/ Implicit biases: subconcious stereotypes about groups, learned through what we see 
-/ Microaggressions: small, subtle, or indirect discriminatory actions or statements 
-/ Stereotype threat: when people feel concerned about conforming to a stereotype for a group they belong to 
+/ Implicit biases: subconcious stereotypes about groups, learned through what we see
+/ Microaggressions: small, subtle, or indirect discriminatory actions or statements
+/ Stereotype threat: when people feel concerned about conforming to a stereotype for a group they belong to
 \
 / Allyship: acting to support those facing discrimination in or underrepresented groups
 - Reactive allyship: in response to an incident of bias (e.g. team member steps in to defend another)
@@ -132,109 +132,6 @@ harm.
 
 #image("assets/safetyControlHierarchy.png", width: 103%, height: 220pt, fit: "contain")
 
-
-= Engineering Drawings 
-
-== Orthographic
-A drawing that depicts an object’s axis, with no perspective \ 
-
-/ Center line of hole: dash dot lines, + symbol in center
-/ Hidden features: dashed lines
-=== First Angle Projection
-- Front, left side, bottom
-=== Third Angle Projection
-- Front, right side, top
-
-#image("assets/firstthirdangleproj.png", width: 70%, height: 85pt, fit: "contain")
-note: any orientation of the symbols are fine
-
-== Title Block and Border:
-- Border has measurements 
-- Title block has: name, author, company, revision, scale, units, tolerances, materials, drawing number, third angle symbol
-
-== Dimensions:
-- best to be outside of part
-- extension lines: connecting dimension line to part
-- *NO REDUNDANT DIMENSIONS*
-- dimension *VISIBLE FEATURES* when possible
-- If two dimensions can be solved from the other, choose the most important and the other
-- Extension lines can cross, dimension lines cannot
- 
-
-
-
-= Feedback
-
-== 7 Cs (recap)
-
-*Clear* - easy to follow, easy to understand \
-*Correct* - Factually accurate, prepared according to professional standard \ 
-*Concise* - Brief, efficient \
-*Concrete* - Detailed, vivid, and specific. Main point is clearly evident \
-*Complete* - includes info relevant to the audience, conveys what audience should do \ 
-*Courteous* - polite and respectful, geuine and sincere \ 
-*Considerate* - empathetic and mindful, prepared with receiver in mind \ 
-
-== 3x3 Feedback Model
-#image("assets/3x3feedback.png", width: 103%, height: 220pt, fit: "contain")
-
-
-= Systems Thinking (covered in APSC100, will be tested again in 101)
-== Sustainability Framework
-#image("assets/susFramework.png", width: 60%, height: 165pt, fit: "contain")
-
-== Resiliency
-/ Resiliency: capacity to *adapt* to changing conditions and to *maintain* or regain functionality and vitality in the face of stress or *disturbance*
-- usually the more simple the more resilient
-- can be analyzed using a CLD
-
-- characteristics of resilient systems:
-  - redundancies
-  - interaction of elements within a system
-  - made from lcoally available resources
-  - system complexity *DOES NOT MATTER*
-  - functions across different scales?
-
-
-
-= Life Cycle Thinking
-
-/ Life cycle thinking: accounting for all impacts of a product or process across all stages of its life cycle
-
-== Life Cycle Stages
-#image("assets/lifeCycleStages.png", width: 100%, height: 220pt, fit: "contain")
-
-At product end of life, the following options are ranked most desirable to least desirable
-+ *Reuse: * reuse the product in its current state, upcycle unwanted products to products of higher quality or value, or repurpose the product to a new use 
-+ *Recycle: * process the raw materials in the product and produce something new
-+ *Recovery:* extracting as much energy or material from product as possible before disposing of it 
-
-Another is *reduce*, which is to change behaviours as a society to reduce what we consume and use.
-
-
-== Life Cycle Assessment (LCA)
-
-- systematic evaluation of the impacts of energy and material inputs and outputs for a product/process across all life cycle stages
-
-+ *Goal Definition and Scope*
-  - System boundary: a description of what elements are included or not included in an LCA
-  - Functional units: a reference measure of performance to use as a baseline in comparing options
-    #image("assets/funcUnitImg.png", width: 85%, height: 150pt, fit: "contain")
-
-+ *Inventory Analysis*
-
-+ *Impact Assessment*
-  - impacts of each material and energy flow are quantified
-
-+ *Interpretation*
-  - systematically review work of each stage as new information comes in
-
-=== Challenges with LCA
-  - Detailed knowledge of material and energy flows required
-  - Impacts must be known and quantified
-  - Focuses on environmental impacts
-  - *_difficult to use early in design process_*
-
 == Risk Tools
 
 //TODO risk management process
@@ -292,7 +189,7 @@ Another is *reduce*, which is to change behaviours as a society to reduce what w
         rowspan: 4,
         rotate(-90deg, origin: right + top, reflow: true, smallcaps[Risk Category #h(.2em)]),
       ),
-      [Safety], [], [N/A],[],
+      [Safety], [], [N/A], [],
       [Technical], ..([],) * 3,
       [Project \ Management], ..([],) * 3,
       [Operational], ..([],) * 3,
@@ -302,34 +199,37 @@ Another is *reduce*, which is to change behaviours as a society to reduce what w
 
 A risk classification table is a tool used to identify and classify risks based on their severity and likelihood.
 
-#figure(
-  caption: [Risk Matrix],
-  table(
-    columns: (2em,) + (4em,) * 6,
-    stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
-    fill: (x, y) => if (x < 2 or y < 2) { none } else {
-      red.transparentize(10% * (6 - x + y))
-    },
-    table.header(
-      table.cell(colspan: 2, rowspan: 2, none),
-      table.cell(colspan: 5)[Severity],
-      [1],
-      [2],
-      [3],
-      [4],
-      [5],
+#{
+  show figure: block.with(breakable: false)
+  figure(
+    caption: [Risk Matrix],
+    table(
+      columns: (2em,) + (4em,) * 6,
+      stroke: (x, y) => if (x < 2 and y < 2) { none } else { black + 0.5pt },
+      fill: (x, y) => if (x < 2 or y < 2) { none } else {
+        red.transparentize(10% * (6 - x + y))
+      },
+      table.header(
+        table.cell(colspan: 2, rowspan: 2, none),
+        table.cell(colspan: 5)[Severity],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+      ),
+      table.cell(
+        rowspan: 5,
+        rotate(-90deg, origin: right + top, reflow: true, smallcaps[Likelihood #h(1.2em)]),
+      ),
+      [5], ..([],) * 5,
+      [4], ..([],) * 5,
+      [3], ..([],) * 5,
+      [2], ..([],) * 5,
+      [1], ..([],) * 5,
     ),
-    table.cell(
-      rowspan: 5,
-      rotate(-90deg, origin: right + top, reflow: true, smallcaps[Likelihood #h(1.2em)]),
-    ),
-    [5], ..([],) * 5,
-    [4], ..([],) * 5,
-    [3], ..([],) * 5,
-    [2], ..([],) * 5,
-    [1], ..([],) * 5,
-  ),
-)
+  )
+}
 
 #figure(
   caption: [Risk Register],
@@ -346,30 +246,132 @@ A risk classification table is a tool used to identify and classify risks based 
     [1], ..([],) * 5,
     [2], ..([],) * 5,
     [3], ..([],) * 5,
-  )
+  ),
 )
 
+
+= Engineering Drawings
+
+== Orthographic
+A drawing that depicts an object’s axis, with no perspective \
+
+/ Center line of hole: dash dot lines, + symbol in center
+/ Hidden features: dashed lines
+=== First Angle Projection
+- Front, left side, bottom
+=== Third Angle Projection
+- Front, right side, top
+
+#image("assets/firstthirdangleproj.png", width: 70%, height: 85pt, fit: "contain")
+note: any orientation of the symbols are fine
+
+== Title Block and Border:
+- Border has measurements
+- Title block has: name, author, company, revision, scale, units, tolerances, materials, drawing number, third angle symbol
+
+== Dimensions:
+- best to be outside of part
+- extension lines: connecting dimension line to part
+- *NO REDUNDANT DIMENSIONS*
+- dimension *VISIBLE FEATURES* when possible
+- If two dimensions can be solved from the other, choose the most important and the other
+- Extension lines can cross, dimension lines cannot
+
+
+
+
+= Feedback
+
+== 7 Cs (recap)
+
+*Clear* - easy to follow, easy to understand \
+*Correct* - Factually accurate, prepared according to professional standard \
+*Concise* - Brief, efficient \
+*Concrete* - Detailed, vivid, and specific. Main point is clearly evident \
+*Complete* - includes info relevant to the audience, conveys what audience should do \
+*Courteous* - polite and respectful, geuine and sincere \
+*Considerate* - empathetic and mindful, prepared with receiver in mind \
+
+== 3x3 Feedback Model
+#image("assets/3x3feedback.png", width: 103%, height: 220pt, fit: "contain")
+
+
+= Systems Thinking (covered in APSC100, will be tested again in 101)
+== Sustainability Framework
+#image("assets/susFramework.png", width: 60%, height: 165pt, fit: "contain")
+
+== Resiliency
+/ Resiliency: capacity to *adapt* to changing conditions and to *maintain* or regain functionality and vitality in the face of stress or *disturbance*
+- Complex systems are more resilient than simple or complicated systems.
+- Can be analyzed using a CLD.
+
+- Design principles of resilient systems:
+  - function across different scales
+  - build redundancies
+  - use locally available resources
+  - as possible, simple, passive and flexible; e.g. not requiring constant monitoring or input
+  - be ethical, supporting community and social equity
+
+
+= Life Cycle Thinking
+
+/ Life cycle thinking: accounting for all impacts of a product or process across all stages of its life cycle
+
+== Life Cycle Stages
+#image("assets/lifeCycleStages.png", width: 100%, height: 220pt, fit: "contain")
+
+At product end of life, the following options are ranked most desirable to least desirable
++ *Reuse: * reuse the product in its current state, upcycle unwanted products to products of higher quality or value, or repurpose the product to a new use
++ *Recycle: * process the raw materials in the product and produce something new
++ *Recovery:* extracting as much energy or material from product as possible before disposing of it
+
+Another is *reduce*, which is to change behaviours as a society to reduce what we consume and use.
+
+
+== Life Cycle Assessment (LCA)
+
+- systematic evaluation of the impacts of energy and material inputs and outputs for a product/process across all life cycle stages
+
++ *Goal Definition and Scope*
+  - System boundary: a description of what elements are included or not included in an LCA
+  - Functional units: a reference measure of performance to use as a baseline in comparing options
+    #image("assets/funcUnitImg.png", width: 85%, height: 150pt, fit: "contain")
+
++ *Inventory Analysis*
+
++ *Impact Assessment*
+  - impacts of each material and energy flow are quantified
+
++ *Interpretation*
+  - systematically review work of each stage as new information comes in
+
+=== Challenges with LCA
+- Detailed knowledge of material and energy flows required
+- Impacts must be known and quantified
+- Focuses on environmental impacts
+- *_difficult to use early in design process_*
+
 == Streamlined Life Cycle Assessment (SLCA)
-  - for each criterion and for each life cycle stage, evaluate performance of product/process on a qualitative scale. \
-    e.g. "very poor" to "very good" or "significant negative impact" to "significant benefit"
-      #image("assets/slcaResult.png", width: 75%, height: 165pt, fit: "contain")
+- for each criterion and for each life cycle stage, evaluate performance of product/process on a qualitative scale. \
+  e.g. "very poor" to "very good" or "significant negative impact" to "significant benefit"
+  #image("assets/slcaResult.png", width: 75%, height: 165pt, fit: "contain")
 
-  - results usually tabulated in SLCA Matrix
-    #image("assets/slcaMatrix.png", width: 80%, height: 100pt, fit: "contain")
+- results usually tabulated in SLCA Matrix
+  #image("assets/slcaMatrix.png", width: 80%, height: 100pt, fit: "contain")
 
-  - values in matrix then summed to determined environmentally responible product rating ($upright("R")_upright("ERP")$). \
-    equivalent to score in WDM if all weights were 1
+- values in matrix then summed to determined environmentally responible product rating ($upright("R")_upright("ERP")$). \
+  equivalent to score in WDM if all weights were 1
 
 === Usage of SLCA
-  + use $upright("R")_"ERP"$ to benchmark performance against other products
-  + use SLCA ratings to determine areas of greatest negative impact 
++ use $upright("R")_"ERP"$ to benchmark performance against other products
++ use SLCA ratings to determine areas of greatest negative impact
 
 === Benefits of SLCA
-  - SLCA faster, easier, less expensive to complete 
-    - SLCA takes days, LCA can take months
-  - SLCA qualitative (easier to use with criteria which are more difficult to quantify), but also makes results *less precise*
-  - SLCA suitable for any stage of design process (especially early where potential influence on design decisions is greatest)
-    - LCA suitable for existing products / very late in design process (where precise assessment of impact is required)
+- SLCA faster, easier, less expensive to complete
+  - SLCA takes days, LCA can take months
+- SLCA qualitative (easier to use with criteria which are more difficult to quantify), but also makes results *less precise*
+- SLCA suitable for any stage of design process (especially early where potential influence on design decisions is greatest)
+  - LCA suitable for existing products / very late in design process (where precise assessment of impact is required)
 
 == Sunk Cost
 / Sunk cost: a cost that has already been incurred and cannot be recovered.
@@ -396,7 +398,7 @@ The apparent properties affecting user experience, e.g. "battery life".
 Typically expressed in forms of thresholds, e.g. "germ level lower than 300", "potable".
 
 == Satisfaction
-Curves are *quantifiable and defensible* models of the relationship between attributes and stakeholder satisfaction. 
+Curves are *quantifiable and defensible* models of the relationship between attributes and stakeholder satisfaction.
 
 "Extent" questions, used mostly in ranking and scoring.
 Typically shown as a curve, with satisfaction changing with attribute value, e.g. "3-8 hours of battery life, the higher the better".
@@ -430,7 +432,7 @@ Building satisfaction curve involves market analysis, consumer/customer intervie
 
 
 == Mining Methods
-=== Open pit mine 
+=== Open pit mine
 - diameter (or radius) of pit roughly proportional to depth
 - area roughly proportional to depth#super[2]
 - volume roughly proportional to depth#super[3]
@@ -456,7 +458,7 @@ Cons:
 - more expensive to remove material
 - slower due to less room and smaller equipment
 
-== treatment for waste water and tailings 
+== treatment for waste water and tailings
 - Tailings dams
 - dry stack tailings (remove most of the water from the tailings before storing)
   - take up less space than dam
@@ -567,7 +569,7 @@ And assume constant water level:
 - Filters \
   Life of a filter is determined by the filter size immediately larger than itself.
   E.g. life of a $qty("1", "micro m")$ filter is affected by the presence of a $qty("5", "micro m")$ filter, but not by the $qty("200", "micro m")$ if the prior is already present.
- 
+
 - Power sources \
   Can be either diesel fuel engine or solar panels and battery.
   Solar has outstandingly low risk exposure, but might be less reliable.
@@ -580,16 +582,16 @@ And assume constant water level:
 + UV (post filter)
 
 === Filters
-  - Can be on line to or from storage
-  - Finer filter --> higher flow resistance, faster fouling
-  - Put large filters first
-  - Filter life depends on previous filters
+- Can be on line to or from storage
+- Finer filter --> higher flow resistance, faster fouling
+- Put large filters first
+- Filter life depends on previous filters
 
 === Non chemical treatment (UV)
 - Pros
   - No residue
   - Kills pathogens
-- Cons 
+- Cons
   - Need pre-pure water (dirt blocks UV)
   - Uses electric power
 
@@ -626,7 +628,7 @@ And assume constant water level:
 - Chemical E converted to mechanical w/ given efficiency
 - Risk transporting fuel
 
-=== Equations 
+=== Equations
 
 $ E_"water" = m g h $
 - $E$ is power required to raise water to storage tank of height $h$
@@ -692,4 +694,4 @@ Note: stakeholder salience can change over time
 #image("assets/realFilters.png", width: 60%, height: 21%, fit: "contain")
 
 = Some mistakes I (nathan) made
-- If two tanks have different diameter/radius/area, but volume same, when subject to constant rainfall, the water depth in the tanks *increase at the same _rate_* 
+- If two tanks have different diameter/radius/area, but volume same, when subject to constant rainfall, the water depth in the tanks *increase at the same _rate_*
