@@ -550,7 +550,6 @@ Consider the worst case scenario, when water in tank is nearly empty:
 #image("assets/rwhdown1.png", width: 70%, height: 14%, fit: "contain")
 
 And assume constant water level:
-
 *Storage Tank and System Curve*
 #image("assets/rwhdown2.png", width: 70%, height: 21%, fit: "contain")
 
