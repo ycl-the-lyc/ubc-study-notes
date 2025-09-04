@@ -5,3 +5,14 @@
   author: "Yecheng Liang"
 )
 
+= ???
+
+#theorem[lol's Theorem][
+  #lorem(10)
+
+  #proof[
+    #lorem(20)
+  ]
+]
+
+#frames-outline([Theorem])
