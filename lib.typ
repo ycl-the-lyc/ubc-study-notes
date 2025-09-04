@@ -1,9 +1,14 @@
 #import "@preview/ilm:1.4.1": *
 
-#import "@preview/physica:0.9.5": *
+#import "@preview/physica:0.9.5"
+#import physica: *
 
 #let conj = math.overline
 #let kern = math.cal([N])
+#let Set(..args) = {
+  let args = args.pos();
+  $physica.Set(#args.remove(0), #args.join($, $))$
+}
 
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
 
