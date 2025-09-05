@@ -9,6 +9,7 @@
   let args = args.pos();
   $physica.Set(#args.remove(0), #args.join($, $))$
 }
+#let vn(body) = $norm(vb(body))$
 
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
 
