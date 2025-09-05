@@ -6,8 +6,6 @@
 
 #set math.vec(delim: "[")
 
-#let vn(body) = math.norm(vb(body))
-
 = Cartesian Coordinate System
 For a 3D space, $RR^3$, there are sets of points.
 Knowing one point does not tell you a line, like so in a 2D space, but rather gives you a surface.
