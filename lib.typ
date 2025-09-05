@@ -14,9 +14,9 @@
 
 #import "@preview/frame-it:1.2.0": *
 
-#let definition = frame("Definition", yellow.darken(15%))
+#let definition = frame("Definition", orange)
 
-#let theorem = frame("Theorem", red.desaturate(25%))
+#let theorem = frame("Theorem", red.desaturate(20%))
 
 #let proof = frame("Proof", purple.lighten(60%).desaturate(40%)).with([])
 
