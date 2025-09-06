@@ -100,6 +100,14 @@ A nibble has 16 possible combinations, hence it can represent a hexadecimal numb
 Just add 'em.
 For subtraction, convert it to addition of negative numbers.
 
+#example[Adding unsigned or two's complement binary numbers][
+  #ladd(
+    numeral: 2,
+    1010,
+    0010,
+  )
+]
+
 == Sign/Magnitude Numbers
 The most significant bit indicates the sign: 0 means positive, 1 means negative.
 
@@ -130,10 +138,9 @@ To add, simply add, then remove overflow.
 
 #example[Adding two's complements][
   $
-    (-6)_10 + 6_10 & = 0     \
-       1010 + 0110 & = 10000 \
-                   & => 0000 \
-                   & = 0
+                   (-6)_10 + 6_10 & = 0     \
+    #ladd(numeral: 2, 1010, 0110) & => 0000 \
+                                  & = 0
   $
 ]
 
@@ -169,3 +176,4 @@ Then "N" or "X" can be appended for an additional NOT or exclusivity.
   ..gatemap.keys().map(drgate),
   ..gatemap.keys().map(upper),
 ))
+
