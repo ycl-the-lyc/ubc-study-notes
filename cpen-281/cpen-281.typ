@@ -5,29 +5,15 @@
   author: "Yecheng Liang",
 )
 
-= Module 1
+= Genral Guidelines
 
 == Reflection
-#qna[
-  What type of writing do you do most often – academic writing, business/technical writing, or texting?
-][
-  Technical writing and texting.
-  In the writing of code and thus programs, comments and standalone documentations are required for developers and users to understand the piece of work.
-]
+- What type of writing do you do most often – academic writing, business/technical writing, or texting?
+- How would you describe your style and writing process?
+- How would you like to improve your style and writing process?
 
-#qna[
-  How would you describe your style and writing process?
-][
-  For technical writing, arbitrary drafts and many revisions to make it impartial.
-  For texting, rapid-fire as if talking.
-]
-
-#qna[
-  How would you like to improve your style and writing process?
-][
-  For technical writing, being more consistent on tense, attitude and being more concise.
-  For texting, forming longer sentences possibly with edits so expressions can be tailored to the audience.
-]
+== Generic Formats
+/ The A.B.C.: Abstract, body, conclusion.
 
 == Technical Writing Strategies
 - Purpose, audience and context analysis.
@@ -50,4 +36,40 @@
   In addition, Hartaj has extensive experience as a communications specialist and a print and e-services manager mainly with the Ministry of Health. Her experience includes technical communication, professional writing, print and e-services, and management.
 ]
 
+= Style and Correspondence
 
+#definition[Correspondence][
+  Communication by exchanging letters, emails or other messages.
+]
+
+#example[Style][
+  Personal or impersonal.
+
+  "I would like you to..." v.s. "All students are to..."
+]
+#example[Tone][
+  Confident, polite, friendly, or discouraging.
+
+  The car is "low cost..." v.s. "cheap..."
+]
+
+== Emails
+Emails are mostly used in workspace, backed up in the service provider's or company's server.
+That means emails are very likely monitored, and hence we should use emails professionally.
+
+== Email Guidlines
+To write concise emails,
+- use simple sentence structure, reduce the use of complex or composite structure;
+- use technical terms wherever possible in place of long phrases;
+- be not persuasive when unnecessary to reduce repetition.
+
+To format emails,
+- for plain text email, hit the "convert all to plain text" button;
+- use a vertical ruler to break lines too long;
+- ensure all users' email client support fonts and formats used;
+- use email templates.
+
+To manage emails,
+- use an email service and clients with encryption like GPG;
+- include tracking number or ticket ID in subject line;
+- set send delay to greater than 30s to be able to recover accidentally sent emails.
