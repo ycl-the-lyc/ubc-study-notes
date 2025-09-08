@@ -3,6 +3,7 @@
 #import "@preview/physica:0.9.5"
 #import physica: *
 
+#let iff = $<=>$
 #let conj = math.overline
 #let kern = math.cal([N])
 #let Set(..args) = {
@@ -126,6 +127,7 @@
     author: author,
   )
   show: frame-style(styles.thmbox)
+  show figure.where(kind: "frame"): set block(breakable: true)
 
   show: it => {
     set math.equation(numbering: "(1.1)")
