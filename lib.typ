@@ -7,7 +7,7 @@
 #let kern = math.cal([N])
 #let Set(..args) = {
   let args = args.pos();
-  $physica.Set(#args.remove(0), #args.join($, $))$
+  $#physica.Set(args.remove(0), args.join($, $))$
 }
 #let vn(body) = $norm(vb(body))$
 
@@ -22,8 +22,6 @@
 #let proof = frame("Proof", purple.lighten(60%).desaturate(40%)).with([])
 
 #let example = frame("Example", gray)
-
-#let qna = frame("Q&A", black.lighten(20%))
 
 #let frames-outline(..supplements) = {
   let sps = supplements.pos()
