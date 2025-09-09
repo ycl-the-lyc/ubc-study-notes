@@ -6,6 +6,7 @@
 #let iff = $<=>$
 #let conj = math.overline
 #let kern = math.cal([N])
+#let xor = "xor"
 #let Set(..args) = {
   let args = args.pos();
   $#physica.Set(args.remove(0), args.join($, $))$
