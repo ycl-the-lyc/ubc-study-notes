@@ -177,3 +177,36 @@ Then "N" or "X" can be appended for an additional NOT or exclusivity.
   ..gatemap.keys().map(upper),
 ))
 
+Each gate is at least a buffer, which delays DC transfer.
+
+== DC Transfer
+Always make sure the voltage to a chip is not too low or too high for triggering HIGH and LOW.
+Different chips have voltage specifications different.
+
+#definition[CMOS][
+  Complementary metal oxide semiconductor.
+]
+
+Logic gates are built from transistors.
+Due to the imperfectness of real world, the voltages for LOW and HIGH are not exactly 0 and 5V or something.
+If a gate with multiple input has unknown input, it might blow up!
+
+== Silicon to Transistor
+Transistors are made from silicon and additives.
+
+Pure silicon crystal is a poor conductor if electricity, but doped silicon, for example, with As and B, allows the additive to produce free and mobile electrons.
+The part with electrons, the negative, is called the "n type"; otherwise it is the "p type".
+
+Polysilicon, which is a good conductor, is be placed between p's _or_ n's, the source and the drain, as a channel for electrons, above a layer of insulating but thin silicon dioxide.
+
+Now, depending on which type are connected by the channel, and which other type is used as substrate, there are two types of MOS:
+- nMOS: n type as source and drain, p type as substrate.
+  When input is LOW, it has low resistance, like a large resistor.
+  When input is HIGH, it has high resistance, like an open circuit.
+- pMOS: p type as source and drain, n type as substrate
+  When input is LOW, it has medium resistance, like a small resistor.
+  When input is HIGH, it has negligible resistance, like a wire.
+
+== Transistor to Gate
+Since nMOS is good at blocking current, and pMOS is good at allowing current, nMOS is used to "pull down" the current --- block it from ground; pMOS is used to "pull up" the current --- lead it to appliances.
+The pull-up block is connected to $V_"DD"$, the power, the pull-down block is connected to ground.
