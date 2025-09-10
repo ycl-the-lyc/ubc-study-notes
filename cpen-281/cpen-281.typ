@@ -53,11 +53,10 @@
   The car is "low cost..." v.s. "cheap..."
 ]
 
-== Emails
+== Email
 Emails are mostly used in workspace, backed up in the service provider's or company's server.
 That means emails are very likely monitored, and hence we should use emails professionally.
 
-== Email Guidlines
 To write concise emails,
 - use simple sentence structure, reduce the use of complex or composite structure;
 - use technical terms wherever possible in place of long phrases;
@@ -73,3 +72,8 @@ To manage emails,
 - use an email service and clients with encryption like GPG;
 - include tracking number or ticket ID in subject line;
 - set send delay to greater than 30s to be able to recover accidentally sent emails.
+
+== Generic Correspondent
++ Introduction: purpose statement and context.
++ Body: details.
++ Conclusion: next steps, timeline and contact information.
