@@ -24,9 +24,11 @@
   $and$, $$, [And],
   $or$, $$, [Or],
   $xor$, $"xor"$, [Exclusive or],
-  $tilde$, $not quad excl$, [Not],
+  $~$, $not quad excl$, [Not],
   $->$, $$, [Tends to],
-  $==>$, $$, [Implies],
+  $=>$, $$, [Implies],
+  $<=$, $$, [Implies (reversed)],
+  $<=>$, $"iff"$, [If and only if],
 ))
 
 = Set
@@ -111,12 +113,12 @@ Statements and open sentences are mutually exclusive, since statements have defi
 To think of them mathematically, a statement is a variable, an open sentence is a function.
 
 #definition[Implication][
-  For statements $P$ and $Q$, if $P$ implied $A$, $P ==> Q$, then if $P$ is true, $Q$ must be true.
+  For statements $P$ and $Q$, if $P$ implied $A$, $P => Q$, then if $P$ is true, $Q$ must be true.
   _An implication is true unless proven false._
 
   #table(
     columns: 3,
-    table.header($P$, $Q$, $P ==> Q$),
+    table.header($P$, $Q$, $P => Q$),
     [T], [T], [T],
     [T], [F], [F],
     [F], [T], [T],
@@ -129,7 +131,7 @@ Generally, "if... then..." indicates an implication.
 To prove an implication, the typical workflow is
 + assume the hypothesis of implication is true;
 + work...;
-+ show that $P: T ==> Q: F$ cannot happen.
++ show that $P: T => Q: F$ cannot happen.
 Since the implication _cannot be false_, it must be true.
 
 == Parity and Divisibility
@@ -144,3 +146,85 @@ To prove parity,
 + substitute variable with the definition of even/odd number;
 + factor expression, most likely with $2$ since it is the coefficient in the definitions;
 + find definition of even/odd number, $2("some integer") "or" 2("some integer") + 1$.
+
+Here, we introduce a crucial proof procedure: starting with assumptions, not the hypothesised implication.
+#example[][
+  Let $x in RR$. Prove that if $x > 0$, then $x + 2 / x > 2$.
+
+  Multiply all terms by $x$, signs are unchanged since $x > 0$; move all terms to LHS.
+  $
+        x + 2 / x & >2 \
+     x^2 - 2x + 2 & > 0 \
+    (x - 1)^2 + 1 & > 0.
+  $
+  We can prove that the LHS function is continuous and has a minimum value of 1, but we _cannot start with the answer!_
+
+  To start with the conditions, which is logical, we assume $x in RR, x > 0$.
+  Note that
+  $
+           (x - 1)^2 & >= 0 \
+    => (x - 1)^2 + 1 & > 0 \
+     => x^2 - 2x + 2 & > 0 \
+    => x^2 + 2 > 2x.
+  $
+  we divide all terms by $x$, with $x > 0$ all signs is unchanged,
+  $
+    x + 2 / x > 2.
+  $
+]
+
+#lemma[Contrapositive][
+  The contrapositive of $P => Q$ is
+  $
+    (~Q) => (~P).
+  $
+  The contrapositive is _logically_ equivalent to the original statement.
+]
+
+#example[][
+  $ (16 divides n => 2 divides n) equiv (2 divides.not n => 16 divides.not n) $
+]
+
+#lemma[Converse][
+  The converse of $P => Q$ is
+  $
+    Q => P
+  $
+  which may not be true.
+]
+
+#lemma[DeMorgan's Laws][
+  $
+     ~(P or Q) & equiv (~P) and (~Q) \
+    ~(P and Q) & equiv (~P) or (~Q)
+  $
+]
+
+#lemma[Implication][
+  $
+    (P => Q) equiv (~P) or Q
+  $
+]
+
+#lemma[Bicondition][
+  $
+    (P <=> Q) equiv (P => Q) and (Q => P)
+  $
+]
+
+#lemma[Exclusive Or][
+  $ (P xor Q) equiv (P and ~Q) or (~P and Q) $
+]
+
+#example[][
+  Using all four lemmas: implication, bicondition, DeMorgan's Laws and exclusive or,
+  $
+     (P <=> Q) & equiv (P => Q) and (Q => P) \
+    ~(P <=> Q) & equiv ~((P => Q) and (Q => P)) \
+               & equiv ~(P => Q) or ~(Q => P) \
+               & equiv ~(~P or Q) or ~(~Q or P) \
+               & equiv (P and ~Q) or (Q and ~P) \
+               & equiv (P and ~Q) or (~P and Q) \
+               & equiv P xor Q
+  $
+]
