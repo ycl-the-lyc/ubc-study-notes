@@ -17,9 +17,11 @@
 
 #import "@preview/frame-it:1.2.0": *
 
-#let definition = frame("Definition", orange)
+#let definition = frame("Definition", black)
 
 #let theorem = frame("Theorem", red.desaturate(20%))
+
+#let lemma = frame("Lemma", orange)
 
 #let proof = frame("Proof", purple.lighten(60%).desaturate(40%)).with([])
 
