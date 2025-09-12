@@ -194,19 +194,37 @@ If a gate with multiple input has unknown input, it might blow up!
 == Silicon to Transistor
 Transistors are made from silicon and additives.
 
-Pure silicon crystal is a poor conductor if electricity, but doped silicon, for example, with As and B, allows the additive to produce free and mobile electrons.
+Pure silicon crystal is a poor conductor if electricity, but doped silicon, for example, with As and B, allows the additive to produce mobile electrons.
 The part with electrons, the negative, is called the "n type"; otherwise it is the "p type".
+Either can be both the source and the drain.
 
-Polysilicon, which is a good conductor, is be placed between p's _or_ n's, the source and the drain, as a channel for electrons, above a layer of insulating but thin silicon dioxide.
+Polysilicon, which is a good conductor, is be placed above the plate, seperated by a layer of insulating but thin silicon dioxide.
+That forms a capacitor.
 
 Now, depending on which type are connected by the channel, and which other type is used as substrate, there are two types of MOS:
 - nMOS: n type as source and drain, p type as substrate.
-  When input is LOW, it has low resistance, like a large resistor.
+  When input is LOW, it has low resistance, a bad resistor.
   When input is HIGH, it has high resistance, like an open circuit.
 - pMOS: p type as source and drain, n type as substrate
-  When input is LOW, it has medium resistance, like a small resistor.
+  When input is LOW, it has medium resistance, a good resistor.
   When input is HIGH, it has negligible resistance, like a wire.
 
 == Transistor to Gate
 Since nMOS is good at blocking current, and pMOS is good at allowing current, nMOS is used to "pull down" the current --- block it from ground; pMOS is used to "pull up" the current --- lead it to appliances.
 The pull-up block is connected to $V_"DD"$, the power, the pull-down block is connected to ground.
+
+For an "and" logic, the transistors are connected in series: only when all are not consuming voltage or connecting ground, current flows in that direction.
+For an "or" logic, the transistors are connected in parallel: if any one is consuming voltage or connecting ground, current flows in that direction.
+
+= SystemVerilog
+A hardware description language actually has two parts: synthesis and simulation.
+Synthesis is the structure of hardware, simulation is running logics.
+
+== Modules
+SystemVerilog (SV) has two types of modules:
+- structural: describing components;
+- behavioral: declaring procedures.
+
+== Optimization
+Say, logic ```sv a & ~b & c | a & ~b & ~c ``` can be optimized to ```sv a & ~b``` as ```sv (c | ~c)``` is always `1`.
+
