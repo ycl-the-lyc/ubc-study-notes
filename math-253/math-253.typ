@@ -10,18 +10,18 @@
 For a 3D space, $RR^3$, there are sets of points.
 Knowing one point does not tell you a line, like so in a 2D space, but rather gives you a surface.
 
-#example[][
+#example[
   $ z = 0 ==> Set((x, y, z) : z = 0, -oo < x < oo, -oo, < y < oo) $
 ]
 
 == Euclidean Distance
-#theorem[Pythagoras][
+#theorem(title: [Pythagoras])[
   For points A and B in $RR^3$,
   $ "dist"(A, B) = sqrt((x_1 - x_2)^2 + (y_1 - y_2)^2 + (z_1 - z_2)^2). $
 ]
 
 == Vector
-#definition[Vector][
+#definition[
   A vector $vb(v)$ is with both magnitude $vn(v)$ and direction $vu(v)$.
 ]
 
@@ -29,7 +29,7 @@ A vector can be multiplied or divided by a scalar, which acts on its magnitude o
 
 A vector can be added or subtracted with a vector, which acts component-by-component.
 
-#definition[Orthogonal Vectors in 3D Space][
+#definition[
   $
     vu(i) & = [1, 0, 0] \
     vu(j) & = [0, 1, 0] \
@@ -39,7 +39,7 @@ A vector can be added or subtracted with a vector, which acts component-by-compo
 
 It would help to derive some scalar value from vectors, as we often need to know about length, distances, etc.
 
-#definition[Vector Dot Product][
+#definition[
   For vectors $vb(u) = [u_1, u_2, u_3], vb(v) = [v_1, v_2, v_3]$,
   $
     vb(u) dot vb(v) & = u_1 v_1 + u_2 v_2 + u_3 v_3 \
@@ -49,17 +49,17 @@ It would help to derive some scalar value from vectors, as we often need to know
 
 ]
 
-#theorem[Angle Between Two Vectors][
+#theorem(title: [Angle Between Two Vectors])[
   Obviously,
   $ cos(theta) = (vb(u) dot vb(v)) / (vn(u) vn(v)) $
 ]
 
-#theorem[Perpendicular Test][
+#theorem(title: [Perpendicular Test])[
   Obviously,
   $ vb(a) dot vb(b) = 0 iff vb(a) perp vb(b) $
 ]
 
-#theorem[Vector Projection][
+#theorem(title: [Vector Projection])[
   The projection of $vb(b)$ onto $vb(a)$,
   $
     "proj"_vb(a) vb(b) & = (vb(a) dot vb(b)) / vn(a)^2 vb(a) \
@@ -67,7 +67,7 @@ It would help to derive some scalar value from vectors, as we often need to know
   $
   in which $(vu(a) dot vb(b))$ is called the "scalar projection".
 
-  #proof[][
+  #proof[
     To project one vector $vb(b)$ onto another $vb(a)$ with angle $theta$, we should ensure that the result is directed in $vu(a) = vb(a) / vn(a)$, and has a length of $vn(b) cos(theta)$ since trigonometry.
     $
       "proj"_vb(a) vb(b) & = "dir" times "len" \
@@ -81,7 +81,7 @@ It would help to derive some scalar value from vectors, as we often need to know
 
 Now, it would be nice to know about area spanned by two vectors, too.
 
-#definition[Vector Cross Product][
+#definition[
   For vector $vb(u) = [u_1, u_2, u_3], vb(v) = [v_1, v_2, v_3]$,
   $
     norm(vb(u) times vb(v)) & = vn(u) vn(v) sin(theta)
@@ -102,7 +102,7 @@ Now, it would be nice to know about area spanned by two vectors, too.
 ]
 
 From the algebraic definition we can see that the cross product is anti-commutative.
-#theorem[][
+#theorem[
   $ vb(u) times vb(v) = -vb(v) times vb(u) $
 ]
 
@@ -112,11 +112,12 @@ $
   (vb(u) times vb(v)) dot vb(v) & = 0 \
 $
 
-#theorem[Parallel Test][
+#theorem(title: [Parallel Test])[
   $
     vb(u) times vb(v) iff vb(u) parallel vb(v)
   $
 ]
+
 
 Similar to how we get area of a parallelogram via cross product, the volume of a parallelepiped formed by three vectors $vb(u), vb(v), vb(w)$ can be obtained with
 $ V & = vb(u) dot (vb(v) times vb(w)) \
@@ -129,3 +130,13 @@ To get the angle between two faces, we can
 
 Make sure the two normals point the same way, or take the supplementary angle.
 
+== Planes
+For points $vb(r), vb(r)_0$ on plane $P$, and $vb(n)$ normal to $P$ at $vb(r)_0$, we use the dot product perpendicular test
+$
+              vb(n) dot (vb(r) - vb(r)_0) & = 0 \
+  a (x - x_0) + b (y - y_0) + c (z - z_0) & = 0 \
+                      a x + b y + c z + d & = 0
+$
+to define the plane.
+
+With this definition, we can quickly find a normal of the plane and a point on the plane, which enable us for more arithmetics, like computing the distance from a point to the plane.

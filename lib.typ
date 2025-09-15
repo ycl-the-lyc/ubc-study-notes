@@ -7,6 +7,7 @@
 #let conj = math.overline
 #let kern = math.cal([N])
 #let xor = "xor"
+#let neg = math.class("unary", math.tilde)
 #let Set(..args) = {
   let args = args.pos();
   $#physica.Set(args.remove(0), args.join($, $))$
@@ -15,24 +16,7 @@
 
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
 
-#import "@preview/frame-it:1.2.0": *
-
-#let definition = frame("Definition", black)
-
-#let theorem = frame("Theorem", red.desaturate(20%))
-
-#let lemma = frame("Lemma", orange)
-
-#let proof = frame("Proof", purple.lighten(60%).desaturate(40%)).with([])
-
-#let example = frame("Example", gray)
-
-#let frames-outline(..supplements) = {
-  let sps = supplements.pos()
-  outline(target: selector.or(..sps.map(sp => figure.where(supplement: sp))), title: sps
-    .map(sp => sp + [s])
-    .join([, ], last: [ and ]))
-}
+#import "@preview/theorion:0.4.0": *
 
 #let max(arr) = arr.reduce((m, i) => if i > m { i } else { m })
 
@@ -129,8 +113,6 @@
     title: title,
     author: author,
   )
-  show: frame-style(styles.thmbox)
-  show figure.where(kind: "frame"): set block(breakable: true)
 
   show: it => {
     set math.equation(numbering: "(1.1)")
@@ -139,6 +121,8 @@
   }
 
   show: super-T-as-transpose // Render "..^T" as transposed matrix
+
+  show: show-theorion
 
   body
 }
