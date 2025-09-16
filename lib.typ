@@ -4,14 +4,19 @@
 #import physica: *
 
 #let iff = $<=>$
-#let conj = math.overline
-#let kern = math.cal([N])
 #let xor = "xor"
 #let neg = math.class("unary", math.tilde)
+#let implies = math.arrow.double
+
+#let modulo(n) = $space (mod #n)$
+
 #let Set(..args) = {
   let args = args.pos();
   $#physica.Set(args.remove(0), args.join($, $))$
 }
+
+#let conj = math.overline
+#let kern = math.cal([N])
 #let vn(body) = $norm(vb(body))$
 
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
