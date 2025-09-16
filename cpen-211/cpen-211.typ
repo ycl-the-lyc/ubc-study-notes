@@ -42,7 +42,7 @@
 + take quotient as the next digit;
 + repeat until quotient is 0.
 
-#example[Decimal to binary and hexadecimal][
+#example(title: [Decimal to binary and hexadecimal])[
   #let div = math.div
   + $11 div 2 = 5 ... 1$
   + $5 div 2 = 2 ... 1$
@@ -58,7 +58,7 @@
 === Between Hexidecimal and Binary
 Each hex digit is four binary digits.
 
-#example[Hexadecimal-binary conversion][
+#example(title: [Hexadecimal-binary conversion])[
   #grid(
     columns: 5,
     inset: .65em,
@@ -73,7 +73,7 @@ Each hex digit is four binary digits.
   )
 ]
 
-#definition[Bit, byte and nibble][
+#definition(title: [Bit, byte and nibble])[
   A bit is a binary digit.
   A byte is 8 bits.
   A nibble is 4 bits.
@@ -100,7 +100,7 @@ A nibble has 16 possible combinations, hence it can represent a hexadecimal numb
 Just add 'em.
 For subtraction, convert it to addition of negative numbers.
 
-#example[Adding unsigned or two's complement binary numbers][
+#example(title: [Adding unsigned or two's complement binary numbers])[
   #ladd(
     numeral: 2,
     1010,
@@ -117,7 +117,7 @@ There are two bit combinations for 0 --- each for a sign bit.
 
 To add, replace the sign bit with an actual sign, then operate.
 
-#example[Adding sign/magnitude numbers][
+#example(title: [Adding sign/magnitude numbers])[
   $
     (-6)_10 + 6_10 & = 0           \
        1110 + 0110 & => -110 + 110 \
@@ -136,7 +136,7 @@ To invert the sign, invert all bits, then $+1$, there being one more number in t
 
 To add, simply add, then remove overflow.
 
-#example[Adding two's complements][
+#example(title: [Adding two's complements])[
   $
                    (-6)_10 + 6_10 & = 0     \
     #ladd(numeral: 2, 1010, 0110) & => 0000 \
@@ -148,7 +148,7 @@ To add, simply add, then remove overflow.
 
 === Sign Extension for Two's Complement
 To extend and keep value, left-pad the most significant digit.
-#example[][
+#example[
   $
     0110 & = 00000110 \
     1110 & = 11111110
@@ -183,7 +183,7 @@ Each gate is at least a buffer, which delays DC transfer.
 Always make sure the voltage to a chip is not too low or too high for triggering HIGH and LOW.
 Different chips have voltage specifications different.
 
-#definition[CMOS][
+#definition(title: [CMOS])[
   Complementary metal oxide semiconductor.
 ]
 
