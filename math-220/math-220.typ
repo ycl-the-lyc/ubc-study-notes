@@ -5,8 +5,6 @@
   author: "Yecheng Liang",
 )
 
-#import cosmos.rainbow: *
-
 = Notations
 
 #figure(table(
