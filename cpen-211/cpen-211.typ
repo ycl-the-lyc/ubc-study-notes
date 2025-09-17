@@ -15,6 +15,8 @@
   )
 }
 
+#let cmpl = math.overline
+
 #import "../lib.typ": *
 #show: setup.with(
   title: [CPEN 211 \ _Digital Design & Computer Architecture_],
@@ -87,11 +89,13 @@ A nibble has 16 possible combinations, hence it can represent a hexadecimal numb
     columns: 3,
     table.header([Name], [Computer], [Conventional]),
     ..([kilo], [mega], [giga], [tera], [peta], [exa])
-      .zip(range(1, 7).map(p => {
-        let pb = p * 10
-        let pd = p * 3
-        ($2^#pb = #calc.pow(2, pb)$, $10^#pd$)
-      }))
+      .zip(
+        range(1, 7).map(p => {
+          let pb = p * 10
+          let pd = p * 3
+          ($2^#pb = #calc.pow(2, pb)$, $10^#pd$)
+        }),
+      )
       .flatten(),
   )
 })
@@ -119,7 +123,7 @@ To add, replace the sign bit with an actual sign, then operate.
 
 #example(title: [Adding sign/magnitude numbers])[
   $
-    (-6)_10 + 6_10 & = 0           \
+    (-6)_10 + 6_10 & = 0 \
        1110 + 0110 & => -110 + 110 \
                    & = 0
   $
@@ -138,7 +142,7 @@ To add, simply add, then remove overflow.
 
 #example(title: [Adding two's complements])[
   $
-                   (-6)_10 + 6_10 & = 0     \
+                   (-6)_10 + 6_10 & = 0 \
     #ladd(numeral: 2, 1010, 0110) & => 0000 \
                                   & = 0
   $
@@ -228,3 +232,113 @@ SystemVerilog (SV) has two types of modules:
 == Optimization
 Say, logic ```sv a & ~b & c | a & ~b & ~c ``` can be optimized to ```sv a & ~b``` as ```sv (c | ~c)``` is always `1`.
 
+== Boolean Arithmetic
+
+#definition(title: [Complement])[
+  Let $A$ be a literal, $neg A$ is the complement of $A$, written $cmpl(A)$.
+]
+
+#definition(title: [Implicant])[
+  Let $A, B, C, ...$ be literals, a product of them or their complements is their implicant.
+]
+
+#definition(title: [Minterm & Maxterm])[
+  Let $A, B, C, ...$ be input literals, a product containing all the literals is a minterm, a sum containing all the literals is a maxterm.
+]
+
+=== Sum of Products
+Take a full adder as example, $neg a neg b c_"in" = s$ is one case where $s$ is 1.
+We take all cases where $s$ is 1.
+$
+  s = neg a neg b or neg a b neg c_"in" or a neg b neg c_"in" or a b c_"in" = 1
+$
+Similarly for $c_"out"$,
+$
+  c_"out" = neg a b c_"in" or a neg b c_"in" or a b neg c_"in" or a b c_"in" = 1
+$
+
+For each output, they are all 0 on all other cases.
+Once we ensured the 1 outputs (true), others are automatically 0 (false).
+
+=== Product of Sums
+To ensure all 0 values (false), instead of having at least one true in a group of OR's, we have at least a false in a group of AND's.
+$
+  v = (a + b + c) and (a + neg b + neg c) = 0
+$
+
+#tip-box[
+  Depending on how many and where the 0's and 1's are, we can choose between SoP and PoS forms for simpler logic.
+]
+
+=== Duality
+In boolean arithmetic, we can replace all 0 with 1, and all + with #math.times.
+#example[
+  $
+    A dot 1 & = A \
+      A + 0 & = A
+  $
+]
+
+#theorem(title: [Idempotency])[
+  Let $A$ be a literal,
+  $
+    A = A + A
+  $
+]
+
+#theorem(title: [De Morgan's])[
+  $
+    cmpl(A dot B dot C dot ...) & = cmpl(A) + cmpl(B) + cmpl(C) + ... \
+          cmpl(A + B + C + ...) & = cmpl(A) dot cmpl(B) dot cmpl(C) dot ...
+  $
+  #align(center, grid(
+    align: center + horizon,
+    columns: 3 * (1.8cm,),
+    rows: 1.6cm,
+    circuit({ (gatemap.nand)(..defelem()) }),
+    [equals to],
+    circuit({
+      (gatemap.or)(..defelem(), inverted: ("in0", "in1"))
+    }),
+    circuit({ (gatemap.or)(..defelem(), inverted: "out") }),
+    [equals to],
+    circuit({
+      (gatemap.and)(..defelem(), inverted: ("in0", "in1"))
+    }),
+  ))
+]
+
+=== Simplification
+To simplify a boolean equation, we reduce it to an SoP form, such that
+- it has the fewest implicants;
+- each implicant has the fewest literals.
+
+Sometimes, we need to use idempotency to simplify equations.
+
+#theorem(title: [Simplification])[
+  $
+    A + cmpl(A) P & = A + P \
+    cmpl(A) + A P & = cmpl(A) + P
+  $
+  // #proof[
+  //   $
+  //     A + cmpl(A) P &= A + (A P + cmpl(A) P) ""
+  //   $
+  // ]
+]
+
+#theorem(title: [Consensus])[
+  $
+    (B dot C) + (cmpl(B) dot D) + (C dot D) = (B dot C) + (cmpl(B) dot D)
+  $
+]
+
+#note-box[
+  More reading on the axioms and theorems of boolean arithmetic, not detailed here.
+]
+
+== Boolean Logic to Gates
+We already know about the complement (NOT), product (AND) and sum (OR).
+
+In SoP form, each implicant is an AND, and their output all connect to an OR as they are summed together.
+You might want to branch a complement immediately for each literal, for consistency and convenience.
