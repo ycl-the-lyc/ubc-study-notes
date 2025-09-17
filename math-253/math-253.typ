@@ -140,3 +140,28 @@ $
 to define the plane.
 
 With this definition, we can quickly find a normal of the plane and a point on the plane, which enable us for more arithmetics, like computing the distance from a point to the plane.
+
+#problem(title: [Distance between planes])[
+  Find the distance between planes $x + y - 2z = 2$, $x + y - 2z = 4$.
+
+  #solution[
+    A normal $vb(n)$ to both planes (since they must be parallel to have a non-zero distance) is $[1, 1, -2]$.
+    Pick an arbitrary point on each plane.
+    $ P: (4, 0, 0) quad Q: (2, 0, 0) $
+    Let $vb(u) := vb(P Q) = [-2, 0, 0]$.
+    $
+      "distance" &= vn(u dot n) / vn(n) \
+      &= norm([-2, 0, 0] dot [1, 1, -2]) / norm([1, 1, -2]) \
+      &= abs(-2) / sqrt(1 + 1 + 4) \
+      &= 2 / sqrt(6) \
+      &= sqrt(2/3)
+    $
+  ]
+]
+
+== Parametric Curves
+In parametric form, an arc can be described using $[a cos(t), b sin(t)]$ with constraints to $t$.
+Extending the logic to all curves, their generic form is
+$
+  F(t) = Set(p, p = [x(t), y(t)], t ...)
+$
