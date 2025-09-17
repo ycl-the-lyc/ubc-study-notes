@@ -22,6 +22,7 @@
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
 
 #import "@preview/theorion:0.4.0": *
+#import cosmos.rainbow: *
 
 #let max(arr) = arr.reduce((m, i) => if i > m { i } else { m })
 

@@ -28,7 +28,7 @@
 
   Personal or impersonal, full phrases or abbreviations.
 
-#example[Instructor's Profile][
+#example[
   Hartaj Sanghara is an instructor in the Department of Electrical and Computer Engineering at UBC. Hartaj received her Honours Bachelor’s degree in English from the University of Victoria.
   She received her Master of Arts in English Language and Literature from Queen’s University.
   She also obtained a Diploma in Education, Guidance Studies, from UBC. Hartaj has been an instructor with the Faculty of Applied Science since 2012. She teaches technical communication and integrated engineering design project courses.
@@ -38,16 +38,16 @@
 
 = Style and Correspondence
 
-#definition[Correspondence][
+#definition(title: [Correspondence])[
   Communication by exchanging letters, emails or other messages.
 ]
 
-#example[Style][
+#example(title: [Style])[
   Personal or impersonal.
 
   "I would like you to..." v.s. "All students are to..."
 ]
-#example[Tone][
+#example(title: [Tone])[
   Confident, polite, friendly, or discouraging.
 
   The car is "low cost..." v.s. "cheap..."
