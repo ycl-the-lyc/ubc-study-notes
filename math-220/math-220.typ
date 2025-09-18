@@ -147,6 +147,12 @@ To prove parity,
 + factor expression, most likely with $2$ since it is the coefficient in the definitions;
 + find definition of even/odd number, $2("some integer") "or" 2("some integer") + 1$.
 
+#note-box[
+  Proving divisibility involves similar steps.
+  We generally use Euclidean division with remainder to prove if something is divisible or not.
+  Fractions are not used.
+]
+
 Here, we introduce a crucial proof procedure: starting with assumptions, not the hypothesised implication.
 #proof[
   Let $x in RR$. Prove that if $x > 0$, then $x + 2 / x > 2$.
