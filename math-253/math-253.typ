@@ -165,3 +165,25 @@ Extending the logic to all curves, their generic form is
 $
   F(t) = Set(p, p = [x(t), y(t)], t ...)
 $
+
+== Quadric Surfaces
+#definition[
+  In 2D, a quadric line is a relationship using ${x^2, y^2, x y, x, y, "const"}$, like a circle, ellipse or hyperbola.
+
+  In 3D, a quadric surface is a relationship using ${x^2, y^2, z^2, x y, x z, y z, x, y, z, "const"}$, like a sphere or ellipsoid.
+]
+
+#definition[
+  In 3D, a cylinder is a quadric relationship with one variable unrestricted.
+]
+
+And there are way more weird quadric shapes.
+
+#definition[
+  In 3D, a trace curve is the intersection of a surface and parallel planes.
+]
+
+It is often hard to visualize quadric surfaces, but trace curves can help.
+Restrict one variable by intersection the surface with a plane, we then solve the 3D quadric equation to 2D relationships, thus being able to plot and visualize the surface on that specific plane.
+
+Yes, it makes a contour map.
