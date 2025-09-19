@@ -220,11 +220,12 @@ The pull-up block is connected to $V_"DD"$, the power, the pull-down block is co
 For an "and" logic, the transistors are connected in series: only when all are not consuming voltage or connecting ground, current flows in that direction.
 For an "or" logic, the transistors are connected in parallel: if any one is consuming voltage or connecting ground, current flows in that direction.
 
-= SystemVerilog
+= Combinational Logic
+
+== System Verilog
 A hardware description language actually has two parts: synthesis and simulation.
 Synthesis is the structure of hardware, simulation is running logics.
 
-== Modules
 SystemVerilog (SV) has two types of modules:
 - structural: describing components;
 - behavioral: declaring procedures.
@@ -300,6 +301,7 @@ In boolean arithmetic, we can replace all 0 with 1, and all + with #math.times.
     circuit({
       (gatemap.or)(..defelem(), inverted: ("in0", "in1"))
     }),
+
     circuit({ (gatemap.or)(..defelem(), inverted: "out") }),
     [equals to],
     circuit({
@@ -342,3 +344,133 @@ We already know about the complement (NOT), product (AND) and sum (OR).
 
 In SoP form, each implicant is an AND, and their output all connect to an OR as they are summed together.
 You might want to branch a complement immediately for each literal, for consistency and convenience.
+
+== Special Bit Values
+
+#definition(title: [Contention])[
+  A contention, $X$, occurs when a circuit tries to drive 0 and 1 at the same output.
+  The value is somewhere between 0 and 1.
+
+  A contention usually indicates a bug, but can also mean intentionally uninitialized value.
+]
+
+#definition(title: [Floating])[
+  Floating, $Z$, occurs when an output has high impedance, or is open.
+  A floating can still have a value between 0 and 1, at random.
+
+  It cannot be checked with a voltmeter.
+]
+
+== Karnaugh Maps
+A Karnaugh Map (K-Map) is an I/O table, with the row and column header being values of evenly-as-possible divided bits, and each body cell being the output for its header combination.
+
+#important-box[
+  Make sure only one bit is changed from any neighboring header cell.
+  This is known as "greycode".
+]
+
+After mapping out the table, we box groups of 1's.
+Each box must
+- only contain 1's;
+- have side length being powers of 2 (1, 2, 4, 8, ...);
+- be as large as possible, wrapping around edges if necessary.
+Boxes can overlap.
+
+#definition(title: [Prime Implicant])[
+  The product of cells in the largest box in a K-Map.
+]
+
+For any box larger than 1, we will be able to drop at least one literal from the SoP equation for the output.
+
+#figure(
+  caption: [K-Map Example],
+  stack(
+    dir: ltr,
+    {
+      place(
+        rect(
+          width: .8cm,
+          height: 1.8cm,
+          stroke: red.transparentize(33%),
+          radius: .2cm,
+        ),
+        dx: 2.1cm,
+        dy: 2.1cm,
+      )
+      place(
+        rect(
+          width: 1.8cm,
+          height: .8cm,
+          stroke: blue.transparentize(33%),
+          radius: .2cm,
+        ),
+        dx: 2.1cm,
+        dy: 3.1cm,
+      )
+      table(
+        columns: 6 * (1cm,),
+        rows: 1cm,
+        align: center + horizon,
+        table.cell(colspan: 2, rowspan: 2, stroke: none, $Y$), table.cell(colspan: 4, $A B$),
+        $00$, $01$, $11$, $10$,
+        table.cell(rowspan: 2, rotate(-90deg, reflow: true, $C$)),
+        $0$, $1$, $0$, $0$, $0$,
+        $1$, $1$, $1$, $0$, $0$,
+      )
+    },
+  ),
+)
+
+In this example, #text(red)[$cmpl(A B C)$ and $cmpl(A B) C$], #text(blue)[$cmpl(A B) C$ and $cmpl(A) B C$] are boxed together.
+We see that, #text(red)[$C$] and #text(blue)[$B$] can be dropped from the equation, $Y = cmpl(A B) + cmpl(A) C = cmpl(A) (cmpl(B) + C)$.
+
+#note-box[
+  $X$ can either be 0 or 1. In K-Maps, if it would help simplifying equations, $X$ can be assumed 1 and be boxed.
+  Otherwise, $X$ can be assumed 0 and not boxed.
+]
+
+== Multiplexer
+#definition(title: [Multiplexer])[
+  A multiplexer (MUX) is a node that takes control inputs to choose _one_ input as the output.
+]
+
+#example[
+  $Y = D_0 cmpl(S) + D_1 S$.
+]
+
+== Timing
+
+#definition(title: [Propagation Delay])[
+  The maximum delay from input to output.
+]
+
+#definition(title: [Contamination Delay])[
+  The minimum delay from input to output.
+]
+
+The reason for minimum delay being "contamination" is that it would cause rapid logic changes before signal stabilizes after maximum delay.
+
+= Sequential Logic
+When output of a circuit comes back as input, it becomes a sequential circuit.
+
+#definition(title: [Sequential Logic])[
+  A logic which its output depends on previous inputs.
+
+  In other words, a sequential logic is stateful, it has memory of previous events.
+]
+
+== Latch
+A latch is a circuit such that when control signal is set to a value, it allows input to pass to output.
+Otherwise, it maintains the output regardless of input.
+
+== Flip-flop
+With two latches next to each other, using a signal $S$ and its complement $cmpl(S)$ for either latch, there is a short time frame created by the delay from $S$ to $cmpl(S)$ that allows for input.
+
+That will be an edge-triggered flip-flop circuit.
+The control input is called a clock, $"CLK"$.
+Depending on the timing, the circuit triggers either on the rising or the falling edge.
+
+There can also be a control input called the enable input, $"EN"$.
+The flip can only flop when $"EN" = 1$.
+
+Multiple flip-flops using one clock and a set of inputs is called a register.
