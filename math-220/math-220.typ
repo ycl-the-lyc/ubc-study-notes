@@ -29,6 +29,9 @@
   $implies$, $$, [Implies],
   $<=$, $$, [Implies (reversed)],
   $<implies$, $"iff"$, [If and only if],
+  $forall$, $$, [For all, for any],
+  $exists$, $$, [There exists],
+  $suchthat$, $$, [Such that],
 ))
 
 = Set
@@ -289,4 +292,29 @@ To proof congruency, we should factor out the modulus to show that $n divides a 
 
   Therefore, $n equiv 3 modulo(5) iff 5 divides (3n + 1)$.
 ]
+
+== Quantifiers
+To prove "there exists", we only have to come up with one case that satisfy the requirements.
+To disprove "for all", we only have to come up with one case that does not satisfy the requirements.
+
+#example[
+  $forall m in ZZ, exists n in ZZ suchthat m^2 < n$.
+  #proof[
+    Given $m in ZZ$, let $n = m^2 + 1$.
+    Note that $m^2 + 1 in ZZ$.
+    Then, $m^2 < m^2 + 1 = n$.
+  ]
+]
+
+=== Negation with Quantifiers
+#theorem[
+  Let $P(x)$ be an open sentence over the domain $A$, then
+  $
+    neg (forall x in A, P(x)) quad &equiv quad exists x in A suchthat neg P(x) \
+    neg (exists x in A suchthat P(x)) quad &equiv quad forall x in A, neg P(x)
+  $
+]
+Note that the comma and #suchthat are used based on English grammar alone.
+
+We find that the negation is simialr to how we disprove the same sentences.
 

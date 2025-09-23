@@ -7,6 +7,7 @@
 #let xor = "xor"
 #let neg = math.class("unary", math.tilde)
 #let implies = math.arrow.double
+#let suchthat = $"s.t."$
 
 #let modulo(n) = $space (mod #n)$
 

@@ -150,11 +150,11 @@ With this definition, we can quickly find a normal of the plane and a point on t
     $ P: (4, 0, 0) quad Q: (2, 0, 0) $
     Let $vb(u) := vb(P Q) = [-2, 0, 0]$.
     $
-      "distance" &= vn(u dot n) / vn(n) \
-      &= norm([-2, 0, 0] dot [1, 1, -2]) / norm([1, 1, -2]) \
-      &= abs(-2) / sqrt(1 + 1 + 4) \
-      &= 2 / sqrt(6) \
-      &= sqrt(2/3)
+      "distance" & = vn(u dot n) / vn(n) \
+                 & = norm([-2, 0, 0] dot [1, 1, -2]) / norm([1, 1, -2]) \
+                 & = abs(-2) / sqrt(1 + 1 + 4) \
+                 & = 2 / sqrt(6) \
+                 & = sqrt(2/3)
     $
   ]
 ]
@@ -187,3 +187,24 @@ It is often hard to visualize quadric surfaces, but trace curves can help.
 Restrict one variable by intersection the surface with a plane, we then solve the 3D quadric equation to 2D relationships, thus being able to plot and visualize the surface on that specific plane.
 
 Yes, it makes a contour map.
+
+= Function of Multiple Variables
+We already know that a function is a mapping.
+$f(x) = 2x$ maps $x$ to $2x$.
+
+In 2D space,
+$
+  z & = f(x, y) \
+  f & : RR^2 -> RR
+$
+
+== Domain
+Just as functions with one variable, multi-variable functions have their own domain.
+
+#example[
+  $g(x, y) = ln(x + y)$,
+  $
+    x + y & > 0 \
+        D & : Set((x, y), x + y > 0)
+  $
+]
