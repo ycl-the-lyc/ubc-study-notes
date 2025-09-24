@@ -208,3 +208,50 @@ Just as functions with one variable, multi-variable functions have their own dom
         D & : Set((x, y), x + y > 0)
   $
 ]
+
+= Limits and Continuity
+#definition(title: [Limits])[
+  $ lim_((x, y) -> (a, b)) f(x, y) = L $
+  if all values of $f(x, y)$ near some small proximity of $(a, b)$ are very close to $L$.
+]
+
+#definition(title: [Continuity])[
+  Function $f(x, y)$ is continuous at $(a, b)$ if
+  $
+    lim_((x, y) -> (a, b)) f(x, y) = f(a, b)
+  $
+]
+
+#example[
+  Consider approachinhg $f(x, y) = (x y) / (x^2 + y^2)$ along $y = m x$.
+  $
+    (x y) / (x^2 + y^2) &= (x (m x)) / (x^2 + (m x)^2) \
+    &= (m x^2) / (x^2 + m^2 x^2) \
+    &= (m x^2) / ((1 + m^2) x^2) \
+    &= m / (1 + m^2) "if" x eq.not 0
+  $
+  Hence, it depends on $m$.
+  The value of the limit would vary as $m$ changes, while $m$ can be arbitrary values.
+  Thus, the limit does not exist.
+]
+
+In the example above, we approached the point along a line, which is not quite ideal in a 2D space.
+If we can have a 2D domain for the function, then restrict the domain, the limit would be easier to work with.
+
+#example[
+  Since we are approaching a point, restrict the domain to a small disk of radius $epsilon$.
+  $
+    x &= r cos(theta) \
+    y &= r sin(theta) \
+    D_epsilon (0, 0) &= Set((x, y), x^2 + y^2 <= epsilon) \
+    &= Set((r, theta), 0 <= r <= epsilon, 0 <= theta <= 2pi)
+  $
+  In polar coordinate form,
+  $
+    (x y) / (x^2 + y^2) &= ((r cos(theta)) (r sin(theta))) /(r^2 cos^2(theta) + r^2 sin^2(theta)) \
+    &= cos(theta) sin(theta) \
+    lim_(r -> 0) f(r, theta) &= cos(theta) sin(theta)
+  $
+  The limit would be a function of $theta$, thus it does not exist.
+]
+
