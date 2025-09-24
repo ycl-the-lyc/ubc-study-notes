@@ -438,18 +438,6 @@ We see that, #text(red)[$C$] and #text(blue)[$B$] can be dropped from the equati
   $Y = D_0 cmpl(S) + D_1 S$.
 ]
 
-== Timing
-
-#definition(title: [Propagation Delay])[
-  The maximum delay from input to output.
-]
-
-#definition(title: [Contamination Delay])[
-  The minimum delay from input to output.
-]
-
-The reason for minimum delay being "contamination" is that it would cause rapid logic changes before signal stabilizes after maximum delay.
-
 = Sequential Logic
 When output of a circuit comes back as input, it becomes a sequential circuit.
 
@@ -474,3 +462,65 @@ There can also be a control input called the enable input, $"EN"$.
 The flip can only flop when $"EN" = 1$.
 
 Multiple flip-flops using one clock and a set of inputs is called a register.
+
+== Timing
+#definition(title: [Propagation Delay])[
+  The maximum delay from input to output, $t_"pcq"$.
+]
+
+#definition(title: [Contamination Delay])[
+  The minimum delay from input to output, $t_"ccq"$.
+]
+
+The reason for minimum delay being "contamination" is that it would cause rapid logic changes before signal stabilizes after maximum delay.
+
+During a sample period, the signal being sampled must be stable sometime before the sampling trigger, and sometime after that trigger.
+
+#definition[
+  / Setup time: time before trigger data must be stable, $t_"setup"$.
+  / Hold time: time after trigger data must be stable, $t_"hold"$.
+  / Aperture time: time around trigger data must be stable, $t_"a"$.
+]
+
+The _dynamic discipline_ states that, in a sequential circuit, intput must be stable during $t_"a"$.
+When it is violated, the final output is chosen random between 0 and 1.
+
+=== Metastability
+Like tossing a coin, only for it to land on the edge, a sequential circuit can land in metastable states, where pulses keep it in no stable state.
+For example, a S-R latch can have two alternating pulses that activates each gate at a time.
+
+A metastable state will finally fall to a stable state, but it takes more time.
+
+A way to reduce metastability is to make a possibly metastable output an input, than capture that input in clock cycles.
+For example, two flip-flops in series.
+A clock cycle is _almost_ enough for output of the first flip-flop to stabilize.
+
+=== Finite State Machine
+#definition(title: [Finite State Machine])[
+  A finite state machine (FSM) is a circuit whose output depends on its current state and inputs.
+]
+
+#definition(title: [Moore FSM])[
+  A Moore FSM is an FSM whose output does not depend on external inputs.
+]
+
+#definition(title: [Mealy FSM])[
+  A Mealy FSM is an FSM whose output does depend on external inputs.
+]
+
+A state machine should have
+- state register;
+- combinational logic.
+
+The register is easily imagined by a flip-flop, where the input is the next state, and the output is the current state.
+
+The current state is input for the combinational logic.
+Optionally, an external signal can also be an combinational logic input.
+
+To design a Moore FSM,
++ Define clock cycle, how many bits and how many combinations are used?
++ Create state transition table: in which state, at which input, at what clock count, what is the next state?
++ Make a truth table for current state, next state and output.
++ Draw Karnaugh maps to determine each boolean logic for each input for each state.
++ Draw the schematic.
+
