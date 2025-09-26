@@ -211,8 +211,7 @@ Just as functions with one variable, multi-variable functions have their own dom
 
 = Limits and Continuity
 #definition(title: [Limits])[
-  $ lim_((x, y) -> (a, b)) f(x, y) = L $
-  if all values of $f(x, y)$ near some small proximity of $(a, b)$ are very close to $L$.
+  We say that $lim_((x, y) -> (a, b)) f(x, y)$ exists and equals $L$ iff for any continuous path $gamma: (x, y) = (x(t), y(t))$ with $x(T) = a, y(T) = b$, that $lim_(t -> T) f(x(t), y(t)) = L$.
 ]
 
 #definition(title: [Continuity])[
@@ -253,5 +252,34 @@ If we can have a 2D domain for the function, then restrict the domain, the limit
     lim_(r -> 0) f(r, theta) &= cos(theta) sin(theta)
   $
   The limit would be a function of $theta$, thus it does not exist.
+]
+
+= Partial Derivation
+It is hard to derive with multiple variable at the same time.
+Instead, we fix all but one variable, and derive against that variable.
+In this setup, it is as if we are deriving a normal one-variable function.
+
+#example[
+  Consider $z = f(x, y)$.
+  - Fixing $y$,
+    $
+      f_x = pdv(f, x) &= lim_(h -> 0) (f(x + h, y) - f(x, y)) / h.
+    $
+  - Fixing $x$,
+    $
+      f_y = pdv(f, y) &= lim_(k -> 0) (f(x, y + k) - f(x, y)) / k.
+    $
+]
+This creates two derivations of trace curves on planes $y = b$ and $x = a$ where $(a, b)$ is the point being approached.
+The tanget lines of these two slopes form a plane.
+As expected, the derivative of a curved surface is a plane!
+
+#example(title: [Another example])[
+  Consider $f(x, y) = x^4 + 2 x^2 y^2 + e^(x y) + y$.
+  $
+    pdv(f, x) &= 4 x^3 + 4 x y^2 + y e^(x y) \
+    pdv(f, y) &= 4 x^2 y + c e^(x y) + 1 \
+    pdv(f, x, y) &= 8 x y + x y e^(x y)
+  $
 ]
 
