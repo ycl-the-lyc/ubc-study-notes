@@ -77,3 +77,6 @@ To manage emails,
 + Introduction: purpose statement and context.
 + Body: details.
 + Conclusion: next steps, timeline and contact information.
+
+
+
