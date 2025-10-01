@@ -309,3 +309,14 @@ The calculus rules for full derivative also apply to partial derivative.
     pdv(g, x) & = -g(x)
   $
 ]
+
+== Tangent Plane
+We have established that, if a point on a plane is differentiable, all paths through it have the same slope.
+We can thus choose two different paths and make a plane out of those, which will be the tangent plane of that point on that plane.
+
+We already know one point on the tangent plane, so its equation form can be
+$
+  A (x - x_0) + B (y - y_0) + C (z - z_0) = 0
+$ where $A, B, C$ are some constants.
+From the two tangent lines we know two expressions of one of the unknowns by the other two.
+Using three equations, we can solve for $A, B, C$.
