@@ -318,3 +318,13 @@ Note that the comma and #suchthat are used based on English grammar alone.
 
 We find that the negation is simialr to how we disprove the same sentences.
 
+== Limits
+#definition(title: [Limit])[
+  Let $(x_n)$ be a sequence of real numbers.
+  We say that $(x_n)$ has a limit $L in RR$ when
+  $
+    forall epsilon > 0, exists N in NN suchthat forall n > N, abs(x_n - L) < epsilon
+  $
+]
+
+When sequence elements are getting smaller and smaller, we typically let $N$ be a value that depends on $epsilon$.
