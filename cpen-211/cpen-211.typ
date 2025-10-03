@@ -17,6 +17,9 @@
 
 #let cmpl = math.overline
 
+// disable OpenType ligature for sv code
+#show raw.where(lang: "sv"): set text(features: (calt: 0))
+
 #import "../lib.typ": *
 #show: setup.with(
   title: [CPEN 211 \ _Digital Design & Computer Architecture_],
@@ -500,14 +503,6 @@ A clock cycle is _almost_ enough for output of the first flip-flop to stabilize.
   A finite state machine (FSM) is a circuit whose output depends on its current state and inputs.
 ]
 
-#definition(title: [Moore FSM])[
-  A Moore FSM is an FSM whose output does not depend on external inputs.
-]
-
-#definition(title: [Mealy FSM])[
-  A Mealy FSM is an FSM whose output does depend on external inputs.
-]
-
 A state machine should have
 - state register;
 - combinational logic.
@@ -517,13 +512,31 @@ The register is easily imagined by a flip-flop, where the input is the next stat
 The current state is input for the combinational logic.
 Optionally, an external signal can also be an combinational logic input.
 
-To design a Moore FSM,
+To design an FSM,
 + Define clock cycle, how many bits and how many combinations are used?
 + Create state transition table: in which state, at which input, at what clock count, what is the next state?
   State assignment can be carefully planed to simplify the later boolean logic resolution, so each output has fewer and smaller implicants.
 + Make a truth table for current state, next state and output.
 + Draw Karnaugh maps to determine each boolean logic for each input for each state.
 + Draw the schematic.
+
+#definition(title: [Moore FSM])[
+  A Moore FSM is an FSM whose output does not depend on external inputs.
+]
+
+Each state in a Moore FSM represents an output that is not in memory; the state itself is the memory.
+
+#definition(title: [Mealy FSM])[
+  A Mealy FSM is an FSM whose output does depend on external inputs.
+]
+
+A Mealy FSM typically requires less states than a Moore FSM, since an external input will join the control signals.
+However, there is a higher risk of input contamination, thus require longer buffer time for each clock cycle.
+
+Each state transition in a Mealy FSM contains its output, which is a part of input for the next state.
+This way, the output also becomes a memory.
+
+Since the output depends on inputs, it needs a Karnaugh map, too.
 
 == Sequential Logic in SystemVerilog
 To listen for an event in parallel, use the following:
@@ -536,11 +549,11 @@ end
 The events are listed as the sensitivity list, for example, ```sv posedge clock```.
 
 #warning-box[
-  A signal can only be driving by one `always` block.
+  A signal can only be driving by one ```sv always``` block.
 ]
 
-There is a special `always` block called `always_ff`, for flip-flops.
-To correctly synthesize the flip-flop circuit, use this `always_ff` instead of the generic one, not even the ```sv always_latch```, the reason being, they create latches implicitly when not all signal combinations are covered, the latch one has implied sensitivity list, too.
+There is a special ```sv always``` block called ```sv always_ff```, for flip-flops.
+To correctly synthesize the flip-flop circuit, use this ```sv always_ff``` instead of the generic one, not even the ```sv always_latch```, the reason being, they create latches implicitly when not all signal combinations are covered, the latch one has implied sensitivity list, too.
 
 However, ```sv always_comb``` is okay because unwanted latches in a combinational logic is no disaster.
 
@@ -555,7 +568,6 @@ module flop(
 endmodule
 ```
 
-#show raw: set text(ligatures: false)
 The ```sv <=``` is an non-blocking get.
 It does not wait for the clock.
 
@@ -563,3 +575,26 @@ It does not wait for the clock.
   Do not use the ```sv posedge reset``` event.
 ]
 
+= Digital Building Blocks
+
+== Arithmetic Logic Units
+A simple arithmetic logic unit can perform addition, subtraction, and, and or on two inputs.
+
+== Shifters
+#definition(title: [Logical Shifter])[
+  Always inserts 0 to empty spaces.
+]
+
+#definition(title: [Arithmetic Shifter])[
+  Insert the old most significant bit to empty spaces.
+]
+
+#definition(title: [Rotator])[
+  Instead of adding spaces, simply move bits on one end to the other end.
+]
+
+== Multipliers
+To multiply a ,multiplier with a multiplicand,
++ multiply each bit of the multiplier with multiplicand, obtaining partial products;
++ logically shift each partial product by their multiplier's place;
++ sum all the partial products.
