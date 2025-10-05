@@ -255,7 +255,7 @@ If we can have a 2D domain for the function, then restrict the domain, the limit
 ]
 
 = Partial Derivative
-It is hard to derive with multiple variable at the same time.
+It is hard to totally derive with multiple variable at the same time.
 Instead, we fix all but one variable, and derive against that variable.
 In this setup, it is as if we are deriving a normal one-variable function.
 
@@ -315,8 +315,28 @@ We have established that, if a point on a plane is differentiable, all paths thr
 We can thus choose two different paths and make a plane out of those, which will be the tangent plane of that point on that plane.
 
 We already know one point on the tangent plane, so its equation form can be
-$
-  A (x - x_0) + B (y - y_0) + C (z - z_0) = 0
-$ where $A, B, C$ are some constants.
+$ A (x - x_0) + B (y - y_0) + C (z - z_0) = 0 $ where $A, B, C$ are some constants.
 From the two tangent lines we know two expressions of one of the unknowns by the other two.
 Using three equations, we can solve for $A, B, C$.
+
+== Linear Approximation
+Similar to how we linearly approximate 2D curves, 3D planes can be approximated by
+$
+  L(x, y) = pdv(z, x)(a, b) (x - a) + pdv(z, y)(a, b) (y - b).
+$
+
+And, when we let the difference between $x$ and $a$, $y$ and $b$, infinitesimally small, we get...
+
+== Total Differential
+#definition(title: [Total Differential])[
+  Let $z = f(x, y)$.
+  $
+    Delta x & = dd(x) \
+    Delta y & = dd(y) \
+    Delta z & = f(x + dd(x), y + dd(y)) - f(x, y) \
+      dd(z) & = L(x + dd(x), y + dd(y)) - L(x, y) \
+            & = pdv(z, x) dd(x) + pdv(z, y) dd(y).
+  $
+]
+
+If there exists a total differential, we say $f(x, y)$ is differentiable.
