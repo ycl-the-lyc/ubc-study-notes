@@ -3,6 +3,8 @@
 #import "@preview/physica:0.9.5"
 #import physica: *
 
+#import "@preview/fletcher:0.5.8"
+
 #let iff = $<=>$
 #let xor = "xor"
 #let neg = math.class("unary", math.tilde)

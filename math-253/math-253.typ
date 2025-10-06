@@ -340,3 +340,42 @@ And, when we let the difference between $x$ and $a$, $y$ and $b$, infinitesimall
 ]
 
 If there exists a total differential, we say $f(x, y)$ is differentiable.
+
+#example[
+  Given a hollow cylinder with 4 diameter, 10 height, 0.1 top and bottom thickness, 0.05 side thickness.
+  Its solid volume is
+  $
+        V & = pi r^h \
+    dd(V) & = underbrace(pdv(V, r) dd(r), #[side]) + underbrace(pdv(V, h) dd(h), #[top & bottom]) \
+          & = 2 pi r h dd(r) + pi r^2 dd(h) \
+          & = 2 pi dot 2 dot 10 dot 0.05 + pi dot 2^2 dot (0.1 + 0.1) \
+          & = 8.8.
+  $
+]
+
+=== Chain Rule
+We use a dependency tree to resolve chained differentials.
+This is especially useful for differentials with multiple variables.
+
+#example[
+  Let $w = f(x(t), y(t), z(t))$.
+  #figure(
+    caption: [Dependency tree of $w$],
+    {
+      import fletcher: *
+      diagram(
+        spacing: .5cm,
+        $
+                                         & x edge() & t \
+          w edge("ru") edge("rd") edge() & y edge() & t \
+                                         & z edge() & t
+        $,
+      )
+    },
+  )
+  Then we can turn each branch into a term of the differential of $w$,
+  $
+    dd(w) = pdv(w, x) dv(x, t) + pdv(w, y) dv(y, t) + pdv(w, z) dv(z, t).
+  $
+]
+
