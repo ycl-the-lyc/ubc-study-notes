@@ -28,7 +28,7 @@
   $->$, $$, [Tends to],
   $implies$, $$, [Implies],
   $<=$, $$, [Implies (reversed)],
-  $<implies$, $"iff"$, [If and only if],
+  $iff$, $"iff"$, [If and only if],
   $forall$, $$, [For all, for any],
   $exists$, $$, [There exists],
   $suchthat$, $$, [Such that],
@@ -51,7 +51,7 @@
 ]
 
 #example(title: [Building more sets])[
-  Let $A = {..., -8, -4, 0, 4, 8, ...}, B = {..., -6, -3, 0, 3, 6, ...$.
+  Let $A = {..., -8, -4, 0, 4, 8, ...}, B = {..., -6, -3, 0, 3, 6, ...}$.
   $
     A & = Set(4 n, n in ZZ) \
     B & = Set(3 k, k in ZZ)
@@ -310,16 +310,16 @@ To disprove "for all", we only have to come up with one case that does not satis
 #theorem[
   Let $P(x)$ be an open sentence over the domain $A$, then
   $
-    neg (forall x in A, P(x)) quad &equiv quad exists x in A suchthat neg P(x) \
-    neg (exists x in A suchthat P(x)) quad &equiv quad forall x in A, neg P(x)
+            neg (forall x in A, P(x)) quad & equiv quad exists x in A suchthat neg P(x) \
+    neg (exists x in A suchthat P(x)) quad & equiv quad forall x in A, neg P(x)
   $
 ]
 Note that the comma and #suchthat are used based on English grammar alone.
 
 We find that the negation is simialr to how we disprove the same sentences.
 
-== Limits
-#definition(title: [Limit])[
+== Limits for Sentences
+#definition[
   Let $(x_n)$ be a sequence of real numbers.
   We say that $(x_n)$ has a limit $L in RR$ when
   $
@@ -328,3 +328,20 @@ We find that the negation is simialr to how we disprove the same sentences.
 ]
 
 When sequence elements are getting smaller and smaller, we typically let $N$ be a value that depends on $epsilon$.
+
+== Limits for Functions
+#definition[
+  Let $a, L in RR "and" f: x mapsto RR$. We say that the limit of $f$ as $x$ approaches $a$ is $L$ when
+  $ forall epsilon > 0, exists delta > 0 suchthat (0 < abs(x - a) < delta) implies (abs(f(x) - L) < epsilon) $ where $epsilon, delta in RR$.
+  In this case,
+  $
+    lim_(x -> a) f(x) = L "or" f(x) -> L "as" x -> a.
+  $
+  And we say $f$ convergese to $L$ as $x -> a$.
+  Otherwiese, we say $f$ diverges as $x -> a$.
+]
+
+By boxing the function domain and range, we make sure that the function is smooth around the limit.
+Hence, we often make $delta$ depend on $epsilon$.
+
+
