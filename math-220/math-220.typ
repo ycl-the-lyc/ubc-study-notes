@@ -332,7 +332,7 @@ When sequence elements are getting smaller and smaller, we typically let $N$ be 
 == Limits for Functions
 #definition[
   Let $a, L in RR "and" f: x mapsto RR$. We say that the limit of $f$ as $x$ approaches $a$ is $L$ when
-  $ forall epsilon > 0, exists delta > 0 suchthat (0 < abs(x - a) < delta) implies (abs(f(x) - L) < epsilon) $ where $epsilon, delta in RR$.
+  $ forall epsilon.alt > 0, exists delta > 0 suchthat (0 < abs(x - a) < delta) implies (abs(f(x) - L) < epsilon.alt) $ where $epsilon.alt, delta in RR$.
   In this case,
   $
     lim_(x -> a) f(x) = L "or" f(x) -> L "as" x -> a.
