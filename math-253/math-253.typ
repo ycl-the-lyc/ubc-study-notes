@@ -5,6 +5,7 @@
 )
 
 #set math.vec(delim: "[")
+#set math.mat(delim: "[")
 
 = Cartesian Coordinate System
 For a 3D space, $RR^3$, there are sets of points.
@@ -357,25 +358,86 @@ If there exists a total differential, we say $f(x, y)$ is differentiable.
 We use a dependency tree to resolve chained differentials.
 This is especially useful for differentials with multiple variables.
 
-#example[
-  Let $w = f(x(t), y(t), z(t))$.
-  #figure(
-    caption: [Dependency tree of $w$],
-    {
-      import fletcher: *
-      diagram(
-        spacing: .5cm,
-        $
-                                         & x edge() & t \
-          w edge("ru") edge("rd") edge() & y edge() & t \
-                                         & z edge() & t
-        $,
-      )
-    },
-  )
-  Then we can turn each branch into a term of the differential of $w$,
-  $
-    dd(w) = pdv(w, x) dv(x, t) + pdv(w, y) dv(y, t) + pdv(w, z) dv(z, t).
-  $
+Let $w = f(x(t), y(t), z(t))$.
+#figure(
+  caption: [A simple dependency tree],
+  {
+    import fletcher: *
+    diagram(
+      spacing: .5cm,
+      $
+                                       & x edge() & t \
+        w edge("ru") edge("rd") edge() & y edge() & t \
+                                       & z edge() & t
+      $,
+    )
+  },
+)
+Then we can turn each branch into a term of the differential of $w$,
+$
+  dd(w) = pdv(w, x) dv(x, t) + pdv(w, y) dv(y, t) + pdv(w, z) dv(z, t).
+$
+
+For secondary dependencies that also depends on more than one variable, we could allow only one bottom-level variable to vary, then differentiate each, thus the top-level variable in regard to that bottom-level variable.
+
+Let $z = f(x, y), x = g(s, t), y = h(s, t)$.
+#figure(
+  caption: [A slightly deeper dependency tree],
+  {
+    import fletcher: *
+    diagram(
+      spacing: .5cm,
+      $
+                                &                     & s \
+                                & x edge("ru") edge() & t \
+        z edge("ru") edge("rd") &                     & s \
+                                & y edge("ru") edge() & t \
+      $,
+    )
+  },
+)
+$
+                  pdv(z, s) & = pdv(z, x) pdv(x, s) + pdv(z, y) pdv(y, s) \
+                  pdv(z, t) & = pdv(z, x) pdv(x, t) + pdv(z, y) pdv(y, t) \
+  vec(pdv(z, s), pdv(z, t)) & = mat(pdv(x, s), pdv(y, s); pdv(x, t), pdv(y, t)) vec(pdv(z, x), pdv(z, y)).
+$
+
+#theorem(title: [Implicit Function])[
+  In a non-function relationship, there exist regions of that relationship which are functions.
 ]
 
+#example[
+  Let $F(x, y, z) = x^3 - y^4 z + e^(x z^2)$.
+  It is impossible to explicitly solve $z$ for $F(x, y, z) = 0$.
+
+  However, $z = f(x, y)$ may be true on some regions of this relationship.
+  In that case, $ F(x, y, z) = F(x, y, f(x, y)) = 0 $ is solvable.
+  #figure({
+    import fletcher: *
+    diagram(
+      spacing: .5cm,
+      $
+                                       & x                   &   \
+        F edge("ru") edge("rd") edge() & y                   & x \
+                                       & z edge("ru") edge() & y \
+      $,
+    )
+  })
+  Differentiate regarding $x$,
+  $
+               pdv(, x) [F(x, y, z) & = 0] \
+    pdv(F, x) + pdv(F, z) pdv(z, x) & = 0 \
+                          pdv(z, x) & = - pdv(F, x) / pdv(F, z).
+  $
+  Differentiate regarding $y$,
+  $
+    pdv(z, y) & = - pdv(F, y) / pdv(F, z).
+  $
+
+  Given that at $(0, 1, 1)$, $pdv(z, x) = 1, pdv(z, y) = -4$, then
+  $
+    z - 1 & = 1 (x - 0) - 4 (y - 1) \
+        z & = x - 4y + 5.
+  $
+  Thus, in that certain region, we can use this simple function of $z$.
+]
