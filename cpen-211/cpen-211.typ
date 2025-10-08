@@ -43,7 +43,7 @@
 
 === From Decimal
 + Divide by $n$;
-+ take reminder as digit;
++ take remainder as digit;
 + take quotient as the next digit;
 + repeat until quotient is 0.
 
@@ -572,8 +572,11 @@ The ```sv <=``` is an non-blocking get.
 It does not wait for the clock.
 
 #warning-box[
-  Do not use the ```sv posedge reset``` event.
+  Always use ```sv =``` in ```sv always_comb```.
+  Always use ```sv <=``` in ```sv always_ff```.
 ]
+
+The non-blocking assignment only take effect on leaving the block, since they are done in parallel.
 
 = Digital Building Blocks
 
@@ -585,16 +588,46 @@ A simple arithmetic logic unit can perform addition, subtraction, and, and or on
   Always inserts 0 to empty spaces.
 ]
 
+For a signed number, given that the most significant bit does not change...
+- a logical left-shift is to multiply by 2;
+- a logical right-shift is to divide by 2, then floor.
+
 #definition(title: [Arithmetic Shifter])[
   Insert the old most significant bit to empty spaces.
 ]
+
+For a signed number, becase it preserves the sign of a two's complement number...
+- an arithmetic left-shift is to multiply by 2;
+- an arithmetic right-shift is to divide by 2, then floor.
 
 #definition(title: [Rotator])[
   Instead of adding spaces, simply move bits on one end to the other end.
 ]
 
 == Multipliers
-To multiply a ,multiplier with a multiplicand,
-+ multiply each bit of the multiplier with multiplicand, obtaining partial products;
+To multiply a multiplier with a multiplicand,
++ multiply each bit of the multiplier with the whole multiplicand, obtaining partial products;
 + logically shift each partial product by their multiplier's place;
 + sum all the partial products.
+
+#important-box[
+  Due to the extensive use of adders, thus XOR gates in multipliers, it is power intensive and prone to glitches.
+  Avoid when possible.
+]
+
+== Dividers
+Recall how we do long division in decimal form.
+From the highest possible digit, divide and take remainder.
+
+For binary numbers, only 1 and then 0 are to be tried for each partial division.
+
+```
+// A / B = Q + R / B
+R' = 0;
+for i = N - 1 to 0
+  R = {R' << 1, A_i} // shift partial R left, append next digit
+  D = R - B
+  if D < 0, Q_i = 0, R' = R // if B > D, Q_i should be 0, partial remainder remains
+  else Q_i = 1, R' = D // else, Q_i should be 1, the difference is the new partial remainder
+R = R' // use the last remainder
+```
