@@ -27,9 +27,9 @@
 #import "@preview/theorion:0.4.0": *
 #import cosmos.rainbow: *
 
-#let max(arr) = arr.reduce((m, i) => if i > m { i } else { m })
+#let amax(arr) = arr.reduce((m, i) => if i > m { i } else { m })
 
-#let min(arr) = arr.reduce((m, i) => if i < m { i } else { m })
+#let amin(arr) = arr.reduce((m, i) => if i < m { i } else { m })
 
 #let ndissect(n, ilen: auto, dlen: auto, ipad: 0, dpad: 0) = {
   let d = ("sign", "int", "dec")
@@ -66,10 +66,10 @@
   let ns = nums.pos().map(ndissect.with(ilen: ilen, dlen: dlen))
   if auto in (ilen, dlen) {
     if ilen == auto {
-      ilen = max(ns.map(n => n.int.len()))
+      ilen = amax(ns.map(n => n.int.len()))
     }
     if dlen == auto {
-      dlen = max(ns.map(n => n.at("dec", default: ()).len()))
+      dlen = amax(ns.map(n => n.at("dec", default: ()).len()))
     }
     ns = nums.pos().map(ndissect.with(ilen: ilen, dlen: dlen)).map(n => (dec: (0,) * dlen) + n)
   }
