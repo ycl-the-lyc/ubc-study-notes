@@ -344,4 +344,11 @@ When sequence elements are getting smaller and smaller, we typically let $N$ be 
 By boxing the function domain and range, we make sure that the function is smooth around the limit.
 Hence, we often make $delta$ depend on $epsilon$.
 
+== Induction
++ Show that all base cases $k$ (starting points) holds.
++ Show that the statement holds for $n = k_"next"$.
+
+To prove in scope of $ZZ$, the $n = k - 1$ case needs to be separately induced.
+
+This course does not cover induction on other domains.
 
