@@ -441,3 +441,22 @@ $
   $
   Thus, in that certain region, we can use this simple function of $z$.
 ]
+
+== Directional Derivative and Gradient Vectormachine
+Since a point can be approached from many directions, derivatives can be directional.
+
+Now imagine looking for the highest ($max(z)$) point of a curve on a surface.
++ Parameterize the line, so $x, y$ depend on one variable $t$;
++ compute $dv(z, t)$, using chain rule.
+The rest is like single-variable calculus.
+
+We say the rate of change of $x, y$ is the 'velocity' vector,
+$
+  vb(v) = vec(dv(x, t), dv(y, t))
+$
+and the rate of change of $z = f(x, y)$ is the gradient vector,
+$
+  vb(grad f) = vec(pdv(f, x), pdv(f, y))
+$
+This gradient is not the slope of the curve at the point, rather, it is the steepest slope alone the curve at the point.
+
