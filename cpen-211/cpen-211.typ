@@ -709,6 +709,9 @@ According to the IEEE 754 floating-point standard, a 32-bit, single-precision fl
 - Since the most significant bit of the mantissa is always 1, it is omitted.
 - The bias for exponent is $127$, meaning the stored exponent is $"actual E" + 127$.
 
+The bias is introduced because the standard wishes to represent exponent as a non-negative number.
+Hence, half-minus-one of the number space is offset.
+
 The standard has special cases:
 $
       0 & = "X" quad & "all" 0 quad & "all" 0 \
