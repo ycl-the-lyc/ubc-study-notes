@@ -17,6 +17,8 @@
 
 #let cmpl = math.overline
 
+#let nf(id, delim: ".", ..nums) = $upright(#id)#nums.pos().join(delim)$
+
 // disable OpenType ligature for sv code
 #show raw.where(lang: "sv"): set text(features: (calt: 0))
 
@@ -631,3 +633,118 @@ for i = N - 1 to 0
   else Q_i = 1, R' = D // else, Q_i should be 1, the difference is the new partial remainder
 R = R' // use the last remainder
 ```
+
+== Shift Registers
+#definition(title: [Shift Register])[
+  A register that, on each clock edge, shifts one bit in and one bit out.
+]
+
+There are shift registers with parallel load, meaning they can behave as either a shift register or a normal register, which loads in parallel.
+They can convert serial input to parallel output, or parallel input to serial output.
+This is useful when the speed of input and output are not matched.
+
+```sv
+module shiftreg #(parameter N=8) (
+  input logic clk,
+  input logic reset, load,
+  input logic sin,
+  input logic [N-1:0] d,
+  output logic [N-1:0] q,
+  output logic sout
+);
+
+  always_ff @(posedge clk, posedge reset)
+  if (reset) q <= 0;
+  else if (load) q <= d;
+  else q <= {q[N-2:0], sin};
+
+  assign sout = q[N-1];
+end
+```
+
+
+== Fix-point Numbers
+#definition(title: [Fix-point Number])[
+  A binary number that has an implied binary point ('decimal point' for binary numbers) in the middle.
+  Instead of going to $2^0$ at the right-most digit, it jumps from $2^1$ to $(2)^(-1)$ across the binary point.
+]
+
+Unlike integers, overflow in fix-point numbers are usually bad.
+Hence we typically use the saturation arithmetic, where we take the largest value instead of overflowing.
+
+=== Unsigned Fix-point Numbers
+For unsigned fix-point numbers, every operation stays the same, just keep the implied binary point.
+
+To specify number format, we use $nf(U, a, b)$ where #nf[U] is for "unsigned", $a$ is the integer bits, and $b$ is the fraction bits.
+
+=== Signed Fix-point Numbers
+To specify such number format, we use $nf(Q, a, b)$ where #nf[Q] is for "signed" (for some reason).
+
+To negate a #nf[Q],
++ invert all bits;
++ add one to the least significant bit.
+
+== Floating-point Numbers
+#definition(title: [Floating-point Number])[
+  A binary number that has a binary point after the most significant bit.
+]
+
+We write floating-point numbers using scientific notation,
+$
+  n = "M" times "B"^"E"
+$
+where $"M"$ is the mantissa, $"B"$ is the exponent and $"E"$ is the exponent.
+Since we are using binary numbers, the base is 2.
+
+According to the IEEE 754 floating-point standard, a 32-bit, single-precision floating-point number is represented by
+#figure(
+  grid(
+    inset: .65em,
+    columns: (auto, auto, 50%),
+    stroke: (_, y) => if y == 0 { none } else { stroke-color },
+    [1 bit], [8 bits], [23 bits],
+    [sign], [biased exponent], [fraction/mantissa],
+  ),
+)
+- Since the most significant bit of the mantissa is always 1, it is omitted.
+- The bias for exponent is $127$, meaning the stored exponent is $"actual E" + 127$.
+
+The standard has special cases:
+$
+      0 & = "X" quad & "all" 0 quad & "all" 0 \
+     oo & = 0 quad   & "all" 1 quad & "all" 0 \
+    -oo & = 1 quad   & "all" 1 quad & "all" 0 \
+  "NaN" & = "X" quad & "all" 1 quad & "not all" 0.
+$
+
+The double precision floating-point number in the standard uses 11 exponent bits, 52 fraction bits and 1023 bias.
+
+Floating-point numbers can handle overflow.
+There is also the inverse of overflow -- underflow, where the number is too small to be represented.
+
+== Memory
+Think of memory as a table.
+Each row is a set of data, and there is a address pointing to a row.
+There would be $(2)^(N)$ rows (word) and $M$ columns (word size).
+
+#definition(title: [Types of Memory])[
+  - Dynamic random-access memory (DRAM)
+  - Static random-access memory (SRAM)
+  - Read-only memory (ROM)
+
+  Data in dymanic memory are lost overtime or on reads, hence they need to be constantly rewritten, typically around $qty("10", "ms")$.
+  Static memory sustains data, is faster, but costs more energy.
+
+  The random access is for jumping to random words, instead of traversing through all words in between.
+]
+
+Each bit cell is crossed by two wires: a horiontal wordline and a vertical bitline.
+Alternatively, there are two bitlines, for one is negated, for faster and more reliable reading.
+
+=== DRAM
+Data in DRAM is stored on capacitors.
+The wordline controls a transistor, so the bitline can or cannot access the capacitor pass the transistor.
+
+The capacitor leaks charge naturally, or discharges on access.
+A larger capacitor would mediate the issue, but not prevent it.
+That is why idling or reading destroyes values, and why the bits should be constantly rewritten.
