@@ -352,3 +352,26 @@ To prove in scope of $ZZ$, the $n = k - 1$ case needs to be separately induced.
 
 This course does not cover induction on other domains.
 
+#example[
+  Let $n in NN$.
+  Prove that $forall n >= 7, n! > 3^n$.
+  ($7! = 5040, 3^7 = 2187$.)
+
+  For $n = 7$,
+  $
+    n! > 3^n.
+  $
+  For $n = k$ for some integer $k$,
+  $
+    (k + 1)! & = (k + 1) (k)! \
+             & > (k + 1) 3^k \
+             & > 3 (3^k) \
+             & = 3^(k + 1).
+  $
+  By induction, $forall n in NN "and" n >= 7, n! > 3^n$.
+]
+
+#definition(title: [Strong Induction])[
+  For series $(a_n)$, fix $j, k in NN, j < k$ such that $forall m in NN "and" j <= m <= k, a_m$.
+]
+
