@@ -743,11 +743,134 @@ There would be $(2)^(N)$ rows (word) and $M$ columns (word size).
 
 Each bit cell is crossed by two wires: a horiontal wordline and a vertical bitline.
 Alternatively, there are two bitlines, for one is negated, for faster and more reliable reading.
+Such array of bit cells make up a logic array.
+
+To read a cell, the bitline is charged with half of $V_"dd"$.
+The transistor at the cell will either drain or supply power to the bitline, creating a voltage different between the bitline and a comparer at the end of the bitline.
+
+Transistors do ware out on writes.
+A solid-state disk (SSD) typically has a standard called "Terabytes Written" (TBW), that explains the amount of data that can be written before the disk is considered unreliable.
 
 === DRAM
 Data in DRAM is stored on capacitors.
 The wordline controls a transistor, so the bitline can or cannot access the capacitor pass the transistor.
 
 The capacitor leaks charge naturally, or discharges on access.
-A larger capacitor would mediate the issue, but not prevent it.
 That is why idling or reading destroyes values, and why the bits should be constantly rewritten.
+A larger capacitor would mediate the issue, but not prevent it.
+For cost reason, it tends to be small -- it will just be the base of transistor built deeper into the sillicon to increase its capacitance.
+
+=== SRAM
+SRAM notably does not leak data.
+
+For a cell, there is the bitline and the negated bitline accessing each other througha a transistor, with an inverter in each direction.
+
+Reading accesses both the bitline and the negated bitline, taking the value of bitline.
+Writing supplied both lines with corresponding data.
+The transistors have higher driving power than the inverters, hence the data from the lines, through transistors, will overpower the inverters, thus being written.
+
+The inverters will restore data after read -- recharging it after discharge.
+Thus, it requires more space (around six times) and power.
+
+=== ROM
+The simpliest way is to build it like DRAM, but without the capacitors, and remove the transistor of a cell to achieve consistent high voltage.
+The transistors drain voltage as usual, but those cells without them let the bitline keep its original voltage.
+
+There are inverters at the end of the bitlines, if that makes manufacturing easier.
+
+To create a programmable ROM (PROM), in case you do want to update its content...
+- Make it electrically erasable (EEPROM) by adding a floating gate to the transistor controls.
+  The floating gate is controlled not by normal wiring, but a floating wire that makes no contact with the gate.
+  When a very high voltage, either positive or negative, is supplied to the floating wire, charges get added or removed from the floating gate.
+  When the voltage is removed, the charges have no where to go but stays there, controling the transistor.
+- Make it optically erasable (OEPROM) by installing transparent windows above the floating gates, so that ultraviolet light can add or remove charges on them.
+
+There are more types of memory implementations not covered in this course.
+
+#definition(title: [Look-up Table])[
+  A look-up table (LUT) is a logic array connected to a decode table.
+  The decoder enables a set of wordlines to retrieve a set of values from the bitlines.
+]
+
+== SV and Multiport Memory
+#example[
+  A $256 times 3$ RAM.
+  ```sv
+  module ram (
+    input logic clk, we,
+    input logic [7:0] a,
+    input logic [2:0] wd,
+    output logic [2:0] rd
+  );
+
+    logic [2:0] RAM[255:0]; // holds all 8-bit addresses
+
+    assign rd = RAM[a]; // async reading
+
+    always_ff @(posedge clk)
+      if (we)
+        RAM[a] <= wd;
+
+  endmodule
+  ```
+  In SystemVerilog, we typically use synchronic assignment for writing.
+  Reading can be synchronic or asynchronic.
+
+  However, our FPGA board does not support synchronic reading.
+]
+
+For reading memory from files, there are ```sv $readmemh(filename, literal)``` and alike.
+To make a ROM, never support writing.
+
+== Multiport Memory
+#definition(title: [Port])[
+  A memory port is an address-data pair.
+  The pair is either for reading or writing.
+]
+
+#example[
+  A $32 times 32$ register file with two reading ports and one writing port.
+  ```sv
+  module regfile(
+    input logic clk,
+    input logic we3,
+    input [4:0] ra1, ra2, wa3,
+    input logic [31:0] wd3,
+    output logic [31:0] rd1, rd2
+  );
+
+    logic [31:0] rf[31:0];
+
+    always_ff @(posedge clk)
+      if (we3) rf[wa3] <= wd3;
+
+    assign rd1 = (ra1 === 5'b00000) ? 32'b0 : rf[ra1];
+    assign rd2 = (ra2 === 5'b00000) ? 32'b0 : rf[ra2];
+
+  endmodule
+  ```
+]
+
+== PLA and FPGA Logic Array
+#definition(title: [Programmable Logic Array])[
+  A programmable logic array (PLA) consists of an array of AND gates and then an array of OR gates.
+]
+
+Since PLA is simply built, it can only perform sequential logic.
+The AND array produces implicants, then the OR array produces their sum.
+
+A PLA is limited by its literal terms (M), implicant terms (N) and sum terms (P).
+
+#definition(title: [Field Programmable gate Array])[
+  A field programmable gate array (FPGA) consists of
+  - logical elements (LE);
+    - LUT;
+    - flip-flops;
+    - multiplexers;
+  - input/output elements (IOE);
+  - programmable interconnections;
+  - sometimes, multipliers and RAMs.
+]
+
+Each LE has an output and a number of inputs depending on the manufacturer.
+Knowing the specifications can help us arrange the LEs, but CAD tools tend to do that for us.
