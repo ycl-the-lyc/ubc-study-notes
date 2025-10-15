@@ -115,7 +115,7 @@ $
 
 #theorem(title: [Parallel Test])[
   $
-    vb(u) times vb(v) iff vb(u) parallel vb(v)
+    vb(u) times vb(v) = vb(0) iff vb(u) parallel vb(v)
   $
 ]
 
@@ -235,7 +235,7 @@ Just as functions with one variable, multi-variable functions have their own dom
   Thus, the limit does not exist.
 ]
 
-In the example above, we approached the point along a line, which is not quite ideal in a 2D space.
+In the example above, we approached the point along a straight line, which is not quite ideal in a 3D space.
 If we can have a 2D domain for the function, then restrict the domain, the limit would be easier to work with.
 
 #example[
@@ -306,7 +306,8 @@ The calculus rules for full derivative also apply to partial derivative.
 #example(title: [Fundamental Theorem of Calculus with partial derivative])[
   $
       f(x, y) & = integral_x^y g(t) dd(t) \
-         g(x) & = pdv(, x) [G(x) - G(x)] \
+              & = evaluated(G(t))^y_x \
+         g(x) & = pdv(, x) [G(y) - G(x)] \
     pdv(g, x) & = -g(x)
   $
 ]
@@ -321,7 +322,7 @@ From the two tangent lines we know two expressions of one of the unknowns by the
 Using three equations, we can solve for $A, B, C$.
 
 == Linear Approximation
-Similar to how we linearly approximate 2D curves, 3D planes can be approximated by
+Similar to how we linearly approximate 2D curves, 3D surfaces can be approximated by
 $
   L(x, y) = pdv(z, x)(a, b) (x - a) + pdv(z, y)(a, b) (y - b).
 $
@@ -459,4 +460,10 @@ $
   vb(grad f) = vec(pdv(f, x), pdv(f, y))
 $
 This gradient is not the slope of the curve at the point, rather, it is the steepest slope alone the curve at the point.
+
+And since $z = f(x, y), f(x, y) - z = 0$.
+The normal becomes
+$
+  vb(n) = vec(-pdv(f, x), -pdv(f, y), 1).
+$
 
