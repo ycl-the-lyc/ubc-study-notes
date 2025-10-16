@@ -14,9 +14,11 @@
 #let modulo(n) = $space (mod #n)$
 
 #let Set(..args) = {
-  let args = args.pos();
-  $#physica.Set(args.remove(0), args.join($, $))$
+  let args = args.pos()
+  $#physica.Set(args.remove(0), args.join($,$))$
 }
+
+#let pws(s) = $cal(P)(#s)$
 
 #let conj = math.overline
 #let kern = math.cal([N])
