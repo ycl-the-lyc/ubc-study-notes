@@ -375,3 +375,30 @@ This course does not cover induction on other domains.
   For series $(a_n)$, fix $j, k in NN, j < k$ such that $forall m in NN "and" j <= m <= k, a_m$.
 ]
 
+= Set Theory
+#definition(title: [Power Set])[
+  Let $S$ be any set.
+  The power set $pws(S)$ of $S$ is the set of all subsets of $S$, including $S$ and $emptyset$.
+]
+
+#important-box[
+  All subsets of $S$ is not the same as all elements of $S$.
+  Make sure to put every combination in a set when constructing power sets.
+]
+
+For every element, it can be present or absent in any subset.
+Hence, the size of the power set of a set with size $n$ is $n^2$.
+In other words, for set $T$,
+$
+  abs(pws(T)) = abs(T)^2.
+$
+
+== Set Arithmetic
+Let $A, B$ be any two sets.
+$
+      A union B & = Set(x, x in A or x in B) \
+      A - B & = Set(x, x in A, x in.not B) \
+  A inter B & = Set(x, x in A, x in B) \
+$
+
+
