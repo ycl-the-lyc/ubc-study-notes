@@ -457,9 +457,14 @@ $
 $
 and the rate of change of $z = f(x, y)$ is the gradient vector,
 $
-  vb(grad f) = vec(pdv(f, x), pdv(f, y))
+  grad f = vec(pdv(f, x), pdv(f, y))
 $
 This gradient is not the slope of the curve at the point, rather, it is the steepest slope alone the curve at the point.
+$grad f(x_0, y_0)$ is always perpendicular to the contour line of $z = f(x, y)$ through $(x-), y_0$.
+To prove this, parameterize a contour curve $r(t) = [x(t), y(t)]$, derive regarding $z$ along it, and the result can be written in the form of
+$
+  grad f(x(t), y(t)) dot r'(t) = 0.
+$
 
 And since $z = f(x, y), f(x, y) - z = 0$.
 The normal becomes
@@ -467,3 +472,12 @@ $
   vb(n) = vec(-pdv(f, x), -pdv(f, y), 1).
 $
 
+#definition(title: [Directional Derivative])[
+  The directional at $(x_0, y_)$ is the rate of change of $f(x, y)$ at $(x_0, y_0)$ in direction of $vu(u)$ at constant speed of 1.
+  Obtained via
+  $
+    Dif_vu(u) f(x_0, y_0) & = grad f(x_0, y_0) dot vu(u) \
+                          & = abs(grad f(x_0, y_0)) cos(theta)
+  $
+  where $theta$ is the angle between $vu(u)$ and $grad f(x_0, y_0)$.
+]
