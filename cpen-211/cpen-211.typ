@@ -874,3 +874,39 @@ A PLA is limited by its literal terms (M), implicant terms (N) and sum terms (P)
 
 Each LE has an output and a number of inputs depending on the manufacturer.
 Knowing the specifications can help us arrange the LEs, but CAD tools tend to do that for us.
+
+= Microcomputer
+#definition(title: [Computer Components])[
+  / CPU: Central processing unit.
+  / Microprocessor: CPU in one integrated circuit (IC) unit.
+]
+
+== Instruction Set Architecture
+There are two major instruction ser architectures (ISA): complex instruction set computation (CISC) and reduced instruction set computation (RISC).
+Pretty self-explanatory.
+
+#definition[
+  Micro-architecture is the hardware design of a ISA.
+]
+
+#definition[
+  Architecture implementation is the actual hardware that facilitates a ISA.
+]
+
+== Programmable State Machine
+If we make an FSM programmable so it can perform different functions, it becomes a programmable state machine.
+#definition[
+  A programmable state machine (PSM) is a SM that has additional input from memory to load to its state counter, so there are choices for the next state.
+]
+
+There would be an input select, which tells the SM whether it should load the next state from the counter or from the memory.
+And there are the inputs from memory that will or will not be selected as the next state.
+Those inputs are called "instruction words".
+
+The output can be written to the instrction for the next round.
+
+A simple CPU uses an ALU, then select its output to write to a register file, optionally, being displayed.
+All kinds of input together select the ALU output, dictating what is written into the register.
+
+The CPU can also read from or write to a memory, and let the memory help make ALU output selection.
+
