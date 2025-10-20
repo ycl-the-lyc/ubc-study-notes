@@ -272,7 +272,7 @@ In this setup, it is as if we are deriving a normal one-variable function.
     $
 ]
 This creates two derivatives of trace curves on planes $y = b$ and $x = a$ where $(a, b)$ is the point being approached.
-The tanget lines of these two slopes form a plane.
+The tangent lines of these two slopes form a plane.
 As expected, the derivative of a curved surface is a plane!
 
 #example(title: [Another example])[
@@ -443,7 +443,7 @@ $
   Thus, in that certain region, we can use this simple function of $z$.
 ]
 
-== Directional Derivative and Gradient Vectormachine
+== Directional Derivative and Gradient Vector
 Since a point can be approached from many directions, derivatives can be directional.
 
 Now imagine looking for the highest ($max(z)$) point of a curve on a surface.
@@ -469,8 +469,9 @@ $
 And since $z = f(x, y), f(x, y) - z = 0$.
 The normal becomes
 $
-  vb(n) = vec(-pdv(f, x), -pdv(f, y), 1).
+  vb(n) = vec(-pdv(f, x), -pdv(f, y), 1)
 $
+as we define it to have a positive $z$ value.
 
 #definition(title: [Directional Derivative])[
   The directional at $(x_0, y_)$ is the rate of change of $f(x, y)$ at $(x_0, y_0)$ in direction of $vu(u)$ at constant speed of 1.
@@ -481,3 +482,26 @@ $
   $
   where $theta$ is the angle between $vu(u)$ and $grad f(x_0, y_0)$.
 ]
+
+To obtain the highest value of the directional derivative, a.k.a the steepest ascent, we take $max(cos(theta)) = 1$, which means $theta = 0$, $vu(u)$ is in the same direction as $grad f$, which happens to be the gradient vector.
+
+== 3D Gradient
+#definition(title: [3D Gradoent and Directional Vector])[
+  For $w = F(x, y, z)$, define
+  $
+         grad F & = [pdv(F, x), pdv(F, y), pdv(F, z)] \
+    Dif_vu(u) F & = grad F dot vu(u).
+  $
+  It would be the gradient of a "3D" surface -- a $4-1$ dimensional hypersurface in a 4 dimensional space.
+]
+
+#definition(title: [Level Surface])[
+  We say $F$ is a level surface iff $F(x, y, z) = k$ where $k$ is some constant.
+]
+
+The tangent plane at a certain point $(x_0, y_0, z_0)$ would be
+$
+  grad F(x_0, y_0, z_0) dot [x - x_0, y - y_0, z - z_0] = 0,
+$
+The gradient vector being its normal.
+
