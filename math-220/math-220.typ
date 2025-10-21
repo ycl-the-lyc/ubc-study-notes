@@ -338,7 +338,7 @@ When sequence elements are getting smaller and smaller, we typically let $N$ be 
     lim_(x -> a) f(x) = L "or" f(x) -> L "as" x -> a.
   $
   And we say $f$ convergese to $L$ as $x -> a$.
-  Otherwiese, we say $f$ diverges as $x -> a$.
+  Otherwise, we say $f$ diverges as $x -> a$.
 ]
 
 By boxing the function domain and range, we make sure that the function is smooth around the limit.
@@ -396,9 +396,20 @@ $
 == Set Arithmetic
 Let $A, B$ be any two sets.
 $
-      A union B & = Set(x, x in A or x in B) \
+  A union B & = Set(x, x in A or x in B) \
       A - B & = Set(x, x in A, x in.not B) \
   A inter B & = Set(x, x in A, x in B) \
+  A times B & = Set((x, y), x in A, y in B)
 $
+
+The $times$ for sets is called the Cartesian product.
+
+#definition(title: [Relation])[
+  Let $A$ be a set, a relation $R$ on $A$ is a subset of $A times A$.
+  $
+    R subset.eq A times A.
+  $
+  If $(x, y) in R$ we write $x R y$, otherwise $x R.not y$.
+]
 
 
