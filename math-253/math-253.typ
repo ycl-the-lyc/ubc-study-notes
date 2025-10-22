@@ -505,3 +505,31 @@ $
 $
 The gradient vector being its normal.
 
+== Maximum and Minimum of Multivariable Functions
+Just like single-variable functions, we can differentiate the function and differentiate the derivative to find out minimum and maximum points.
+We should also worry about saddle (instead of inflection) and singularity.
+
+#definition(title: [Critical Point])[
+  A critical point is either a maximum, a minimum or a saddle point.
+  It has
+  $
+    pdv(f, x) (a, b) = pdv(f, y) (a, b) = 0.
+  $
+]
+
+To distinguish between the kinds of critical points, we take the second derivative.
+To compute the second derivative (discriminant), we use a suprising method involving determinant.
+$
+  D(x, y) & = matrixdet(pdv(f, x, 2), pdv(f, x, y); pdv(f, y, x), pdv(f, y, 2)) \
+          & = pdv(f, x, 2) pdv(f, y, 2) - pdv(f, x, y) pdv(f, y, x).
+$
+
+#definition(title: [Classification of Critical Points])[
+  A critical point $(a, b)$ is
+  - a local minimum if $D(x, y) (a, b) > 0, pdv(f, x, 2) (a, b) > 0$;
+  - a local maximum if $D(x, y) (a, b) > 0, pdv(f, x, 2) (a, b) < 0$;
+  - a saddle point if $D(x, y) (a, b) < 0$.
+
+  If $D(x, y) (a, b) = 0$, the test yield no result.
+]
+
