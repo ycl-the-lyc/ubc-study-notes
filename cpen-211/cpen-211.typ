@@ -903,10 +903,28 @@ There would be an input select, which tells the SM whether it should load the ne
 And there are the inputs from memory that will or will not be selected as the next state.
 Those inputs are called "instruction words".
 
-The output can be written to the instrction for the next round.
+The output can be written to the instruction for the next round.
 
 A simple CPU uses an ALU, then select its output to write to a register file, optionally, being displayed.
 All kinds of input together select the ALU output, dictating what is written into the register.
 
 The CPU can also read from or write to a memory, and let the memory help make ALU output selection.
+
+== Programming CPU
+CPU typically holds a program counter (PC) for going to the next instruction.
+It has an initial address, and accepts the next address from the instruction memory.
+
+Instruction memory is where instructions are stored.
+It usually returns the next line of instruction to PC
+There are ```yasm JMP ``` for jump and ```yasm Bxx``` for branching, where `xx` is an ALU flag.
+When jumping or branching, the instruction memory output ('input select') together with ALU flag output, select the next instruction.
+
+An instruction memory table looks like
+#figure(
+  table(
+    columns: (.8cm,) * (9 + 3 + 4),
+    table.header(table.cell(colspan: 9)[The Instruction], table.cell(colspan: 3)[Input\ Select], table.cell(colspan: 4)[Next Counter]),
+    ..((([],) * (9 + 3 + 4),) * 4).flatten(),
+  ),
+)
 
