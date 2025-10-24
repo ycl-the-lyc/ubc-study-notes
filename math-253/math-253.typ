@@ -523,6 +523,10 @@ $
   D(x, y) & = matrixdet(pdv(f, x, 2), pdv(f, x, y); pdv(f, y, x), pdv(f, y, 2)) \
           & = pdv(f, x, 2) pdv(f, y, 2) - pdv(f, x, y) pdv(f, y, x).
 $
+Many times, $pdv(f, x, y) = pdv(f, y, x)$ so the equation can be further simplified.
+
+The matrix used above is a Hession Matrix, not covered in this course, which is used for discriminants of functions of arbitrary dimensions.
+It involves using the sum and product of eigenvalues, which results in the rules we see below:
 
 #definition(title: [Classification of Critical Points])[
   A critical point $(a, b)$ is
@@ -532,4 +536,14 @@ $
 
   If $D(x, y) (a, b) = 0$, the test yield no result.
 ]
+
+=== At Boarders of Domain
+If no local minimum or maximum are found, but the domain is indeed bounded, we would compute the boundary of the surface.
+
+Given a restricted surface $S$, we say $diff S$ is its boundary,
+$
+  diff S & = #[the set of points on the boundary].
+$
+
+If the functions of edges are nice enough (some variables restricted), we find minimum/maximum of the dges.
 
