@@ -916,15 +916,170 @@ It has an initial address, and accepts the next address from the instruction mem
 
 Instruction memory is where instructions are stored.
 It usually returns the next line of instruction to PC
-There are ```yasm JMP ``` for jump and ```yasm Bxx``` for branching, where `xx` is an ALU flag.
+There are ```asm JMP``` for jump and ```asm Bxx``` for branching, where `xx` is an ALU flag.
 When jumping or branching, the instruction memory output ('input select') together with ALU flag output, select the next instruction.
 
 An instruction memory table looks like
-#figure(
-  table(
-    columns: (.8cm,) * (9 + 3 + 4),
-    table.header(table.cell(colspan: 9)[The Instruction], table.cell(colspan: 3)[Input\ Select], table.cell(colspan: 4)[Next Counter]),
-    ..((([],) * (9 + 3 + 4),) * 4).flatten(),
-  ),
-)
+#{
+  let side = (.8cm,)
+  let lens = (9, 3, 4)
+  let len = lens.sum()
+  figure(
+    caption: [An Empty Instruction Table],
+    table(
+      columns: side * len,
+      rows: (auto,) + side,
+      ..([The Instruction], [Input\ Select], [Next Counter]).zip(lens).map(((c, cs)) => table.cell(colspan: cs, c)),
+      ..((([],) * len,) * 3).flatten(),
+    ),
+  )
+}
+with PC providing the current counter, address of the instruction.
+The "input select" indicate whether to continue to sequentially the next counter, to jump, or to branch on some condition.
+
+= RISC-V ISA
+The fifth generation of RISC architecture.
+
+== Instructions
+```asm
+add a, b, c # a = b + c
+sub a, b, c # a = b - c
+```
+
+== Registers
+Operands can be registers,
+
+Register is faster than memory.
+#{
+  figure(
+    caption: [RISC-V Registers],
+    table(
+      columns: 3,
+      [Name], [Register Number], [Usage],
+      ..(
+        ([zero], [x0], [Constant value 0]),
+        ([ra], [x1], [Return address]),
+        ([sp], [x2], [Stack pointer]),
+        ([gp], [x3], [Global pointer]),
+        ([tp], [x4], [Thread pointer]),
+        ([t0-2], [x5-7], [Temporaries]),
+        ([s0/fp], [x8], [Saved register / frame pointer]),
+        ([s1], [x9], [Saved register]),
+        ([a0-1], [x10-11], [Function arguments / return values]),
+        [Function arguments],
+        [Saved registers],
+        [Temporaries],
+        //TODO
+      ).flatten(),
+    ),
+  )
+}
+
+== Memory
+Memory, on the other hand, can store more data.
+However, reading and writing is slow on memory.
+
+#definition[
+  Word-addressable memory is the memory space that is addressed using number of words.
+]
+
+To read from a word-addressable memory, we "load word"
+```asm
+lw destination, offset(base)
+lw t1, 5(s0)
+```
+Data at the `base + offset` word of memory is loaded into `t1`.
+
+To write to a word-addressable memory, we "store word"
+```asm
+sw source, offset(base)
+sw t4, 0x2(zero)
+```
+Data at `source` is stored at the `base + offset` word of memory.
+
+However, in RISC-V, memory is addressed by bytes.
+#definition[
+  Byte-addressed memory is the memory space that is addressed using number of bytes.
+]
+
+For a 32-bit word board, each word has 4 bytes.
+
+#warning-box[
+  Byte address should increament by number of bytes in a word.
+  Else, it causes word misalignment.
+]
+
+To load and store data with byte-addressed memory, we "load byte" and "store byte".
+
+== Constants
+Constants can be loaded and stored using "immediate" commands.
+```asm
+addi s0, s0, 0x123 # add immediate for 12 bits to s0
+lui s0, 0x12345 # load upper immediate for 20 bits to s0
+```
+Combining ```asm lui``` and ```asm addi``` stores 32-bit data into a register.
+
+== Logics and Shifts
+We have
+```asm
+and dest, t0, t1
+or dest, t0, t1
+xor dest, t0, t1
+```
+and their immediate versions
+```asm
+andi dest, t0, const
+ori dest, t0, const
+xori dest, t0, const
+```
+
+#note-box[
+  The immediate logical instructions are sign-extended.
+]
+
+The shift instructions shift in (lower five bits of) a register.
+There are "shift left logical", "shift right logical", and "shift right arithmetic".
+```asm
+sll dest, source, shift
+srl dest, source, shift
+sra dest, source, shift
+```
+Also, their immediate counter parts.
+
+== Multiplication and Division
+For 32-bit words, a product is 64-bit.
+```asm
+mul dest, mult1, mult2 # dest = the lower 32-bit of the product
+mulh dest, mult1, mult2 # dest = the higher 32-bit of the product
+```
+For 64-bit words, there is an additional
+```asm
+mulw dest, mult1, mult2
+```
+where only the lower 32 bits are concerned.
+
+```asm div``` and ```asm rem``` also exists, and have their 64-bit variants.
+
+== Jumping and Branching
+```asm
+j label
+bxx t0, t1, label
+
+label:
+...
+```
+where `xx` is a condition.
+
+The condition does not always corresponds to higher-level code.
+For example, ```c if (x == y)``` in C is converted to
+```asm
+bne t0, t1, label # tests "not equal"
+```
+
+In fact, we always use opposite conditions.
+
+There is a special "set if less than" instruction
+```asm
+slt dest, t0, t1 # dest = 1 if true, else 0
+```
 
