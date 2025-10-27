@@ -547,3 +547,28 @@ $
 
 If the functions of edges are nice enough (some variables restricted), we find minimum/maximum of the dges.
 
+== Extreme Values Under Constraints
+
+#definition(title: [Lagrange Multiplier Method])[
+  Given function $f(x, y)$ with a  constraint $g(x, y) = 0$.
+  To find extreme values, solve for
+  $
+    x, y, lambda suchthat cases(grad f = lambda grad g, g(x, y) = 0)
+  $
+  where $lambda in RR$ is called the Lagrange Multiplier.
+
+  It extends to high dimensions and more constraints.
+
+  #proof[
+    For 2D functions only, let $vb(r)(t) = [x(t), y(t)]$ be the contour of $g(x, y) = 0$.
+    If $f(vb(r)(t))$ is extremal, we have
+    $
+      0 = dv(, t) f(vb(r)(t)) & = pdv(f, x) dv(x, t) + pdv(f, y) dv(y, t) \
+                              & = grad f dot vb(r)
+    $
+    Since, by definition of gradient, $grad f perp vb(r)', grad g perp vb(r)'$, we have $grad f = lambda grad g$ for some $lambda in RR$.
+  ]
+
+  For higher dimension functions, the proof is not valid as there are many orientations for $grad f$ to be perpendicular to $vb(r)'$.
+]
+
