@@ -404,12 +404,61 @@ $
 
 The $times$ for sets is called the Cartesian product.
 
+== Set Proofs
+Proofs involving sets can require us to interpret -- to rewrite the sets so they can be used with respect to what we wish to proof.
+
+=== Subset and Equality
+If an element is in a set, which set is a subset of another set, than the element is also in the master set.
+$
+  A subset.eq B & equiv forall x in A, x in B           & equiv x in A implies x in B \
+          A = B & equiv A subset.eq B and B subset.eq A &     equiv x in A iff x in B
+$
+
+=== Intersection and Union
+$
+  x in A inter B & equiv x in A and x in B \
+  x in A union B & equiv x in A or x in B
+$
+
+=== Complement and Difference
+$
+  x in overline(A) & equiv x in.not A \
+        x in A - B & equiv x in A and x in.not B
+$
+
+== Relations
+
 #definition(title: [Relation])[
   Let $A$ be a set, a relation $R$ on $A$ is a subset of $A times A$.
   $
     R subset.eq A times A.
   $
-  If $(x, y) in R$ we write $x R y$, otherwise $x R.not y$.
+  If $(x, y) in R$ we write $x R y$, otherwise $x cancel(R) y$.
+
+  $emptyset$ is a trivial relation on $A$, and $S = A times A$ is the universal relation on $A$.
 ]
 
+A trivial or universal relation is not useful to us, we are more interested in some special ones.
 
+#definition(title: [Special Relation Properties])[
+  Let $R$ be a relation on set $A$, then $R$ is...
+  - reflexive when $forall a in A, a R a$.
+  - symmetric when $forall a, b, a R b implies b R a$.
+  - transitive when $forall a, b, c, a R b and b R c implies a R c$.
+]
+
+For example, the congruency relation has all three properties, which makes it a...
+
+=== Equivalence Relation
+#definition(title: [Equivalence Relation])[
+  Let $R$ be a relation on $A$, then $R$ is an equivalence relation when it is reflexive, symmetric and transitive.
+]
+
+#definition(title: [Equivalence Class])[
+  Let $R$ be an equivalence relation on $A$.
+  The equivalence class of $x in A$ with respect to $R$ is
+  $
+    [x] = Set(a in A, a R x).
+  $
+  No equivalence class is empty, for any $a in A, a in [a]$.
+]
