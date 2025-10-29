@@ -1011,6 +1011,15 @@ For a 32-bit word board, each word has 4 bytes.
 
 To load and store data with byte-addressed memory, we "load byte" and "store byte".
 
+```asm
+lh dest source # load half word
+lhu
+lb dest source # load byte
+lbu
+```
+
+The signed versions do sign extension, since all RISC-V registers are 32-bit, while the values loaded can be 8-bit.
+
 == Constants
 Constants can be loaded and stored using "immediate" commands.
 ```asm
@@ -1060,6 +1069,13 @@ where only the lower 32 bits are concerned.
 
 ```asm div``` and ```asm rem``` also exists, and have their 64-bit variants.
 
+For unsigned multiplication, there are
+```asm
+mulhu dest, mult1, mult2 # both operands are unsigned
+mulhsu dest, mult1, mult2 # the second operand is unsigned
+```
+The lower-half multiplication is the same regardless of sign.
+
 == Jumping and Branching
 ```asm
 j label
@@ -1069,6 +1085,14 @@ label:
 ...
 ```
 where `xx` is a condition.
+
+```asm
+j imm # jal x0 imm
+jal imm # jal ra imm
+jr ra # 
+ret
+```
+//TODO find all the jump in slides
 
 The condition does not always corresponds to higher-level code.
 For example, ```c if (x == y)``` in C is converted to
@@ -1083,3 +1107,99 @@ There is a special "set if less than" instruction
 slt dest, t0, t1 # dest = 1 if true, else 0
 ```
 
+And they have unsigned versions, too.
+
+== Overflow Detection
+RISC-V has no special flags for overflow.
+
+For unsigned overflow,
+```asm
+add t0, t1, t2
+bltu t0, t1, carryout
+```
+
+For signed overflow,
+```asm
+add t0, t1, t2
+slti t3, t2, 0 # t3 = 1 if t2 is negative
+slt t4, t0, t1 # t4 = 1 if t0 < t1
+bne t3, t4, overflow
+```
+If `t2` is negative, than result, `t0`, should be a smaller than `t1`.
+Otherwise, it overflowed.
+
+== Arrays
+An array has a base address, which is loaded into a register on accessing the array.
+Then, the address for the next element is the previous address increamented by element size.
+
+```asm
+lui s0, 0x123B4 # the upper 20 bits
+addi s0, s0, 0x780 # the lower 8 bits
+lw t1, 0(s0) # load from memory at s0 with offset 0
+slli t1, t1 1 # logical shift left by 1, so times 2
+sw t1, 0(s0) # store it back to memory at s0 with offset 0
+```
+
+To access elements of an array in a loop,
+```asm
+  lui s0, 0x23B8F
+  addi s0, s0, 0x400
+  addi s1, zero, 0
+  addi t2, zero, 1000 # elements at 0 to 999
+
+loop:
+  bge s1 t2, done
+  slli t0, s1, 2 # offset times 4, the size of int in C
+  add t0, t0, s0 # plus base
+  lw t1, 0(t0)
+  slli t1, t1, 3 # times 8
+  sw t1, 0(t1)
+  addi s1, s1, 1
+  j loop
+done:
+```
+
+== ASCII
+American Standard Code for Information Interchange (ASCII) is an encoding of characters.
+
+Recall that, in C, a string is terminated by a ```c NUL```, `0x00`.
+In a loop, we see if the current character is `0x00`, and if so, jump out of the loop.
+
+== Function Call
+```asm
+  jal func # jump to label "func" and link, store the next address to ra
+func:
+  jr ra # jump to register, ra
+```
+
+Function arguments are stored in `a0-a7`, and return values are stored in `a0-a1`.
+If more arguments are needed, then the argument registers should store address of memory that stores the actual values.
+
+#warning-box[
+  In a subroutine, `t0-t6` can be used freely; however, `s0-s11` must be stored and restored befor exiting the subroutine.
+]
+
+However, we do not have space in the register to store those regoster values.
+Thus, re store them in the...
+
+== Stack
+A stack is a set of memory space that grows from top address value to bottom.
+The special register that holds the stack position is `sp`.
+Each time, the stack pointer moves down two words.
+```asm
+func:
+  addi sp, sp -12
+  sw s3, 8(sp)
+  sw t0, 4(sp)
+  sw t1, 0(sp)
+  # ...
+  lw s3, 8(sp)
+  lw t0, 4(sp)
+  lw t1, 0(sp)
+  jr ra
+```
+Of course, `sp` itself needs to be preserved.
+If a function calls another function, then `ra` should be preserved as well.
+
+== Machine Language
+//TODO next class
