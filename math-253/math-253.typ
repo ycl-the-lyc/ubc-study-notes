@@ -572,3 +572,60 @@ If the functions of edges are nice enough (some variables restricted), we find m
   For higher dimension functions, the proof is not valid as there are many orientations for $grad f$ to be perpendicular to $vb(r)'$.
 ]
 
+To set up a Lagrange multiplier problem, we first figure out what is $g$, then write
+$
+  grad f = lambda grad g.
+$
+
+#example[
+  The plane $x + y + 2z = 2$ intersects the paraboloid $z = x^+ y^2$.
+  Find the points on the ellipse nearest and farthest from the origin.
+
+  #solution[
+    Identify the problem as the extreme points of $D(x, y, z) = sqrt(x^2 + y^2 + z^2)$ with the constraint
+    $
+      Set((x, y, z), x + y + 2z = 2) inter Set((x, y, z), z = x^2 + y^2).
+    $
+    In fact, we can use $f(x, y, z) = D^2(x, y, z)$ to make our life easier.
+
+    Using the second set, define $F(x, y) = f(x, y, x^2 + y^2)$.
+    Using the first set, define $G(x, y) = x + y + 2(x^2 + y^2) - 2 = 0$.
+
+    $
+                      pdv(F, x) & = 2x + 2(x^2 + y^2) 2x \
+                      pdv(F, y) & = 2y + 2(x^2 + y^2) 2y \
+                      pdv(G, x) & = 1 + 4x \
+                      pdv(G, y) & = 1 + 4y \
+      vec(pdv(F, x), pdv(F, y)) & = lambda vec(pdv(G, x), pdv(G, y)).
+    $
+    Therefore, we have three equations with three unknowns.
+    $
+                     pdv(F, x) & = lambda pdv(G, x) \
+           2x + 4x (x^2 + y^2) & = lambda (1 + 4x) \
+                     pdv(F, y) & lambda pdv(G, y) \
+           2y + 2y (x^2 + y^2) & = lambda (1 + 4y) \
+                       G(x, y) & = 0 \
+      x + y + 2(x^2 + y^2) - 2 & = 0.
+    $
+    Solving the equations (try eliminating the $x y$'s) gives us
+    $
+      "Assume" lambda eq.not 0 \
+      cases(
+        x = 1/2,
+        y = 1/2,
+      ) "or" cases(
+        x = -1,
+        y = -1
+      )
+    $
+    Finally, use the $x, y$ values to conpute $z$.
+  ]
+
+  Why do we assume $lambda eq.not 0$?
+  If it is,
+  $
+    grad F = 0,
+  $
+  then the constraint is trivial; there are critical points on the boundary.
+]
+
