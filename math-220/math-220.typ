@@ -454,11 +454,76 @@ For example, the congruency relation has all three properties, which makes it a.
   Let $R$ be a relation on $A$, then $R$ is an equivalence relation when it is reflexive, symmetric and transitive.
 ]
 
+#example[
+  Prove that $R$ on $ZZ$ defined by $a R b$ if $7a^2 equiv 2b^2 modulo(5)$ is an equivalent relation.
+
+  #solution[
+    - Reflexiveness: For any integer $a$, $7a^2 = 5a^2 + 2a^2$,
+    $
+      7a^2 & equiv 5a^2 modulo(5) + 2a^2 modulo(5) \
+           & equiv 0 + 2a^2 modulo(5).
+    $
+    - Symmetry: For integers $a, b$, if $2a^2 equiv 2b^2 modulo(5)$, then $2b^2 equiv 2a^2 modulo(5)$.
+    - Transitivity: If $2a^2 equiv 2b^2 modulo(5), 2b^2 equiv 2c^2 modulo(5)$, then $2a^2 equiv 2c^2 modulo(5)$.
+  ]
+
+  There are alternative proofs using divisibility.
+]
+
+=== Equivalenec Classes
 #definition(title: [Equivalence Class])[
   Let $R$ be an equivalence relation on $A$.
   The equivalence class of $x in A$ with respect to $R$ is
   $
     [x] = Set(a in A, a R x).
   $
+  It contains all elements related to $x$ under that relation.
+
   No equivalence class is empty, for any $a in A, a in [a]$.
+]
+
+#example[
+  Using the previous example, find the equivalence class $[0]$.
+
+  #solution[
+    By definition, $[0] = Set(y in A, 0 R y)$.
+    We need $y$ where
+    $
+                7 dot 0^2 & equiv 2 y^2 modulo(5) \
+                        5 & divides 2 y^2 \
+      cancel(5 divides 2) & or 5 divides y^2 \
+              5 divides y & or 5 divides y.
+    $
+    $y & := 5k$ for some integer $k$.
+    Hence, $[0] = Set(5k, k in ZZ)$.
+  ]
+]
+
+#example[
+  Again, determine $[1]$.
+
+  #solution[
+    By definition, $[1] = Set(y in A, 1 R y)$.
+    We need $y$ where
+    $
+                7 dot 1^2 & equiv 2 y^2 modulo(5) \
+                        5 & divides (2y^2 - 2) \
+      cancel(5 divides 2) & or 5 divides (y^2 - 1) \
+        5 divides (y + 1) & or 5 divides (y - 1) \
+              y := 5k - 1 & or y := 5k + 1.
+    $
+    Hence, $[1] = Set(5k + 1, k in ZZ) union Set(5k - 1, k in ZZ)$.
+  ]
+]
+
+=== Relation Partitions
+A set can be partitioned to equivalence classes.
+$
+  A = [a] union [b] union [c] ...
+$
+
+#definition(title: [Partition])[
+  A partition of a set $A$ is a collection $P$ of non-empty subsets of $A$, so that
+  - if $X, Y in P$, then $X inter Y = emptyset or X = Y$;
+  - if $x in A$, then $exists X in P suchthat x in X$.
 ]
