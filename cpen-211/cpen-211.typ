@@ -955,22 +955,23 @@ Register is faster than memory.
     caption: [RISC-V Registers],
     table(
       columns: 3,
-      [Name], [Register Number], [Usage],
+      [name], [register number], [usage],
       ..(
-        ([zero], [x0], [Constant value 0]),
-        ([ra], [x1], [Return address]),
-        ([sp], [x2], [Stack pointer]),
-        ([gp], [x3], [Global pointer]),
-        ([tp], [x4], [Thread pointer]),
-        ([t0-2], [x5-7], [Temporaries]),
-        ([s0/fp], [x8], [Saved register / frame pointer]),
-        ([s1], [x9], [Saved register]),
-        ([a0-1], [x10-11], [Function arguments / return values]),
-        [Function arguments],
-        [Saved registers],
-        [Temporaries],
-        //TODO
-      ).flatten(),
+        ("zero", [x0], [Constant value 0]),
+        ("ra", [x1], [Return address]),
+        ("sp", [x2], [Stack pointer]),
+        ("gp", [x3], [Global pointer]),
+        ("tp", [x4], [Thread pointer]),
+        ("t0-2", [x5-7], [Temporaries]),
+        ("s0/fp", [x8], [Saved register / frame pointer]),
+        ("s1", [x9], [Saved register]),
+        ("a0-1", [x10-11], [Function arguments / return values]),
+        ("a2-7", [x12-17], [Function arguments]),
+        ("s2-11", [x18-27], [Saved registers]),
+        ("t3-6", [x28-31], [Temporaries]),
+      )
+        .map(((n, r, u)) => (raw(n), r, u))
+        .flatten(),
     ),
   )
 }
@@ -1079,26 +1080,33 @@ The lower-half multiplication is the same regardless of sign.
 == Jumping and Branching
 ```asm
 j label
-bxx t0, t1, label
 
 label:
 ...
 ```
-where `xx` is a condition.
 
+Though it may appear like RISC-V has many jump instructions, it only has two.
+```asm
+jal rd, imm_20:0 # jump and link
+jalr rd, rs, imm_11:0 # jump and link register
+```
+`rd` is set to `PC + 4`, while `PC` is set to `PC + imm` or `[rs] + SignExt(imm)`, which allows for longer jumps.
+The rest are pseudoinstructions that maps to real, often longer instructions.
 ```asm
 j imm # jal x0 imm
 jal imm # jal ra imm
-jr ra # 
-ret
+jr rs # jalr x0, rs, 0
+ret # jalr x0, ra, 0
 ```
-//TODO find all the jump in slides
 
-The condition does not always corresponds to higher-level code.
-For example, ```c if (x == y)``` in C is converted to
 ```asm
 bne t0, t1, label # tests "not equal"
+label:
 ```
+where `xx` is a condition.
+
+The condition does not always corresponds to higher-level code.
+For example, ```c if (x == y)``` in C is converted to ```asm bne```, "not equals to".
 
 In fact, we always use opposite conditions.
 
@@ -1202,4 +1210,59 @@ Of course, `sp` itself needs to be preserved.
 If a function calls another function, then `ra` should be preserved as well.
 
 == Machine Language
-//TODO next class
+Machines still do not understand the letters and numbers we wrote.
+An assembler would take those texts and assemble them to machine language -- 0's and 1's.
+
+To align the words and such, instruction with different numbers of parameters of different sizes are arranged nicely.
+Read the "Chapter 6B slides" for more information.
+
+=== Compressed Instructions
+Word alignment means wasted memory.
+To save space, some instructions can be compressed.
+
+The problem is, a word is read as a whole.
+Hence, it was decided that the most common instructions can be compressed to 16 bits.
+```asm
+c.add
+c.lw
+c.addi
+```
+
+=== Using Assembly
+First, we assemble assembly `.s` files.
+```shell-unix-generic
+as [ option ...  ] [ file ...  ]
+```
+to produce object `.o` files.
+
+Then, we link the objects with libraries.
+```shell-unix-generic
+ld files...  [options] [-o outputfile]
+```
+to produce an executable.
+
+The assembly code can also contain commands to the assembler.
+
+```asm
+.equ LX_WRITE, 64
+.equ LX_EXIT, 93
+
+.global _start
+
+.text
+_start:
+  li a0, 1 # 1 = stdout
+  la a1, mystring # string address
+  li a2, 13 # strlen 13 bytes
+  li a7, LX_WRITE # write (print)
+  ecall # call OS
+
+  li a0, 0 # return value
+  li a7, LX_EXIT # exit
+  ecall # call OS
+
+.data
+mystring: .ascii "Hello world!\n"
+```
+
+See `211_M3_L16 RISC-V Assembly.pdf` for more info.
