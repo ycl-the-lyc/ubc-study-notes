@@ -629,3 +629,41 @@ $
   then the constraint is trivial; there are critical points on the boundary.
 ]
 
+= Double Integrals
+We have covered double and triple derivatives, now comes integrals.
+
+== Rectangles
+Recall the Riemann sum, where a graph is broken down into approximate rectangles on very short $x$ intervals.
+$
+                     Delta x & = x_i - x_(i-1) \
+                             & = (b - a) / N \
+                           A & = f(x_i) Delta x \
+  sum_(i=1)^N f(x_i) Delta x & stretch(->)^(N -> oo) integral_a^b f(x) dd(x)
+$
+
+Let $z = f(x, y), x, y in RR = [a, b] times [c, d] = Set((x, y) in RR^2, a <= x <= b, c <= y <= d)$
+where $a, b$ indicate the domain of $x$ and $c, d$ indicate the domain of $y$.
+
+The rectangle bounded by four corners $a, b, c, d$ is the domain of integration, $R$.
+
+Graphically, this integration of $z$ yields the volume from the domain to the projected region on surface $z$, if $f(x, y) >= 0$.
+
+Total volume under $z = f(x, y)$ over $R$ is
+$
+  integral.double_R f(x, y) dd(x, y) = sum_(i=1)^m sum_(j=1)^n f(x_i, y_i) Delta x Delta y
+$
+where $n, m -> oo$.
+We can also write $dd(x, y)$ as $dd(A)$, $A$ for "area".
+
+#important-box[
+  If integrated functions are continuous on $R$,
+  - addition;
+  - multiplication with constants in $RR$;
+  works the same as single integrals.
+
+  If $forall (x, y) in R, f(x, y) <= g(x, y)$, then
+  $
+    integral.double f(x, y) dd(A) <= integral.double g(x, y) dd(A)
+  $
+  which is called monotonicity.
+]
