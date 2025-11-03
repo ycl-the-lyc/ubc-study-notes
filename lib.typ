@@ -18,10 +18,11 @@
   $#physica.Set(args.remove(0), args.join($,$))$
 }
 
-#let pws(s) = $cal(P)(#s)$
+#let pws = math.cal[P]
+#let part = math.cal[P]
 
 #let conj = math.overline
-#let kern = math.cal([N])
+#let kern = math.cal[N]
 #let vn(body) = $norm(vb(body))$
 
 #import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit

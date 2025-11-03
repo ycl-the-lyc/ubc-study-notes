@@ -528,7 +528,7 @@ Many times, $pdv(f, x, y) = pdv(f, y, x)$ so the equation can be further simplif
 The matrix used above is a Hession Matrix, not covered in this course, which is used for discriminants of functions of arbitrary dimensions.
 It involves using the sum and product of eigenvalues, which results in the rules we see below:
 
-#definition(title: [Classification of Critical Points])[
+#theorem(title: [Classification of Critical Points])[
   A critical point $(a, b)$ is
   - a local minimum if $D(x, y) (a, b) > 0, pdv(f, x, 2) (a, b) > 0$;
   - a local maximum if $D(x, y) (a, b) > 0, pdv(f, x, 2) (a, b) < 0$;
@@ -549,7 +549,7 @@ If the functions of edges are nice enough (some variables restricted), we find m
 
 == Extreme Values Under Constraints
 
-#definition(title: [Lagrange Multiplier Method])[
+#theorem(title: [Lagrange Multiplier Method])[
   Given function $f(x, y)$ with a  constraint $g(x, y) = 0$.
   To find extreme values, solve for
   $
@@ -578,7 +578,7 @@ $
 $
 
 #example[
-  The plane $x + y + 2z = 2$ intersects the paraboloid $z = x^+ y^2$.
+  The plane $x + y + 2z = 2$ intersects the paraboloid $z = x^2 + y^2$.
   Find the points on the ellipse nearest and farthest from the origin.
 
   #solution[
@@ -650,7 +650,7 @@ Graphically, this integration of $z$ yields the volume from the domain to the pr
 
 Total volume under $z = f(x, y)$ over $R$ is
 $
-  integral.double_R f(x, y) dd(x, y) = sum_(i=1)^m sum_(j=1)^n f(x_i, y_i) Delta x Delta y
+  limits(integral.double)_R f(x, y) dd(x, y) = sum_(i=1)^m sum_(j=1)^n f(x_i, y_i) Delta x Delta y
 $
 where $n, m -> oo$.
 We can also write $dd(x, y)$ as $dd(A)$, $A$ for "area".
@@ -666,4 +666,42 @@ We can also write $dd(x, y)$ as $dd(A)$, $A$ for "area".
     integral.double f(x, y) dd(A) <= integral.double g(x, y) dd(A)
   $
   which is called monotonicity.
+]
+
+== Iterated Integrals
+Given $a, b$ that bound $x$ and $c, d$ that bound $y$, and
+$
+  limits(integral.double)_R f(x, y) dd(A),
+$
+we can restrict $x$ to only partially integrate $A$ with regard to $y$,
+$
+  A(x) & = integral_c^d f(x, y) dd(y).
+$
+Then, integrate $x$,
+$
+  integral_a^b A(x) dd(x) = integral_a^b integral_c^d f(x, y) dd(y, x)
+$
+
+#theorem(title: [Fubini's])[
+  Suppose $f(x, y)$ is continuous on $R = [a, b] times [c, d]$, then
+  $
+    limits(integral.double)_R f(x, y) = integral_a^b integral_c^d f(x, y) dd(y, x) = integral_c^d integral_a^b f(x, y) dd(x, y).
+  $
+]
+
+Look closely, the two layers of integrals stays consistent, just have their order swapped.
+
+#example[
+  Integrate $e^y sqrt(x + e^y)$ from $0$ to $1$.
+
+  #solution[
+    Let $u = x + e^y$, $dd(u) = e^y dd(y)$.
+    $
+      integral_0^1 e^y sqrt(x + e^y) dd(y) & = 1/4 integral_0^4 integral_0^4 e^y sqrt(x + e^y) dd(y, x) \
+                                           & = 1/4 integral_0^4 integral_(x + 1)^(x + e) sqrt(u) dd(u, x) \
+                                           & = 1/4 integral_0^4 2/3 u^(3/2) evaluated_(u=x+1)^(x+e) dd(x) \
+                                           & = 1/4 integral_0^4 2/3 ((x+e)^(3/2) (x+1)^(3/2)) dd(x) \
+                                           & = 3.327...
+    $
+  ]
 ]
