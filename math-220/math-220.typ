@@ -523,7 +523,13 @@ $
 $
 
 #definition(title: [Partition])[
-  A partition of a set $A$ is a collection $P$ of non-empty subsets of $A$, so that
-  - if $X, Y in P$, then $X inter Y = emptyset or X = Y$;
-  - if $x in A$, then $exists X in P suchthat x in X$.
+  A partition of a set $A$ is a collection $part$ of non-empty subsets of $A$, so that
+  - if $X, Y in part$, then $X inter Y = emptyset or X = Y$;
+  - if $x in A$, then $exists X in part suchthat x in X$.
+]
+
+#note-box[
+  The meaning of $cal(P)$ changes in contexts.
+  Used as a function of a set, it means power set.
+  Used as a collection, it means partition.
 ]
