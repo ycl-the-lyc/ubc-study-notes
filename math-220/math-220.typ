@@ -32,6 +32,7 @@
   $forall$, $$, [For all, for any],
   $exists$, $$, [There exists],
   $suchthat$, $$, [Such that],
+  $[a]$, $$, [Collection of $a$],
 ))
 
 = Set
@@ -451,8 +452,14 @@ For example, the congruency relation has all three properties, which makes it a.
 
 === Equivalence Relation
 #definition(title: [Equivalence Relation])[
-  Let $R$ be a relation on $A$, then $R$ is an equivalence relation when it is reflexive, symmetric and transitive.
+  Let $R$ be a relation on $A$, then $R$ is an equivalence relation when it is reflexive, symmetric and transitive, with the three properties ordered by strictness.
 ]
+
+When proving an equivalence relation, we must prove all three spacial properties.
+
+The smallest possible equivalence relation whould be $R: a = b$.
+We first prove that it is reflexive, than show that it satisfies the other two.
+Since every other possible equivalence relation must contain such relation, it is the smallest.
 
 #example[
   Prove that $R$ on $ZZ$ defined by $a R b$ if $7a^2 equiv 2b^2 modulo(5)$ is an equivalent relation.
@@ -469,6 +476,8 @@ For example, the congruency relation has all three properties, which makes it a.
 
   There are alternative proofs using divisibility.
 ]
+
+The smallest size of an equivalence relation is the size of the set it is on.
 
 === Equivalenec Classes
 #definition(title: [Equivalence Class])[
@@ -523,13 +532,43 @@ $
 $
 
 #definition(title: [Partition])[
-  A partition of a set $A$ is a collection $part$ of non-empty subsets of $A$, so that
-  - if $X, Y in part$, then $X inter Y = emptyset or X = Y$;
-  - if $x in A$, then $exists X in part suchthat x in X$.
+  A partition of a set $A$ is a collection $part$ of non-empty _subsets_ of $A$, so that
+  - there is no overlap: if sets $X, Y in part$, then $X inter Y = emptyset or X = Y$;
+  - it has full coverage: if $x in A$, then $exists X in part suchthat x in X$.
 ]
 
 #note-box[
   The meaning of $cal(P)$ changes in contexts.
   Used as a function of a set, it means power set.
   Used as a collection, it means partition.
+
+  One thing in common is that they are all collection of subsets.
 ]
+
+In this course, a collection can be viewed as a set, though it may not be accurate.
+
+An equivalence relation effectively partitions a set.
+Hence, for each equivalence relation, there are partiions for every set of related elements.
+
+In fact, given the properties of a partition, for each partition, there is an equivalence relation for the set.
+
+#proof[
+  Given a partition $part$ of set $A$, define a relation $R: x, y in S$ for some $S in part$.
+
+  - For $x in S, x in S$. The relation is reflexive.
+  - Since there is no overlap between subsets of $part$, $x, y in "and only" in S$. The relation is symmetric.
+  - For the same reason, for $x, y in S$, $y, z in S$, $x, y, z in "and only" in S$. The relation is transitive.
+
+  - $forall a in A, s in S in part$. $a$ and itself are in the same set.
+    The relation is _reflexive._
+  - $a R b implies a, b in S in part$.
+    Hence, $b, a in S, b R a$.
+    The relation is _symmetric._
+  - Assume $a R b, b R c$. $exists S, T in part suchthat a, b in S and b, c in T$.
+    Since $b in S inter T$, $S inter T eq.not emptyset$, thus $S = T$.
+    Then, $a, c in S, a R c$.
+    The relation is transitive.
+
+  $R$ is an equivalence relation on $A$.
+]
+
