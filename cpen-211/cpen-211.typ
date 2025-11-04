@@ -1187,8 +1187,8 @@ If more arguments are needed, then the argument registers should store address o
   In a subroutine, `t0-t6` can be used freely; however, `s0-s11` must be stored and restored befor exiting the subroutine.
 ]
 
-However, we do not have space in the register to store those regoster values.
-Thus, re store them in the...
+However, we do not have space in the register to store those register values.
+Thus, we store them in the...
 
 == Stack
 A stack is a set of memory space that grows from top address value to bottom.
