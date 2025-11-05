@@ -31,7 +31,9 @@
 #import cosmos.rainbow: *
 
 #let powset(s) = {
-  range(1, s.len() + 1).map(c => (..s.windows(c)))
+  for c in range(1, s.len() + 1) {
+    s.windows(c)
+  }
 }
 
 #let cartprod(s, t) = for i in s { for j in t { (i, j) } }
