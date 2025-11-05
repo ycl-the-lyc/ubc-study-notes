@@ -21,6 +21,7 @@
 #let pws = math.cal[P]
 #let part = math.cal[P]
 
+#let cmpl = math.overline
 #let conj = math.overline
 #let kern = math.cal[N]
 #let vn(body) = $norm(vb(body))$
@@ -30,13 +31,15 @@
 #import "@preview/theorion:0.4.0": *
 #import cosmos.rainbow: *
 
+#let ssub(s, t) = s.filter(e => not t.contains(e))
+
 #let powset(s) = {
   for c in range(1, s.len() + 1) {
     s.windows(c)
   }
 }
 
-#let cartprod(s, t) = for i in s { for j in t { (i, j) } }
+#let cartprod(s, t) = for i in s { for j in t { ((i, j),) } }
 
 #let amax(arr) = arr.reduce((m, i) => if i > m { i } else { m })
 
