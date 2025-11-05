@@ -30,6 +30,12 @@
 #import "@preview/theorion:0.4.0": *
 #import cosmos.rainbow: *
 
+#let powset(s) = {
+  range(1, s.len() + 1).map(c => (..s.windows(c)))
+}
+
+#let cartprod(s, t) = for i in s { for j in t { (i, j) } }
+
 #let amax(arr) = arr.reduce((m, i) => if i > m { i } else { m })
 
 #let amin(arr) = arr.reduce((m, i) => if i < m { i } else { m })

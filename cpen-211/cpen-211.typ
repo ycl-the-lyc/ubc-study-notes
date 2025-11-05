@@ -1266,3 +1266,60 @@ mystring: .ascii "Hello world!\n"
 ```
 
 See `211_M3_L16 RISC-V Assembly.pdf` for more info.
+
+= RISC-V Bare Metal Programming
+In addition to programming for full OS's, we can also program RISC-V for microcomputers, like our FPGA boards.
+Since we have full access to such boards, we can do whatever we want, which is called "bare metal programming".
+
+It is all similar, but we are provided with direct device access, such as switches and LEDs.
+The devices can be accessed through specific memory addresses, which we can look up in the board's manual.
+This #link("https://cpulator.01xz.net/?sys=rv32-de1soc")[web-based simulator] can... simulate the bare metal.
+
+On bare metal, we do not have a exit signal.
+Instead, we use an loop that does nothing.
+```asm
+stop:
+  j stop
+```
+
+Again, refer to documentation and example slides for using each device.
+
+== Memory
+There is no built-in memory management.
+
+To initialize a stack,
+```asm
+# off-chip 64 MiB memory
+.equ SDRAM_BASE, 0x00000000
+.equ SDRAM_END, 0x03ffffff
+
+_start:
+  la sp, SDRAM_END+1 # just past the end
+```
+
+#figure(
+  caption: [Memory Layout],
+  {
+    show table.cell.where(y: 0): none
+    table(
+      columns: 50%,
+      inset: 1.3em,
+      stroke: (_, y) => if y in (2, 3) {
+        (top: (paint: black, thickness: .4pt, dash: "dashed"), rest: black + .4pt)
+      } else { black + .4pt },
+      table.header(),
+      [stack],
+      $ arrow.b \ \ \ arrow.t $,
+      [heap],
+      [Unintialized data],
+      [Initialized data],
+      [text]
+    )
+  },
+)
+
+=== Memory in C
+A C compiler usually optimizes variable by storing their values in a register, so to reduce memory access.
+
+In bare metal programming, there is no guarantee that values of a device would not change.
+Hence, it is important to mark any variable for device input ```c volatile```, so each time the variable is accessed, its value is fetched from memory.
