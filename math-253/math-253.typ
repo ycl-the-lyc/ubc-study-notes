@@ -540,9 +540,9 @@ It involves using the sum and product of eigenvalues, which results in the rules
 === At Boarders of Domain
 If no local minimum or maximum are found, but the domain is indeed bounded, we would compute the boundary of the surface.
 
-Given a restricted surface $S$, we say $diff S$ is its boundary,
+Given a restricted surface $S$, we say $partial S$ is its boundary,
 $
-  diff S & = #[the set of points on the boundary].
+  partial S & = #[the set of points on the boundary].
 $
 
 If the functions of edges are nice enough (some variables restricted), we find minimum/maximum of the dges.
