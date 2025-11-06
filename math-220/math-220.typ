@@ -100,7 +100,7 @@ In essence, to prove set equality, we need to show that "every element of S is m
 
 #theorem(title: [Bézout's Identity])[
   Let $a$ and $b$ be integers with greatest common divisor $d$. Then there exist integers $x$ and $y$ such that $a x + b y = d$. Moreover, the integers of the form $a z + b t$ are exactly the multiples of $d$.
-]
+] <th:bezouts>
 
 = Logic
 
@@ -570,5 +570,14 @@ In fact, given the properties of a partition, for each partition, there is an eq
     The relation is transitive.
 
   $R$ is an equivalence relation on $A$.
+]
+
+We will find @th:bezouts[Bézout's Identity] useful for equivalence relation related proofs that also involve congruency.
+
+= Functions
+#definition(title: [Function])[
+  For sets $A, B$, a function $f$ from $A$ to $B$, written $f: A -> B$, is a subset of $A times B$ with two properties.
+  - //TODO coverage
+  - //TODO no overlap
 ]
 
