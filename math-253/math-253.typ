@@ -699,9 +699,34 @@ Look closely, the two layers of integrals stays consistent, just have their orde
     $
       integral_0^1 e^y sqrt(x + e^y) dd(y) & = 1/4 integral_0^4 integral_0^4 e^y sqrt(x + e^y) dd(y, x) \
                                            & = 1/4 integral_0^4 integral_(x + 1)^(x + e) sqrt(u) dd(u, x) \
-                                           & = 1/4 integral_0^4 2/3 u^(3/2) evaluated_(u=x+1)^(x+e) dd(x) \
+                                           & = evaluated(1/4 integral_0^4 2/3 u^(3/2))_(u=x+1)^(x+e) dd(x) \
                                            & = 1/4 integral_0^4 2/3 ((x+e)^(3/2) (x+1)^(3/2)) dd(x) \
                                            & = 3.327...
     $
   ]
 ]
+
+== General Regions
+We can integrate over rectangles, but we can also integrate over general, non-rectangular regions.
+
+For a general region $R$, choose a rectangle $D$ containing $R$.
+Define
+$
+  F(x, y) = cases(f(x, y) "if" (x, y) in R, 0 "otherwise").
+$
+
+If the boundary of $y$ can be expressed as functions of $x$, we would first integrate over $y$, then $x$.
+Write boundary of $y$ as functions of $x$, $g_1(x), g_2(x)$.
+$
+                                        R & = Set((x, y), a <= x <= b, g_1(x) <= y <= g_2(x)) \
+  limits(integral.double)_R f(x, y) dd(A) & = integral_a^b integral_(g_1(x))^(g_2(x)) f(x, y) dd(y, x).
+$
+
+Conversely, if the boundary of $x$ can be expressed as functions of $y$, we would first integrate over $x$, then $y$.
+$
+                                        R & = Set((x, y), c <= y <= d, h_1(y) <= x <= h_2(y)) \
+  limits(integral.double)_R f(x, y) dd(A) &= integral_c^d integral_(h_1(y))^(h_2(y)) f(x, y) dd(x, y).
+$
+
+Pay attention of the order of integration, their layering.
+
