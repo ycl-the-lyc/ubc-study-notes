@@ -602,7 +602,7 @@ $
     $
                      pdv(F, x) & = lambda pdv(G, x) \
            2x + 4x (x^2 + y^2) & = lambda (1 + 4x) \
-                     pdv(F, y) & lambda pdv(G, y) \
+                     pdv(F, y) & = lambda pdv(G, y) \
            2y + 2y (x^2 + y^2) & = lambda (1 + 4y) \
                        G(x, y) & = 0 \
       x + y + 2(x^2 + y^2) - 2 & = 0.
