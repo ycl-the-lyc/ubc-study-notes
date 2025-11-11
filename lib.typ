@@ -1,9 +1,11 @@
 #import "@preview/ilm:1.4.1": *
 
-#import "@preview/physica:0.9.5"
+#import "@preview/physica:0.9.6"
 #import physica: *
 
 #import "@preview/fletcher:0.5.8"
+
+#import "lib/make-math.typ" as mkm
 
 #let iff = $<=>$
 #let xor = "xor"

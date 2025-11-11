@@ -1,0 +1,11 @@
+#let unary = math.class.with("unary")
+#let binary = math.class.with("binary")
+#let vary = math.class.with("vary")
+#let relation = math.class.with("relation")
+#let opening = math.class.with("opening")
+#let closing = math.class.with("closing")
+#let fence = math.class.with("fence")
+#let large = math.class.with("large")
+#let punctuation = math.class.with("punctuation")
+#let normal = math.class.with("normal")
+
