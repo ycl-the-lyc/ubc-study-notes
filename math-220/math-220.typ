@@ -577,7 +577,55 @@ We will find @th:bezouts[Bézout's Identity] useful for equivalence relation rel
 = Functions
 #definition(title: [Function])[
   For sets $A, B$, a function $f$ from $A$ to $B$, written $f: A -> B$, is a subset of $A times B$ with two properties.
-  - //TODO coverage
-  - //TODO no overlap
+  - $forall a in A, exists b in B suchthat (a, b) in f$.
+  - $(a, b) in f and (a, c) in f implies b = c$.
+]
+
+#definition(title: [Domain, Co-domain and Range])[
+  In the previous example, we call $A$ _domain_, $B$ _co-domain_, and the set of elements of $B$ actually being mapped to by $f$ the _range_.
+]
+
+#definition(title: [Image and Preimage])[
+  Let $f: A -> B$ be a function, and $C subset.eq A, D subset.eq B$.
+  - The set $f(C) = Set(f(x), x in C)$ is the _image_ of $C$ in $B$.
+  - The set $f^(-1)(D) = Set(x in A, f(x) in D)$ is the _preimage_ of $D$ in $A$.
+
+  When applying a function to a set, we yield a set as well.
+]
+
+#note-box[
+  A preimage is not necessarily an inverse function; some functions are not invertible.
+  If an image has multiple elements mapping to less elements, the preimage would "grow" in size, violating the function definition.
+]
+
+#example[
+  Suppose that $f: A -> B$ is a function and let $C$ be a subset of $A$.
+  Prove that $f(A) - f(C) subset.eq f(A - C)$.
+
+  #proof[
+    Let $y in f(A) - f(C)$, we are to prove that $y in f(A - C)$.
+    $
+      y in f(A) and f in.not f(C) \
+      forall y in f(A), exists x in A suchthat f(x) = y \
+      forall y in.not f(C), exists.not z in C suchthat f(z) = y \
+      x in A - C \
+      therefore f(x) in f(A - C).
+    $
+    Since $f(x) = y$, $y in f(A - C)$.
+    Thus, $f(A) - f(C) subset.eq f(A - C)$.
+  ]
+
+  The statement which the subset in the original statement is swapped with superset, is easily disproved by counterexample.
+]
+
+#definition(title: [Injectiveness])[
+  Let $a_1, a_2 in A$ and let $f: A -> B$ be a function, we say that if $f$ is _injective_ (one-to-one) when
+  $
+    a_1 eq.not a_2 iff f(a_1) eq.not f(a_2).
+  $
+]
+
+#definition(title: [Surjectiveness])[
+  Let $f: A -> B$ be a function, we say that $f$ is _surjective_ (onto) when for every $b in B$ there is some $a in A$ such that $f(a) = b$.
 ]
 
