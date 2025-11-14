@@ -693,7 +693,7 @@ We write floating-point numbers using scientific notation,
 $
   n = "M" times "B"^"E"
 $
-where $"M"$ is the mantissa, $"B"$ is the exponent and $"E"$ is the exponent.
+where $"M"$ is the mantissa, $"B"$ is the base and $"E"$ is the exponent.
 Since we are using binary numbers, the base is 2.
 
 According to the IEEE 754 floating-point standard, a 32-bit, single-precision floating-point number is represented by
@@ -706,7 +706,7 @@ According to the IEEE 754 floating-point standard, a 32-bit, single-precision fl
     [sign], [biased exponent], [fraction/mantissa],
   ),
 )
-- Since the most significant bit of the mantissa is always 1, it is omitted.
+- The mantissa is actally $1."M"$.
 - The bias for exponent is $127$, meaning the stored exponent is $"actual E" + 127$.
 
 The bias is introduced because the standard wishes to represent exponent as a non-negative number.
@@ -724,6 +724,19 @@ The double precision floating-point number in the standard uses 11 exponent bits
 
 Floating-point numbers can handle overflow.
 There is also the inverse of overflow -- underflow, where the number is too small to be represented.
+
+=== Addition
+To add IEEE 754 floating-point numbers,
++ extract components, prepend $1.$ to mantissas but keep exponents biased;
++ align the smaller exponent with the larger, compensated by shifting mantissa;
++ add mantissas;
++ normalize mantissa, compensated by adding to exponent;
++ round mantissa to 23 bits;
++ assemble components.
+
+=== Subtraction
+To subtract, follow steps for addition, but subtract the larger mantissa with the smaller mantissa.
+If operands are swapped, also swap the result sign bit.
 
 == Memory
 Think of memory as a table.
