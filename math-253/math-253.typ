@@ -725,8 +725,51 @@ $
 Conversely, if the boundary of $x$ can be expressed as functions of $y$, we would first integrate over $x$, then $y$.
 $
                                         R & = Set((x, y), c <= y <= d, h_1(y) <= x <= h_2(y)) \
-  limits(integral.double)_R f(x, y) dd(A) &= integral_c^d integral_(h_1(y))^(h_2(y)) f(x, y) dd(x, y).
+  limits(integral.double)_R f(x, y) dd(A) & = integral_c^d integral_(h_1(y))^(h_2(y)) f(x, y) dd(x, y).
 $
 
 Pay attention of the order of integration, their layering.
+
+== In Polar Coordinate System
+Take a Cartesian coordinate system, we pick the direction of $x$ as $0 <= theta < 2pi = 0$, the distance from the origin to a point as $r > 0$.
+The origin $(0, 0)$ has no well-defined $theta$, but that's okay.
+
+Thus, we have
+$
+  x^2 + y^2 & = r^2 \
+      theta & = arctan(y/x).
+$
+
+#definition(title: [Locus])[
+  A locus is the set of all points whose location is determined by some stated conditions.
+]
+
+#example[
+  Determine the locus of points given by $r = 2 cos(theta)$.
+
+  #solution[
+    $
+                   r & = 2 cos(theta) \
+                 r^2 & = 2 underbrace(r cos(theta), x) \
+           x^2 + y^2 & = 2x \
+      x^2 - 2x + y^2 & = 0 \
+       (x-1)^2 + y^2 & = 1.
+    $
+    It forms a circle of origin $(1, 0)$ and radius $1$.
+  ]
+]
+
+In this system, we define $dd(A)$ no longer by $dd(x, y), dd(y, x)$.
+Given a range of $r$ and a range of $theta$, we form an area of a sector between two concentric circles.
+#definition(title: [Annulus])[
+  An annulus is the region between two concentric circles.
+]
+$
+          A_"sector" & = theta / (2pi) pi r^2 \
+                     & = 1/2 pi r^2 \
+  dd(A)_((r, theta)) & = pdv(A, r) dd(r) + pdv(A, theta) dd(theta) \
+                     & = r theta dd(r, theta) + 1/2 r^2 dd(theta, 2) \
+  //TODO more steps
+                     & = r dd(r, theta).
+$
 
