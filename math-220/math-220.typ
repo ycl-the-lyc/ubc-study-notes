@@ -572,7 +572,7 @@ In fact, given the properties of a partition, for each partition, there is an eq
   $R$ is an equivalence relation on $A$.
 ]
 
-We will find @th:bezouts[Bézout's Identity] useful for equivalence relation related proofs that also involve congruency.
+We will find Bézout's Identity useful for equivalence relation related proofs that also involve congruency.
 
 = Functions
 #definition(title: [Function])[
@@ -624,8 +624,39 @@ We will find @th:bezouts[Bézout's Identity] useful for equivalence relation rel
     a_1 eq.not a_2 iff f(a_1) eq.not f(a_2).
   $
 ]
+To prove injectiveness, we need to prove the preimage for any image has only one element.
 
 #definition(title: [Surjectiveness])[
   Let $f: A -> B$ be a function, we say that $f$ is _surjective_ (onto) when for every $b in B$ there is some $a in A$ such that $f(a) = b$.
 ]
+
+To prove surjectiveness, we only need to prove exisitence of a non-empty preimage.
+
+== Compositions
+#definition(title: [Composition])[
+  Let $f: A -> B, g: B -> C$ be functions.
+  The composition of $f$ and $g$, denoted $g compose f$, defines a new function
+  $
+    g compose f: A -> C quad (g compose f)(a) = g(f(a)) quad forall a in A.
+  $
+  Function composition is associative.
+]
+
+#theorem[
+  Let $f: A -> B, g: B -> C$ be functions.
+  - If $f, g$ are injective, so is $g compose f$.
+  - If $f, g$ are surjective, so is $g compose f$.
+]
+
+This can be proven simply by definition of composition.
+
+#theorem[
+  Let $f: A -> B, g: B -> C$ be functions.
+  - If $g compose f$ is injective, so is $f$.
+  - If $g compose f$ are surjective, so is $g$.
+]
+
+Notice that only a part of the converse is true.
+- $g compose f$ being injective only guarantees the range of $f$ on domain of $g$ leads to injectiveness.
+- $g compose f$ being surjective only guarantees the range of $g$ on range of $f$ leads to surjectiveness.
 
