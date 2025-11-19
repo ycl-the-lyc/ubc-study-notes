@@ -1363,6 +1363,8 @@ To read the entire timer:
 + read low;
 + read high, if high changed, read low.
 
+For Nios V, the machine timer triggers exception 7.
+
 == Interval Timers
 There are two of them.
 They count down.
@@ -1383,9 +1385,18 @@ There is a family of commands for `csr`, control status register.
 csrr dest, source # csr read
 ```
 
-For `source`, we will put ```asm mcause```, the register for machine interrupt cause.
+For `source`, we will put `mcause`, the register for machine interrupt cause.
 
-Then, we compare the ```asm mcause``` value to all kinds of cause magic values, jump and link to their handler subroutines.
+Then, we compare the `mcause` value to all kinds of cause magic values, jump and link to their handler subroutines.
+Finally, the cause of the interrupt, `mcause` must be cleared, otherwise it will keep generating interrupts.
 
 Since the interrupt handling is an unplanned event, all registers must be restored.
+
+To return from interrupt, we do not use ```asm ret```, but ```asm mret```.
+This is to reenable interrupt -- entering interrupt handler, further interrupt is disabled.
+
+== Setup Interrupts
+For interrupts to trigger, a CPU must be setup to enable and handle interrupts, and devices must be setup to trigger interrupts.
+
+Usually, writing `1` to certain bits will enable the corresponding interrupt.
 

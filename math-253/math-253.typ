@@ -763,13 +763,34 @@ In this system, we define $dd(A)$ no longer by $dd(x, y), dd(y, x)$.
 Given a range of $r$ and a range of $theta$, we form an area of a sector between two concentric circles.
 #definition(title: [Annulus])[
   An annulus is the region between two concentric circles.
+  A sector of an annulus can be called a "polar rectangle".
 ]
 $
-          A_"sector" & = theta / (2pi) pi r^2 \
-                     & = 1/2 pi r^2 \
-  dd(A)_((r, theta)) & = pdv(A, r) dd(r) + pdv(A, theta) dd(theta) \
-                     & = r theta dd(r, theta) + 1/2 r^2 dd(theta, 2) \
-  //TODO more steps
-                     & = r dd(r, theta).
+  A_"sector" & = theta / (2pi) pi r^2 \
+             & = 1/2 pi r^2.
+$
+Let there be two circles with radii $r_1, r_2, r_1 < r_2$.
+$
+  Delta A & = 1/2 r_2^2 Delta theta - 1/2 r_1^2 Delta theta \
+          & = 1/2 (r_2^2 - r_1^2) Delta theta \
+          & = 1/2 (r_2 + r_1) (r_2 - r_1) Delta theta.
+$
+Let $theta$ and the difference between $r_1, r_2$ infinitesimally small,
+$
+  dd(A)_((r, theta)) = underbrace(r, 1/2(r_2 + r_1)) underbrace(dd(r), (r_2 - r_1)) underbrace(dd(theta), Delta theta).
 $
 
+#example[
+  Evaluate $limits(integral.double)_D x^2 dd(A)$ in a polar coordinate system.
+
+  #solution[
+    $
+      D & = Set((r, theta), 1 <= r <= 2, 0 <= theta <= pi/2) \
+      I & = integral_0^(pi/2) integral_1^2 r^2 cos^2(theta) underbrace(r dd(r, theta), dd(A)) \
+        & = integral_0^(pi/2) integral_1^2 r^3 cos^2(theta) dd(r, theta) \
+        & = integral_0^(pi/2) cos^2(theta) dd(theta) integral_1^2 r^3 dd(r) \
+        & = integral_0^(pi/2) underbrace((1+cos(2theta))/2, #[trig. identity!]) dd(theta) [r^4/4]_1^2 \
+        & = 15/16 pi.
+    $
+  ]
+]
