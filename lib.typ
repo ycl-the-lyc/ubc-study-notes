@@ -5,6 +5,8 @@
 
 #import "@preview/fletcher:0.5.8"
 
+#import "@preview/mannot:0.3.1": *
+
 #import "@preview/lilaq:0.5.0" as lq
 
 #import "lib/make-math.typ" as mkm
