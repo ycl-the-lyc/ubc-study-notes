@@ -794,3 +794,47 @@ $
     $
   ]
 ]
+
+#example[
+  Evaluate $I = integral_(-oo)^oo 1 / sqrt(2pi) e^(-x^2/2) dd(x)$.
+
+  #important-box[
+    $integral e^(-x^2)$ has no expansion to elementary functions!
+    Despite not being obvious now, converting this to a two-variable double integral actually solves the problem!
+  ]
+
+  #solution[
+    $
+      I^2 & = (integral_(-oo)^oo 1/sqrt(2pi) e^(-x^2/2) dd(x))^2 \
+          & = (integral_(-oo)^oo 1/sqrt(2pi) e^(-x^2/2) dd(x)) (integral_(-oo)^oo 1/sqrt(2pi) e^(-x^2/2) dd(x)).
+    $
+    Rename the $x$ in the second multiplicand to $y$.
+    $
+      (integral_(-oo)^oo 1/sqrt(2pi) e^(-x^2/2) dd(x)) (integral_(-oo)^oo 1/sqrt(2pi) e^(-y^2/2) dd(y))
+      &= integral_(-oo)^oo (integral_(-oo)^oo 1/sqrt(2pi) e^(-x^2/2) dd(x)) 1/sqrt(2pi) e^(-y^2/2) dd(y) \
+      &= 1/(2pi) integral_(-oo)^oo integral_(-oo)^oo e^(-x^2/2) e^(-y^2/2) dd(x, y) \
+      &= 1/(2pi) integral_(-oo)^oo integral_(-oo)^oo e^(-(x^2 + y^2)/2) dd(x, y).
+    $
+    The $x^2 + y^2$ looks suspiciously suitable for polar coordinates.
+    Let
+    $
+      x^2 + y^2 & = r^2 \
+      dd(A) = dd(x, y) & = r dd(r, theta) \
+      1/(2pi) integral_(-oo)^oo integral_(-oo)^oo e^(-(x^2 + y^2)/2) dd(x, y)
+      &= 1/(2pi) integral_markhl(0)^markhl(2pi, tag: #<mn:bc1>) integral_markhl(0, tag: #<mn:bc2>, color: #blue)^markhl(oo, color: #blue) e^(-r/2) r dd(r, theta) \
+      &= 1/(2pi) integral_0^(2pi) dd(theta) integral_0^oo e^(-r^2/2) r dd(r) \
+      &= integral_0^oo e^(-r^2/2) r dd(r).
+      //mn
+      #annot(<mn:bc1>, pos: top + right, dx: 0.5cm, leader-connect: "elbow", leader-toe: none)[Integrating over all of $theta in [0, 2pi]$.]
+      #annot(<mn:bc2>, pos: horizon + right, dx: 0.5cm, leader-connect: "elbow", leader-toe: none)[Integrating over all of $r in [0, oo)$.]
+    $
+    Let $u = r^2/2, dd(u) = r dd(r)$.
+    $
+      integral_0^oo e^(-r^2/2) r dd(r) & = integral_0^oo e^(-u) dd(u) \
+                                       & = -e^(-oo) + e^0 \
+                                       & = 1 \
+                                     I & = 1.
+    $
+  ]
+]
+
