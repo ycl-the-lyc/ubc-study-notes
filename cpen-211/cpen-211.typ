@@ -1241,6 +1241,11 @@ c.lw
 c.addi
 ```
 
+=== Instruction Formats
+//TODO the instruction types table
+// https://canvas.ubc.ca/courses/171989/files/42409443?module_item_id=8656971
+// R I S B U J
+
 === Using Assembly
 First, we assemble assembly `.s` files.
 ```shell-unix-generic
@@ -1351,7 +1356,7 @@ That is called ACLINT.
 
 == Timers
 There are two types of timers.
-- Machine timer: a part of the CPU. 
+- Machine timer: a part of the CPU.
 - Interval timer: outside of CPU.
 
 === Machine Timer
@@ -1383,6 +1388,9 @@ To stop a timer, write `1` to its stop bit.
 There is a family of commands for `csr`, control status register.
 ```asm
 csrr dest, source # csr read
+csrw dest, source # write to the whole csr
+csrs dest, mask # set 1 on mask
+csrc dest, mask # set 0 on mask
 ```
 
 For `source`, we will put `mcause`, the register for machine interrupt cause.
@@ -1395,8 +1403,135 @@ Since the interrupt handling is an unplanned event, all registers must be restor
 To return from interrupt, we do not use ```asm ret```, but ```asm mret```.
 This is to reenable interrupt -- entering interrupt handler, further interrupt is disabled.
 
+Interrupt service routines are done as quick as possible, so main programs are not staggered.
+
 == Setup Interrupts
 For interrupts to trigger, a CPU must be setup to enable and handle interrupts, and devices must be setup to trigger interrupts.
 
 Usually, writing `1` to certain bits will enable the corresponding interrupt.
+
+== Interrupts with C
+Interrupt cannot be done in C, but we can link or inline assembly code with C programs.
+
+To set and get the machine timer,
+```c
+volatile uint32_t *pmtime = (uint32_t *) MTIMER_BASEl;
+const uint64_t PERIOD = (uint64_t) CLOCK_RATE;
+
+void set_mtimer(
+  volatile uint32_t *ptime,
+  uint64_t new_time64
+) {
+  // prevent higher part from increasing before lower part is set
+  *(ptime + 0) = (uint32_t) 0;
+  // set higher part
+  *(ptime + 1)  = (uint32_t) (new_time64 >> 32);
+  // set lower part
+  *(ptime + 2) = (uint32_t) new_time64;
+}
+
+uint32_t get_mtimer(
+  volatile uint32_t *ptime
+) {
+  uint32_t mtime_h, mtie_l;
+  // since the two reads are not atomic,
+  // the higher part may change between reading the higher and the lower parts
+  do {
+    mtime_h = *(ptime + 1);
+    mtime_l = *(ptime + 0);
+  } while (mtime_h != *(ptime + 1));
+
+  return ((uint64_t) mtime_h << 32) | mtime_l;
+}
+```
+
+To trigger interrupt at  a certain period,
+```c
+void setup_mtimecmp() {
+  // read current mtime
+  uint64_t mtime64 = get_mtimer(pmtime);
+
+  // get time at the next period
+  mtime64 = (mtime64 / PERIOD + 1) * PERIOD;
+
+  // set mtime cmp
+  set_mtimer(pmtime + 2, mtime64);
+}
+
+int main() {
+  volatile uint32_t *pLEDR = (uint32_t *) LEDR_BASE;
+
+  setup_mtimecmp();
+  // enable mtimer IRQs
+  setup_cpu_irqs(0x80);
+
+  while (1) {
+    *pLEDR = counter;
+  }
+}
+```
+
+To serve the interrupt,
+```c
+void mtimer_isr() {
+  // get mtimecmp
+  uint64_t mtimecmp64  = get_mtimer(pmtime + 2);
+  // get the next interrupt time
+  mtimecmp64 += PERIOD;
+  // set it
+  set_mtimer(pmtime + 2, mtimecmp64);
+
+  // side effect
+  counter++;
+}
+```
+
+But wait... we never setup the exception handler (which invokes the ISRs).
+```c
+// tell compiler to generate `mret` instead of `ret` for the function
+static void handler() __attribute__ ((interrupt ("machine")));
+
+
+void handler() {
+  int mcause_value;
+
+  // idk but it works
+  __asm__ volatile("csrr %0, mcause" : "=r"(mcause_value));
+
+  if (mcause_value == 0x80000007) // the machine timer interrupt
+    mtimer_isr();
+}
+
+void setup_cpu_irqs(
+  uint32_t new_mie_value
+) {
+  uint32_t mstatus_value, mtvec_value, old_mie_value;
+  mstatus_value = 0b1000; // interrupt bit mask
+  mtvec_value = (uint32_t) &handler; // set trap address
+
+  // master irq disable
+  __asm__ volatile("csrc mstatus, %0" :: "r"(mstatus_value));
+
+  // sets handler
+  __asm__ volatile("csrw mtvec, %0" :: "r"(mtvec_value));
+  __asm__ volatile("csrr %0, mie" : "=r"(old_mie_value));
+  __asm__ volatile("csrc mie, %0" :: "r"(old_mie_value));
+
+  // reads old irq mask, removes old irqs, sets new irq mask
+  __asm__ volatile("csrs mie, %0" :: "r"(new_mie_value));
+
+  // master irq enable
+  __asm__ volatile("csrs mstatus, %0" :: "r"(mstatus_value));
+}
+```
+
+== Shared Memory
+In the previous section, we see that the ISR side effect mutates `counter`, which is also get and set by the main program.
+If, during a non-atomic get-then-set operation in the main programs, an interrupt occurs, the ISR modifies `counter`, its side effect is lost because the main programs does not see that: it is holding on to the older value it got.
+
+To make the get-then-set atomic, we can disable interrupt during the operation.
+Or, on a larger scale, we can introduce a lock system, which has a special register a process must acquire to access certain registers.
+
+= Single Cycle CPU
+See example code in textbook.
 

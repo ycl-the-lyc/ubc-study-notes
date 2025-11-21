@@ -660,3 +660,57 @@ Notice that only a part of the converse is true.
 - $g compose f$ being injective only guarantees the range of $f$ on domain of $g$ leads to injectiveness.
 - $g compose f$ being surjective only guarantees the range of $g$ on range of $f$ leads to surjectiveness.
 
+== Inverses
+#definition(title: [Inverses])[
+  Let $f: A -> B, g: B -> A$ be functions, and $i_A, i_B$ be identity functions on $A, B$.
+  - If $g compose f = i_A$, then $g$ is a left-inverse of $f$.
+  - If $f compose g = i_B$, then $g$ is a right-inverse of $f$.
+  If $g$ is both a left-inverse and a right-inverse of $f$, then $g$ is _the_ inverse of $f$.
+
+  $f$ must be bijective to have a total inverse.
+]
+
+#example[
+  Let $f: A -> B$ be a function.
+  Prove that if there is a function $g: B -> A$ such that $g compose f(x) = x$, then for all $x in A$, $f$ is injective.
+
+  #proof[
+    Let $f(x_1) = f(x_2)$ for some $x_1, x_2 in A$.
+    Apply $g$ to both sides,
+    $
+      g compose f(x_1) & = g compose f(x_2) \
+                   x_1 & = x_2.
+    $
+    $f$ is injective by definition.
+  ]
+]
+
+
+#example[
+  Let $f: A -> B$ be a function.
+  Prove that if $f$ is injective, then there is a function $g: B -> A$ such that $forall x in A, g compose f(x) = x$.
+
+  #proof[
+    Pick a function that for $b in B$.
+    - If $b in "range"(f)$,
+      $
+        exists a in A suchthat f(a) = b.
+      $
+      Since $f$ is injective, $a_1, a_2 in A suchthat f(a_1) = f(a_2) implies a_1 = a_2$, $a$ is unique.
+      Define $g(b) = a$.
+    - If  $b in.not "range"(f)$, define $g(b) = c$ where $c in A$ is some constant.
+
+    Since $f(x) in "range"(f)$, by definition, $g compose f(x) = x$; $g$ is an left-inverse of $f$.
+  ]
+]
+
+#theorem[
+  Let $f: A -> B$ be a function.
+  $
+    f "is injective" iff exists g: B -> A suchthat g compose f(x) = x.
+  $
+]
+
+= Proof by Contradiction
+If $S$ is true, then $neg S$ is false; vice versa.
+
