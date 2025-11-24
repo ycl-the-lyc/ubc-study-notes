@@ -1370,7 +1370,7 @@ To read the entire timer:
 
 For Nios V, the machine timer triggers exception 7.
 
-== Interval Timers
+=== Interval Timers
 There are two of them.
 They count down.
 They have 32 bits each, but we can only access 16 bits each at a time.
@@ -1381,7 +1381,7 @@ To start a timer, write `1` to its start bit.
 To stop a timer, write `1` to its stop bit.
 
 #warning-box[
-  Do not write `1` to botth the start and the stop bit at the same time.
+  Do not write `1` to both the start and the stop bit at the same time.
 ]
 
 == Handling Interrupts
@@ -1430,10 +1430,10 @@ void set_mtimer(
   *(ptime + 2) = (uint32_t) new_time64;
 }
 
-uint32_t get_mtimer(
+uint64_t get_mtimer(
   volatile uint32_t *ptime
 ) {
-  uint32_t mtime_h, mtie_l;
+  uint32_t mtime_h, mtime_l;
   // since the two reads are not atomic,
   // the higher part may change between reading the higher and the lower parts
   do {
@@ -1475,7 +1475,7 @@ To serve the interrupt,
 ```c
 void mtimer_isr() {
   // get mtimecmp
-  uint64_t mtimecmp64  = get_mtimer(pmtime + 2);
+  uint64_t mtimecmp64 = get_mtimer(pmtime + 2);
   // get the next interrupt time
   mtimecmp64 += PERIOD;
   // set it
