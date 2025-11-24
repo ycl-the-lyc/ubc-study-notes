@@ -838,3 +838,34 @@ $
   ]
 ]
 
+= Triple Integrals
+Yes, triple integrals.
+
+#theorem(title: [Fubini's])[
+  Let $B = Set((x, y, z), a <= x <= b, c <= y <= d, r <= z <= s)$.
+  $
+    limits(integral.triple)_B f(x, y, z) dd(V) & = integral_r^s integral_c^d integral_a^b f(x, y, z) dd(x, y, z) \
+                                               & = 3! #[permutations of the three integral layers]
+  $
+]
+
+This enables us to integrate over a 3D body.
+To form a triple integral,
++ evaluate the planes forming the 3D body in question (the begining of the course);
++ express variables in terms of their outer variables;
++ evaluate the integrals inside-out, or sometimes, outside-in.
+
+#example[
+  Evaluate $I = integral_0^3 integral_0^(-2/3x+2) integral_0^(1-x/3-y/2) e^x e^y e^z dd(z, y, x)$.
+
+  #solution[
+    $
+      I & = integral_0^3 integral_0^(-2/3x+2) e^x e^y (e^(1-x/3-y/2) - 1) dd(y, x) \
+        & = integral_0^3 integral_0^(-2/3x+2) e^x (e^(1-x/3+y/2) - e^y) dd(y, x) \
+        & = integral_0^3 (e^(2+x/3) - 2e^(1+2/3x) + e^x) dd(x) \
+        & = e^3 - 3e^2 + 3e - 1 \
+        & = (e-1)^3.
+    $
+  ]
+]
+
