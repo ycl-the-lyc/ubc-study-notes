@@ -714,3 +714,87 @@ Notice that only a part of the converse is true.
 = Proof by Contradiction
 If $S$ is true, then $neg S$ is false; vice versa.
 
+#example[
+  Prove that $sqrt(7)$ is irrational.
+
+  #proof[
+    Assume that $sqrt(7) in QQ$.
+    $
+      sqrt(7) & := a/b
+    $
+    where $a, b$ are some integers, $b eq.not 0$, and $markhl(gcd(a, b) = 1)$.
+    $
+          7 & = a^2 / b^2 \
+      7 b^2 & = a^2 \
+          7 & divides a^2.
+    $
+    $7$ is a prime number, thus
+    $
+      7 divides a^2 & implies 7 divides a or 7 divides a \
+                  a & := 7k
+    $
+    for some integer $k$.
+    $
+      7b^2 & = (7k)^2 \
+           & = 49k^2 \
+       b^2 & := 7 j \
+    $
+    for some integer $j$.
+    $
+      7 & divides b^2 \
+      7 & divides b.
+    $
+    This is a contradiction with $gcd(a, b) = 1$.
+
+    Since $sqrt(7) in QQ xor sqrt(7) in II$, $sqrt(7) in II$.
+  ]
+]
+
+#example[
+  Let $x in RR$ satisfy $x^7 + 5x^2 - 3 = 0$.
+  Prove that $x$ is irrational.
+
+  #proof[
+    Assume that $x in QQ$.
+    $
+      x & := a/b
+    $
+    for some $a, b in ZZ, b eq.not 0, gcd(a, b) = 1$.
+    $
+                   x^7 + 5x^2 - 3 & = (a/b)^7 + 5(a/b)^2 - 3 \
+                                  & = 0 \
+      a^7 / b^7 + 5 a^2 / b^2 - 3 & = 0 \
+          a^7 + 5 a^2 b^5 - 3 b^7 & = 0
+    $
+    - If $a, b$ are odd.
+      $
+        a & := 2k + 1 \
+        b & := 2j + 1
+      $
+      for $k, j in ZZ$.
+      $
+        (2k+1)^7 + 5 (2k+1)^2 (2j+1)^5 - 3 (2j+1)^7 & = 0.
+      $
+      Take modulo of $2$ on both sides.
+      $
+        1 + 5 - 3 = 0
+      $
+      Contradiction.
+    - If $a$ is odd, $b$ is even...
+      $
+              ... & mod 2 \
+        1 + 0 - 0 & = 0.
+      $
+      Contradiction.
+    - If $a$ is even, $b$ is odd...
+      $
+              ... & mod 2 \
+        0 + 0 - 3 & = 0.
+      $
+      Contradiction.
+
+    $a, b$ cannot both be even, since $gcd(a, b) = 1$.
+
+    Since $x in QQ xor x in II$, $x in II$.
+  ]
+]
