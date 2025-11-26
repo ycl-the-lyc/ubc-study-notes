@@ -869,3 +869,48 @@ To form a triple integral,
   ]
 ]
 
+#example[
+  Let
+  $
+    I = integral_0^1 integral_sqrt(x)^1 integral_0^(1-y) f(x, y, z) dd(z, y, x).
+  $
+  Write the other five interated integrals.
+
+  #solution[
+    We draw three plots, each fixing one of the variables.
+
+    #let xs = range(0, 60).map(x => x * 1.25 / 60)
+    #let xs1 = xs.filter(x => x <= 1)
+    #let axes = arguments(
+      xlim: (0, 1.25),
+      ylim: (0, 1.25),
+      xaxis: (ticks: (0, 1)),
+      yaxis: (ticks: (0, 1)),
+    )
+    #figure(
+      caption: [$(x, y)$ - plane],
+      lq.diagram(
+        ..axes,
+        lq.fill-between(xs1, calc.sqrt, y2: _ => 1, fill: blue.transparentize(80%)),
+        lq.plot(xs, calc.sqrt, mark: none, label: $y=sqrt(x)$),
+      ),
+    )
+    //TODO i dont understand !!!!!!!!!!!!!1
+    #figure(
+      caption: [$(y, z)$ - plane],
+      lq.diagram(
+        ..axes,
+        lq.fill-between(xs1, x => 1 - x, fill: blue.transparentize(80%)),
+        lq.plot(xs, x => 1 - x, mark: none, label: $z=1-y$),
+      ),
+    )
+    #figure(
+      caption: [$(x, z)$ - plane],
+      lq.diagram(
+        ..axes,
+        lq.fill-between(xs1, x => 1 - calc.sqrt(x), fill: blue.transparentize(80%)),
+        lq.plot(xs, x => 1 - calc.sqrt(x), mark: none, label: $z=1-sqrt(x)$),
+      ),
+    )
+  ]
+]
