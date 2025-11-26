@@ -1529,9 +1529,22 @@ void setup_cpu_irqs(
 In the previous section, we see that the ISR side effect mutates `counter`, which is also get and set by the main program.
 If, during a non-atomic get-then-set operation in the main programs, an interrupt occurs, the ISR modifies `counter`, its side effect is lost because the main programs does not see that: it is holding on to the older value it got.
 
-To make the get-then-set atomic, we can disable interrupt during the operation.
-Or, on a larger scale, we can introduce a lock system, which has a special register a process must acquire to access certain registers.
-
 = Single Cycle CPU
 See example code in textbook.
+
+For a ```asm lw``` instruction, the CPU
++ fetches instruction;
++ reads source operand from the register file;
++ if needed, generates immediate value;
++ if needed, computes memory address;
++ reads data from memory and writes it to register file.
+At the same time, the program counter is increased by 4.
+
+The data path used by ```asm lw``` is the longest of all instructions, hence it is called the _critical path_.
+
+== Program Execution Time
+$
+  T & = "# Instructions" times "CPI" times T_c \
+$
+where $"CPI" = "Cycles" / "Instruction"$, and $T_c, "Seconds" / "Cycle"$, is the time for a critical path walkthrough.
 
