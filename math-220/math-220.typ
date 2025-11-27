@@ -750,6 +750,8 @@ If $S$ is true, then $neg S$ is false; vice versa.
   ]
 ]
 
+Besides irrationalllity, modular arithmetic is often used in proof by contradiction.
+
 #example[
   Let $x in RR$ satisfy $x^7 + 5x^2 - 3 = 0$.
   Prove that $x$ is irrational.
@@ -798,3 +800,90 @@ If $S$ is true, then $neg S$ is false; vice versa.
     Since $x in QQ xor x in II$, $x in II$.
   ]
 ]
+
+That was just modular two, how about...
+
+#axiom(title: [The Pigeonhole Principle (PHP)])[
+  If $n$ items are put into $m$ containers, with $n > m$, then at least one container must contain more than one item.
+]
+
+#example[
+  Prove that for every $a in NN$, there exist distinct $k, l in NN$ such that $11$ divides $a^k - a^l$.
+
+  #proof[
+    We can prove that, winthin all possible $a^n mod 11$, there exist two distinct $n$s such that $a^(n_1) mod 11 = a^(n_2) mod 11$.
+    There are eleven possible results for $a^n mod 11$.
+    For these twelve $a^1 ... a^12$, there is at least one overlap over the eleven possibilities, using the PHP.
+  ]
+]
+
+= Cardinality
+#definition(title: [Cardinality])[
+  Cardinality is the size of a set.
+
+  Let $A, B$ be sets.
+  If there exists a _bijection_ between them, then they have the same cardinality, noted
+  $
+    abs(A) = abs(B).
+  $
+  If there exists a _injection_ between them, then
+  $
+    abs(A) <= abs(B).
+  $
+  If there exists a _surjection_ between them, then
+  $
+    abs(A) >= abs(B).
+  $
+]
+
+#example[
+  Prove that $abs([3, oo)) = abs([5, oo))$.
+
+  #proof[
+    Define
+    $
+      f & : [3, oo) -> [5, oo) \
+      x & mapsto x + 2 \
+      h & : [5, oo) -> [3, oo) \
+      y & mapsto y - 2.
+    $
+    Then,
+    $
+      h compose f & = x + 2 - 2 \
+                  & = x \
+      f compose h & = x - 2 + 2 \
+                  & = x.
+    $
+    Since $f$ has a two-sided inverse, it is bijective.
+    Thus, $abs([3, oo)) = abs([5, oo))$.
+  ]
+]
+
+
+Let
+$
+     f & : [3, oo) -> [5, oo) \
+  f(x) & = x^2 - 6x + 14 \
+       & = x^2 - 6x + 9 + 5 \
+       & = (x-3)^2 + 5.
+$
+Note that $x >= 3$.
+
+Define
+$
+  g & : [5, oo) -> [3, oo) \
+  x & mapsto sqrt(x - 5) + 3.
+$
+Note that $x >= 5$.
+
+Then,
+$
+  g compose f & = sqrt((x-3)^2 + 5 - 5) + 3 \
+              & = x - 3 + 3 \
+              & = x, \
+  f compose g & = (sqrt(x-5) + 3 - 3)^2 + 5 \
+              & = x - 5 + 5 \
+              & = x.
+$
+Since $f$ has a two-sided inverse, it is bijective.
+
