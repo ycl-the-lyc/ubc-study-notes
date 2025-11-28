@@ -1529,22 +1529,95 @@ void setup_cpu_irqs(
 In the previous section, we see that the ISR side effect mutates `counter`, which is also get and set by the main program.
 If, during a non-atomic get-then-set operation in the main programs, an interrupt occurs, the ISR modifies `counter`, its side effect is lost because the main programs does not see that: it is holding on to the older value it got.
 
-= Single Cycle CPU
+== Single-cycle CPU
 See example code in textbook.
 
 For a ```asm lw``` instruction, the CPU
 + fetches instruction;
-+ reads source operand from the register file;
-+ if needed, generates immediate value;
++ reads source operand from the register file; if needed, generates immediate value;
 + if needed, computes memory address;
-+ reads data from memory and writes it to register file.
++ loads data from memory;
++ writes data to register file.
 At the same time, the program counter is increased by 4.
 
 The data path used by ```asm lw``` is the longest of all instructions, hence it is called the _critical path_.
 
-== Program Execution Time
+=== Program Execution Time
 $
-  T & = "# Instructions" times "CPI" times T_c \
+  T & = "No. Instructions" times "CPI" times T_c \
 $
 where $"CPI" = "Cycles" / "Instruction"$, and $T_c, "Seconds" / "Cycle"$, is the time for a critical path walkthrough.
 
+In a single-cycle CPU, CPI is always 1.
+
+== Multi-cycle RISC-V Processor
+By breaking an instruction into short steps, multi-cycle CPU allows for
+- reusing hardware;
+- shortening cycle time.
+
+For a ```asm lw``` insrruction, the CPU
++ fetches instruction;
++ reads source operand from the register file; if needed, generates immediate value;
++ if needed, computes memory address;
++ loads data from memory;
++ writes data to register file; increaments program counter by 4.
+Each step consumes a clock cycle.
+
+To reuse hardware parts of a CPU, it uses an FSM to orchestrate their steps.
+
+=== Program Execution Time
+$
+  T & = "No. Instructions" times "CPI" times T_c \
+$
+where $"CPI" = "Cycles" / "Instruction"$, and $T_c, "Seconds" / "Cycle"$, is the time for a critical path walkthrough.
+
+However, CPI is no longer just 1.
+It is calcuated as a weighted average of load, branch, read... instructions with weights of number of cycles they take.
+
+Since an instruction takes at least four cycles, the CPI is usually something above 4.
+As a compensation, the CPU clock speed is increased, but that does not make up to the CPI penalty.
+
+== Pipelined RISC-V Processor
+Since each instruction go through five separable stages,
++ fetch
++ decode,
++ execute,
++ memory,
++ writeback,
+a pipelined CPU stores the output of each stage in a flip-flop "pipe", before passing it to the next stage.
+Thus, the previous stage can start running its part in the next instruction, provided that the data is there, after its previous stage finished.
+
+=== Hazards
+There are two types of hazards that comes with pipelining instructions:
+- data hazard,
+- control hazard.
+
+#definition(title: [Data Hazard])[
+  When one instruction is yet to finish, writing output to register file, the next instruction wants to read the output from register file.
+  This is a data hazard.
+]
+
+Data hazard can be mitigated by
+- ```asm nop```;
+- or, scheduling instructions that do not depend on previous output to execute, when there would be ```asm nop```s.
+- Or, fowarding data that would be written to register file, through internal bus, to the next instruction.
+
+There is this _stall_ technique to insert ```asm nop```s on the fly.
+Compilers can also add ```asm nop```s.
+
+To enable data forwarding, data from each pipeline flip-flop array is also passed to a _hazard unit_, who detects hazards and forwards data accordingly.
+
+#definition(title: [Control Hazard])[
+  When one branching instruction has not branched yet, its branches are already pushed into the pipeline.
+  This is a control hazard.
+]
+
+Control hazard can be mitigated by
+- stalling instructions;
+- predicting branching.
+
+The more accurate the branch prediction is, the better the instructions can be scheduled.
+
+=== Program Execution Time
+Similar to the multi-cycle processor, its CPI is determined by instruction benchmarks.
+In addition, it depends on how good the branch predition is, SIMD status, etc.
