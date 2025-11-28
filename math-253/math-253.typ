@@ -650,7 +650,7 @@ Graphically, this integration of $z$ yields the volume from the domain to the pr
 
 Total volume under $z = f(x, y)$ over $R$ is
 $
-  limits(integral.double)_R f(x, y) dd(x, y) = sum_(i=1)^m sum_(j=1)^n f(x_i, y_i) Delta x Delta y
+  integral.double_R f(x, y) dd(x, y) = sum_(i=1)^m sum_(j=1)^n f(x_i, y_i) Delta x Delta y
 $
 where $n, m -> oo$.
 We can also write $dd(x, y)$ as $dd(A)$, $A$ for "area".
@@ -671,7 +671,7 @@ We can also write $dd(x, y)$ as $dd(A)$, $A$ for "area".
 == Iterated Integrals
 Given $a, b$ that bound $x$ and $c, d$ that bound $y$, and
 $
-  limits(integral.double)_R f(x, y) dd(A),
+  integral.double_R f(x, y) dd(A),
 $
 we can restrict $x$ to only partially integrate $A$ with regard to $y$,
 $
@@ -685,7 +685,7 @@ $
 #theorem(title: [Fubini's])[
   Suppose $f(x, y)$ is continuous on $R = [a, b] times [c, d]$, then
   $
-    limits(integral.double)_R f(x, y) = integral_a^b integral_c^d f(x, y) dd(y, x) = integral_c^d integral_a^b f(x, y) dd(x, y).
+    integral.double_R f(x, y) = integral_a^b integral_c^d f(x, y) dd(y, x) = integral_c^d integral_a^b f(x, y) dd(x, y).
   $
 ]
 
@@ -718,14 +718,14 @@ $
 If the boundary of $y$ can be expressed as functions of $x$, we would first integrate over $y$, then $x$.
 Write boundary of $y$ as functions of $x$, $g_1(x), g_2(x)$.
 $
-                                        R & = Set((x, y), a <= x <= b, g_1(x) <= y <= g_2(x)) \
-  limits(integral.double)_R f(x, y) dd(A) & = integral_a^b integral_(g_1(x))^(g_2(x)) f(x, y) dd(y, x).
+                                R & = Set((x, y), a <= x <= b, g_1(x) <= y <= g_2(x)) \
+  integral.double_R f(x, y) dd(A) & = integral_a^b integral_(g_1(x))^(g_2(x)) f(x, y) dd(y, x).
 $
 
 Conversely, if the boundary of $x$ can be expressed as functions of $y$, we would first integrate over $x$, then $y$.
 $
-                                        R & = Set((x, y), c <= y <= d, h_1(y) <= x <= h_2(y)) \
-  limits(integral.double)_R f(x, y) dd(A) & = integral_c^d integral_(h_1(y))^(h_2(y)) f(x, y) dd(x, y).
+                                R & = Set((x, y), c <= y <= d, h_1(y) <= x <= h_2(y)) \
+  integral.double_R f(x, y) dd(A) & = integral_c^d integral_(h_1(y))^(h_2(y)) f(x, y) dd(x, y).
 $
 
 Pay attention of the order of integration, their layering.
@@ -781,7 +781,7 @@ $
 $
 
 #example[
-  Evaluate $limits(integral.double)_D x^2 dd(A)$ in a polar coordinate system.
+  Evaluate $integral.double_D x^2 dd(A)$ in a polar coordinate system.
 
   #solution[
     $
@@ -844,8 +844,8 @@ Yes, triple integrals.
 #theorem(title: [Fubini's])[
   Let $B = Set((x, y, z), a <= x <= b, c <= y <= d, r <= z <= s)$.
   $
-    limits(integral.triple)_B f(x, y, z) dd(V) & = integral_r^s integral_c^d integral_a^b f(x, y, z) dd(x, y, z) \
-                                               & = 3! #[permutations of the three integral layers]
+    integral.triple_B f(x, y, z) dd(V) & = integral_r^s integral_c^d integral_a^b f(x, y, z) dd(x, y, z) \
+                                       & = 3! #[permutations of the three integral layers]
   $
 ]
 
@@ -929,5 +929,85 @@ To form a triple integral,
       I = integral_(0)^(1) integral_(0)^(1-sqrt(x)) integral_(sqrt(x))^(1-z) f(x, y, z) dd(y, z, x).
     $
     Note that the upper bound of $y$ changed from $1$ to $1-z$, evident from @fg:ti2.
+  ]
+]
+
+== In Cylindrical Coordinate System
+#definition(title: [Cylindrical Coordinate System])[
+  Combine the polar coordinate system with a $z$ axis with right-hand rule from $y$ to $x$, we get a cylindrical coordinate system.
+  $
+    dd(V) = r dd(r, theta, z).
+  $
+  Further reading: _Jacobian determinant_.
+]
+
+The integration domain is usually denoted as $Omega$.
+
+#example[
+  Find the volume of a sphere of radius $a$, where we took out a cylinder of diameter $a$ right in the middle of the sphere.
+
+  #solution[
+    The outer shell of the sphere is defined by
+    $
+      x^2 + y^2 + z^2 & = a^2 \
+                  z^2 & = a^2 - r^2 \
+                    z & = plus.minus sqrt(a^2 - r^2)
+    $
+    where $a/2 <= r <= a, 0 <= theta <= 2pi$.
+
+    The inner shell of the sphere, where the cylindrical hole is, is defined by
+    $
+      x^2 + y^2 & = (a/2)^2.
+    $
+
+    $
+      V & = integral.triple_Omega \
+        & = integral_(0)^(2pi) integral_(a/2)^(a) integral_(-sqrt(a^2-r^2))^(sqrt(a^2-r^2)) r dd(z, r, theta) \
+        & = integral_(0)^(2pi) integral_(a/2)^(a) r dot 2 sqrt(a^2-r^2) dd(r, theta).
+    $
+    Let $u = a^2 - r^2$, then $dd(u) = -2 r dd(r)$.
+    $
+      V & = integral_(0)^(2pi) (-integral_(3/4 a^2)^(0) u dd(u)) dd(theta) \
+        & = integral_(0)^(2pi) sqrt(3)/4 a^3 dd(theta) \
+        & = sqrt(3)/2 a^3 pi.
+    $
+  ]
+]
+
+#theorem(title: [Center of Mass Coordinates])[
+  Given a region in 3D coordinate system, we can find its center of mass (CoM) coordinates by
+  $
+    overline(x) & = (integral.triple_Omega x dd(V)) / V \
+    overline(y) & = (integral.triple_Omega y dd(V)) / V \
+    overline(z) & = (integral.triple_Omega z dd(V)) / V,
+  $
+  assuming uniform mass distribution.
+]
+
+#example[
+  Find the center of mass of a inverted cone of height $h$.
+
+  #solution[
+    From symmetry, $overline(x) = 0, overline(y) = 0$.
+
+    We can say that $z = r$ is the lower bound of $h$ (or some given value in exams).
+
+    Of course, $r = R/h z$ where $R$ is the radius of the base.
+    However, they will cancel out in the end; for simplicity of our integration, we treat it as said.
+    $r = R/h z$ will work, too.
+    $
+                              V & = integral.triple_Omega dd(V) \
+                                & = integral_(0)^(2pi) integral_(0)^(h) integral_(r)^(h) r dd(z, r, theta) \
+                                & = integral_(0)^(2pi) integral_(0)^(h) integral_(0)^(z) r dd(r, z, theta) \
+                                & = integral_(20)^(2pi) integral_(0)^(h) r (h - r) dd(r, theta) \
+                                & = 2pi [(r^2 h)/2 - r^3/3]_0^h \
+                                & = pi/3 h^3. \
+      integral.triple_V z dd(V) & = integral_(0)^(2pi) integral_(0)^(h) integral_(r)^(h) z r dd(z, r, theta) \
+                                & = integral_(0)^(2pi) integral_(0)^(h) r (h^2/2 - r^2/2) dd(r, theta) \
+                                & = 2pi [(r^2 h^2)/4 - r^4/8]_0^h \
+                                & = pi/4 h^4. \
+                    overline(z) & = 3/4 h.
+    $
+    The center of mass is $(0, 0, 3/4h)$.
   ]
 ]
