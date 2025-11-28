@@ -859,31 +859,3 @@ That was just modular two, how about...
   ]
 ]
 
-
-Let
-$
-     f & : [3, oo) -> [5, oo) \
-  f(x) & = x^2 - 6x + 14 \
-       & = x^2 - 6x + 9 + 5 \
-       & = (x-3)^2 + 5.
-$
-Note that $x >= 3$.
-
-Define
-$
-  g & : [5, oo) -> [3, oo) \
-  x & mapsto sqrt(x - 5) + 3.
-$
-Note that $x >= 5$.
-
-Then,
-$
-  g compose f & = sqrt((x-3)^2 + 5 - 5) + 3 \
-              & = x - 3 + 3 \
-              & = x, \
-  f compose g & = (sqrt(x-5) + 3 - 3)^2 + 5 \
-              & = x - 5 + 5 \
-              & = x.
-$
-Since $f$ has a two-sided inverse, it is bijective.
-

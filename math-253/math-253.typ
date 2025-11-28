@@ -877,9 +877,9 @@ To form a triple integral,
   Write the other five interated integrals.
 
   #solution[
-    We draw three plots, each fixing one of the variables.
+    We draw three plots, each being an area of two inner integrals, parameterized by the outermost integral.
 
-    #let xs = range(0, 60).map(x => x * 1.25 / 60)
+    #let xs = range(0, 64).map(x => x * 1.25 / 64)
     #let xs1 = xs.filter(x => x <= 1)
     #let axes = arguments(
       xlim: (0, 1.25),
@@ -894,8 +894,13 @@ To form a triple integral,
         lq.fill-between(xs1, calc.sqrt, y2: _ => 1, fill: blue.transparentize(80%)),
         lq.plot(xs, calc.sqrt, mark: none, label: $y=sqrt(x)$),
       ),
-    )
-    //TODO i dont understand !!!!!!!!!!!!!1
+    ) <fg:ti1>
+    First, we can easily swap the two outer layers.
+    $y = sqrt(x)$, but since $x$ should now depend on $y$, it becomes $x = y^2$.
+    $
+      I = integral_(0)^(1) integral_(0)^(y^2) integral_(0)^(1-y) f(x, y, z) dd(z, x, y).
+    $
+
     #figure(
       caption: [$(y, z)$ - plane],
       lq.diagram(
@@ -903,7 +908,12 @@ To form a triple integral,
         lq.fill-between(xs1, x => 1 - x, fill: blue.transparentize(80%)),
         lq.plot(xs, x => 1 - x, mark: none, label: $z=1-y$),
       ),
-    )
+    ) <fg:ti2>
+    On top of the previous swap, we swap the two inner layers.
+    Because these two bounds only depends on the outermost layer, $y$, we can simply switch their order.
+    $
+      I = integral_(0)^(1) integral_(0)^(1-y) integral_(0)^(y^2) f(x, y, z) dd(x, z, y).
+    $
     #figure(
       caption: [$(x, z)$ - plane],
       lq.diagram(
@@ -911,6 +921,13 @@ To form a triple integral,
         lq.fill-between(xs1, x => 1 - calc.sqrt(x), fill: blue.transparentize(80%)),
         lq.plot(xs, x => 1 - calc.sqrt(x), mark: none, label: $z=1-sqrt(x)$),
       ),
-    )
+    ) <fg:ti3>
+    Starting from the original $I$ again, swap $y, z$.
+    $y$ can depend on $x$ all the same, but $z$ can no longer depend on $y$.
+    Using the graph, the new bound for $z$ is $0 <= z <= 1-sqrt(x)$.
+    $
+      I = integral_(0)^(1) integral_(0)^(1-sqrt(x)) integral_(sqrt(x))^(1-z) f(x, y, z) dd(y, z, x).
+    $
+    Note that the upper bound of $y$ changed from $1$ to $1-z$, evident from @fg:ti2.
   ]
 ]
