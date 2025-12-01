@@ -1011,3 +1011,99 @@ The integration domain is usually denoted as $Omega$.
     The center of mass is $(0, 0, 3/4h)$.
   ]
 ]
+
+== In Spherical Coordinate System
+#definition(title: [Spherical Coordinate System])[
+  Spherical coordinate system is a 3D coordinate system, with $x, y, z$ defined by
+  - $rho$, distance from the origin;
+  - $theta$, angle from the positive $x$-axis;
+  - $phi$, angle from the positive $z$-axis.
+  Specifically,
+  $
+        x & = rho sin(phi) cos(theta) \
+        y & = rho sin(phi) sin(theta) \
+        z & = rho cos(phi) \
+    rho^2 & = x^2 + y^2 + z^2 \
+    dd(V) & = rho^2 sin(phi) dd(rho, phi, theta).
+  $
+]
+
+#example[
+  Evaluate
+  $
+    I = integral.triple_B e^(x^2 + y^2 + z^2)^(3/2) dd(V)
+  $
+  where $B$ is the unit ball $Set((x, y, z), x^2 + y^2 + z^2 <= 1)$.
+
+  #solution[
+    Express $B$ using spherical coordinates.
+    $
+      B & = Set(rho, phi, theta), 0 <= rho <= 1, 0 <= phi <= pi, 0 <= theta <= 2pi).
+    $
+    #note-box[
+      $phi$ is only up to $pi$; since $theta$ will be integrated over a full circle, that combined with a half circle sufficiently captures a shperical volume.
+    ]
+    $
+      e^(x^2 + y^2 + z^2)^(3/2) & = e(rho^2)^(3/2) \
+      & = e^rho^3 \
+      I & = integral_(0)^(2pi) integral_(0)^(pi) integral_(0)^(1) e^rho^3 rho^2 sin(phi) dd(rho, phi, theta) \
+      &= (integral_(0)^(2pi) dd(theta)) (integral_(0)^(pi) sin(phi) dd(phi)) (integral_(0)^(1) rho^2 e^rho^3 dd(rho)).
+    $
+    We can seperate these three integrands, because they do not depend on each other.
+
+    Let $u = rho^3, dd(u) = 3 rho^2 dd(rho)$.
+    $
+      I & = (2pi) (evaluated(-cos(phi))_0^pi) (evaluated(e^4 / 3)_0^1) \
+        & = 4pi (e/3 - 1/3).
+    $
+  ]
+]
+
+For volumes that are not spherical, we tyically note them with $E$.
+
+#example[
+  Let
+  $
+    E & = Set((x, y, z), x, y, z >= 0, x^2 + y^2 + z^2 <= 9).
+  $
+  Write
+  $
+    I & = integral.triple_E f dd(V)
+  $
+  in spherical coordinates where $f$ is $E$ expressed in spherical coordinate system.
+
+  #solution[
+    The second condition forms a sphere, but the first condition restricts it to $1/8$ of a sphere in the first octant.
+    $
+      I & = integral_(0)^(pi/2) integral_(0)^(pi/2) integral_(0)^(3) f rho^2 sin(phi) dd(rho, phi, theta).
+    $
+  ]
+]
+
+#example[
+  Let
+  $
+    E & = Set((x, y, z), x^2 + y^2 + (z-1)^2 <= 1).
+  $
+  Write
+  $
+    I & = integral.triple_E f dd(V)
+  $
+  in spherical coordinates where $f$ is $E$ expressed in spherical coordinate system.
+
+  #solution[
+    It is a sphere with radius of $1$, sitting on top of the origin.
+    $theta$ is still in $[0, 2pi]$, but $phi$ is only ever reaching $pi/2$, as it cannot point down the $x, y$-plane.
+    $
+           x^2 + y^2 + (z-1)^2 & <= 1 \
+      x^2 + y^2 + z^2 - 2z + 1 & <= 1 \
+               x^2 + y^2 + z^2 & <= 2z \
+                         rho^2 & <= 2 rho cos(phi).
+    $
+    Thus, $0 <= rho <= 2 cos(phi)$.
+    $
+      I & = integral_(0)^(2pi) integral_(0)^(pi/2) integral_(0)^(2cos(phi)) f rho^2 sin(phi) dd(rho, phi, theta).
+    $
+  ]
+]
+
