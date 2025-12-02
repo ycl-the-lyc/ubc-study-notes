@@ -826,13 +826,17 @@ That was just modular two, how about...
   $
     abs(A) = abs(B).
   $
-  If there exists a _injection_ between them, then
+  If there exists a _injection_ from $A$ to $B$, then
   $
     abs(A) <= abs(B).
   $
-  If there exists a _surjection_ between them, then
+  If there exists a _surjection_ from $A$ to $B$, then
   $
     abs(A) >= abs(B).
+  $
+  If there exists a _bijection_ from $A$ to $B$, then
+  $
+    abs(A) = abs(B).
   $
 ]
 
@@ -842,10 +846,10 @@ That was just modular two, how about...
   #proof[
     Define
     $
-      f & : [3, oo) -> [5, oo) \
-      x & mapsto x + 2 \
-      h & : [5, oo) -> [3, oo) \
-      y & mapsto y - 2.
+      f : [3, oo) & -> [5, oo) \
+                x & mapsto x + 2 \
+      h : [5, oo) & -> [3, oo) \
+                y & mapsto y - 2.
     $
     Then,
     $
@@ -857,5 +861,120 @@ That was just modular two, how about...
     Since $f$ has a two-sided inverse, it is bijective.
     Thus, $abs([3, oo)) = abs([5, oo))$.
   ]
+]
+
+For domains with wildly different scale, we could employ other operations with much fater conversoin rate.
+
+#example[
+  Show that $abs((0, 1)) = abs((0, oo))$.
+
+  #proof[
+    Let
+    $
+       f : (0, 1) & -> (1, oo) \
+                x & mapsto 1/x \
+      g : (1, oo) & -> (0, oo) \
+                y & mapsto y - 1.
+    $
+    Then let $h & = g compose f$,
+    $
+      h: (0, 1) & -> (0, oo) \
+              x & mapsto 1/x - 1.
+    $
+    _Proof for bijectiveness of $h$ is omitted._
+  ]
+]
+
+We could find that constructing bijections is tedious... we don't have to.
+
+#theorem(title: [Schröder–Bernstein])[
+  Let $A, B$ be sets.
+  If $abs(A) <= abs(B) and abs(B) <= abs(A)$, then $abs(A) = abs(B)$.
+
+  Also known as the Cantor–Schröder–Bernstein theorem (CSB).
+]
+
+#example[
+  Prove that $abs((0, 1)) = abs((0, 1])$,
+
+  #proof[
+    We can simply prove two-way injectiveness.
+
+    Let $f: (0, 1) -> (0, 1], x mapsto x$.
+    $f(a) = f(b) implies a = b$.
+    It is an injection.
+
+    Let $g: (0, 1] -> (0, 1), y mapsto 1/2 y$.
+    $g(a) = g(b) implies a = b$.
+    It is an injection.
+
+    By CSB, $abs((0, 1)) = abs((0, 1])$.
+  ]
+]
+
+#definition(title: [Equinumerous])[
+  Let $A, B$ be sets.
+  If $abs(A) = abs(B)$, we say $A, B$ are equinumerous.
+]
+
+#definition(title: [Denumerable])[
+  Let $A$ be a set.
+  If there exists a bijection $f: NN -> A$, we say $A$ is denumerable.
+]
+#definition(title: [Countable])[
+  If a set is either finite or denumerable, we say it is countable.
+]
+
+Given two uncountable sets, we tend to think that they have the same cardinality... behold!
+
+#theorem(title: [Cantor's])[
+  Let $S$ be a set,
+  $
+    abs(S) < abs(pws(S)).
+  $
+]
+
+$pws(RR)$ is just another set, so there are even 'greater' infinities beyond cardinality of $pws(RR)$!
+
+#theorem[
+  Let $A, B$ be denumerable sets.
+  $A times B$ is also denumerable.
+]
+
+#example[
+  Let $ZZ(sqrt(2)) = Set(a + b sqrt(2), a, b in ZZ)$.
+  Assume that $forall a, b, c, d in ZZ, a + b sqrt(2) = c + d sqrt(2) implies a = c and b = d$.
+
+  + Prove that $ZZ(sqrt(2)) inter QQ = ZZ$.
+
+    #proof[
+      Let $x in ZZ(sqrt(2)) inter QQ$, so $x = a + b sqrt(2) and x = c / d$ where $a, b, c, d in ZZ, d eq.not 0$.
+      $
+            a + b sqrt(2) & = c/d \
+        d a + d b sqrt(2) & = c \
+              d b sqrt(2) & = c - d a.
+      $
+      If $b eq.not 0$, then
+      $
+        sqrt(2) & = (c - d a) / (d b) \
+        sqrt(2) & in QQ
+      $
+      which contradicts $sqrt(2) in II$.
+      If $b = 0$, then
+      $
+        x = a in ZZ.
+      $
+      Thus, $ZZ(sqrt(2)) inter QQ subset.eq ZZ$.
+
+      Let $y in ZZ$.
+      $y in QQ$, and let $y = a$, $y in Set(a + b sqrt(2), a, b in ZZ) inter QQ$.
+      Thus, $ZZ subset.eq ZZ(sqrt(2)) inter QQ$.
+    ]
+  + Prove that $ZZ(sqrt(2))$ is denumerable.
+
+    #proof[
+      //TODO
+      // prove bijection between ZZ times ZZ and ZZ(sqrt(2)), and use abs(ZZ times ZZ) = abs(ZZ) = abs(NN)
+    ]
 ]
 
