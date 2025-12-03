@@ -910,10 +910,12 @@ To form a triple integral,
       ),
     ) <fg:ti2>
     On top of the previous swap, we swap the two inner layers.
-    Because these two bounds only depends on the outermost layer, $y$, we can simply switch their order.
+    Because these two bounds only depends on the outermost layer, $y$, but not each other, we can simply switch them.
     $
       I = integral_(0)^(1) integral_(0)^(1-y) integral_(0)^(y^2) f(x, y, z) dd(x, z, y).
     $
+    Note that the region shown is the projection of the entire integrated volume.
+    The granular volume depends on value of $x in [0, y^2]$.
     #figure(
       caption: [$(x, z)$ - plane],
       lq.diagram(
@@ -974,14 +976,13 @@ The integration domain is usually denoted as $Omega$.
   ]
 ]
 
-#theorem(title: [Center of Mass Coordinates])[
-  Given a region in 3D coordinate system, we can find its center of mass (CoM) coordinates by
+#theorem(title: [Centroid Coordinates])[
+  Given a region in 3D coordinate system, we can find its centroid, and center of mass (CoM) if mass is distributed uniformly, by
   $
     overline(x) & = (integral.triple_Omega x dd(V)) / V \
     overline(y) & = (integral.triple_Omega y dd(V)) / V \
-    overline(z) & = (integral.triple_Omega z dd(V)) / V,
+    overline(z) & = (integral.triple_Omega z dd(V)) / V.
   $
-  assuming uniform mass distribution.
 ]
 
 #example[
@@ -1106,4 +1107,6 @@ For volumes that are not spherical, we tyically note them with $E$.
     $
   ]
 ]
+
+
 
