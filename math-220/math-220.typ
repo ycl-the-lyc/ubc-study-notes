@@ -937,8 +937,9 @@ Given two uncountable sets, we tend to think that they have the same cardinality
 $pws(RR)$ is just another set, so there are even 'greater' infinities beyond cardinality of $pws(RR)$!
 
 #theorem[
-  Let $A, B$ be denumerable sets.
-  $A times B$ is also denumerable.
+  Let $A, B$ be sets.
+  If $A, B$ are denumerable, then $A times B$ is also denumerable.
+  If $A$ is denumerable and $B subset.eq A$, then $B$ is also denumerable.
 ]
 
 #example[
@@ -973,8 +974,32 @@ $pws(RR)$ is just another set, so there are even 'greater' infinities beyond car
   + Prove that $ZZ(sqrt(2))$ is denumerable.
 
     #proof[
-      //TODO
-      // prove bijection between ZZ times ZZ and ZZ(sqrt(2)), and use abs(ZZ times ZZ) = abs(ZZ) = abs(NN)
+      Let
+      $
+        f: ZZ times ZZ & -> ZZ(sqrt(2)) \
+                (a, b) & mapsto a + b sqrt(2).
+      $
+
+      Let $f((a, b)) = f((c, d))$ for some $(a, b), (c, d) in ZZ times ZZ$.
+      $a + b sqrt(2) = c + d sqrt(2) implies a = c, b = d, (a, b) = (c, d)$.
+      $f$ is injective.
+
+      Given $a + b sqrt(2)$ where $a, b in ZZ$, we have $(a, b) in ZZ times ZZ$.
+      $f$ is surjective.
+
+      Since $f$ is bijective, $abs(ZZ times ZZ) = abs(ZZ(sqrt(2)))$.
+      By a class theorem (look up), $abs(ZZ times ZZ)$
+      Thus, $ZZ(sqrt(2))$ is denumerable.
     ]
+]
+
+#theorem[
+  Let $A, B$ be sets.
+  If $A$ is countable and $B subset.eq A$, then B is also countable.
+]
+
+#theorem[
+  Let $A, B$ be countable sets.
+  $A inter B, A union B$ are also countable.
 ]
 
