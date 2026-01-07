@@ -11,6 +11,11 @@
 
 #import "lib/make-math.typ" as mkm
 
+#import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
+
+#import "@preview/theorion:0.4.1": *
+#import cosmos.rainbow: *
+
 #let iff = $<=>$
 #let xor = "xor"
 #let neg = math.class("unary", math.tilde)
@@ -31,11 +36,6 @@
 #let conj = math.overline
 #let kern = math.cal[N]
 #let vn(body) = $norm(vb(body))$
-
-#import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
-
-#import "@preview/theorion:0.4.0": *
-#import cosmos.rainbow: *
 
 #let ssub(s, t) = s.filter(e => not t.contains(e))
 
