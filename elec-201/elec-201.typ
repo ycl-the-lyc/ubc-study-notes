@@ -6,21 +6,26 @@
 
 = Vocabulary of ECT
 
-#definition[
-  / Charge: Eletric charge, denoted $q$.
-    It is measured in coulombs, $coulomb()$.
+/ Charge: Eletric charge, denoted $q$, measured in coulombs, $coulomb()$.
 
-    An electron carries $coulomb(-1.602e-19)$ of charge, which is the smallest amount of charge in our discussion.
-    Its charge counterpart, a protone, carries that amount of positive charge.
+  An electron carries $coulomb(-1.602e-19)$ of charge, which is the smallest amount of charge in our discussion.
+  Its charge counterpart, a protone, carries that amount of positive charge.
 
-  / Current: Eletric current, denoted $i$.
-    It is measured in coulombs per second, $coulombps()$.
+/ Current: Eletric current, denoted $i$, measured in coulombs per second, $coulombpers()$, which is $ampere()$.
 
-  / Voltage:
+  The direction of current is defined as the direction of flow of positive charges, despite, it is usually the electrons.
 
-  / Power:
+  Measuring current is to be avoided, for obvious reasons.
+  To represent non-constant current, we use
+  $
+    i(t) = dv(q(t), t).
+  $
 
-  / Tellegen's Theorem:
-]
+/ Voltage: Electric potential, denoted $v$, measured in $jpercoulomb()$, which is $volt()$.
+  The zero potential reference is the Earth for circuits connected to the earth.
+  Otherwise, the reference is arbitrary.
 
+/ Power:
+
+/ Tellegen's Theorem:
 
