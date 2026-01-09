@@ -13,8 +13,10 @@
 
 #import "@preview/zero:0.5.0": num, zi
 #let coulomb = zi.declare("C")
-#let coulombps = zi.declare("C", ("s", -1))
+#let coulombpers = zi.declare("C", ("s", -1))
 #let ampere = zi.declare("A")
+#let jpercoulomb = zi.declare("J", ("C", -1))
+#let volt = zi.declare("V")
 
 #import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
