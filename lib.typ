@@ -11,7 +11,10 @@
 
 #import "lib/make-math.typ" as mkm
 
-#import "@preview/unify:0.7.1": num, numrange, qty, qtyrange, unit
+#import "@preview/zero:0.5.0": num, zi
+#let coulomb = zi.declare("C")
+#let coulombps = zi.declare("C", ("s", -1))
+#let ampere = zi.declare("A")
 
 #import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
