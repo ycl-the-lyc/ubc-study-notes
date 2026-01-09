@@ -52,6 +52,7 @@ $
        & = g(x).
 $
 So long as $p(x), g(x)$ are continuous, a solution exists.
+And, if $oL y = 0$, we say the equation is homogeneous.
 
 Let $F(x)$ be the _integrating factor_ such that
 $
@@ -157,4 +158,14 @@ $
     No particular solution.
   ]
 ]
+
+== Undetermined Coefficient Method
+For a homogeneous linear equatoion, we can guess a particular solution, $y_p$.
+- If $g(x) = x^n$, then $y_p = a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0$.
+- If $g(x) = e^(a x)$, then $y_p = A e^(a x)$.
+- If $g(x) = sin(x) "or" cos(x)$, then $y_p = A cos(x) + B sin(x)$.
+The guesses are linear combinations of all possible derivatives of $g(x)$.
+
+The particular solution still carries undetermined coefficients.
+Assume this $y_p$ to transform $oL y$.
 
