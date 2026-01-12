@@ -43,7 +43,6 @@ $
            & = abs(A) / abs(Omega).
     $
   ]
-
 ]
 
 #theorem[
@@ -80,16 +79,85 @@ However, if not, we get a commonly used inequality,
 
 == Random Sampling
 #definition[
-  Given a set $D$,
-  - sampling $k$ _with replacement_ means that each sample is independent of each other; the sample space is $D^k$;
-  - sampling $k$ _without replacement_ means that each choice reduces the population; the sample space is $(D)_k := Set(d, d in pws(D), abs(d) = k)$.
+  / "Pick": To remove an element from the population, when order matters.
+  / "Choose": To remove an element in the population, when order does not matter.
 ]
 
-We denote "number of ways to pick $k$ _distinct_ elements out of $n$ elements" using $(n)_k$, which is $n! / (n - k)!$.
+#definition[
+  Given a set $D$,
+  - sampling $k$ _with replacement_ means that each sample is independent of each other; the sample space is $D^k$;
+  - sampling $k$ _without replacement_ means that each choice reduces the population; the sample space is $npk(D) := Set(d, d in pws(D), abs(d) = k)$.
+
+  Note that replacement has nothing to do with order.
+  The definition above concerns no ordering during or after sampling.
+]
+
+The "number of ways to _pick_ $k$ elements out of $n$ elements" with
+$
+  npk() & = n (n - 1) (n - 2) ... (n - k + 1) \
+        & =n! / (n - k)!
+$
+
+The "number of ways to _choose_ $k$ elements out of $n$ elements" with
+$
+  nck() & := npk() / k! \
+        & = n! / (k! (n - k)!).
+$
 
 #theorem[
+  Given sets $A, B$ where $abs(B) = n$,
   $
-    abs((A)_k) = (abs(A))_k.
+        abs((A)_k) & = (abs(A))_k \
+    abs(nck(B, k)) & = nck(abs(B), k) \
+                   & = nck(n, k).
   $
+]
+
+== Decomposing Events
+Based on additivity of probability, if we can decompose an event with large sample space to smaller, disjoint events, such that
+$
+  abs(A) & = sum_(i = 1)^k A_i.
+$
+If $A$ is uniform, and each of the $A_i$ are equal in size, then
+$
+  P(A) & = k P(A_i).
+$
+
+#problem[
+  Given a set of poker of fifty-two cards, define
+  $
+    A & := { "full house" }.
+  $
+  Give $P(A)$.
+
+  #solution[
+    Let $2 <= i, eq.not k <= 14$ (J, Q, K, A being 11 to 14),
+    $
+      A_(i, j) := { i "appears with two suits", j "appears with three suits" }.
+    $
+    Hence,
+    $
+      A & = union.plus_("all" (i, j) suchthat 2 <= i eq.not j <= 14) A_(i, j).
+    $
+    We are picking two numbers out of thirteen, so
+    $
+      abs(A) & = npk(13, 2) \
+             & = 13 times 12.
+    $
+
+    Recall that the poker distribution is uniform (as we assume), thus each number is equally likely to be drawn.
+    $
+            P(A) & = k P(A_1) \
+                 & = npk(13, 2) times "probability of a specific full house" \
+                 & = npk(13, 2) times "size of sample space of one full house" / "size of sample space of all hands" \
+           Omega & := "all sets of five cards" \
+      abs(Omega) & = nck(52, 5).
+    $
+    We pick that full house of two 2's and three 3's for no reason.
+    $
+      abs(A_(2, 3)) & = nck(4, 2) nck(4, 3) \
+               P(A) & = npk(13, 2) (nck(4, 2) nck(4, 3)) / nck(52, 5).
+    $
+  ]
 ]
 
