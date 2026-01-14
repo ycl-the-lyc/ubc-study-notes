@@ -37,3 +37,31 @@
     sum P_"absorbed" = sum P_"delivered".
   $
 
+= Eletric Properties of Matter and Circuit Elements
+We use four basic, ideal elements to describe a circuit:
+- resistor
+- inductor
+- capacitor
+- source
+which do not correspond to real components.
+
+== Eletric Properties of Matter
+- Matter opposes current flowing through it, even to that called a "comductor".
+  $
+    v = R i
+  $
+  where $R$ is resistance, measured in $vpera()$ which is $ohm()$.
+- Matter opposes _changes_ of current already flowing through it.
+  $
+    v = L dv(i, t)
+  $
+  where $L$ is inductance, measured in $vspera()$ which is $henry()$.
+- Matter opposes _changes_ of voltage already applied to it.
+  $
+    i & = C dv(v, t) \
+    v & = 1/C integral i dd(t).
+  $
+  where $C$ is capacitance, measured in $asperv()$ which is $farad()$.
+
+It is convention to draw an arrow for current flow and a pair of $+, -$ for voltage drop.
+
