@@ -25,7 +25,15 @@
   The zero potential reference is the Earth for circuits connected to the earth.
   Otherwise, the reference is arbitrary.
 
-/ Power:
+  Measuring voltage is non-intrusive, hence much more viable than measuring current.
 
-/ Tellegen's Theorem:
+/ Power: Rate of work being done, denoted $p$, measured in $jpers()$, whihc is $watt()$.
+  $
+    p = v i.
+  $
+
+/ Tellegen's Theorem: Total power in a circuit is zero.
+  $
+    sum P_"absorbed" = sum P_"delivered".
+  $
 
