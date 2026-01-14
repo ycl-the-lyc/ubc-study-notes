@@ -17,6 +17,8 @@
 #let ampere = zi.declare("A")
 #let jpercoulomb = zi.declare("J", ("C", -1))
 #let volt = zi.declare("V")
+#let jpers = zi.declare("J", ("s", -1))
+#let watt = zi.declare("W")
 
 #import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
