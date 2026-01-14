@@ -13,12 +13,18 @@
 
 #import "@preview/zero:0.5.0": num, zi
 #let coulomb = zi.declare("C")
-#let coulombpers = zi.declare("C", ("s", -1))
+#let coulombpers = zi.declare($C s^(-1)$)
 #let ampere = zi.declare("A")
-#let jpercoulomb = zi.declare("J", ("C", -1))
+#let jpercoulomb = zi.declare($J C^(-1)$)
 #let volt = zi.declare("V")
-#let jpers = zi.declare("J", ("s", -1))
+#let jpers = zi.declare($J s^(-1)$)
 #let watt = zi.declare("W")
+#let vpera = zi.declare($V A^(-1)$)
+#let ohm = zi.declare($Omega$)
+#let vspera = zi.declare($V s A^(-1)$)
+#let henry = zi.declare("H")
+#let asperv = zi.declare($A s V^(-1)$)
+#let farad = zi.declare("F")
 
 #import "@preview/theorion:0.4.1": *
 #import cosmos.rainbow: *
