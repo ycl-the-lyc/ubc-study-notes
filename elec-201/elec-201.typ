@@ -1,3 +1,6 @@
+#import "@preview/zap:0.5.0"
+#let circuit = zap.circuit.with(variant: "ieee")
+
 #import "../lib.typ": *
 #show: setup.with(
   title: [ELEC 201 \ _Circuit Analysis_],
@@ -34,7 +37,14 @@
 
 / Tellegen's Theorem: Total power in a circuit is zero.
   $
-    sum P_"absorbed" = sum P_"delivered".
+    sum p_"absorbed" = sum p_"delivered".
+  $
+
+/ KVL: $
+    sum_"loop" v = 0.
+  $
+/ KCL: $
+    sum_"Gauß" i_"in" = sum_"Gauß" i_"out".
   $
 
 = Eletric Properties of Matter and Circuit Elements
@@ -45,23 +55,43 @@ We use four basic, ideal elements to describe a circuit:
 - source
 which do not correspond to real components.
 
+In real life, a "resistor" is a resistor and an inductor in series, paralelled with a capacitor; a "battery" is a voltage source and a resistor.
+But we say "resistor" as if it is a resistor, and we say "source" instead of "battery".
+
+We call elements that absorb power all the time "passive", and those absorb then release power "reactive".
+Sources are called "active" elements.
+
 == Eletric Properties of Matter
-- Matter opposes current flowing through it, even to that called a "comductor".
+/ Ohm's Law: Matter opposes current flowing through it, even to that called a "conductor".
   $
-    v = R i
+    v & = R i \
+    p & = R i^2 = v^2 / R.
   $
   where $R$ is resistance, measured in $vpera()$ which is $ohm()$.
-- Matter opposes _changes_ of current already flowing through it.
+/ Faraday's Law: Matter opposes _changes_ of current already flowing through it.
   $
-    v = L dv(i, t)
+      v & = L dv(i, t) \
+      p & = L i dv(i, t) \
+    E_L & = integral p dd(t) = 1/2 L i^2.
   $
   where $L$ is inductance, measured in $vspera()$ which is $henry()$.
-- Matter opposes _changes_ of voltage already applied to it.
+/ Ampere's Law: Matter opposes _changes_ of voltage already applied to it.
   $
-    i & = C dv(v, t) \
-    v & = 1/C integral i dd(t).
+      i & = C dv(v, t) \
+      v & = 1/C integral i dd(t) \
+      p & = C v dv(v, t) \
+    E_C & = integral p dd(t) = 1/2 C v^2.
   $
   where $C$ is capacitance, measured in $asperv()$ which is $farad()$.
 
 It is convention to draw an arrow for current flow and a pair of $+, -$ for voltage drop.
+
+== Ideal Sources
+/ Voltage Sources: Sources that keep a voltage difference.
+/ Current Source: Sources that keep a current flow.
+
+The current through a voltage source, and the voltage drop across a current source, depends on what they are connected to.
+
+/ Independent Sources: Sources that maintain its own output, shaped round.
+/ Dependent Sources: Sources whose output depend on others, shaped square.
 

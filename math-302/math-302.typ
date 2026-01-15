@@ -131,7 +131,7 @@ $
   Give $P(A)$.
 
   #solution[
-    Let $2 <= i, eq.not k <= 14$ (J, Q, K, A being 11 to 14),
+    Let $2 <= i, eq.not k <= 14$ (J, Q, K, A being eleven to fourteen),
     $
       A_(i, j) := { i "appears with two suits", j "appears with three suits" }.
     $
@@ -159,5 +159,33 @@ $
                P(A) & = npk(13, 2) (nck(4, 2) nck(4, 3)) / nck(52, 5).
     $
   ]
+]
+
+#problem[
+  Similar to above, but cards are replaced after removed.
+
+  #solution[
+    Only two things changed:
+    - $Omega = 52^5$ since cards are replaced;
+    - $abs(A_(2, 3))$ is different.
+
+    Given two cards in a hand are 2, the rest are 3; the picking of each rank is trivial:
+    $
+      abs(A_(2, 3) ("some position")) & = 4^2 times 4^3.
+    $
+    What is left is choosing which two spots the 2 should reside in.
+    $
+      abs(A_(2, 3)) & = nck(5, 2) times 4^2 times 4^3.
+    $
+
+    The same follows.
+  ]
+]
+
+We decomposed problems of rank, suit and position to smaller problems which are either ordered or unordered.
+Commonly, making them unordered problems will be easier.
+
+#important-box[
+  Always think of utilizing uniform distribution of probability.
 ]
 
