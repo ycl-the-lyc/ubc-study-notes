@@ -95,3 +95,17 @@ The current through a voltage source, and the voltage drop across a current sour
 / Independent Sources: Sources that maintain its own output, shaped round.
 / Dependent Sources: Sources whose output depend on others, shaped square.
 
+= Topology of Circuits
+If we remove all elements, the wires and joints of wires are left.
+That is the topology of a circuit.
+
+/ Branch: An line.
+/ Node: A joint of branches, of at least three terminals.
+/ Binary Node: A joint of two parts of one branch.
+/ Atomic Branch: A branch without binary nodes.
+
+#important-box[
+  A node includes all connecting wires, until the elements.
+  This means that wires drawn to have multiple juctions form only one node, so long as the junctions are not separated by elements.
+]
+
