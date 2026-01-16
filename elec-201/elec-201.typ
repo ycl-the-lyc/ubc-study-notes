@@ -102,10 +102,13 @@ That is the topology of a circuit.
 / Branch: An line.
 / Node: A joint of branches, of at least three terminals.
 / Binary Node: A joint of two parts of one branch.
-/ Atomic Branch: A branch without binary nodes.
+/ Atomic Branch: A branch with one element.
 
 #important-box[
   A node includes all connecting wires, until the elements.
   This means that wires drawn to have multiple juctions form only one node, so long as the junctions are not separated by elements.
 ]
+
+Two elements are in series if they are on the same branch.
+Two elements are in paralell if they are on two different atomic branches, which branches share a common node.
 
