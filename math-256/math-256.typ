@@ -169,3 +169,84 @@ The guesses are linear combinations of all possible derivatives of $g(x)$.
 The particular solution still carries undetermined coefficients.
 Assume this $y_p$ to transform $oL y$.
 
+= Higher Order ODEs
+
+== Linear Second-order ODEs
+Redefine the operator $oL$:
+$
+  oL y & := y'' + p(x) y' + q(x) y = g(x).
+$
+If $g(x) = 0$, we say it is homogeneous.
+
+Such equations are common in superposition of waves and such.
+
+== Constant Coefficient Equations
+If $g(x) = 0$ and the coefficients are constant, like
+$
+  oL y = a y'' + b y' + c y = 0,
+$
+then,
+$
+     y & = e^(r x) \
+  oL y & = (a r^2 + b r + c) e^(r x) = 0.
+$
+
+Since $e^(r x) eq.not 0$, solving the equation is the same as solving the contained quadratic equation.
+If $Delta < 0$, then the roots are complex,
+$
+  r_(1, 2) & = lambda plus.minus i mu \
+      y(x) & = e^(r x) (A cos(mu x) + B sin(mu x))
+$
+
+#problem[
+  A stone thrown vertically up at speed $v_0$ at height $h$.
+  Express its displacement as a function of $t$.
+
+  #solution[
+    $
+                     y'' & = -g \
+      integral y'' dd(t) & = integral -g dd(t) \
+                      y' & = -g t + C \
+                   y'(0) & = v_0 = C \
+       integral y' dd(t) & = integral -g t + v_0 dd(t) \
+                       y & = v_0 t - 1/2 g t^2 + D \
+                    y(0) & = h = D \
+                    y(t) & = h + v_0 t - 1/2 g t^2.
+    $
+  ]
+]
+
+== Initial Value Problem
+With similar setup to the previous problem, but the coefficients may not be constants.
+
+Given $oL y = 0$ and initial conditions $y(x_0) = y_0, y'(x_0) = v_0$, let $y_1(x), y_2(x)$ be two solutions to $oL y = 0$.
+Since $oL$ is a linear operation, its solution is also linear.
+$
+     y(x) & = C_1 y_1(x) + C_2 y_2(x) \
+   y(x_0) & = C_1 y_1(x_0) + C_2 y_2(x_0) \
+          & = y_0 \
+  y'(x_0) & = C_1 y'_1(x_0) + C_2 y'_2(x_0) \
+          & = v_0.
+$
+This can be written as
+$
+  underbrace(mat(y_1(x_0), y_2(x_0); y'_1(x_0), y'_2(x_0)), A) mat(C_1; C_2) = mat(y_0; v_0).
+$
+
+For it to be solved as having constant coefficients, $det(A) eq.not 0$ or $A^(-1)$ must exist.
+
+#definition(title: [Wronsian Function])[
+  Given $y_1(x), y_2(x)$,
+  $
+    W(y_1, y_2)(x) := mdet(y_1(x), y_2(x); y'_1(x), y'_2(x)).
+  $
+]
+
+So, an initial value problem has solution if $W(y_1, y_2)(x_0) eq.not 0$.
+
+== Linear Dependency of Functions
+Given two functions $f(x), g(x)$ which are valid on interval $I$, they are linearly dependent on $I$ if there exists non-zero $c_1, c_2$ such that
+$
+  c_1 y(x) + c_2 g(x) = 0.
+$
+

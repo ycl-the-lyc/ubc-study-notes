@@ -105,26 +105,26 @@ Yeah just do it.
 For addition and subtraction, simply add or subtract the corresponding scalars.
 Commutate, associate and distribute them.
 
-#canvas({
-  import cetz-plot: *
-
-  plot.plot(
-    size: (4, 4),
-    axis-style: "left",
-    x-tick-step: 1,
-    y-tick-step: 1,
-    x-max: 6,
-    y-max: 6,
-    {
-      add-vec(((0, 0), (1, 3)), label: $vb(a)$)
-      add-vec(((0, 0), (3, 1)), label: $vb(b)$)
-      add-vec(((1, 3), (5, 5)), label: $vb(c)$)
-      add-vec(((3, 1), (5, 5)), label: $vb(d)$)
-
-      add-vec(((0, 0), (5, 5)), label: $vb(e)$)
-    },
-  )
-})
+// #canvas({
+//   import cetz-plot: *
+//
+//   plot.plot(
+//     size: (4, 4),
+//     axis-style: "left",
+//     x-tick-step: 1,
+//     y-tick-step: 1,
+//     x-max: 6,
+//     y-max: 6,
+//     {
+//       add-vec(((0, 0), (1, 3)), label: $vb(a)$)
+//       add-vec(((0, 0), (3, 1)), label: $vb(b)$)
+//       add-vec(((1, 3), (5, 5)), label: $vb(c)$)
+//       add-vec(((3, 1), (5, 5)), label: $vb(d)$)
+//
+//       add-vec(((0, 0), (5, 5)), label: $vb(e)$)
+//     },
+//   )
+// })
 
 $
   vb(a) + vb(b) &= vb(c) + vb(d) = vb(e) \
@@ -1090,38 +1090,38 @@ $
 The $i$ is the "1" of _imaginary numbers_.
 Every imaginary number is a real-valued multiple of $i$, and are usually represented by $z$.
 
-#figure(
-  caption: [Complex number],
-  canvas({
-    import draw: *
-    import cetz-plot: *
-    plot.plot(
-      name: "ri",
-      size: (4, 4),
-      axis-style: "school-book",
-      x-min: 0,
-      x-max: 2,
-      y-min: -2,
-      y-max: 2,
-      x-label: $Re{z}$,
-      y-label: $Im{z}$,
-      x-ticks: (),
-      x-tick-step: none,
-      y-ticks: (),
-      y-tick-step: none,
-      {
-        plot.add-anchor("a", (1, 1))
-        plot.add-anchor("b", (1, -1))
-      },
-    )
-    circle("ri.a", radius: 1pt)
-    content((rel: (.5, -.5)), $z_1 (1, 1)$)
-    content((rel: (0, .5)), $1 + i$)
-    circle("ri.b", radius: 1pt)
-    content((rel: (.5, -.5)), $z_2 (1, -1)$)
-    content((rel: (0, .5)), $1 - i$)
-  }),
-)
+// #figure(
+//   caption: [Complex number],
+//   canvas({
+//     import draw: *
+//     import cetz-plot: *
+//     plot.plot(
+//       name: "ri",
+//       size: (4, 4),
+//       axis-style: "school-book",
+//       x-min: 0,
+//       x-max: 2,
+//       y-min: -2,
+//       y-max: 2,
+//       x-label: $Re{z}$,
+//       y-label: $Im{z}$,
+//       x-ticks: (),
+//       x-tick-step: none,
+//       y-ticks: (),
+//       y-tick-step: none,
+//       {
+//         plot.add-anchor("a", (1, 1))
+//         plot.add-anchor("b", (1, -1))
+//       },
+//     )
+//     circle("ri.a", radius: 1pt)
+//     content((rel: (.5, -.5)), $z_1 (1, 1)$)
+//     content((rel: (0, .5)), $1 + i$)
+//     circle("ri.b", radius: 1pt)
+//     content((rel: (.5, -.5)), $z_2 (1, -1)$)
+//     content((rel: (0, .5)), $1 - i$)
+//   }),
+// )
 We call $z_2$ the complex conjugate of $z_1$, or $z_2 = conj(z)_1$.
 
 == Complex Number Operations
