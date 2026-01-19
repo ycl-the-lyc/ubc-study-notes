@@ -186,6 +186,46 @@ We decomposed problems of rank, suit and position to smaller problems which are 
 Commonly, making them unordered problems will be easier.
 
 #important-box[
-  Always think of utilizing uniform distribution of probability.
+  Always think of utilizing uniform distribution of probability, and complement of events.
 ]
+
+#problem[
+  Flipping a coin with $p$ probability for tail, how many flips it takes for tail to show up?
+
+  #solution[
+    $
+      Omega = NN + {oo}
+    $
+    where $oo$ is the events where tail never show up, $i$ is the events which the first $i - 1$ flips are head.
+
+    $
+      P(i) & = P_i ({"first" i - 1 "flips are heads"}) dot P_i ({"the" i"th" "flip is tail"}) \
+           & = (1 - p)^(i - 1) p
+    $
+
+    We know that a tail will eventually show up, so $P(oo) = 0$.
+    To show that, we take its complement
+    $
+      P(oo) & = 1 - P(NN) \
+            & = 1 - sum_(i=1)^oo P(i) \
+            & = 1 - sum_(i=1)^oo (1 - p)^(i - 1) p.
+    $
+    Sum $P(NN)$ up as a geometric series: let $j = i - 1$,
+    $
+      sum_(j=0)^oo (1 - p)^j p & = p dot 1 / (1 - (1 - p)) \
+                               & = p / p \
+                               & = 1 \
+                         P(oo) & = 0.
+    $
+  ]
+]
+
+#definition(title: [Discrete])[
+  Countably infinite and finite spaces are discrete spaces.
+]
+
+$
+  P(A) = sum_(omega in A) P({omega})
+$
+provided that $A$ is discrete.
 
