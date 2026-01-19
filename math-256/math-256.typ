@@ -176,7 +176,7 @@ Redefine the operator $oL$:
 $
   oL y & := y'' + p(x) y' + q(x) y = g(x).
 $
-If $g(x) = 0$, we say it is homogeneous.
+If $g(x) = 0$, we say the equation is homogeneous.
 
 Such equations are common in superposition of waves and such.
 
@@ -233,13 +233,17 @@ $
   underbrace(mat(y_1(x_0), y_2(x_0); y'_1(x_0), y'_2(x_0)), A) mat(C_1; C_2) = mat(y_0; v_0).
 $
 
-For it to be solved as having constant coefficients, $det(A) eq.not 0$ or $A^(-1)$ must exist.
+For it to be solved as having constant coefficients, $det(A) eq.not 0$, i.e. $A^(-1)$ must exist.
 
 #definition(title: [Wronsian Function])[
   Given $y_1(x), y_2(x)$,
   $
     W(y_1, y_2)(x) := mdet(y_1(x), y_2(x); y'_1(x), y'_2(x)).
   $
+]
+
+#definition(title: [Fundamental Set of Solutions])[
+  Given $oL y = y'' + p(x) y' + q(x) y = 0$, the pair ${y_1(x), y_2(x)}$ is a set of fundamental solutions on an interval $I$, provided that $W(Y_1, y_2)(x_0)$ where $x_0 in I$.
 ]
 
 So, an initial value problem has solution if $W(y_1, y_2)(x_0) eq.not 0$.
@@ -250,3 +254,79 @@ $
   c_1 y(x) + c_2 g(x) = 0.
 $
 
+If $y(x) = C_1 y_1(x) + C_2 y_2(x)$, then ${y_1, y_2}$ is a set of fundamental solutions.
+
+== Simple Harmonic Motion
+Second-order differential equations are common in problems where contributing factors also produce hindrances, like spring-mass and inductor-capacitor systems.
+
+#example[
+  Given a spring hanging a mass,
+  $
+    m dot.double(x) & = - m g - k x - beta dot(x) \
+    m dot.double(x) + underbrace(beta dot(x), #[damping]) + underbrace(k x, #[energy\ storage]) = underbrace(- m g, #[forcing])
+  $
+]
+
+=== Free Undamped Oscillation
+Ignore external influence ("free") and damping.
+
+#example[
+  $
+                        g & = 0 \
+                     beta & = 0 \
+    m dot.double(x) + k x & = 0.
+  $
+]
+
+=== Free Damped Oscillation
+There is still no external forcing.
+
+#example[
+  $
+                                      g & = 0 \
+    m dot.double(x) + beta dot(x) + k x & = 0.
+  $
+
+  See this as a constant coefficient equation,
+  $
+                  x(t) & = e^(r t) \
+    m r^2 + beta r + k & = 0 \
+                 Delta & = beta^2 + 4 m k \
+                     r & = (-beta plus.minus Delta) / (2m).
+  $
+
+  If $Delta < 0$, then
+  $
+    r_(1, 2) & = - beta / (2m) plus.minus i sqrt(4 m k - beta^2) / (2m) \
+             & = - beta / (2m) plus.minus omega_1
+  $
+  where
+  $
+    omega_1 & = sqrt((4 m k - beta^2) / (4m^2)) \
+            & = sqrt(k/m - beta^2 / (4m^2)) \
+            & = sqrt(k/m (1 - beta^2 / (4 m k))) \
+            & = sqrt(k/m) sqrt(1 - beta^2 / (4 m k)) \
+            & = omega_0 sqrt(1 - beta^2 / (4 m k)).
+  $
+
+  Substitute it back, plus Euler's equation,
+  $
+    x(t) = e^(- beta / (2m) t) [A cos(omega_1) t + B sin(omega_1) t].
+  $
+
+  If $Delta > 0$, then solve for $r_1, r_2$ as usual.
+  Since $beta, m, k > 0$, the roots will be negative.
+  $
+    x(t) = A e^(r_1 t) + B e^(r_2 t)
+  $
+  which is an overdamp.
+
+  If $Delta = 0$, then
+  $
+    beta^2 - 4 m k & = 0 \
+              beta & = 2 sqrt(m k) \
+                 r & = - beta / (2 m k) \
+              x(t) & = e^(- beta / (2m)) [A + B t]
+  $
+  which is a critcal damp.
+]
