@@ -229,3 +229,21 @@ $
 $
 provided that $A$ is discrete.
 
+== Inclusion and Exclusion
+For three sets overlapping like the color combinations, we can
++ count each set;
++ eliminate the three two-set overlaps;
++ add the three-set overlap back.
+
+For all $A, B, C in Omega$,
+$
+  P(A union B union C) & = P(A) + P(B) + P(C) \
+                       & - P(A inter B) - P(B inter C) - P(A inter C) \
+                       & + P(A inter B inter C).
+$
+
+In times when calculating probability of an event is hard, we can take its complement and the parent probability.
+Finding symmetry can shrink sample space that is significance to us, like the probability of three dice rolls to be the same, is just the probability of two two-rolls.
+
+= Random Variables
+
