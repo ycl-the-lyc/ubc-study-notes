@@ -263,18 +263,33 @@ Second-order differential equations are common in problems where contributing fa
   Given a spring hanging a mass,
   $
     m dot.double(x) & = - m g - k x - beta dot(x) \
-    m dot.double(x) + underbrace(beta dot(x), #[damping]) + underbrace(k x, #[energy\ storage]) = underbrace(- m g, #[forcing])
+    m dot.double(x) + underbrace(beta dot(x), #[damping]) + underbrace(k x, #[energy\ storage]) & = underbrace(- m g, #[forcing]).
   $
 ]
+
+When $beta = 0$, it is without damping, thus simple harmonic motion.
 
 === Free Undamped Oscillation
 Ignore external influence ("free") and damping.
 
 #example[
   $
-                        g & = 0 \
-                     beta & = 0 \
-    m dot.double(x) + k x & = 0.
+                              g & = 0 \
+                           beta & = 0 \
+          m dot.double(x) + k x & = 0 \
+                              x & = e^(r t) \
+                        omega_0 & = sqrt(k/m) \
+    dot.double(x) + omega_0^2 x & = 0 \
+      (r^2 + omega_0^2) e^(r t) & = 0 \
+                              r & = plus.minus i omega_0 \
+                           y(t) & = A cos(omega_0 t) + B sin(omega_0 t) \
+                                & = R cos(omega_0 t - phi) quad ("double angle") \
+                                & = R cos(omega_0 t) cos(phi) + R sin(omega_0 t) sin(phi) \
+                              A & = R cos(phi) \
+                              B & = R sin(phi) \
+                              R & = sqrt(A^2 + B^2) \
+                          B / A & = tan(phi) \
+                            phi & = tan^(-1)(B / A)
   $
 ]
 
@@ -284,6 +299,7 @@ There is still no external forcing.
 #example[
   $
                                       g & = 0 \
+                                   beta & > 0 \
     m dot.double(x) + beta dot(x) + k x & = 0.
   $
 
@@ -292,7 +308,7 @@ There is still no external forcing.
                   x(t) & = e^(r t) \
     m r^2 + beta r + k & = 0 \
                  Delta & = beta^2 + 4 m k \
-                     r & = (-beta plus.minus Delta) / (2m).
+                     r & = (-beta plus.minus sqrt(Delta)) / (2m).
   $
 
   If $Delta < 0$, then
@@ -311,11 +327,12 @@ There is still no external forcing.
 
   Substitute it back, plus Euler's equation,
   $
-    x(t) = e^(- beta / (2m) t) [A cos(omega_1) t + B sin(omega_1) t].
+    x(t) = e^(- beta / (2m) t) [A cos(omega_1) t + B sin(omega_1) t]
   $
+  which is an underdamp.
 
   If $Delta > 0$, then solve for $r_1, r_2$ as usual.
-  Since $beta, m, k > 0$, the roots will be negative.
+  Since $beta, m, k > 0$, the roots will be negative,
   $
     x(t) = A e^(r_1 t) + B e^(r_2 t)
   $
@@ -330,3 +347,53 @@ There is still no external forcing.
   $
   which is a critcal damp.
 ]
+
+== Inhomogeneous Second-order Equations
+Define
+$
+  oL y & = y'' + p(x) y' + q(x) y = g(x)
+$
+where $g(x) eq.not 0$.
+
+It has the general solution of
+$
+  y(x) & = y_P (x) + y_H (x)
+$
+where $oL y_P (x) = g(x), oL y_H (x) = 0$.
+
+If $g(x) = 0$, then $y_P$ disappears, then we can solve the constant coefficient cases as usual.
+$
+              y_H & = e^(r x) \
+  a r^2 + b r + c & = 0 \
+                r & = ... \
+             y(x) & = y_H (x) = c_1 y_1 (x) + c_2 y_2 (x).
+$
+
+To find $y_P$, we guess it to be a linear combination of all possible derivatives of $g(x)$.
+- $x^n$: $y_P = a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0$.
+- $e^(a x)$: $y_P = A e^(a x)$.
+- $sin(omega x), cos(omega x)$: $y_P = A cos(omega x) + B sin(omega x)$.
+
+#note-box[
+  This does not work when one or more terms of $y_P$ is a solution to the homogeneous equation.
+  To make it work, we multiply the guess of $y_P$ by one or more $x$, until the highest power of $oL y_P$ matches the ones in $g(x)$.
+]
+
+#problem[
+  Solve $oL y = y'' + 3y' + 2y = e^x$.
+
+  #solution[
+    Guess $y_P = A e^x$.
+    Solve for $y_H$ (omitted).
+    $
+       oL y_P & = A e^x + 3 A e^x + 2 A e^x = e^x \
+      6 A e^x & = e^x \
+            A & = 1/6.
+    $
+    Combine $y_P, y_H$,
+    $
+      y(x) & = 1/6 e^x + c_1 e^(-x) + c_2 e^(-2 x).
+    $
+  ]
+]
+
