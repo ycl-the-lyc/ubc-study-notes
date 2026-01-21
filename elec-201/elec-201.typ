@@ -137,19 +137,20 @@ Consequently, elements on a branch can be enclosed in many different Gauß surfa
 
 == Branches
 Here, $V, I$ means their corresponding sources.
+$C, L$ are ignored here, since the syllabus does not cover AC; in DC, they become open circuit and wire.
 
 In an $R$ branch:
 - $i = (v_"orig" - v_"dest") / R$;
 
 In an $R V$ branch:
-- 
+-
 
 In an $I$ branch:
-- 
+-
 
 In an $R I$ branch:
-- 
+-
 
 In an $V$ (evil) branch:
-- 
+-
 
