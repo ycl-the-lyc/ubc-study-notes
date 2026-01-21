@@ -58,7 +58,7 @@
 #let nck(..args) = {
   let n = args.at(0, default: $n$)
   let k = args.at(1, default: $k$)
-  $vec(#n, #k)$
+  $binom(#n, #k)$
 }
 
 //
