@@ -99,7 +99,7 @@ The current through a voltage source, and the voltage drop across a current sour
 If we remove all elements, the wires and joints of wires are left.
 That is the topology of a circuit.
 
-/ Branch: An line.
+/ Branch: An line between true (non-binary) nodes.
 / Node: A joint of branches, of at least three terminals.
 / Binary Node: A joint of two parts of one branch.
 / Atomic Branch: A branch with one element.
@@ -111,4 +111,45 @@ That is the topology of a circuit.
 
 Two elements are in series if they are on the same branch.
 Two elements are in paralell if they are on two different atomic branches, which branches share a common node.
+
+We can enclose part of a circuit with a Gauß surface, which becomes a super-node.
+
+== KCL
+A node, or a super-node is often more convinient than dealing with elements and wires directly.
+
+#theorem[
+  At any Gauß surface, the current input is the same as the current output.
+]
+
+Consequently, elements on a branch can be enclosed in many different Gauß surfaces, and their current input and output are the same.
+
+#theorem[
+  The current in all elements on a branch is the same.
+]
+
+== KVL
+/ Loop: A closed trajectory that does not cross a node more than once.
+/ Window Pane (Mesh) Loop: A loop that does not contain any loops.
+
+#theorem[
+  The voltage drop in a loop is zero.
+]
+
+== Branches
+Here, $V, I$ means their corresponding sources.
+
+In an $R$ branch:
+- $i = (v_"orig" - v_"dest") / R$;
+
+In an $R V$ branch:
+- 
+
+In an $I$ branch:
+- 
+
+In an $R I$ branch:
+- 
+
+In an $V$ (evil) branch:
+- 
 
