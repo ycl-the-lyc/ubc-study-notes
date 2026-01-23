@@ -245,5 +245,41 @@ $
 In times when calculating probability of an event is hard, we can take its complement and the parent probability.
 Finding symmetry can shrink sample space that is significance to us, like the probability of three dice rolls to be the same, is just the probability of two two-rolls.
 
-= Random Variables
+== Random Variables
+#definition(title: [Random Variable])[
+  Given a sample space $Omega$, a discrete random variable is a probability measure function
+  $
+    X: Omega -> RR.
+  $
+  Shorten $Set(omega in Omega, f(X(omega)))$ to ${f(X)}$.
+]
+
+A random variable is discrete if its sample space where sample probability is not zero is countable.
+
+#example[
+  Use the previous head toss number example.
+  Let $X$ be the number of heads.
+  $
+    P_X (j) & = nck(n, j) p^j (i - p)^(n - j)
+  $
+  which expands from the particular case of one head.
+]
+
+= Conditional Probability
+#definition(title: [Conditional Probability])[
+  Denoted $P(A|B)$, it is the probability of event $A$ given event $B$ is happened.
+
+  Since
+  $
+    P(A inter B) & = P(B) P(A|B) \
+                 & = P(A) P(B|A),
+  $
+  if $P(B) > 0$,
+  $
+    P(A|B) & = P(A "and" B "happen") / P(B "happens") \
+           & = P(A inter B) / P(B).
+  $
+]
+
+$P(A|B) + P(A^c|B) = 1$.
 
