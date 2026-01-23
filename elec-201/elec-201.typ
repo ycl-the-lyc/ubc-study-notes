@@ -136,21 +136,39 @@ Consequently, elements on a branch can be enclosed in many different Gauß surfa
 ]
 
 == Branches
-Here, $V, I$ means their corresponding sources.
-$C, L$ are ignored here, since the syllabus does not cover AC; in DC, they become open circuit and wire.
+Here, V, I means their corresponding sources.
+C, L are ignored here, since the syllabus does not cover AC; in DC, they become open circuit and wire.
 
-In an $R$ branch:
-- $i = (v_"orig" - v_"dest") / R$;
+In an R branch,
+$
+  i = (v_"orig" - v_"dest") / R.
+$
 
-In an $R V$ branch:
--
+In an RV branch, since there is a voltage source,
+$
+  i = (v_"orig" - v_"dest" + v_"src") / R.
+$
 
-In an $I$ branch:
--
+In a V (evil) branch,
+$
+  v_"dest" & = v_"orig" + v_"src" \
+         i & "is unknown".
+$
 
-In an $R I$ branch:
--
+In an I or RI branch,
+$
+  i = i_"source".
+$
 
-In an $V$ (evil) branch:
--
+== Modified Nodal Analysis
+Basically a combination of KVL, KCL and nodal analysis.
+
+/ Controlling Variable: A variable depended by dependent sources.
+/ Control Equation: An expression of a dependent source.
+
++ Choose a reference.
++ Assume current directions in R and RV branches.
++ Label the true nodes; do KCL at each.
++ Label the currents in V branches; do KVL with each.
++ Locate the controling variables.
 
