@@ -397,3 +397,47 @@ To find $y_P$, we guess it to be a linear combination of all possible derivative
   ]
 ]
 
+== Forced Oscillations and Resonnance
+For all periodic motions, we can write them into some
+$
+  m x'' + c x' + k x = F_0 cos(omega t).
+$
+
+=== Undamped Forced Motion and Resonnance
+Since it is undamped, $c = 0$.
+
+Recall that our spring-mass system has the homogeneous solution of
+$
+  x_h = C_1 cos(omega_0 t) + C_2 sin(omega_0 t)
+$
+where $omega_0 = sqrt(k/m)$ is the _natural frequency_.
+
+If $omega eq.not omega_0$, we know $x_p = A cos(omega t)$ where $A$ is some constant.
+Solve for $x_p$,
+$
+  x_p = F_0 / (m (omega_0^2 - omega^2)) cos(omega t).
+$
+
+The general solution is thus the linear combination of $x_h$ and $x_p$:
+$
+  x = C_1 cos(omega_0 t) + C_2 sin(omega_0 t) + F_0 / (m (omega_0^2 - omega^2)) cos(omega t).
+$
+
+=== Damped Forced Motion and Partial Resonnance
+Let
+$
+        p & = c / (2m) \
+  omega_0 & = sqrt(k/m).
+$
+Then,
+$
+  x'' + 2 p x + omega_0^2 = F_0 / m cos(omega t)
+$
+
+Assume that
+$
+  x_p = A cos(omega t) + B sin(omega t),
+$
+solve for $A, B$,
+//TODO
+
