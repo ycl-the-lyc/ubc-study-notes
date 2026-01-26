@@ -408,14 +408,14 @@ Since it is undamped, $c = 0$.
 
 Recall that our spring-mass system has the homogeneous solution of
 $
-  x_h = C_1 cos(omega_0 t) + C_2 sin(omega_0 t)
+  x_H = C_1 cos(omega_0 t) + C_2 sin(omega_0 t)
 $
 where $omega_0 = sqrt(k/m)$ is the _natural frequency_.
 
 If $omega eq.not omega_0$, we know $x_p = A cos(omega t)$ where $A$ is some constant.
 Solve for $x_p$,
 $
-  x_p = F_0 / (m (omega_0^2 - omega^2)) cos(omega t).
+  x_P = F_0 / (m (omega_0^2 - omega^2)) cos(omega t).
 $
 
 The general solution is thus the linear combination of $x_h$ and $x_p$:
@@ -431,13 +431,86 @@ $
 $
 Then,
 $
-  x'' + 2 p x + omega_0^2 = F_0 / m cos(omega t)
+  oL x_P = & dot.double(x_P) + beta / m dot(x_P) + k / m x_P = F_0 / m cos(omega t) \
+         = & -omega^2 [A cos(omega t) + B sin(omega t)] \
+           & + k / m [-A omega sin(omega t) + B omega cos(omega t)] \
+           & + [A cos(omega t) + B sin(omega t)] \
+         = & (omega_0^2 - omega^2) [A cos(omega t) + B sin(omega t)] \
+           & + beta / m [-A omega sin(omega t) + B omega cos(omega t)] \
+         = & cos(omega t) [A (omega_0^2 - omega^2) + B (omega beta) / m] \
+           & + sin(omega t) [B (omega_0^2 - omega^2) - A (omega beta) / m].
 $
 
-Assume that
+Equate the first and last line, we know that the $sin... = 0, cos... = F_0 / m$.
+So solve for $A, B$ (omitted).
+
+Let $R = sqrt(A^2 + B^2)$, we can combine the $sin$ and $cos$ terms
 $
-  x_p = A cos(omega t) + B sin(omega t),
+  x_P (t) = & R cos(omega t - phi)
 $
-solve for $A, B$,
-//TODO
+where $phi = tan^-1 (((omega beta) / m) / (omega_0^2 - omega^2))$.
+
+== Cauchy-Euler Equation
+Define
+$
+  oL y = & a x^2 y'' + b x y' + c y = 0
+$
+where $a, b, c$ are constants.
+
+If $a = 0$, the equation becomes first-order and seperable.
+$
+  ln abs(y) = & - c / b ln abs(x) + D \
+       y(x) = & e^(ln abs(y)) \
+            = & e^(ln abs(x))^(-c/b) e^D \
+            = & A x^(-c/b).
+$
+
+For the second-order equatoion, we guess that
+$
+        y = & x^r \
+       y' = & r x^(r - 1) \
+      y'' = & r (r - 1) x^(r - 2) \
+     x y' = & r x^r \
+  x^2 y'' = & r (r - 1) x^r.
+$
+
+Apply $oL$ on this guess: for all $x$,
+$
+               oL x^r = & [a r (r - 1) + b r + c] x^r \
+                        & = 0 \
+  a r^2 + (b - a) r + c & = 0.
+$
+
+Then solve it in similar fasion to the previous second-order equations.
+- If $Delta > 0$,
+  $
+    y(x) = & C_1 x^(r_1) + C_2 x^(r_2).
+  $
+- If $Delta < 0$,
+  $
+    r_(1, 2) = & - (b - a) / (2 a) plus.minus ((-1) (4 a c - (b - a)^2)) \
+             = & alpha plus.minus i beta
+  $
+  where $alpha, beta$ are obvious.
+  $
+    y(x) = & C_1 x^(alpha + i beta) + C_2 x^(alpha - i beta) \
+         = & x^alpha [C_1 e^(i beta ln(x)) + C_2 e^(-i beta ln(x))] \
+         = & x^alpha [A cos(beta ln(x)) + B sin(beta ln(x))].
+  $
+- If $Delta = 0$, $r = - (b - a) / (2 a)$.
+  One solution is
+  $
+    y_1 (x) = x^r.
+  $
+  The other can be found via
+  $
+    oL x^r = & [a x^2 dv(, x, 2) + b x dv(, x) + c] x^r \
+           = & [a r^2 + (b - a) r + c] x^2 \
+           = & a [(r + (b - a) / (2a))^2 - overbrace((b - a)^2 - 4 a c, Delta = 0) / (4 a^2)] x^2 \
+           = & a (r + (b - a) / (2a))^2 x^r
+  $
+  TODO
+  $
+    oL(evaluated(pdv(x^r, r))_(r = 1)) = & 0.
+  $
 
