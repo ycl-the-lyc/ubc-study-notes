@@ -268,6 +268,7 @@ A random variable is discrete if its sample space where sample probability is no
 = Conditional Probability
 #definition(title: [Conditional Probability])[
   Denoted $P(A|B)$, it is the probability of event $A$ given event $B$ is happened.
+  $P(A|B) + P(A^c|B) = 1$.
 
   Since
   $
@@ -281,5 +282,15 @@ A random variable is discrete if its sample space where sample probability is no
   $
 ]
 
-$P(A|B) + P(A^c|B) = 1$.
+Given multiple conditions,
+$
+  P(A_1 inter A_2 inter A_3 inter ... inter A_n) = & P(A_1) P(A_2 | A_1) P(A_3 | A_1 inter A_2) \
+                                                   & ... P(A_n | A_1 inter A_2 inter ... inter A_(n - 1)).
+$
+
+== Symmetry
+#theorem[
+  Given $k$ elements from a uniformly distributed $Omega$, the first $k$ items of a random permutation of $Omega$ is the same as $k$ elements sampled from $Omega$ without replacement.
+  All the $npk(abs(Omega), n)$ possibilities are equal.
+]
 
