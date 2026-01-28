@@ -61,6 +61,8 @@
   $binom(#n, #k)$
 }
 
+#let given = math.op($|$)
+
 //
 
 #let ssub(s, t) = s.filter(e => not t.contains(e))
