@@ -497,20 +497,113 @@ Then solve it in similar fasion to the previous second-order equations.
          = & x^alpha [C_1 e^(i beta ln(x)) + C_2 e^(-i beta ln(x))] \
          = & x^alpha [A cos(beta ln(x)) + B sin(beta ln(x))].
   $
-- If $Delta = 0$, $r = - (b - a) / (2 a)$.
+- If $Delta = 0$, the one repeated root $r = - (b - a) / (2 a)$.
   One solution is
   $
     y_1 (x) = x^r.
   $
   The other can be found via
   $
-    oL x^r = & [a x^2 dv(, x, 2) + b x dv(, x) + c] x^r \
-           = & [a r^2 + (b - a) r + c] x^2 \
-           = & a [(r + (b - a) / (2a))^2 - overbrace((b - a)^2 - 4 a c, Delta = 0) / (4 a^2)] x^2 \
-           = & a (r + (b - a) / (2a))^2 x^r
+    y_2 (x) = & evaluated(pdv(, r) x^r)_(r = r_1) \
+            = & evaluated(pdv(, r) e^(r ln(x)))_(r = r_1) \
+            = & x^r ln(x).
   $
-  TODO
+  This method is explained in the next section.
+  $y(x)$ is then a linear combination of the two solutions.
+
+// TODO
+// $
+//   oL x^r = & [a x^2 dv(, x, 2) + b x dv(, x) + c] x^r \
+//          = & [a r^2 + (b - a) r + c] x^2 \
+//          = & a [(r + (b - a) / (2a))^2 - overbrace((b - a)^2 - 4 a c, Delta = 0) / (4 a^2)] x^2 \
+//          = & a (r + (b - a) / (2a))^2 x^r
+// $
+//
+// $
+//   oL(evaluated(pdv(x^r, r))_(r = 1)) = & 0.
+// $
+
+== Reduction of Order Method
+Given the second-order differential equation.
+If $y_1 (x)$ is a solution to the homogeneous equation, then the other solution $y_2 (x)$ can be found in form of
+$
+    y_2 (x) = & u(x) y_1 (x) \
+   y'_2 (x) = & u(x) y'_1 (x) + u' (x) + y_1 (x) \
+  y''_2 (x) = & u(x) y''_1 (x) + 2 u' (x) y'_1 (x) + u'' (x) + y_1 (x).
+$
+Since we know $oL y_1 = 0$, we can strip it from the expression of $oL y_2$:
+$
+  oL y_2 = & y''_2 + p(x) y'_2 + q(x) y_2 = g(x) \
+         = & underbrace(u [y''_1 + p(x) y'_1 + q(x) y_1], oL y_1 = 0) + [u'' y_1 + (2 u' y_1 + p y_1 u')] \
+         = & u'' y_1 + (2 u' y_1 + p y_1 u').
+$
+Let $W = u', W'' = u''$,
+$
+  W' + ((2 y'_1) / y_1 + p(x)) W = & g(x) / (y_1 (x)).
+$
+Go back to using the integrating factor method,
+$
+                 F(x) = & e^(2 integral y'_1 / y_1 dd(x) + integral p(x) dd(x)) \
+                      = & e^(ln(y_1^2) + integral p(x) dd(x)) \
+                      = & y_1^2 e^(integral p(x) dd(x)) \
+  dv(, x) [F(x) W(x)] = & (F(x) g(x)) / (y_1 (x)) \
+            F(x) W(x) = & integral (F(x) g(x)) / (y_1 (x)) dd(x) + C_2 \
+        W(x) = u' (x) = & 1 / F(x) integral (F(x) g(x)) / (y_1 (x)) dd(x) + C_2 / F(x) \
+                 u(x) = & C_2 integral 1 / F(x) dd(x) \
+                        & + limits(integral)^x 1 / F(s) [limits(integral)^s (F(t) g(t)) / (y_1 (t)) dd(t)] dd(s) \
+                 y(x) = & C_1 y_1 (x) + u(x) y_1 (x).
+$
+
+#problem[
+  Solve
   $
-    oL(evaluated(pdv(x^r, r))_(r = 1)) = & 0.
+    oL y = & x^2 y'' + x y' - 9 y = 0.
   $
+
+  #solution[
+    Let $y = x^r$.
+    $
+                   oL x^r = & [a r (r - 1) + b r + c] x^r \
+                            & = 0 \
+      a r^2 + (b - a) r + c & = 0
+    $
+    where $a = 1, b = 1, c = -9$.
+    $
+         Delta = & (b - a)^2 - 4 a c \
+               = & 36 > 0; \
+      r_(1, 2) = & (plus.minus sqrt(Delta)) / 2 \
+               = & plus.minus 3 \
+          y(x) = & C_1 x^3 + C_2 x^(-3).
+    $
+  ]
+]
+
+#problem[
+  Solve
+  $
+    oL y = & x^2 y'' + x y' + 9 y = 0.
+  $
+
+  #solution[
+    Similar to the previous problem,
+    $
+      r_(1, 2) = & plus.minus 3 i \
+          y(x) = & C_1 cos(3 ln(x)) + C_2 sin(3 ln(x)).
+    $
+  ]
+]
+
+#problem[
+  Solve
+  $
+    oL y = & x^2 y'' - x y' + y = 0.
+  $
+
+  #solution[
+    $Delta = 0, r = 1$.
+    $
+      y(x) = & C_1 x' + C_2 x' ln(x).
+    $
+  ]
+]
 
