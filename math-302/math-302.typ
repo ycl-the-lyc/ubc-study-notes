@@ -272,8 +272,8 @@ A random variable is discrete if its sample space where sample probability is no
 
   Since
   $
-    P(A inter B) & = P(B) P(A|B) \
-                 & = P(A) P(B|A),
+    P(A inter B) & = P(B) P(A given B) \
+                 & = P(A) P(B given A),
   $
   if $P(B) > 0$,
   $
@@ -284,13 +284,87 @@ A random variable is discrete if its sample space where sample probability is no
 
 Given multiple conditions,
 $
-  P(A_1 inter A_2 inter A_3 inter ... inter A_n) = & P(A_1) P(A_2 | A_1) P(A_3 | A_1 inter A_2) \
-                                                   & ... P(A_n | A_1 inter A_2 inter ... inter A_(n - 1)).
+  P(A_1 inter A_2 inter A_3 inter ... inter A_n) = & P(A_1) P(A_2 given A_1) P(A_3 given A_1 inter A_2) \
+                                                   & ... P(A_n given A_1 inter A_2 inter ... inter A_(n - 1)).
 $
 
 == Symmetry
 #theorem[
   Given $k$ elements from a uniformly distributed $Omega$, the first $k$ items of a random permutation of $Omega$ is the same as $k$ elements sampled from $Omega$ without replacement.
   All the $npk(abs(Omega), n)$ possibilities are equal.
+]
+
+#theorem(title: [Total Probability Formula])[
+  $
+    P(A) = & P(A inter B) + P(A inter B^c) \
+         = & P(A given B) P(B) + P(A given B^c) P(B^c).
+  $
+  If $B_i$ partitions $Omega$, then
+  $
+    P(A) = & sum_(i = 0)^oo P(A inter B_i) \
+         = & sum_(i = 0)^oo P(A given B_i) P(B_i).
+  $
+]
+
+This fact can disect complicated probability into simpler probabilities for individual cases.
+
+#problem[
+  For three coin flips, roll a dice on each head.
+  What is the probability of the sum of dice rolls to be 3?
+
+  #solution[
+    Let $S = "sum of dice values", X = "n.o. of heads"$.
+    The dice rolls needed for each viable $X$ are $(3,), (1, 2) or (2, 1), (1, 1, 1)$.
+    $
+      P(S = 3) = & sum_(i = 0)^3 P(X = i) P(S = 3 given X = i) \
+      = & 1 / 8 times 0 + nck(3, 1) / 2^3 times 1 / 6 + nck(3, 2) / 2^3 times 2 / 36 + nck(3, 3) / 2^3 times 1 / 6^3.
+    $
+  ]
+
+  #problem[
+    And, get $P(X = 1 given S = 3)$.
+
+    #solution[
+      $
+        P(X = 1 given S = 3) = & P(S = 3 inter X = 1) / P(S = 3) \
+                             = & (P(S = 3 given X = 1) P(X = 1)) / P(S = 3) \
+                             = & (3 / 8 times 1 / 6) / P(S = 3).
+      $
+    ]
+  ]
+]
+
+#theorem(title: [Bayes' Formula])[
+  $
+    P(B given A) = & P(A inter B) / P(A) \
+                 = & (P(A given B) P(B)) / P(A) \
+                 = & (P(A given B) P(B)) / (P(A given B) P(B) + P(A given B^c) P(B^c))
+  $
+]
+
+#problem[
+  A rare disease affecting $1 / 10^6$ of the population.
+  The test for it has
+  - $1 / 10^4$ chance of false positive;
+  - $1 / 10^5$ chance of false negative.
+
+  You tested positive, but what is the chance that you actually have the disease?
+
+  #solution[
+    Let
+    $
+      D = & { "have disease" } \
+      T = & { "tested positive" }.
+    $
+    We want $P(D given T)$.
+    $
+                P(D) = & 1 / 10^6 \
+      P(T given D^c) = & 1 / 10^4 \
+      P(T^c given D) = & 1 / 10^5 \
+        P(T given D) = & 1 - P(T^c given D) \
+        P(D given T) = & (P(T given D) P(D)) / P(T) \
+                     = & (P(T given D) P(D)) / (P(T given D) P(D) + P(T given D^c) P(D^c)).
+    $
+  ]
 ]
 
