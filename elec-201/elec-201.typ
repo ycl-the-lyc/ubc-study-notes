@@ -41,8 +41,9 @@
   $
 
 / KVL: $
-    sum_"loop" v = 0.
+    sum_"loop" v = 0
   $
+  where loop can follow wires or not.
 / KCL: $
     sum_"Gauß" i_"in" = sum_"Gauß" i_"out".
   $
@@ -171,4 +172,18 @@ Basically a combination of KVL, KCL and nodal analysis.
 + Label the true nodes; do KCL at each.
 + Label the currents in V branches; do KVL with each.
 + Locate the controling variables.
+
+V branches can be combined with paralell branches to be a super-node.
+Choosing either end of a V branch makes its voltage drop known.
+
+== Power and Relative Polarity
+Current from higher voltage to lower voltage is absorbing power.
+Otherwise, it is delivering power.
+
+#definition(title: [Bipolar Junction Transistor])[
+  A NPN or PNP transistor that amplifies current.
+  It has a controlling _base,_ an input _collector,_ and an output _emitter._
+
+  The PNP transistor has current direction in each port inverted (to its name).
+]
 
