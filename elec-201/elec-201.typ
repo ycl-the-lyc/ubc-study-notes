@@ -187,3 +187,30 @@ Otherwise, it is delivering power.
   The PNP transistor has current direction in each port inverted (to its name).
 ]
 
+== Thevenin and Norton Equivalents
+#definition(title: [Linear Circuit])[
+  A circuit whose voltages and currents are linear combinations of all independent sources.
+]
+
+#definition(title: [Port])[
+  Two nodes make one port.
+  Given $n$ nodes, there would be
+  $
+    nck(n, 2) = n! / (2 (n - 2)!)
+  $
+  ports.
+]
+
+#definition[
+  / Thevenin Equivalent: A voltage source and a resistor in series.
+  / Norton Equivalent: A current source and a resistor in parallel.
+]
+
+To get a Thevenin Equivalent of a circuit:
++ Choose a port.
++ Measure the voltage across the port to get $V_"th"$.
++ - Short-circuit the port, measure the current to compute $R_"th"$.
+  - In case shorting it is undesirable, add an external resistance $R_x$ to the port and use voltage divider for $R_"th"$.
+
+In computation, take the limit of $R_x -> 0$ and $R_x -> oo$ to solve for $I_"sc", V_"th"$ respectively.
+
