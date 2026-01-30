@@ -368,3 +368,61 @@ This fact can disect complicated probability into simpler probabilities for indi
   ]
 ]
 
+#important-box[
+  Given a condition, the sum of probabilities of an event and its complement is $1$.
+]
+
+#problem[
+  One has two children.
+  Get
+  $
+    P("two daughters" given "at least one child is a daughter born on Sunday").
+  $
+
+  #solution[
+    The chances of sex and weekday of birth are independent among children, and are uniformly distributed.
+    Let
+    $
+      A = & "two daughters" \
+      D = & "at least one is a daughter born on Sunday".
+    $
+    Use the total probability formula in different forms,
+    $
+      P(A given D) = & P(A inter D) / P(D) \
+              P(D) = & 1 - P(D^c) \
+                   = & 1 - (1 - 1 / 2 times 1 / 7)^2 \
+                   = & 27 / 196 \
+      P(A inter D) = & P(A) - P(A inter D^c) \
+                   = & (1 / 2)^2 - (1 / 2 times 6 / 7)^2 \
+                   = & 13 / 196 \
+      P(A given D) = & 13 / 27.
+    $
+  ]
+]
+
+== Independence
+#definition(title: [Independence])[
+  Given events $A, B$, they are independent iff
+  $
+    P(A inter B) = & P(A) P(B).
+  $
+]
+
+Hence, if $A, B$ are independent and $P(B) eq.not 0$,
+$
+  P(A given B) = & P(A inter B) / P(B) \
+               = & (P(A) P(B)) / P(B) \
+               = & P(A).
+$
+
+#theorem[
+  If $A, B$ are independent, then so are
+  - $A, B^c$,
+  - $A^c, B$,
+  - $A^c, B^c$.
+]
+
+#theorem[
+  Any event is independent from $Omega$ and $emptyset$.
+]
+
