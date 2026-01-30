@@ -7,7 +7,7 @@
 #set math.vec(delim: "[")
 #set math.mat(delim: "[")
 
-#let oL = math.op[L]
+#let ll = math.op[L]
 
 = Differential Equations
 #definition(title: [Differential Equation])[
@@ -45,14 +45,14 @@ Then, integrating both sides gives us a relationship between $x$ and $y$.
 == Integrating Factor Method
 With a linear first-order equation, we can forcibly express it by only $x$.
 
-Let $oL$ be an operator such that
+Let $ll$ be an operator such that
 $
-  oL y & = (dv(, x) + p(x)) y \
+  ll y & = (dv(, x) + p(x)) y \
        & = dv(y, x) + p(x) y \
        & = g(x).
 $
 So long as $p(x), g(x)$ are continuous, a solution exists.
-And, if $oL y = 0$, we say the equation is homogeneous.
+And, if $ll y = 0$, we say the equation is homogeneous.
 
 Let $F(x)$ be the _integrating factor_ such that
 $
@@ -64,7 +64,7 @@ $
   F(x) & = e^(integral p(x) dd(x)).
 $
 
-Multiply $oL y$ by $F(x)$,
+Multiply $ll y$ by $F(x)$,
 $
   e^(integral p(x) dd(x)) dv(y, x) + e^(integral p(x) dd(x)) p(x) y & = e^(integral p(x) dd(x)) g(x)
 $
@@ -79,7 +79,7 @@ $
   Solve
   $
     cases(
-      oL y = y' + y = x,
+      ll y = y' + y = x,
       y(0) = 1
     )
   $
@@ -121,7 +121,7 @@ $
 #problem[
   Solve
   $
-    oL y & = y' + y = sin(x).
+    ll y & = y' + y = sin(x).
   $
 
   #solution[
@@ -132,7 +132,7 @@ $
 
     Similar to the previous problem,
     $
-          F(x) & = e^x oL y \
+          F(x) & = e^x ll y \
                & = [e^x y]' \
                & = e^x sin(x) \
       [e^x y]' & = Im e^((1 + i)x).
@@ -167,14 +167,14 @@ For a homogeneous linear equatoion, we can guess a particular solution, $y_p$.
 The guesses are linear combinations of all possible derivatives of $g(x)$.
 
 The particular solution still carries undetermined coefficients.
-Assume this $y_p$ to transform $oL y$.
+Assume this $y_p$ to transform $ll y$.
 
 = Higher Order ODEs
 
 == Linear Second-order ODEs
-Redefine the operator $oL$:
+Redefine the operator $ll$:
 $
-  oL y & := y'' + p(x) y' + q(x) y = g(x).
+  ll y & := y'' + p(x) y' + q(x) y = g(x).
 $
 If $g(x) = 0$, we say the equation is homogeneous.
 
@@ -183,12 +183,12 @@ Such equations are common in superposition of waves and such.
 == Constant Coefficient Equations
 If $g(x) = 0$ and the coefficients are constant, like
 $
-  oL y = a y'' + b y' + c y = 0,
+  ll y = a y'' + b y' + c y = 0,
 $
 then,
 $
      y & = e^(r x) \
-  oL y & = (a r^2 + b r + c) e^(r x) = 0.
+  ll y & = (a r^2 + b r + c) e^(r x) = 0.
 $
 
 Since $e^(r x) eq.not 0$, solving the equation is the same as solving the contained quadratic equation.
@@ -219,8 +219,8 @@ $
 == Initial Value Problem
 With similar setup to the previous problem, but the coefficients may not be constants.
 
-Given $oL y = 0$ and initial conditions $y(x_0) = y_0, y'(x_0) = v_0$, let $y_1(x), y_2(x)$ be two solutions to $oL y = 0$.
-Since $oL$ is a linear operation, its solution is also linear.
+Given $ll y = 0$ and initial conditions $y(x_0) = y_0, y'(x_0) = v_0$, let $y_1(x), y_2(x)$ be two solutions to $ll y = 0$.
+Since $ll$ is a linear operation, its solution is also linear.
 $
      y(x) & = C_1 y_1(x) + C_2 y_2(x) \
    y(x_0) & = C_1 y_1(x_0) + C_2 y_2(x_0) \
@@ -243,7 +243,7 @@ For it to be solved as having constant coefficients, $det(A) eq.not 0$, i.e. $A^
 ]
 
 #definition(title: [Fundamental Set of Solutions])[
-  Given $oL y = y'' + p(x) y' + q(x) y = 0$, the pair ${y_1(x), y_2(x)}$ is a set of fundamental solutions on an interval $I$, provided that $W(Y_1, y_2)(x_0)$ where $x_0 in I$.
+  Given $ll y = y'' + p(x) y' + q(x) y = 0$, the pair ${y_1(x), y_2(x)}$ is a set of fundamental solutions on an interval $I$, provided that $W(Y_1, y_2)(x_0)$ where $x_0 in I$.
 ]
 
 So, an initial value problem has solution if $W(y_1, y_2)(x_0) eq.not 0$.
@@ -351,7 +351,7 @@ There is still no external forcing.
 == Inhomogeneous Second-order Equations
 Define
 $
-  oL y & = y'' + p(x) y' + q(x) y = g(x)
+  ll y & = y'' + p(x) y' + q(x) y = g(x)
 $
 where $g(x) eq.not 0$.
 
@@ -359,7 +359,7 @@ It has the general solution of
 $
   y(x) & = y_P (x) + y_H (x)
 $
-where $oL y_P (x) = g(x), oL y_H (x) = 0$.
+where $ll y_P (x) = g(x), ll y_H (x) = 0$.
 
 If $g(x) = 0$, then $y_P$ disappears, then we can solve the constant coefficient cases as usual.
 $
@@ -376,17 +376,17 @@ To find $y_P$, we guess it to be a linear combination of all possible derivative
 
 #note-box[
   This does not work when one or more terms of $y_P$ is a solution to the homogeneous equation.
-  To make it work, we multiply the guess of $y_P$ by one or more $x$, until the highest power of $oL y_P$ matches the ones in $g(x)$.
+  To make it work, we multiply the guess of $y_P$ by one or more $x$, until the highest power of $ll y_P$ matches the ones in $g(x)$.
 ]
 
 #problem[
-  Solve $oL y = y'' + 3y' + 2y = e^x$.
+  Solve $ll y = y'' + 3y' + 2y = e^x$.
 
   #solution[
     Guess $y_P = A e^x$.
     Solve for $y_H$ (omitted).
     $
-       oL y_P & = A e^x + 3 A e^x + 2 A e^x = e^x \
+       ll y_P & = A e^x + 3 A e^x + 2 A e^x = e^x \
       6 A e^x & = e^x \
             A & = 1/6.
     $
@@ -431,7 +431,7 @@ $
 $
 Then,
 $
-  oL x_P = & dot.double(x_P) + beta / m dot(x_P) + k / m x_P = F_0 / m cos(omega t) \
+  ll x_P = & dot.double(x_P) + beta / m dot(x_P) + k / m x_P = F_0 / m cos(omega t) \
          = & -omega^2 [A cos(omega t) + B sin(omega t)] \
            & + k / m [-A omega sin(omega t) + B omega cos(omega t)] \
            & + [A cos(omega t) + B sin(omega t)] \
@@ -453,7 +453,7 @@ where $phi = tan^-1 (((omega beta) / m) / (omega_0^2 - omega^2))$.
 == Cauchy-Euler Equation
 Define
 $
-  oL y = & a x^2 y'' + b x y' + c y = 0
+  ll y = & a x^2 y'' + b x y' + c y = 0
 $
 where $a, b, c$ are constants.
 
@@ -474,9 +474,9 @@ $
   x^2 y'' = & r (r - 1) x^r.
 $
 
-Apply $oL$ on this guess: for all $x$,
+Apply $ll$ on this guess: for all $x$,
 $
-               oL x^r = & [a r (r - 1) + b r + c] x^r \
+               ll x^r = & [a r (r - 1) + b r + c] x^r \
                         & = 0 \
   a r^2 + (b - a) r + c & = 0.
 $
@@ -531,10 +531,10 @@ $
    y'_2 (x) = & u(x) y'_1 (x) + u' (x) + y_1 (x) \
   y''_2 (x) = & u(x) y''_1 (x) + 2 u' (x) y'_1 (x) + u'' (x) + y_1 (x).
 $
-Since we know $oL y_1 = 0$, we can strip it from the expression of $oL y_2$:
+Since we know $ll y_1 = 0$, we can strip it from the expression of $ll y_2$:
 $
-  oL y_2 = & y''_2 + p(x) y'_2 + q(x) y_2 = g(x) \
-         = & underbrace(u [y''_1 + p(x) y'_1 + q(x) y_1], oL y_1 = 0) + [u'' y_1 + (2 u' y_1 + p y_1 u')] \
+  ll y_2 = & y''_2 + p(x) y'_2 + q(x) y_2 = g(x) \
+         = & underbrace(u [y''_1 + p(x) y'_1 + q(x) y_1], ll y_1 = 0) + [u'' y_1 + (2 u' y_1 + p y_1 u')] \
          = & u'' y_1 + (2 u' y_1 + p y_1 u').
 $
 Let $W = u', W'' = u''$,
@@ -557,13 +557,13 @@ $
 #problem[
   Solve
   $
-    oL y = & x^2 y'' + x y' - 9 y = 0.
+    ll y = & x^2 y'' + x y' - 9 y = 0.
   $
 
   #solution[
     Let $y = x^r$.
     $
-                   oL x^r = & [a r (r - 1) + b r + c] x^r \
+                   ll x^r = & [a r (r - 1) + b r + c] x^r \
                             & = 0 \
       a r^2 + (b - a) r + c & = 0
     $
@@ -581,7 +581,7 @@ $
 #problem[
   Solve
   $
-    oL y = & x^2 y'' + x y' + 9 y = 0.
+    ll y = & x^2 y'' + x y' + 9 y = 0.
   $
 
   #solution[
@@ -596,7 +596,7 @@ $
 #problem[
   Solve
   $
-    oL y = & x^2 y'' - x y' + y = 0.
+    ll y = & x^2 y'' - x y' + y = 0.
   $
 
   #solution[
@@ -606,4 +606,80 @@ $
     $
   ]
 ]
+
+= Laplace Transform
+This is a transformation useful in _linear systems _only (for now).
+The reasons are that it
++ works for discountinuous and impulsive forcing;
++ easier than undetermined coefficient method;
+
+It looks like
+$
+               ll y = & g(t) \
+          "something" & "transforms" \
+  D(s) [Y(s) + I C] = & G(s) \
+               Y(s) = & 1 / D(s) [G(s) - I C] \
+          "something" & "transforms" \
+               y(t) = & ...
+$
+
+#definition(title: [Laplace Transform])[
+  Given a (at least piecewise) continuous function $f(t)$ defined on $[0, oo)$.
+  The Laplace Transform is, $F(s)$, is then
+  $
+    F(s) = llt (f(t)) (s) = & integral_(0)^(oo) e^(-s t) f(t) dd(t)
+  $
+  where $s > 0 "and may be complex"$.
+
+  It is a linear operation.
+]
+
+For transformation conclusions, a table of Laplace Transforms is given for this course.
+Most importantly,
+$
+  llt (dv(, t, n) f(t)) = & s^n F(s) - f^(n - 1) (0) - s f^(n - 2) (0) - ... - s^(n - 1) f(0)
+$
+and
+$
+  llt (e^(i a t)) = & (s + i a) / (s^2 + a^2) \
+   llt (sin(a t)) = & a / (s^2 + a^2) quad s > 0 \
+   llt (cos(a t)) = & s / (s^2 + a^2) quad s > abs(a).
+$
+which can all be proven by induction.
+
+== Forced Simple Harmonic Motion
+#problem[
+  Solve
+  $
+    dot.double(x) + omega_0^2 x = & F_0 / m cos(omega t) \
+              x(0) = dot(x) (0) = & 0
+  $
+  where $omega eq.not omega_0 = sqrt(k / m)$.
+
+  #solution[
+    $
+               llt (dot.double(x)) + omega_0^2 llt (x) = & F_0 / m llt (cos(omega t)) \
+      s^2 XX(s) - dot(x)(0) - s x(0) + omega_0^2 XX(s) = & F_0 / m s / (s^2 + omega^2) \
+                               (s^2 + omega_0^2) XX(s) = & F_0 / m s / (s^2 + omega^2) \
+                                                 XX(s) = & F_0 / m s / ((s^2 + omega^2) (s^2 + omega_0^2)).
+    $
+    Let
+    $
+      A / (s^2 + omega^2) + B / (s^2 + omega_0^2) = & 1 / ((s^2 + omega^2) (s^2 + omega_0^2)) \
+          A (s^2 + omega^2) + B (s^2 + omega_0^2) = & 1.
+    $
+    Let $s = i omega$, $1 = B (omega_0^2 - omega^2)$, $B = 1 / (omega_0^2 - omega^0)$.
+    Let $s = i omega_0$, $1 = A (-omega_0^2 + omega^2)$, $A = -1 / (omega_0^2 - omega^0)$.
+    $
+      XX(s) = & F_0 / (m (omega_0^2 - omega^2)) [s / (s^2 + omega^2) - s / (s^2 + omega^2)].
+    $
+
+    Notice that some terms are result of Laplace Transforms, we linearly inverse them:
+    $
+      x(t) = & F_0 / (m (omega_0^2 - omega^2)) [cos(omega t) - cos(omega_0 t)].
+    $
+  ]
+]
+
+== Partial Fraction Tricks
 
