@@ -176,6 +176,10 @@ Basically a combination of KVL, KCL and nodal analysis.
 V branches can be combined with paralell branches to be a super-node.
 Choosing either end of a V branch makes its voltage drop known.
 
+#note-box[
+  Learn about Y-Δ transform, so you don't have to do this.
+]
+
 == Power and Relative Polarity
 Current from higher voltage to lower voltage is absorbing power.
 Otherwise, it is delivering power.
