@@ -343,7 +343,7 @@ This fact can disect complicated probability into simpler probabilities for indi
 ]
 
 #problem[
-  A rare disease affecting $1 / 10^6$ of the population.
+  A rare disease affects $1 / 10^6$ of the population.
   The test for it has
   - $1 / 10^4$ chance of false positive;
   - $1 / 10^5$ chance of false negative.
@@ -373,20 +373,21 @@ This fact can disect complicated probability into simpler probabilities for indi
 ]
 
 #problem[
-  One has two children.
+  Someone has two children.
   Get
   $
     P("two daughters" given "at least one child is a daughter born on Sunday").
   $
 
   #solution[
-    The chances of sex and weekday of birth are independent among children, and are uniformly distributed.
+    The chances of sex and weekday of birth are independent, and are uniformly distributed.
     Let
     $
       A = & "two daughters" \
       D = & "at least one is a daughter born on Sunday".
     $
-    Use the total probability formula in different forms,
+    $P(D)$ is not obbvious, but $P(A), P(D^c)$ are easy to get.
+    Use the total probability formula:
     $
       P(A given D) = & P(A inter D) / P(D) \
               P(D) = & 1 - P(D^c) \
@@ -423,6 +424,43 @@ $
 ]
 
 #theorem[
-  Any event is independent from $Omega$ and $emptyset$.
+  Any event is independent to $Omega$ or $emptyset$.
+]
+
+#theorem[
+  If $A, B$ are disjoint, $A, B$ are independent iff $P(A) = 0 or P(B) = 0$.
+
+  #proof[
+    Given that $A, B$ are disjoint.
+    $
+      P(A inter B) = & 0.
+    $
+
+    - Assume that they are independent.
+      $
+              P(A) P(B) = P(inter B) = & 0 \
+        A, B "are independent" implies & P(A) = 0 or P(B) = 0.
+      $
+    - Assume that $P(A) = 0 or P(B) = 0$.
+      $
+                     P(A) P(B) = 0 = & P(A inter B) \
+        P(A) = 0 or P(B) = 0 implies & A, B "are independent".
+      $
+  ]
+]
+
+#theorem[
+  Given events $A, B$ and that $A subset.eq B$.
+  $A, B$ are independent iff $P(A) in {0, 1} or P(B) in {0, 1}$.
+]
+
+#theorem[
+  Given a finite $Omega$ are $P$ that is uniform over $Omega$.
+  $A, B subset.eq Omega$ are independent iff
+  $
+    abs(A inter B) / abs(Omega) = & abs(A) / abs(Omega) abs(B) / abs(Omega).
+  $
+
+  See what probabilities the terms correspond to for proof.
 ]
 
