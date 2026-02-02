@@ -658,10 +658,10 @@ which can all be proven by induction.
 
   #solution[
     $
-               llt (dot.double(x)) + omega_0^2 llt (x) = & F_0 / m llt (cos(omega t)) \
-      s^2 XX(s) - dot(x)(0) - s x(0) + omega_0^2 XX(s) = & F_0 / m s / (s^2 + omega^2) \
-                               (s^2 + omega_0^2) XX(s) = & F_0 / m s / (s^2 + omega^2) \
-                                                 XX(s) = & F_0 / m s / ((s^2 + omega^2) (s^2 + omega_0^2)).
+             llt (dot.double(x)) + omega_0^2 llt (x) = & F_0 / m llt (cos(omega t)) \
+      s^2 X(s) - dot(x)(0) - s x(0) + omega_0^2 X(s) = & F_0 / m s / (s^2 + omega^2) \
+                              (s^2 + omega_0^2) X(s) = & F_0 / m s / (s^2 + omega^2) \
+                                                X(s) = & F_0 / m s / ((s^2 + omega^2) (s^2 + omega_0^2)).
     $
     Let
     $
@@ -671,7 +671,7 @@ which can all be proven by induction.
     Let $s = i omega$, $1 = B (omega_0^2 - omega^2)$, $B = 1 / (omega_0^2 - omega^0)$.
     Let $s = i omega_0$, $1 = A (-omega_0^2 + omega^2)$, $A = -1 / (omega_0^2 - omega^0)$.
     $
-      XX(s) = & F_0 / (m (omega_0^2 - omega^2)) [s / (s^2 + omega^2) - s / (s^2 + omega^2)].
+      X(s) = & F_0 / (m (omega_0^2 - omega^2)) [s / (s^2 + omega^2) - s / (s^2 + omega^2)].
     $
 
     Notice that some terms are result of Laplace Transforms, we linearly inverse them:
@@ -681,5 +681,70 @@ which can all be proven by induction.
   ]
 ]
 
+The linearity of Laplace Transform makes it applicable to compleicated differential equations.
+
+#problem[
+  Solve
+  $
+    y'' + 4y' + 5y = & t e^(-t) - 3e^(-t) + 4e^(-2t) \
+      y(0) = y'(0) = & 0.
+  $
+
+  #solution[
+    Apply Laplace Transform to boths sides:
+    $
+      [s^2 Y(s) - s y(0) - y(0)'] + 4 [s Y(s) - y(0)] + 5 Y(s) = & 1 / (s + 1)^2 - 3 / (s + 1) - 4 / (s + 2) \
+      (s^2 + 4s + 5) Y(s) = & s^2 / ((s + 1)^2 + (s + 2)) \
+      Y(s) = & s^2 / ((s^2 + 4s + 5) (s + 1)^2 + (s + 2)) \
+      = & (A s + B) / (s^2 + 4s + 5) + C / (s + 1)^2 + E / (s + 1) + F / (s + 2).
+    $
+
+    But how do we easily solve this gigantic partial fraction?
+    #align(right)[cont.]
+  ]
+]
+
 == Partial Fraction Tricks
+Given a fraction of $s$:
+$
+  Y(s) = & N(s) / D(s).
+$
+
+=== Contribution of an Unrepeated Factor
+When there is a _unrepeated_ $(s - a)$ factor in the denominator, we can conclude that $D(a) = & 0$, hence
+$
+                       Y(s) = & A / (s - a) + "Rest" \
+               (s - a) Y(s) = & ((s - a) N(s)) / (D(s) - D(a)) \
+                            = & A + (s - a) "Rest" \
+  lim_(s -> a) (s - a) Y(s) = & lim_(s -> a) (s - a) / (D(s) - D(a)) N(s) \
+                            = & A \
+             N(a) / (D'(a)) = & A.
+$
+
+=== Contribution of a Repeated Factor
+When there is a _repeated_ $(s - a)$ factor of $m$ times in the denominator, we can factor each of it out:
+$
+  Y(s) = & A_m / (s - a)^m + A_(m - 1) / (s - a)^(m - 1) + A_(m - 2) / (s - a)^(m - 2) + ... + A_1 / (s - a) + "Rest".
+$
+Let $Q(s) = (s - a)^m Y(s)$.
+$
+  Q(s) = & A_m + A_(m - 1) (s - a) + A_(m - 2) (s - a)^2 + ... + A_1 (s - a)^(m - 1) + (s - a)^m "Rest" \
+  Q(a) =& A_m \
+  Q'(a) =& A_(m - 1)
+  Q''(a) =& 2 A_(m - 2)
+  Q^(m - 1)(a) =& (m - 1)! A_1.
+$
+
+=== Contribution of a Complex Conjugate Pair
+When there is a complex conjugate pair, $(s - a) (s - conj(a))$ in the denominator, let $a = alpha + i beta, b = alpha - i beta$.
+$
+  (s - a) (s - conj(a)) = & s^2 - 2 alpha s + alpha^2 + beta^2 \
+                        = & (s - alpha)^2 + beta^2.
+$
+The complex conjugate pair is likely a result of a quadratic expression, force it to zero to solve for $alpha, beta$.
+
+#solution[
+  #align(right)[cont.]
+  // TODO
+]
 
