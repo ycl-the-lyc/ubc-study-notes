@@ -50,11 +50,16 @@
 #let kern = math.cal[N]
 #let vn(body) = $norm(vb(body))$
 
+#let Bern = math.op[Bern]
+#let Bin = math.op[Bin]
+#let Geom = math.op[Geom]
+
 #let npk(..args) = {
   let n = args.at(0, default: $n$)
   let k = args.at(1, default: $k$)
   $(#n)_#k$
 }
+
 #let nck(..args) = {
   let n = args.at(0, default: $n$)
   let k = args.at(1, default: $k$)
