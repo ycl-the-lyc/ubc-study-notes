@@ -218,3 +218,46 @@ To get a Thevenin Equivalent of a circuit:
 
 In computation, take the limit of $R_x -> 0$ and $R_x -> oo$ to solve for $I_"sc", V_"th"$ respectively.
 
+= Capacitor and Inductor
+#definition(title: [Steady State])[
+  A circuit is in a steady state if
+  - all independent sources are in DC;
+  - all switches have not operated for a _long time_.
+
+  We call such state "DC steady state" (DCSS).
+]
+
+== Capacitor
+$
+  i(t) = & C dv(v, t) \
+  E(t) = & C integral_0^t v(t) dd(v) \
+       = & 1 / 2 C v^2 quad ("DCSS")
+$
+
+#note-box[
+  Capacitors maintain voltage, but not current.
+  $
+         v(t^-) = & v(t^+) \
+    i(t^-) eq.not & i(t^+).
+  $
+]
+
+In DCSS, a capacitor is like an open circuit.
+
+== Inductor
+$
+  v(t) = & L dv(i, t) \
+  E(t) = & L integral_(0)^(t) i(t) dd(i) \
+       = & 1 / 2 L i^2 quad ("DCSS")
+$
+
+#note-box[
+  Inductors maintain current, but not voltage.
+  $
+         i(t^-) = & i(t^+) \
+    v(t^-) eq.not & v(t^+).
+  $
+]
+
+In DCSS, an inductor is like a short circuit.
+
