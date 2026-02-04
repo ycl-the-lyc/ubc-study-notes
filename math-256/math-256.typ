@@ -699,7 +699,8 @@ The linearity of Laplace Transform makes it applicable to compleicated different
       = & (A s + B) / (s^2 + 4s + 5) + C / (s + 1)^2 + E / (s + 1) + F / (s + 2).
     $
 
-    But how do we easily solve this gigantic partial fraction?
+    How do we solve this gigantic partial fraction?
+    We can certainly solve the system of five equations, but we will see the other method below.
     #align(right)[cont.]
   ]
 ]
@@ -745,6 +746,69 @@ The complex conjugate pair is likely a result of a quadratic expression, force i
 
 #solution[
   #align(right)[cont.]
+  $
+    s^2 + 4s + 5 = & s^2 + 4s + 4 + 1 \
+                 = & (s + 2)^2 + 1 \
+            Y(s) = & (A s + B) / ((s + alpha)^2 + beta^2) + "Rest".
+  $
+  Let $R(s) = (s - a) (s - conj(a)) Y(s)$.
+  $
+        R(s) = & A s + B + ((s - a) (s - conj(a))) "Rest" \
+        R(a) = & A a + B \
+             = & A (alpha + i beta) + B \
+             = & (A alpha + B) + A beta i \
+    Re(R(a)) = & A alpha + B \
+    Im(R(a)) = & A beta i.
+  $
   // TODO
 ]
+
+== Discountinuous and Impossible Loads
+#definition(title: [Heaviside Step Function])[
+  $H(t)$, or written $u(t)$, is a fuction of that
+  $
+    H(t) = & cases(
+               0 quad & t < c,
+               1 & t > c
+             )
+  $
+  where $c$ is a constant.
+]
+
+$
+  llt (u(t - a)) = & integral_(0)^(oo) e^(-s t) u(t - a) dd(t) \
+                 = & integral_(a)^(oo) e^(-s t) dd(t) \
+                 = & e^(-a s) / s.
+$
+Similarly, let $tau = t - a$,
+$
+  llt (u(t - a) f(t - a)) = & integral_(a)^(oo) e^(-s t) f(t - a) dd(t) \
+                          = & integral_(0)^(oo) e^(-s (a + tau)) f(tau) dd(tau) \
+                          = & e^(-a s) integral_(0)^(oo) e^(-s t) f(tau) dd(tau) \
+                          = & e^(-a s) F(s).
+$
+
+#definition(title: [Dirac Delta Function])[
+  Let
+  $
+    d_k (t) = & cases(
+                  1 / (2k) quad & abs(t) < k,
+                  0 & abs(k) > k
+                ),
+  $
+  the Dirac Delta function is defined by
+  $
+    delta(t) = & lim_(k -> 0) d_k (t).
+  $
+]
+
+$
+  integral_(-oo)^oo delta(t) dd(t) = & lim_(k -> 0) integral_(-k)^(k) 1 / (2k) dd(t) = 1.
+$
+Given a continuous function of $t$, $f(t)$,
+$
+  integral_(-oo)^(oo) delta(t - t_0) f(t) dd(t) = & lim_(k -> 0) integral_(-oo)^(oo) d_k (t - t_0) f(t) dd(t) \
+  // TODO
+                                                = & f(t_0).
+$
 
