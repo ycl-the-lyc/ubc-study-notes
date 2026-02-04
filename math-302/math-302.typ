@@ -11,9 +11,9 @@
   A sample space, $Omega$, is a set of all sample points.
 
   An event is a subset of $Omega$.
-  All possible events is thus conviniently $pws(Omega)$.
+  All possible events is thus conveniently $pws(Omega)$.
 
-  A possibility, $P$, is the relevant proabbility measure on $Omega$ so that for all events $A subset.eq Omega, P(A) = "the probability that event" A "occurs"$.
+  A possibility, $P$, is the relevant probability measure on $Omega$ so that for all events $A subset.eq Omega, P(A) = "the probability that event" A "occurs"$.
 
   A complement of an event, $A$, in $Omega$, is $A^C = Omega - A$.
 ]
@@ -79,8 +79,8 @@ However, if not, we get a commonly used inequality,
 
 == Random Sampling
 #definition[
-  / "Pick": To remove an element from the population, when order matters.
-  / "Choose": To remove an element in the population, when order does not matter.
+  / Pick: To remove an element from the population, when order matters.
+  / Choose: To remove an element in the population, when order does not matter.
 ]
 
 #definition[
@@ -114,7 +114,7 @@ $
 ]
 
 == Decomposing Events
-Based on additivity of probability, if we can decompose an event with large sample space to smaller, disjoint events, such that
+Based on additivity of probability, if we can decompose an event with large sample space into smaller, disjoint events, such that
 $
   abs(A) & = sum_(i = 1)^k A_i.
 $
@@ -153,7 +153,7 @@ $
            Omega & := "all sets of five cards" \
       abs(Omega) & = nck(52, 5).
     $
-    We pick that full house of two 2's and three 3's for no reason.
+    We pick that full house of two 2 and three 3 for no reason.
     $
       abs(A_(2, 3)) & = nck(4, 2) nck(4, 3) \
                P(A) & = npk(13, 2) (nck(4, 2) nck(4, 3)) / nck(52, 5).
@@ -182,7 +182,7 @@ $
   ]
 ]
 
-We decomposed problems of rank, suit and position to smaller problems which are either ordered or unordered.
+We decomposed problems of rank, suit, and position to smaller problems which are either ordered or unordered.
 Commonly, making them unordered problems will be easier.
 
 #important-box[
@@ -243,7 +243,7 @@ $
 $
 
 In times when calculating probability of an event is hard, we can take its complement and the parent probability.
-Finding symmetry can shrink sample space that is significance to us, like the probability of three dice rolls to be the same, is just the probability of two two-rolls.
+Finding symmetry can shrink sample space that is significance to us, like the probability of three dice rolls to be the same, is just the probability of two 2-rolls.
 
 == Random Variables
 #definition(title: [Random Variable])[
@@ -306,7 +306,7 @@ $
   $
 ]
 
-This fact can disect complicated probability into simpler probabilities for individual cases.
+This fact can dissect complicated probability into simpler probabilities for individual cases.
 
 #problem[
   For three coin flips, roll a dice on each head.
@@ -386,7 +386,7 @@ This fact can disect complicated probability into simpler probabilities for indi
       A = & "two daughters" \
       D = & "at least one is a daughter born on Sunday".
     $
-    $P(D)$ is not obbvious, but $P(A), P(D^c)$ are easy to get.
+    $P(D)$ is not obvious, but $P(A), P(D^c)$ are easy to get.
     Use the total probability formula:
     $
       P(A given D) = & P(A inter D) / P(D) \
@@ -461,6 +461,48 @@ $
     abs(A inter B) / abs(Omega) = & abs(A) / abs(Omega) abs(B) / abs(Omega).
   $
 
-  See what probabilities the terms correspond to for proof.
+  See whose probabilities the terms correspond to for proof.
+]
+
+We can extend the independence between two random variables to multiple's.
+
+#theorem[
+  Let $X_1, X_2, ..., X_n$ be discrete random variables defined on the same sample space.
+  They are independent of each other iff
+  $
+    P(X_1 = k_1, X_2 = k_2, ..., X_n = k_n) = product_i P(X_i = k_i)
+  $
+  for all viable $k$ values.
+]
+
+== Bernoulli, Binomial and Geometric Random Variables
+#definition(title: [Bernoulli Random Variable])[
+  $Bern(p)$ is the outcome of an experiment that is either 1 or 0.
+  $
+    P(X~Bern(p) = 1) = & p \
+    P(X~Bern(p) = 0) = & 1 - p.
+  $
+]
+
+#definition(title: [Binomial Random Variable])[
+  $Bin(n, p)$ is the number of 1 in $n$ independent experiments that are either 1 or 0.
+  $
+    P(X~Bin(n, p) = k) = & nck(n, k) p^k (1 - p)^(n - k).
+  $
+]
+
+#definition(title: [Geometric Random Variable])[
+  $Geom(p)$ is the number of trials until the first experiments resulting in 1 in a sequence of experiments that are either 1 or 0.
+  $
+    P(X~Geom(p) = n) = & (1 - p)^(n - 1) p.
+  $
+]
+
+== Probability Density
+#definition(title: [Probability Density Function])[
+  The probability density function, $f(x)$, of random variable $X$ is defined by
+  $
+    P(X <= a) = integral_(-oo)^(a) f(x) dd(x).
+  $
 ]
 
