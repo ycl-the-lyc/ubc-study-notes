@@ -763,16 +763,16 @@ The complex conjugate pair is likely a result of a quadratic expression, force i
   // TODO
 ]
 
-== Discountinuous and Impossible Loads
+== Discontinuous and Impossible Loads
 #definition(title: [Heaviside Step Function])[
-  $H(t)$, or written $u(t)$, is a fuction of that
+  $u(t)$, or written $H(t)$, is a function of that
   $
-    H(t) = & cases(
-               0 quad & t < c,
-               1 & t > c
-             )
+    u(t - a) = & cases(
+                   0 quad & t < a,
+                   1 & t > a
+                 )
   $
-  where $c$ is a constant.
+  where $a$ is a constant.
 ]
 
 $
@@ -780,6 +780,11 @@ $
                  = & integral_(a)^(oo) e^(-s t) dd(t) \
                  = & e^(-a s) / s.
 $
+As expected (integration by parts), $llt (u'(t - a))$ gives one more $s$ and hence
+$
+  llt (u' (t - a)) = & e^(-a s).
+$
+
 Similarly, let $tau = t - a$,
 $
   llt (u(t - a) f(t - a)) = & integral_(a)^(oo) e^(-s t) f(t - a) dd(t) \
@@ -802,13 +807,101 @@ $
   $
 ]
 
+This function, despite having no apparent "area under the curve", is integrated to be one.
 $
   integral_(-oo)^oo delta(t) dd(t) = & lim_(k -> 0) integral_(-k)^(k) 1 / (2k) dd(t) = 1.
 $
-Given a continuous function of $t$, $f(t)$,
+Given a continuous function $f(t)$,
 $
   integral_(-oo)^(oo) delta(t - t_0) f(t) dd(t) = & lim_(k -> 0) integral_(-oo)^(oo) d_k (t - t_0) f(t) dd(t) \
-  // TODO
+                                                = & lim_(k -> 0) integral_(t_0 - k)^(t_0 + k) f(t) / (2k) dd(t) \
+                                                = & lim_(k -> 0) f(t) integral_(t_0 - k)^(t_0 + k) dd(t) / (2k) \
                                                 = & f(t_0).
 $
+
+== Convolution Theorem
+#definition(title: [Laplace Convolution])[
+  Let $f, g$ be functions defined on $[0, oo)$, then
+  $
+    (f convolve g)(t) := & integral_(0)^(t) f(tau) g(t - tau) dd(tau).
+  $
+
+  This operation is linear, hence
+  $
+               (f convolve g) (t) = & (g convolve f) (t) \
+    h convolve (alpha f + beta g) = & alpha h convolve f + beta g convolve g.
+  $
+]
+
+#theorem(title: [Convolution Theorem])[
+  If $H(s) = F(s) G(s)$, then $h = f convolve g$, i.e. $llt (f convolve g) (s) = F(s) G(s)$.
+]
+
+#problem[
+  Transform
+  $
+    g(t) = & cases(
+               2t quad & 0 < t < 1,
+               2 & 1 < t
+             ).
+  $
+
+  #solution[
+    Rewrite $g(t)$ so it is transformable.
+    $
+      g(t) = & 2t - 2t u(t - 1) + 2 u(t - 1) \
+           = & 2t - 2 (t - 1) u(t - 1) - 2 u(t - 1) + 2 u(t - 1) \
+           = & 2t - 2(t - 1) u(t - 1)
+    $
+    where $u$ is a Heaviside function.
+    $
+      llt(g(t))(s) = G(s) = & 2 / s^2 - 2 / s^2 e^(-s) \
+                            & = 2 / s^2 (1 - e^(-s))
+    $
+  ]
+]
+
+#problem[
+  $
+    y'' + y = g(x) = & 2t - 2u(t - 1) (t - 1) \
+          y(0) = 0 = & y'(0).
+  $
+
+  #solution[
+    $
+      llt (y'') + llt (y) = G(s) = & s^2 Y(s) - y'(0) - s y(0) + Y(s) \
+                                 = & 2 / s^2 (1 - e^(-s)).
+    $
+    Notice that how this is equivalent to the convolution method.
+    $
+      (s^2 + 1) Y(s) = & G(s) \
+                Y(s) = & 1 / (s^2 + 1) G(s) \
+                     = & 2 / (s^2 (s^2 + 1)) (1 - e^(-s)).
+    $
+
+    #solution(title: [Partial Fraction Expansion])[
+      $
+        2 / (s^2 (s^2 + 1)) = & 1 / s^2 - 1 / (s^2 + 1) \
+                       Y(s) = & 2 (1 / s^2 - 1 / (s^2 + 1)) - 2 e^(-s) (1 / s^2 - 1 / (s^2 + 1)) \
+                       y(s) = & 2 (t - sin(t)) - 2 u(t - 1) ((t - 1) - sin(t - 1)).
+      $
+    ]
+
+    #solution(title: [Convolution Theorem])[
+      $
+        y(t) = & integral_(0)^(t) g(t) sin(t - tau) dd(tau) \
+        = & integral_(0)^(t) [2 tau - 2 (tau - 1) u(tau - 1)] sin(t - tau) dd(tau) \
+        = & integral_(0)^(t) underbrace(2 tau sin(t - tau), I_1) - underbrace(2 (tau - 1) u(tau - 1) sin(t - tau), I_2) dd(tau) \
+        I_1 = & 2 integral_(0)^(t) tau sin(t - tau) dd(tau) \
+        = & 2 [evaluated(tau cos(t - tau))_0^t - integral_(0)^(t) cos(t - tau) dd(tau)] \
+        = & 2 [(t - 0) + evaluated(sin(t - tau))_0^t] \
+        = & 2 (t - sin(t)).
+        I_2 = & 2 integral_(0)^(t) (tau - 1) u(tau - 1) sin(t - tau) dd(tau) \
+        = & ... \
+        = & 2 [(t - 1) - sin(t - 1)].
+      $
+    ]
+  ]
+
+]
 
