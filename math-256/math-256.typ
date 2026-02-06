@@ -731,8 +731,8 @@ Let $Q(s) = (s - a)^m Y(s)$.
 $
   Q(s) = & A_m + A_(m - 1) (s - a) + A_(m - 2) (s - a)^2 + ... + A_1 (s - a)^(m - 1) + (s - a)^m "Rest" \
   Q(a) =& A_m \
-  Q'(a) =& A_(m - 1)
-  Q''(a) =& 2 A_(m - 2)
+  Q'(a) =& A_(m - 1) \
+  Q''(a) =& 2 A_(m - 2) \
   Q^(m - 1)(a) =& (m - 1)! A_1.
 $
 
@@ -895,7 +895,7 @@ $
         I_1 = & 2 integral_(0)^(t) tau sin(t - tau) dd(tau) \
         = & 2 [evaluated(tau cos(t - tau))_0^t - integral_(0)^(t) cos(t - tau) dd(tau)] \
         = & 2 [(t - 0) + evaluated(sin(t - tau))_0^t] \
-        = & 2 (t - sin(t)).
+        = & 2 (t - sin(t)). \
         I_2 = & 2 integral_(0)^(t) (tau - 1) u(tau - 1) sin(t - tau) dd(tau) \
         = & ... \
         = & 2 [(t - 1) - sin(t - 1)].
