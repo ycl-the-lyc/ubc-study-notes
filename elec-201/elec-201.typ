@@ -171,9 +171,9 @@ Basically a combination of KVL, KCL and nodal analysis.
 + Assume current directions in R and RV branches.
 + Label the true nodes; do KCL at each.
 + Label the currents in V branches; do KVL with each.
-+ Locate the controling variables.
++ Locate the controlling variables.
 
-V branches can be combined with paralell branches to be a super-node.
+V branches can be combined with parallel branches to be a super-node.
 Choosing either end of a V branch makes its voltage drop known.
 
 #note-box[
@@ -185,7 +185,7 @@ Current from higher voltage to lower voltage is absorbing power.
 Otherwise, it is delivering power.
 
 #definition(title: [Bipolar Junction Transistor])[
-  A NPN or PNP transistor that amplifies current.
+  An NPN or PNP transistor that amplifies current.
   It has a controlling _base,_ an input _collector,_ and an output _emitter._
 
   The PNP transistor has current direction in each port inverted (to its name).
@@ -222,10 +222,28 @@ In computation, take the limit of $R_x -> 0$ and $R_x -> oo$ to solve for $I_"sc
 #definition(title: [Steady State])[
   A circuit is in a steady state if
   - all independent sources are in DC;
-  - all switches have not operated for a _long time_.
+  - all switches have not operated for _a long time_.
 
   We call such state "DC steady state" (DCSS).
 ]
+
+Recall from PHYS 158 that the functions of voltage or current in capacitors and inductors are exponential.
+$
+  f(t) = & (f_0 - f_f) e^(-t / tau) + f_f.
+$
+
+We see $5 tau$ as _a long time._
+
+#example[
+  Given
+  $
+    i(t) = 7 e^(-t / 5),
+  $
+  the current has an amplitude of $ampere(7)$ and $tau$ of $second(5)$.
+  When $t >= second(25)$, the current is considered steadily $ampere(0)$.
+]
+
+Using KCL or KVL, we can write a first-order ordinary differential equation about the circuit.
 
 == Capacitor
 $
@@ -260,4 +278,18 @@ $
 ]
 
 In DCSS, an inductor is like a short circuit.
+
+== RC Circuit
+Given a voltage source, a resistor and a capacitor in series, they are an RC circuit.
+$
+  R C dv(v_C, t) + v_C = & v_s \
+                   tau = & R C.
+$
+
+== RL Circuit
+Given a voltage source, a resistor and an inductor in series, they are an RL circuit.
+$
+  L dv(i, t) + R i = & v_s \
+               tau = & L / R.
+$
 

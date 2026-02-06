@@ -12,6 +12,7 @@
 #import "lib/make-math.typ" as mkm
 
 #import "@preview/zero:0.5.0": num, zi
+#let second = zi.second
 #let coulomb = zi.declare("C")
 #let coulombpers = zi.declare($C s^(-1)$)
 #let ampere = zi.declare("A")
