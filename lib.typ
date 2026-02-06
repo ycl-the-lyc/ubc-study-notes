@@ -54,6 +54,7 @@
 #let Bern = math.op[Bern]
 #let Bin = math.op[Bin]
 #let Geom = math.op[Geom]
+#let Pois = math.op[Pois]
 
 #let npk(..args) = {
   let n = args.at(0, default: $n$)
@@ -68,6 +69,8 @@
 }
 
 #let given = math.op($|$)
+
+#let follows = math.class("normal", $~$)
 
 #let llt = $cal(L)$
 

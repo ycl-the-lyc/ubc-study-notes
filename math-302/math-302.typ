@@ -479,22 +479,48 @@ We can extend the independence between two random variables to multiple's.
 #definition(title: [Bernoulli Random Variable])[
   $Bern(p)$ is the outcome of an experiment that is either 1 or 0.
   $
-    P(X~Bern(p) = 1) = & p \
-    P(X~Bern(p) = 0) = & 1 - p.
+    P(X follows Bern(p) = 1) = & p \
+    P(X follows Bern(p) = 0) = & 1 - p.
   $
 ]
 
 #definition(title: [Binomial Random Variable])[
   $Bin(n, p)$ is the number of 1 in $n$ independent experiments that are either 1 or 0.
   $
-    P(X~Bin(n, p) = k) = & nck(n, k) p^k (1 - p)^(n - k).
+    P(X follows Bin(n, p) = k) = & nck(n, k) p^k (1 - p)^(n - k).
   $
 ]
 
 #definition(title: [Geometric Random Variable])[
-  $Geom(p)$ is the number of trials until the first experiments resulting in 1 in a sequence of experiments that are either 1 or 0.
+  $Geom(p)$ is the number of trials until the first experiments resulting in 1 in a sequence of independent experiments that are either 1 or 0.
   $
-    P(X~Geom(p) = n) = & (1 - p)^(n - 1) p.
+    P(X follows Geom(p) = k) = & (1 - p)^(k - 1) p \
+    P(X follows Geom(p) > k) = & (1 - p)^k.
+  $
+]
+
+#problem[
+  Let $X_i follows Geom(p_i)$, solve for $P(X > k)$.
+
+  #solution[
+    $
+      P(X > k) = & product_i^oo P(X_i > k) \
+               = & product_0^oo (1 - p_i)^k \
+               = & [product_0^oo (1 - p_i)]^k.
+    $
+  ]
+]
+
+== Poisson Distribution
+#definition(title: [Poisson Distribution])[
+  $Pois(lambda)$ is the number of 1 in some number of independent experiments that are either 1 or 0.
+  $
+    P(X follows Pois(lambda) = k) = & (e^(-lambda) lambda^k) / k!.
+  $
+
+  Note that for a sample space of $X follows Pois(lambda)$ elements, the number of 1, $Y follows Pois(lambda p)$, and the number of 0, $Z follows Pois(lambda (1 - p))$ are independent.
+  $
+    P(Y = k and Z = j) = & P(Pois(lambda) = k + j) P(Bin(k + j, p) = k).
   $
 ]
 
