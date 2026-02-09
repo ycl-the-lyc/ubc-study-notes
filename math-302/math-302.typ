@@ -524,11 +524,38 @@ We can extend the independence between two random variables to multiple's.
   $
 ]
 
+== Conditional Independence
+#definition(title: [Conditional Independence])[
+  Given events $D$, events $A, B$ are conditionally independent iff
+  $
+    P(A inter B given D) = & P(A given D) P(B given D).
+  $
+]
+
 == Probability Density
-#definition(title: [Probability Density Function])[
+#definition(title: [Probability Density Function (PDF)])[
   The probability density function, $f(x)$, of random variable $X$ is defined by
   $
     P(X <= a) = integral_(-oo)^(a) f(x) dd(x).
   $
+
+  Notably,
+  $
+                   forall x, f(x) >= & 0 \
+    integral_(-oo)^(oo) f(x) dd(x) = & 1.
+  $
 ]
+
+#theorem[
+  Random variable $X$ has a PDF iff
+  $
+    forall B in RR "and" k, P(Unif[-k, k] in B) = 0 and P(X in B) = 0.
+  $
+]
+
+If random variable $X$ has a PDF, then
+- $X$ is continuous;
+- $P(X in B) = integral_B f(x) dd(x)$;
+- $P(X = k) = 0$;
+- $P(X in [a, b]) = integral_(a)^(b) f(x) dd(x)$.
 
