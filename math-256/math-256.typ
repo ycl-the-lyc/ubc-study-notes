@@ -58,7 +58,7 @@ Let $F(x)$ be the _integrating factor_ such that
 $
   F(x) dv(y, x) + F(x) p(x) y & = dv(, x) [F(x) y].
 $
-From the equatoion above we can see that, if we differentiate $F(x)$, we get itself multiplied by $p(x)$, looks much like our guess of exponential before.
+From the equation above we can see that, if we differentiate $F(x)$, we get itself multiplied by $p(x)$, looks much like our guess of exponential before.
 Hence,
 $
   F(x) & = e^(integral p(x) dd(x)).
@@ -160,7 +160,7 @@ $
 ]
 
 == Undetermined Coefficient Method
-For a homogeneous linear equatoion, we can guess a particular solution, $y_p$.
+For a homogeneous linear equation, we can guess a particular solution, $y_p$.
 - If $g(x) = x^n$, then $y_p = a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0$.
 - If $g(x) = e^(a x)$, then $y_p = A e^(a x)$.
 - If $g(x) = sin(x) "or" cos(x)$, then $y_p = A cos(x) + B sin(x)$.
@@ -465,7 +465,7 @@ $
             = & A x^(-c/b).
 $
 
-For the second-order equatoion, we guess that
+For the second-order equation, we guess that
 $
         y = & x^r \
        y' = & r x^(r - 1) \
@@ -729,11 +729,11 @@ $
 $
 Let $Q(s) = (s - a)^m Y(s)$.
 $
-  Q(s) = & A_m + A_(m - 1) (s - a) + A_(m - 2) (s - a)^2 + ... + A_1 (s - a)^(m - 1) + (s - a)^m "Rest" \
-  Q(a) =& A_m \
-  Q'(a) =& A_(m - 1) \
-  Q''(a) =& 2 A_(m - 2) \
-  Q^(m - 1)(a) =& (m - 1)! A_1.
+          Q(s) = & A_m + A_(m - 1) (s - a) + A_(m - 2) (s - a)^2 + ... + A_1 (s - a)^(m - 1) + (s - a)^m "Rest" \
+          Q(a) = & A_m \
+         Q'(a) = & A_(m - 1) \
+        Q''(a) = & 2 A_(m - 2) \
+  Q^(m - 1)(a) = & (m - 1)! A_1.
 $
 
 === Contribution of a Complex Conjugate Pair
@@ -903,5 +903,99 @@ $
     ]
   ]
 
+]
+
+= System of Linear Equations
+A first-order linear system looks like
+$
+  dv(vb(x), t) = & A(t) vb(x) (t) + vb(f) (t).
+$
+
+Any linear $n$th order ODE can be rewritten as a first-order linear system.
+For each derivation of $x$, make a new $x_i$, so that each $x_i$ is at most order one.
+
+Given a linear system, if $vb(x_1) (t), vb(x_2) (t)$ are solutions to the homogeneous equation
+$
+  vb(x)' = & A vb(x),
+$
+then so $vb(x) (t) = alpha vb(x_1) (t) + beta vb(x_2) (t)$.
+
+Note how this is similar to solution to a second-order differential equation being the linear combination of two solutions.
+
+#problem[
+  Find the general solution of
+  $
+    x' = & -3x - 2y \
+    y' = & -2x - 6y.
+  $
+
+  #solution[
+    Let
+    $
+       vb(x) = & vec(x, y) \
+           A = & mat(-3, -2; -2, -6) \
+      vb(x)' = & A vb(x).
+    $
+
+    Similar to how we guessed the solutions of first-order equations, guess
+    $
+                              vb(x) (t) = & e^(r t) vb(v) \
+                             vb(x)' (t) = & e^(r t) r vb(v) = A e^(r t) vb(v) = A vb(x) \
+      e^(r t) r vb(v) - A e^(r t) vb(v) = & vb(0) \
+                        (r I - A) vb(v) = & vb(0).
+    $
+    Looks familiar? $r$ is an eigenvalue for a nontrivial solution.
+    Recall from MATH 152 that we do
+    $
+      det(r I - A) = & 0 \
+                   = & mdet(r + 3, 2; 2, r + 6) \
+               r_1 = & -7 \
+               r_2 = & -2.
+    $
+    Use $r_1 = -7$,
+    $
+      mat(-4, 2; 2, -1) vec(v_1, v_2) = & vec(0, 0) \
+                                  v_1 = & 1 \
+                                  v_2 = & 2.
+    $
+    Use $r_2 = -2$,
+    $
+      mat(1, 2; 2, 4) vec(v_1, v_2) = & vec(0, 9) \
+                                v_1 = & -2 \
+                                v_2 = & 1.
+    $
+
+    The general solution is
+    $
+      vb(x) = & (t) c_1 e^(-7 t) vec(1, 2) + c_2 e^(-2 t) vec(-2, 1) \
+      = & underbrace(mat(e^(-7 t), -2 e^(-2, t); 2 e^(-7 t), e^(-2 t)), #[$phi(t)$ \ the Fundamental Matrix]) vec(c_1, c_2).
+    $
+
+    #problem[
+      Given
+      $
+        vb(x) (0) = & vec(5, 4),
+      $
+      find the particular solution.
+
+      #solution[
+        $
+          vb(x) (t) = & phi(t) vb(c) \
+          vb(x) (0) = & phi(0) vb(c) \
+                    = & mat(1, -2; 2, 1) vec(c_1, c_2) \
+                    = & vec(5, 4) \
+                c_1 = & 13 / 5 \
+                c_2 = & - 6 / 5.
+        $
+
+        #note-box[
+          $
+                vb(c) = & phi(0)^(-1) vb(x) (0) \
+            vb(x) (t) = & underbrace(phi(t) phi(0)^(-1), #[the Flow Matrix]) vb(x) (0).
+          $
+        ]
+      ]
+    ]
+  ]
 ]
 

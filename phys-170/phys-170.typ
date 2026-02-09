@@ -103,34 +103,34 @@ $ where $x, y$ are magnitudes of the force in the $vu(i), vu(j)$ directions.
 
 #grid(
   columns: (25%, 75%),
-  cetz.canvas(
-    length: 40%,
-    {
-      import cetz.draw: *
-
-      set-style(mark: (end: ">", fill: black))
-
-      line((0, 0), (2, 3), name: "f")
-      content("f.mid", (rel: (-0.2, 0.2)), $vb(F)$)
-
-      line((0, 0), (2, 0), name: "fx", stroke: (paint: blue))
-      content("fx.mid", (rel: (0, 0.3)), $vb(F)_x$)
-
-      line((2, 0), (2, 3), name: "fy", stroke: (paint: red))
-      content("fy.mid", (rel: (-0.35, 0)), $vb(F)_y$)
-
-      cetz.angle.angle(
-        (0, 0),
-        "fx.end",
-        "fy.end",
-        radius: 0.5,
-        fill: green.transparentize(80%),
-        mark: none,
-        label: $theta$,
-        label-radius: 65%,
-      )
-    },
-  ),
+  // cetz.canvas(
+  //   length: 40%,
+  //   {
+  //     import cetz.draw: *
+  //
+  //     set-style(mark: (end: ">", fill: black))
+  //
+  //     line((0, 0), (2, 3), name: "f")
+  //     content("f.mid", (rel: (-0.2, 0.2)), $vb(F)$)
+  //
+  //     line((0, 0), (2, 0), name: "fx", stroke: (paint: blue))
+  //     content("fx.mid", (rel: (0, 0.3)), $vb(F)_x$)
+  //
+  //     line((2, 0), (2, 3), name: "fy", stroke: (paint: red))
+  //     content("fy.mid", (rel: (-0.35, 0)), $vb(F)_y$)
+  //
+  //     cetz.angle.angle(
+  //       (0, 0),
+  //       "fx.end",
+  //       "fy.end",
+  //       radius: 0.5,
+  //       fill: green.transparentize(80%),
+  //       mark: none,
+  //       label: $theta$,
+  //       label-radius: 65%,
+  //     )
+  //   },
+  // ),
   align(horizon)[
     Force $vb(F)$ can be represented as a combination of $vb(F)_x$ and $vb(F)_y$
     $ vb(F) = vb(F)_x + vb(F)_y $
