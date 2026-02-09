@@ -51,6 +51,7 @@
 #let kern = math.cal[N]
 #let vn(body) = $norm(vb(body))$
 
+#let Unif = math.op[Unif]
 #let Bern = math.op[Bern]
 #let Bin = math.op[Bin]
 #let Geom = math.op[Geom]
