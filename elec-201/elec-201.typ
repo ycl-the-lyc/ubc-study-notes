@@ -293,3 +293,80 @@ $
                tau = & L / R.
 $
 
+= Amplifiers
+#definition(title: [Signal])[
+  A function of time that carries information.
+
+  An electric signal is a signal of voltage or current.
+  Other signals can be transduced into electric signals.
+]
+
+== Simple Amplifier
+A typical amplifier is a two-port network, with one for input and one for output.
+$
+   p_"in" = & i_"in" v_"in" \
+  p_"out" = & i_"out" v_"out".
+$
+
+#note-box[
+  Ports have a seemingly different idea of series and parallel connection.
+]
+
+The boost ratio of $v, i, p$ are called "gain".
+$
+        A = & "out" / "in" \
+  A^bel() = & lg (A) \
+   A^db() = & 10 lg (A).
+$
+
+Gains can be cascaded multiplicatively.
+When in logarithm (#bel(), #db()) forms, take their sum instead of product.
+
+#figure(
+  caption: [Decibel Ratio Approximations],
+  table(
+    columns: 2,
+    table.header[#db()][Amplification],
+    $3$, $2$,
+    $6$, $4$,
+  ),
+)
+
+When comparing two resistors, we can compute their power gain in Decibel using currents or voltages.
+$
+  A_i = & 20 lg (i_"out" / i_"in") \
+  A_v = & 20 lg (v_"out" / v_"in").
+$
+
+We may see Decibel values representing one quantity by setting a certain input value, usually $1$.
+For instance, #dbmw() is #db() with one milliwatt as the denominator.
+
+== Operational Amplifier
+An operational amplifier has
+- an input port with $v_p$, the non-inverting input terminal;
+- an input port with $v_n$, the inverting input terminal;
+- an output port with $v_o$;
+where the ports are defined with a common reference.
+
+The gain is applied to the difference between $v_p$ and $v_n$: $A (v_p - v_n)$, the open-loop voltage gain.
+
+Given the three wires ($v_p, v_n, "ref"$) defining the two input ports, there is a resistance between every two, so three in total.
+They are equivalent to one resistor between $v_p$ and $v_n$.
+
+#figure(
+  caption: [Equivalent Circuit of an Operational Amplifier],
+  image("assets/op-amp-internal.svg", width: 33%),
+)
+
+$R_"in"$ is made as large as possible, with an ideal one being infinity, such that it does not suck current from source.
+$R_"out"$ is made as small as possible, ideally zero.
+Thus, $A$ will be as large as possible, ideally infinity.
+Additionally, its output voltage is limited by $V_(S+), V_(S-)$, or $V_"cc", - V_"cc"$ since it is the power supply for this operational amplifier.
+Reaching this limit is called "saturation".
+
+In reality, $R_"in" in [ohm("100k"), ohm("10T")]$, $R_"out" in [ohm(10), ohm(100)]$, $A in [num("100k"), num("100M")]$.
+There is also a voltage inset to $V_S$, so saturation can be reached easier than ideal.
+
+To limit the ideally infinite voltage gain, we take some amplified voltage to the inverting input terminal.
+This is called negative feedback.
+
