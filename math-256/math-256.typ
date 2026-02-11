@@ -999,3 +999,5 @@ Note how this is similar to solution to a second-order differential equation bei
   ]
 ]
 
+This matrix method works the same with equations after Laplace Transform, as the matrices yield the same determinant and so.
+
