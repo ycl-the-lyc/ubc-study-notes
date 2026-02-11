@@ -546,6 +546,8 @@ We can extend the independence between two random variables to multiple's.
   $
 ]
 
+Although the integral of a PDF from $-oo$ to $oo$ is $1$, it can be larger than $1$ at any point.
+
 #theorem[
   Random variable $X$ has a PDF iff
   $
@@ -554,8 +556,70 @@ We can extend the independence between two random variables to multiple's.
 ]
 
 If random variable $X$ has a PDF, then
-- $X$ is continuous;
+- $X$ is continuous, thus $P(X = k) = 0$;
 - $P(X in B) = integral_B f(x) dd(x)$;
-- $P(X = k) = 0$;
 - $P(X in [a, b]) = integral_(a)^(b) f(x) dd(x)$.
+
+Define $F_X (t) := P(X <= t)$.
+If PDF $f(x)$ is right-continuous, then
+$
+  f(x) = & lim_(epsilon -> 0^+) (F_X (t + epsilon) - F_X (t)) / epsilon \
+       = & dv(, x) F_X (t).
+$
+
+#problem[
+  Let $X = "fair 6-sided dice roll", Y follows Unif[0, 2]$ and they are independent.
+  Find $P(X + Y <= 3)$.
+
+  #solution[
+    The viable $X$ are $1, 2, 3$.
+    $
+      X + Y <= 3 implies & cases(
+                             X = & 1 and Y <= & 2,
+                             X = & 2 and Y <= & 1,
+                             X = & 3 and Y = & 0
+                           ) \
+         P(X + Y <= 3) = & P(X = 1) P(Y <= 2) + P(X = 2) + P(Y <= 1) + P(X = 3) P(Y = 0) \
+                       = & 1 / 6 times (1 + 1 / 2 + 0) \
+                       = & 1 / 4.
+    $
+
+    #note-box[
+      It looks like we did not count the probability of $Y = 0$, which can totally happen.
+      However, the result is correct.
+    ]
+  ]
+]
+
+#problem[
+  Let $U follows Unif[0, 1], X := ln (1 / U)$.
+
+  + Express $F_X (x) := P(X <= x)$.
+
+    #solution[
+      When $x >= 0$,
+      $
+        F_X (x) = & 1 - P(X > x) \
+                = & 1 - P(ln(1 / U) > x) \
+                = & 1 - P(1 / U > e^x) \
+                = & 1 - P(U < e^(-x)) \
+                = & 1 - (1 - e^(-x)) \
+                = & e^(-x).
+      $
+      When $x < 0$, $F_X (x) = 0$.
+
+      $
+        F_X (x) = & cases(
+                      e^(-x) quad & x >= 0,
+                      0 & x < 0
+                    ).
+      $
+    ]
+
+  + Find the PDF of $X$.
+
+    #solution[
+      // TODO
+    ]
+]
 
