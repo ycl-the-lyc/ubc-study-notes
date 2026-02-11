@@ -116,9 +116,9 @@ $
 == Decomposing Events
 Based on additivity of probability, if we can decompose an event with large sample space into smaller, disjoint events, such that
 $
-  abs(A) & = sum_(i = 1)^k A_i.
+  abs(A) & = sum_(i = 1)^k abs(A_i).
 $
-If $A$ is uniform, and each of the $A_i$ are equal in size, then
+If $A$ is uniform, and all the $A_i$ are equal in size, then
 $
   P(A) & = k P(A_i).
 $
@@ -131,7 +131,7 @@ $
   Give $P(A)$.
 
   #solution[
-    Let $2 <= i, eq.not k <= 14$ (J, Q, K, A being eleven to fourteen),
+    Let $2 <= i eq.not k <= 14$ (J, Q, K, A being eleven to fourteen),
     $
       A_(i, j) := { i "appears with two suits", j "appears with three suits" }.
     $
@@ -149,7 +149,7 @@ $
     $
             P(A) & = k P(A_1) \
                  & = npk(13, 2) times "probability of a specific full house" \
-                 & = npk(13, 2) times "size of sample space of one full house" / "size of sample space of all hands" \
+                 & = npk(13, 2) times "event size of one full house" / "sample space size of all hands" \
            Omega & := "all sets of five cards" \
       abs(Omega) & = nck(52, 5).
     $
@@ -196,7 +196,7 @@ Commonly, making them unordered problems will be easier.
     $
       Omega = NN + {oo}
     $
-    where $oo$ is the events where tail never show up, $i$ is the events which the first $i - 1$ flips are head.
+    where $oo$ is the event where tail never shows up, $i$ is the events which the first $i - 1$ flips are heads.
 
     $
       P(i) & = P_i ({"first" i - 1 "flips are heads"}) dot P_i ({"the" i"th" "flip is tail"}) \
@@ -314,10 +314,10 @@ This fact can dissect complicated probability into simpler probabilities for ind
 
   #solution[
     Let $S = "sum of dice values", X = "n.o. of heads"$.
-    The dice rolls needed for each viable $X$ are $(3,), (1, 2) or (2, 1), (1, 1, 1)$.
+    The dice rolls needed for each viable $X$ are ${3}, {1, 2} "or" {2, 1}, {1, 1, 1}$.
     $
       P(S = 3) = & sum_(i = 0)^3 P(X = i) P(S = 3 given X = i) \
-      = & 1 / 8 times 0 + nck(3, 1) / 2^3 times 1 / 6 + nck(3, 2) / 2^3 times 2 / 36 + nck(3, 3) / 2^3 times 1 / 6^3.
+      = & 1 / 2^3 times 0 + nck(3, 1) / 2^3 times 1 / 6 + nck(3, 2) / 2^3 times 1 / 6^2 times 2 + nck(3, 3) / 2^3 times 1 / 6^3.
     $
   ]
 
