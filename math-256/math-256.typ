@@ -911,7 +911,7 @@ $
   dv(vb(x), t) = & A(t) vb(x) (t) + vb(f) (t).
 $
 
-Any linear $n$th order ODE can be rewritten as a first-order linear system.
+Any linear $n$th-order ODE can be rewritten as a first-order linear system.
 For each derivation of $x$, make a new $x_i$, so that each $x_i$ is at most order one.
 
 Given a linear system, if $vb(x_1) (t), vb(x_2) (t)$ are solutions to the homogeneous equation
@@ -991,7 +991,7 @@ Note how this is similar to solution to a second-order differential equation bei
         #note-box[
           $
                 vb(c) = & phi(0)^(-1) vb(x) (0) \
-            vb(x) (t) = & underbrace(phi(t) phi(0)^(-1), #[the Flow Matrix]) vb(x) (0).
+            vb(x) (t) = & underbrace(phi(t) phi(0)^(-1), #[$psi(t)$ \ the Flow Matrix]) vb(x) (0).
           $
         ]
       ]
@@ -1000,4 +1000,79 @@ Note how this is similar to solution to a second-order differential equation bei
 ]
 
 This matrix method works the same with equations after Laplace Transform, as the matrices yield the same determinant and so.
+
+- Given a pair of real roots, solve as usual.
+
+- Given a pair of complex roots,
+  $
+    r_(1, 2) = & alpha plus.minus i beta
+  $
+  where $beta eq.not 0$.
+  Solving this would give complex pairs of eigenvalue and eigenvector.
+  Use $r_1 = alpha + i beta$,
+  $
+    mat((alpha + i beta) - alpha, -beta; beta, (alpha + i beta) - alpha) vec(v_1, v_2) & = vec(0, 0) \
+    i beta v_1 - i beta v_2 = & 1 \
+    v_2 = & i v_1 \
+    vb(v)_1 = & underbrace(vec(1, 0), vb(v)_"re") + i underbrace(vec(0, 1), vb(v)_"im").
+  $
+  Plug in the values,
+  $
+    vb(x) (t) = & e^((alpha + i beta) t) [vb(v)_"re" + i vb(v)_"im"] \
+    = & e^(alpha t) [cos(beta t) + i sin(beta t)] [vb(v)_"re" + i vb(v)_"im"] \
+    ... & "seperate real and imaginary parts" \
+    =& A vb(x)_1 (t) + B vb(x)_2 (t) \
+    =& e^(alpha t) { A [cos(beta t) vb(v)_"re" - sin(beta t) vb(v)_"im"] - B [sin(beta t) vb(v)_"re" + cos(beta t) vb(v)_"im"] } \
+    =& underbrace(e^(alpha t) mat(cos(beta t), sin(beta t); -sin(beta t), cos(beta t)), phi(t)) vec(A, B) \
+    vb(x) (0) =& vec(A, B) = vec(x_0, y_0).
+  $
+  Looks very familiar to MATH 152 content.
+  Get length of the vector,
+  $
+    sqrt(x^2 + y^2) = & e^(alpha t) sqrt(x_0^2 + y_0^2).
+  $
+  It is evident now, that $alpha$ controls length variation, $beta$ controls rotation speed.
+
+- Given a repeated root, we still solve as usual.
+  #example[
+    Solve
+    $
+      dv(vb(x), t) = & mat(3, -4; 1, -1) vb(x).
+    $
+
+    #solution[
+      Guess $vb(x) = e^(r t) vb(v)$.
+      $
+                           det(r I - A) = & 0 \
+              mdet(r - 3, 4; -1, r + 1) = & (r - 1)^2 \
+                                        = & 0 \
+                             r_(1, 2) = 1 \
+        mat(-2, 4; -1, 2) vec(v_1, v_2) = & vec(0, 0) \
+                                    v_1 = & 2 v_2 \
+                                vb(v)_1 = & vec(2, 1).
+      $
+      Thus,
+      $
+        vb(x)_1 = & e^t vec(2, 1).
+      $
+
+      Guess $vb(x)_2 (t) = e^(r t) [vb(w) + t vb(u)]$.
+      $
+        vb(x)'_2 (t) = & e^(r t) [r vb(w) + vb(u) + r t vb(u)].
+      $
+      Solve $vb(x)'_2 - A vb(x)_2 = & 0$:
+      $
+        [(r I - A) vb(w) + vb(u)] + t [(r I - A) vb(u)] = & vb(0).
+      $
+      Since the first term cannot cancel itself, and the equation should hold for all $t$,
+      $
+        (r I - A) vb(u) = & vb(0) \
+           -w_1 + 2 w_2 = & -1 \
+                      w_1 & = 1 \
+                    w_2 = & 0 \
+            vb(x)_2 (t) = & e^t [vec(1, 0) + t vec(2, 1)] \
+              vb(x) (t) = & C_1 e^t vec(2, 1) + C_2 e^t vec(1 + 2t, t).
+      $
+    ]
+  ]
 
