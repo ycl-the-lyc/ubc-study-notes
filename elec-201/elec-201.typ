@@ -367,6 +367,31 @@ Reaching this limit is called "saturation".
 In reality, $R_"in" in [ohm("100k"), ohm("10T")]$, $R_"out" in [ohm(10), ohm(100)]$, $A in [num("100k"), num("100M")]$.
 There is also a voltage inset to $V_S$, so saturation can be reached easier than ideal.
 
+=== Negative Feedback
 To limit the ideally infinite voltage gain, we take some amplified voltage to the inverting input terminal.
 This is called negative feedback.
+
+With a resistor from voltage source to $v_n$, and another resistor from $v_"out"$ to $v_n$ (the negative feedback), we can solve the circuit to find that
+$
+  lim_(A -> oo) v_n = & v_p
+$
+when there is no saturation.
+
+This equality is useful in MNA.
+However, we need to check for saturation after the fact, since we cannot check it before solving the circuit.
+
+#note-box[
+  Look up inverting amplifier and non-inverting amplifier configurations using resistors and operational amplifiers.
+  And, summing and subtracting amplifiers that use variable resistor to control contribution of each signal.
+  And, calculus amplifiers that does magic.
+
+  They all use the convenient property that $v_n = v_p$.
+]
+
+=== Offset Balance
+In reality, the $v_p$ and $v_n$ inputs are not perfectly balanced to produce $volt(0)$ when equal.
+Hence, two extra pins ($1, 5$) are left for the offset balance:
+The user adds a resistance between the two pins so the operational amplifier outputs $volt(0)$ when balanced.
+
+When the voltage output is precisely zero, the operational amplifier becomes a current source.
 
