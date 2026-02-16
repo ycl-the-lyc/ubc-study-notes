@@ -603,14 +603,13 @@ $
                 = & 1 - P(ln(1 / U) > x) \
                 = & 1 - P(1 / U > e^x) \
                 = & 1 - P(U < e^(-x)) \
-                = & 1 - (1 - e^(-x)) \
-                = & e^(-x).
+                = & 1 - e^(-x).
       $
       When $x < 0$, $F_X (x) = 0$.
 
       $
         F_X (x) = & cases(
-                      e^(-x) quad & x >= 0,
+                      1 - e^(-x) quad & x >= 0,
                       0 & x < 0
                     ).
       $
@@ -619,7 +618,43 @@ $
   + Find the PDF of $X$.
 
     #solution[
-      // TODO
+      The PDF is the derivative of $F_X$:
+      $
+        f_X (x) = & cases(
+                      e^(-x) quad & x >= 0,
+                      0 & x < 0
+                    ).
+      $
     ]
 ]
+
+What is $F_X$ in the problem?
+
+== Cumulative Distribution
+#definition(title: [Cumulative Distribution Function (CDF)])[
+  The cumulative distribution function, $F(x)$, of a random variable $X$, is defined as
+  $
+    F(s) := P(X <= s) quad s in RR.
+  $
+
+  Notably, $forall s in RR$,
+  $
+     F(s) <= & 1 \
+    F'(s) >= & 0.
+  $
+]
+
+#example[
+  Given random variable $X follows Unif[0, 1]$,
+  $
+    F_X (s) = & cases(
+                  0 quad & s < 0,
+                  s & s in [0, 1],
+                  1 & s > 1
+                ).
+  $
+]
+
+Obviously, CDF of a non-discrete continuous random variable is the integral of its PDF over $(-oo, s]$.
+However, CDF also exists for discrete random variables.
 
