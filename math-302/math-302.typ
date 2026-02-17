@@ -658,3 +658,91 @@ What is $F_X$ in the problem?
 Obviously, CDF of a non-discrete continuous random variable is the integral of its PDF over $(-oo, s]$.
 However, CDF also exists for discrete random variables.
 
+= Expectation
+#definition(title: [Expectation])[
+  The expectation, the mean value of a random variable $X$ is
+  $
+    EE X := sum_k k P(X = k) = sum_(omega in Omega) X(omega) P(omega)
+  $
+  when $X$ is discrete;
+  $
+    EE X := integral_(-oo)^(oo) x f_X (x) dd(x)
+  $
+  when $X$ is continuous.
+]
+
+#example[
+  The expectation of a dice roll is
+  $
+    EE X = & sum_(k = 1)^6 1 / 6 k \
+         = & 21 / 6.
+  $
+]
+
+/ Bernoulli:
+  $
+    EE X follows Bern(p) = & p dot 1 + (1 - p) dot 0 \
+                         = & p.
+  $
+
+/ Binomial:
+  $
+    EE X follows Bin(n, p) = & sum_(k = 1)^oo P(X >= k)               && X "is discrete non-negative integer" \
+                      "or" = & integral_(0)^(oo) P(X >= x) dd(x) quad && X "is continuous".
+  $
+
+/ Geometric:
+  $
+    EE X follows Geom(k, p) = & sum_(k = 1)^oo k (1 - p)^(k - 1) p \
+                            = & p sum_(k = 1)^oo dv(, p) [-(1 - p)^k] \
+                            = & -p dv(, p) sum_(k = 0)^oo (1 - p)^k \
+                            = & -p dv(, p) 1 / p \
+                            = & 1 / p.
+  $
+
+/ Uniform:
+  $
+    EE X follows Unif[a, b] = & integral_(a)^(b) 1 / (b - a) x dd(x) \
+                            = & (b + a) / 2.
+  $
+
+If given specific PDF, we can solve for expectation using its definition.
+
+#example[
+  / PDF of $e^(-x)$:
+    $
+      f_X (x) = & cases(
+                    e^(-x) quad & x >= 0,
+                    0 & x < 0
+                  ); \
+         EE X = & integral_(0)^(oo) P(X >= x) dd(x) \
+              = & integral_(0)^(oo) e^(-x) dd(x) \
+              = & 1.
+    $
+
+  / PDF of $1 / x^2$:
+    $
+      f_X (x) = & cases(
+                    1 / x^2 quad & x >= 1,
+                    0 & x < 1
+                  ) \
+         EE X = & integral_(1)^(oo) 1 / x^2 x dd(x) \
+              = & [ln(x)]_1^oo \
+              = & oo.
+    $
+    #note-box[
+      Expectation can be infinity.
+    ]
+
+  / PDF of $1 / (2 x^2)$ as an even function:
+    $
+      f_X (x) = & cases(
+                    1 / (2 x^2) quad & abs(x) >= 1,
+                    0 & -1 < x < 1
+                  ) \
+         EE X = & integral_(-oo)^(-1) 1 / (2x) dd(x) + integral_(1)^(oo) 1 / (2x) dd(x) \
+              = & -oo + oo \
+      therefore & "DNE".
+    $
+]
+
