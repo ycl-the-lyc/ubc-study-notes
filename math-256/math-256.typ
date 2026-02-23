@@ -25,8 +25,8 @@ Integration is solving a trivial differential equation.
 Given a first-order, linear differential equation, $dv(y, x) = a y$, a reasonable guess is $y = A e^(a x)$.
 We can take any constant $A$ because the equation is linear.
 
-== Seperable Equations Method
-For non-linear differential equations, we would manipulate the equation so one side is expressed by $y$, the other by $x$ and $dd(x)$.
+== Separable Equations Method
+For nonlinear differential equations, we would manipulate the equation so one side is expressed by $y$, the other by $x$ and $dd(x)$.
 Then, integrating both sides gives us a relationship between $x$ and $y$.
 
 #example[
@@ -967,7 +967,7 @@ Note how this is similar to solution to a second-order differential equation bei
 
     The general solution is
     $
-      vb(x) = & (t) c_1 e^(-7 t) vec(1, 2) + c_2 e^(-2 t) vec(-2, 1) \
+      vb(x) (t) = & c_1 e^(-7 t) vec(1, 2) + c_2 e^(-2 t) vec(-2, 1) \
       = & underbrace(mat(e^(-7 t), -2 e^(-2, t); 2 e^(-7 t), e^(-2 t)), #[$phi(t)$ \ the Fundamental Matrix]) vec(c_1, c_2).
     $
 
@@ -991,7 +991,7 @@ Note how this is similar to solution to a second-order differential equation bei
         #note-box[
           $
                 vb(c) = & phi(0)^(-1) vb(x) (0) \
-            vb(x) (t) = & underbrace(phi(t) phi(0)^(-1), #[$psi(t)$ \ the Flow Matrix]) vb(x) (0).
+            vb(x) (t) = & underbrace(phi(t) phi(0)^(-1), #[$psi(t)$ \ the Flow/Propagator Matrix]) vb(x) (0).
           $
         ]
       ]
@@ -1002,6 +1002,11 @@ Note how this is similar to solution to a second-order differential equation bei
 This matrix method works the same with equations after Laplace Transform, as the matrices yield the same determinant and so.
 
 - Given a pair of real roots, solve as usual.
+
+  The polarity of $r_1, r_2$ dictates propagation of the initial values:
+  - If $r_1 < r_2 < 0$, then the values shrink.
+  - If $0 < r_1 < r_2$, then the values grow.
+  - If $r_1 < 0 < r_2$, then the initial value is a saddle point.
 
 - Given a pair of complex roots,
   $
@@ -1056,7 +1061,7 @@ This matrix method works the same with equations after Laplace Transform, as the
         vb(x)_1 = & e^t vec(2, 1).
       $
 
-      Guess $vb(x)_2 (t) = e^(r t) [vb(w) + t vb(u)]$.
+      Guess $vb(x)_2 (t) = e^(r t) [vb(w) + t vb(u)]$, such that $vb(w)$ solves $(r I - A) vb(w) = - vb(v)_1$, giving contribution in the opposite direction.
       $
         vb(x)'_2 (t) = & e^(r t) [r vb(w) + vb(u) + r t vb(u)].
       $
@@ -1075,4 +1080,99 @@ This matrix method works the same with equations after Laplace Transform, as the
       $
     ]
   ]
+
+== Laplace Transform
+Since Laplace Transform is linear, we can apply it directly on matrices.
+
+Knowing that
+$
+          llt (y') = & s Y(s) - y(0) \
+                 A = & mat(a, b; c, d) \
+  vb(x)' - A vb(x) = & 0 \
+         vb(x) (0) = & vb(x)_0,
+$
+we get
+$
+  s vb(X) (s) - vb(x) (0) - A vb(X) (s) = & 0 \
+                    (s I - A) vb(X) (0) = & vb(x)_0 \
+                              vb(X) (s) = & (s I - A)^(-1) vb(x)_0.
+$
+
+#problem[
+  Let
+  $
+            A = & mat(3, -4; 1, -1) \
+    vb(x) (0) = & vec(x_0, y_0).
+  $
+  Solve $vb(x)' - A vb(x) = vb(x) (0)$.
+
+  #solution[
+    $
+      det(s I - A) = & (s - 1)^2 \
+         vb(X) (s) = & 1 / (s - 1)^2 mat(s + 1, -4; 1, s - 3) vec(x_0, y_0) \
+                   = & vec(
+                         x_0 / (s - 1)^2 + (2 x_0 - 4 y_0) / (s - 1)^2,
+                         (x_0 - 2 y_0) / (s - 1)^2 + y_0 / (s - 1)
+                       ) \
+         vb(x) (t) = & e^t vec(
+                         x_0 + 2 t x_0 - 4 t y_0,
+                         (x_0 - 2 y_0) t + y_0
+                       ) \
+                   = & e^t mat(1 + 2 t, -4 t; t, 1 - 2t) vec(x_0, y_0).
+    $
+  ]
+]
+
+#problem[
+  Given the special case of
+  $
+    A = & mat(alpha, -beta; beta, alpha).
+  $
+
+  #solution[
+    $
+      det(s I - A) = & (s - alpha)^2 + beta^2 \
+         vb(X) (s) = & 1 / ((s - alpha)^2 + beta^2) mat(s - alpha, beta; -beta, s - alpha) vb(x)_0 \
+         vb(x) (t) = & e^(alpha t) mat(cos(beta t), sin(beta t); -sin(beta t), cos(beta t)) vb(x)_0.
+    $
+  ]
+]
+
+== Inhomogeneous Linear System
+Adding a forcing term $vb(f) (t)$ into the RHS.
+
+We assume $vb(f) (t) = 0$ to solve the homogeneous system, then...
+
+=== Undetermined Coefficient Method
+
+#figure(
+  caption: [Common Guesses for Linear Systems],
+  table(
+    columns: 2,
+    table.header($vb(f) (t)$, [Guess for $vb(x)_P$]),
+    $e^(a t) vb(b)$, [$e^(a t) vb(u)$ \ or $e^(a t) (vb(u) + t vb(w))$ like in repeated roots],
+    $sin(beta t) vb(v), cos(beta t) vb(v)$, $vb(a) cos(beta t) + vb(b) sin(beta t)$,
+    $t^2$, $vb(a) t^2 + vb(b) t + vb(c)$,
+  ),
+)
+
+=== Variation of Parameters Method
+Notice that
+$
+  phi' (t) = & A phi(t),
+$
+hence guess that
+$
+   vb(x)_P = & phi(t) vb(u) (t) \
+  vb(x)'_P = & phi' (t) vb(u) (t) + phi(t) vb(u)' (t).
+$
+
+Substitute them back,
+$
+  vb(x)_P - A vb(x)_P = & (underbrace(phi' (t) vb(u) (t), A phi(t) vb(u) (t)) + phi(t) (t) vb(u)' (t)) - A phi(t) vb(u) (t) \
+  = & vb(f) (t) \
+  vb(u)' (t) = & phi(t)^(-1) vb(f) (t) \
+  vb(u) (t) = & integral_(0)^(t) phi(tau)^(-1) dd(tau) + vb(c) \
+  vb(x) (t) = & phi(t) integral_(0)^(t) phi(tau)^(-1) vb(f) (tau) dd(tau) + underbrace(phi(t) vb(c), vb(x)_H)
+$
 
