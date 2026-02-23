@@ -746,3 +746,143 @@ If given specific PDF, we can solve for expectation using its definition.
     $
 ]
 
+/ PDF of an odd function $g(x)$ such that $integral_(-oo)^(oo) abs(g(x)) dd(x) < oo$:
+  $
+    EE X = & 0.
+  $
+
+When checking for definition of PDF for $f(x)$, if it is hard to check for the integral $A$ itself, we can check for
+$
+  A^2 = & 1
+$
+along with $f(x) >= 0$ for all $x$.
+
+Using Fubini's Theorem,
+$
+  A^2 = & integral_(-oo)^(oo) f(x) dd(x) integral_(-oo)^(oo) f(y) dd(y) \
+      = & integral_(-oo)^(oo) integral_(-oo)^(oo) f(x) f(y) dd(x, y)
+$
+which might be easier to solve.
+
+Just like in MATH 253, we may want to convert the integrals to polar coordinate form when encountering $x^2 + y^2$ patterns.
+$
+               dd(x, y) = & r dd(r, theta) \
+    r : (-oo, oo) implies & [0, oo] \
+  theta : [0, oo) implies & [0, 2pi].
+$
+
+#theorem(title: [Linearity of Expectation])[
+  $
+    EE [X_1 + X+2 + X_3 + ... + X_n] = & EE X_1 + EE X_2 + EE X_3 + ... + EE X_n \
+                        EE [a X + b] = & a EE [X] + b
+  $
+  where $a, b in RR$, and $EE X_i$ can be _dependent_ of each other.
+]
+
+#example[
+  Given
+  $
+    X follows & Bin(n, p).
+  $
+  Let $X_i follows Bern(p)$ be independent identical experiments of $X$.
+  $
+    EE X = & EE sum_(k = 1)^n X_i ] \
+         = & sum_(k = 1)^n EE X_i \
+         = & sum_(k = 1)^n p \
+         = & n p.
+  $
+]
+
+#problem(title: [The Birthday Problem])[
+  Let $X$ be the number of students who share a birthday with at least one other classmate in a class with $n$ students.
+  Give $EE X$.
+
+  #solution[
+    Number each student with an increasing ID from 1.
+    Let $A_j$ be the event that student $j$ shares their birthday with at least one other student.
+    Let $X_j$ be the indicator of $A_j$, and $p = P(A_1)$, so
+    $
+           X = & sum_(j = 1)^n X_j \
+      P(A_j) = & p.
+    $
+
+    Despite that $A_j$ are not independent of each other, linearity of expectation applies.
+    $
+      EE X = & EE sum_(j = 1)^n X_j \
+           = & n p \
+         p = & 1 - P(A_1^c) \
+           = & 1 - (365 times 364^(n - 1)) / 365^n \
+           = & 1 - (364 / 365)^(n - 1).
+    $
+  ]
+]
+
+#theorem(title: [Law of the Unconscious Statistician (LOTUS)])[
+  Given random variable $X$ which is contained in a real-valued domain of $g(x)$,
+  $
+    EE g(X) := & cases(
+                   sum_k g(k) p_X (k) & X "is discrete",
+                   integral_(-oo)^(oo) g(x) f_X (x) dd(x) quad & X "is continuous"
+                 ).
+  $
+
+  Note that
+  $
+    EE g(X) equiv.not & g(EE X).
+  $
+]
+
+#problem[
+  Given $X follows Geom(1/2)$ is the chance we double or nothing, starting with \$1.
+  Let $Y = 2^(X - 1)$ be the amount we gain.
+  Given $EE Y$.
+
+  #solution[
+    Using LOTUS, $Y = g(X), g(k) = 2^(k - 1)$.
+    $
+      EE Y = & EE 2^(X - 1) \
+           = & sum_(k = 1)^oo g(k) P(X = k) \
+           = & sum_(k = 1)^oo 2^(k - 1) dot (1 / 2)^(k - 1) dot 1 / 2 \
+           = & sum_(k = 1)^oo 1 / 2 \
+           = & oo.
+    $
+
+    Notice that we should not expect this outcome in real life.
+  ]
+]
+
+== Moments of a Random Variable
+#definition(title: [Moment])[
+  Given a random variable $X$, the $n^"th"$ moment of $X$ is $EE X^n$.
+]
+
+#example[
+  The $n^"th"$ moment of $X follows Unif[0, 1]$ is
+  $
+    EE X^n = & integral_(-oo)^(oo) x^n f(x) dd(x) \
+           = & integral_(0)^(1) x^n dd(x) \
+           = & 1 / (n + 1).
+  $
+]
+
+#theorem[
+  Given random variable $X$.
+
+  - If its PDF is an even function such that
+    $
+      EE abs(X)^(2n + 1) = & integral_(-oo)^(oo) abs(x)^(2n + 1) f(x) dd(x) \
+                         = & 2 integral_(0)^(oo) x^(2n + 1) f(x) dd(x) \
+                         < & oo
+    $
+    where $n in ZZ$, then
+    $
+      EE X^(2n + 1) = 0
+    $
+    since the integrand will be $"even" times "odd" implies "odd"$.
+
+  - If its PDF is an odd function such that $EE abs(f(x)) < oo$, then
+    $
+      EE f(X) = & 0.
+    $
+]
+
