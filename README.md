@@ -3,7 +3,7 @@ This is a partial display of my study notes for UBC courses.
 Feel free to look around and take them, just do not violate your institution's academic integrity policy and this repository's license.
 
 ## License
-This work (c) 2025 is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+This work (c) 2026 is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 This means, if you:
 
