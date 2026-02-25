@@ -1,5 +1,5 @@
 #import "@preview/zap:0.5.0"
-#let circuit = zap.circuit.with(variant: "ieee")
+#let circuit = zap.circuit
 
 #import "../lib.typ": *
 #show: setup.with(
@@ -9,12 +9,12 @@
 
 = Vocabulary of ECT
 
-/ Charge: Eletric charge, denoted $q$, measured in coulombs, $coulomb()$.
+/ Charge: Electric charge, denoted $q$, measured in coulombs, $coulomb()$.
 
   An electron carries $coulomb(-1.602e-19)$ of charge, which is the smallest amount of charge in our discussion.
-  Its charge counterpart, a protone, carries that amount of positive charge.
+  Its charge counterpart, a proton, carries that amount of positive charge.
 
-/ Current: Eletric current, denoted $i$, measured in coulombs per second, $coulombpers()$, which is $ampere()$.
+/ Current: Electric current, denoted $i$, measured in coulombs per second, $coulombpers()$, which is $ampere()$.
 
   The direction of current is defined as the direction of flow of positive charges, despite, it is usually the electrons.
 
@@ -30,7 +30,7 @@
 
   Measuring voltage is non-intrusive, hence much more viable than measuring current.
 
-/ Power: Rate of work being done, denoted $p$, measured in $jpers()$, whihc is $watt()$.
+/ Power: Rate of work being done, denoted $p$, measured in $jpers()$, which is $watt()$.
   $
     p = v i.
   $
@@ -56,7 +56,7 @@ We use four basic, ideal elements to describe a circuit:
 - source
 which do not correspond to real components.
 
-In real life, a "resistor" is a resistor and an inductor in series, paralelled with a capacitor; a "battery" is a voltage source and a resistor.
+In real life, a "resistor" is a resistor and an inductor in series, paralleled with a capacitor; a "battery" is a voltage source and a resistor.
 But we say "resistor" as if it is a resistor, and we say "source" instead of "battery".
 
 We call elements that absorb power all the time "passive", and those absorb then release power "reactive".
@@ -394,4 +394,42 @@ Hence, two extra pins ($1, 5$) are left for the offset balance:
 The user adds a resistance between the two pins so the operational amplifier outputs $volt(0)$ when balanced.
 
 When the voltage output is precisely zero, the operational amplifier becomes a current source.
+
+= Diode
+Diodes are electric current valves.
+They allow current flow in one direction only.
+
+Diode is directional and nonlinear:
+/ Cathode: The positive terminal.
+/ Anode: The negative terminal.
+
+The current can only flow from the anode to the cathode; the voltage hence drops from the anode to the cathode.
+$
+  v_D < 0 implies & i_D = 0 \
+  i_D > 0 implies & v_D = 0.
+$
+
+When solving circuits with diodes, we initially do not know if they are conducting.
+Hence, we can assume that they are conducting or not, then solve it and verify resulting currents or voltages with the implications of ideal diodes.
+
+However, $n$ diodes provides $2^n$ combinations, we must eliminate possibilities using the direction rule.
+
+== Real Diodes
+
+Real-life diodes are not ideal, thus consuming some voltage when conducting, like the light-emitting diodes (LED).
+The voltage drop when conducting is positive; the current when insulating is negative.
+
+For real diodes, the Shockley diode equation says that
+$
+  i_D = & I_0 (e^(v_D / (n v_T)) - 1)
+$
+where $v_T = (k T) / q_e$ is the thermal voltage, $I_0$ is the reverse-bias saturation current, and $n$ is the ideality factor of how good the diode is made.
+
+For very negative $v_D$, $i_D approx -I_0$.
+
+To approximate real diodes like ideal diodes, we say that the voltage stays constant after the point where the current blows up.
+
+#circuit(
+  zap.diode("x", (0, 0)), //TODO
+)
 
