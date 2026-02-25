@@ -61,6 +61,8 @@
 #let Geom = math.op[Geom]
 #let Pois = math.op[Pois]
 
+#let Var = math.op[Var]
+
 #let npk(..args) = {
   let n = args.at(0, default: $n$)
   let k = args.at(1, default: $k$)

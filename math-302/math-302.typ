@@ -886,3 +886,61 @@ $
     $
 ]
 
+== Variance
+#definition(title: [Variance])[
+  Given random variable $X$ with expectation $mu$,
+
+  $
+    Var(X) := & EE (X - mu)^2 \
+            = & EE X^2 - (EE X)^2. quad ("LOTUS")
+  $
+]
+
+#example[
+  $
+    Var(X follows Unif[-1000, 1000]) = & EE (X - 0)^2 \
+                                     = & integral_(-oo)^(oo) x^2 f_X (x) dd(x) \
+                                       & "where" f_X = 1 / 2000 dot 1_{x in [-1000, 1000]} \
+                                     = & 1 / 2000 integral_(-1000)^(1000) x^2 dd(x) \
+                                     = & 1000^2 / 3. \
+          Var(Y follows Unif[-1, 1]) = & EE (Y - 0)^2 \
+                                     = & integral_(-oo)^(oo) y^2 f_Y (y) dd(y) \
+                                       & "where" f_Y = 1 / 2 dot 1_{y in [-1, 1]} \
+                                     = & 1 / 2 integral_(-1)^(1) y^2 dd(y) \
+                                     = & 1 / 3.
+  $
+
+  #theorem[
+    If $Y follows Unif[-1, 1]$, then
+    $
+      forall a > 0, b in RR, (a Y + b) follows Unif[-a + b, a + b].
+    $
+  ]
+
+  In this example,
+  $
+      1000 Y eq^d & X \
+    Var(1000 Y) = & EE (1000 Y - EE 1000 Y)^2 \
+                = & EE 1000^2 Y^2 \
+                = & 1000^2 EE Y^2.
+  $
+]
+
+#theorem(title: [Linearity of Variance Under Pairwise Independence])[
+  Given independent random variables $X, Y$,
+  $
+    Var(X + Y) = & Var(X) + Var(Y).
+  $
+  This can be proven using (when independent)
+  $
+    EE (X + Y) = & EE X dot EE Y
+  $
+  and the LOTUS definition of variance.
+
+  Plus,
+  $
+    Var (X_1 + X+2 + X_3 + ... + X_n) = & Var X_1 + Var X_2 + Var X_3 + ... + Var X_n.
+  $
+  where $a, b in RR$, and $X_i$ must be _pairwise independent_ of each other.
+]
+
