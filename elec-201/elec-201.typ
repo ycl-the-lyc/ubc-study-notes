@@ -421,7 +421,7 @@ The voltage drop when conducting is positive; the current when insulating is neg
 
 For real diodes, the Shockley diode equation says that
 $
-  i_D = & I_0 (e^(v_D / (n v_T)) - 1)
+  i_D = & I_0 (e^display(v_D / (n v_T)) - 1)
 $
 where $v_T = (k T) / q_e$ is the thermal voltage, $I_0$ is the reverse-bias saturation current, and $n$ is the ideality factor of how good the diode is made.
 
@@ -429,7 +429,16 @@ For very negative $v_D$, $i_D approx -I_0$.
 
 To approximate real diodes like ideal diodes, we say that the voltage stays constant after the point where the current blows up.
 
-#circuit(
-  zap.diode("x", (0, 0)), //TODO
+#figure(
+  caption: [Ideal Equivalence of a Real Diode],
+  circuit({
+    import zap: *
+    set-style(variant: "ieee")
+
+    diode("Dr", (0, 0), (1, 0), label: "real")
+    draw.content((2, 0), $equiv$)
+    diode("Di", (3, 0), (4, 0), label: "ideal")
+    vsource("V", (6, 0), (4, 0), u: $v_"rev"$)
+  }),
 )
 
