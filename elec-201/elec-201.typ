@@ -427,18 +427,30 @@ where $v_T = (k T) / q_e$ is the thermal voltage, $I_0$ is the reverse-bias satu
 
 For very negative $v_D$, $i_D approx -I_0$.
 
+There is a really negative voltage that the diode might as well breakdown, the breakdown voltage $v_"bd"$.
+Beyond $v_"bd"$, the voltage drop across the diode barely changes.
+We can use this to our advantage to regulate voltage.
+
 To approximate real diodes like ideal diodes, we say that the voltage stays constant after the point where the current blows up.
 
 #figure(
   caption: [Ideal Equivalence of a Real Diode],
   circuit({
     import zap: *
-    set-style(variant: "ieee")
+    set-style(variant: "IEEE")
 
     diode("Dr", (0, 0), (1, 0), label: "real")
-    draw.content((2, 0), $equiv$)
+    draw.content((2, 0), $approx$)
     diode("Di", (3, 0), (4, 0), label: "ideal")
-    vsource("V", (6, 0), (4, 0), u: $v_"rev"$)
+    vsource("V", (6, 0), (4, 0), u: $v_"rev" approx volt(0.7)$)
   }),
 )
+
+To better capture the initial rising part of the exponential function, we can use a piece-wise linear function for that small part: the first Newton approximation.
+
+Using the approximation, the voltage drop can be obtained using the root $v_x$ and a coefficient (inverse slope):
+$
+  v_D = & v_x + r_D i_D
+$
+where $r_D$ is the dynamic resistance of the diode, calculated using two points on the line of $ln(i_D) : v_D$ approximation.
 
