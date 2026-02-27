@@ -1081,7 +1081,7 @@ This matrix method works the same with equations after Laplace Transform, as the
     ]
   ]
 
-== Laplace Transform
+== Laplace Transform Method
 Since Laplace Transform is linear, we can apply it directly on matrices.
 
 Knowing that
@@ -1175,4 +1175,51 @@ $
   vb(u) (t) = & integral_(0)^(t) phi(tau)^(-1) dd(tau) + vb(c) \
   vb(x) (t) = & phi(t) integral_(0)^(t) phi(tau)^(-1) vb(f) (tau) dd(tau) + underbrace(phi(t) vb(c), vb(x)_H)
 $
+
+=== Laplace Transform Method
+If given initial conditions,
+$
+     vb(x)' - A vb(x) = & vb(f) (x) \
+            vb(x) (0) = & vb(x)_0 \
+  (s I - A) vb(X) (s) = & vb(F) (s) + vb(x)_0 \
+            vb(X) (s) = & (s I - A)^(-1) [vb(F) (s) + vb(x)_0] \
+            vb(x) (t) = & integral_(0)^(t) psi(t - tau) vb(f) (tau) dd(tau) + psi(tau) vb(x)_0
+$
+where $llt (psi(t)) = P(s)$.
+
+#problem[
+  $
+    vb(x)' = mat(-2, 1; 1, -2) vb(x) + vec(4 e^(-t), 0)
+  $
+
+  #solution[
+    $
+      det(r I - A) = & mdet(r + 2, -1; -1, r + 2) \
+                   = & r^2 + 4r + 3 \
+                   = & 0 \
+               r_1 = & -3 \
+               r_2 = & -1. \
+           vb(v)_1 = & vec(1, 1) \
+           vb(v)_2 = & vec(1, -1). \
+           vb(x)_H = & mat(e^(-t) vec(1, 1), e^(-3t) vec(1, -1)) vec(c_1, c_2).
+    $
+    Since $e^(-t)$ is already a part of $vb(x)_H$, we guess that
+    $
+      vb(x)_P = & e^(-t) (vb(u) + t vb(w)).
+    $
+    And since that
+    $
+      vb(f) (t) = & e^(-t) vec(4, 0),
+    $
+    we let $vb(w) = vb(v)_1$ to match the forcing term once combined.
+    Hence we use $r = -1$.
+    $
+      (r I - A) vb(u) = & - alpha vb(w) + vb(b) \
+                alpha = & 2 \
+                vb(u) = & vec(1, -1) \
+              vb(x)_P = & e^(-t) vec(1 + 2t, -1 + 2t) \
+                vb(x) = & vb(x)_P + vb(x)_H.
+    $
+  ]
+]
 
