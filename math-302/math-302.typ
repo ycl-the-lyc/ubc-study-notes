@@ -944,3 +944,64 @@ $
   where $a, b in RR$, and $X_i$ must be _pairwise independent_ of each other.
 ]
 
+/ Bernoulli:
+  $
+    Var(X follows Bern(p)) = & p - p^2 \
+                           = & p (1 - p).
+  $
+
+/ Binomial:
+  Using the linearity of variance under pairwise independence,
+  $
+    Var(X follows Bin(n, p)) = & n p (1 - p).
+  $
+
+/ Geometric:
+  $
+    Var(X follows Geom(p)) = & (1 - p) / p^2.
+  $
+  (Proof omitted)
+
+#theorem(title: [Sum of Dependent Indicators])[
+  Given events $A_1, A_2, ... A_n$ and their indicators $X_1, X_2, ... X_n$.
+  $
+    Var(X) = & EE(X) - EE(X)^2 + 2 sum_(1 <= i < j <= n)^n P(A_i inter A_j).
+  $
+
+  Furthermore, if
+  $
+        forall 1 <= j <= n, & p := P(A_1) = P(A_j) \
+    forall 1 <= i < j <= n, & q := P(A_1 inter A_2) = P(A_i inter A_j),
+  $
+  then
+  $
+    Var(X) = & n p - n^2 p^2 - n (n - 1) q.
+  $
+]
+
+#problem[
+  Let $X$ be the number of students in a class of $n$ students who share their birthday with other students.
+  Let $A_i$ be the events that student $i$ does not share their birthday with any other student.
+
+  Give the expectation and variance of $Y = sum_(j = 1)^n 1_A_j$.
+
+  #solution[
+    By symmetry,
+    $
+                            p := P(A_j) = P(A_1) = & (365 dot 364^(n - 1)) / 365^n \
+                                                 = & (364 / 365)^(n - 1); \
+                           q := P(A_j inter A_k) = & P(A_1 inter A_2) \
+                                                 = & (365 dot 364 dot 363^(n - 2)) / 365^n \
+                                                 = & 364 / 365 dot (363 / 365)^(n - 2). \
+                                           EE(Y) = & EE sum_(k = 1)^n 1_A_k \
+                                                 = & sum_(k = 1)^n EE(1_A_k) \
+                                                 = & sum_(k = 1)^n P(A_k) \
+                                                 = & sum_(k = 1)^n p \
+                                                 = & n p; \
+      2 sum_(1 <= j < k <= n)^n P(A_j inter A_k) = & 2q dot ((1 + n - 1) (n - 1)) / 2 \
+                                                 = & q n (n - 1) \
+                                 Var(Y) = Var(X) = & EE(Y) - EE(Y)^2 + q n (n - 1).
+    $
+  ]
+]
+
