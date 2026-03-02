@@ -1317,7 +1317,7 @@ where $llt (psi(t)) = P(s)$.
   $
   then guess that
   $
-    vb(x)_P = & (vb(a) + t vb(c)) cos(beta t) + (vb(b) t vb(d)) sin(beta t).
+    vb(x)_P = & (vb(a) + t vb(c)) cos(beta t) + (vb(b) t + vb(d)) sin(beta t).
   $
 ]
 
