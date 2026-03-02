@@ -1205,14 +1205,16 @@ where $llt (psi(t)) = P(s)$.
     $
     Since $e^(-t)$ is already a part of $vb(x)_H$, we guess that
     $
-      vb(x)_P = & e^(-t) (vb(u) + t vb(w)).
+      vb(x)_P = & e^(-t) (vb(u) + t vb(w))
     $
+    to capture all possible derivatives of the $e^(-t)$ term.
+
     And since that
     $
       vb(f) (t) = & e^(-t) vec(4, 0),
     $
     we let $vb(w) = vb(v)_1$ to match the forcing term once combined.
-    Hence we use $r = -1$.
+    Hence, we use $r = -1$.
     $
       (r I - A) vb(u) = & - alpha vb(w) + vb(b) \
                 alpha = & 2 \
@@ -1221,5 +1223,101 @@ where $llt (psi(t)) = P(s)$.
                 vb(x) = & vb(x)_P + vb(x)_H.
     $
   ]
+
+  #problem[
+    Furthermore, $vb(x) (0) = vb(0)$.
+
+    #solution[
+      $
+        vb(0) = & vec(1, -1) + mat(1, 1; 1, -1) vec(c_1, c_2) \
+        vb(c) = & - 1 / 2 mat(-1, -1; -1, 1) vec(-1, 1) \
+          c_1 = & 0 \
+          c_2 = & -1.
+      $
+
+      Or, using the convolution theorem,
+      $
+        vb(x) (t) = & phi(t) integral_(0)^(t) phi(tau)^(-1) vb(f) (tau) dd(tau) + phi(t) vb(c) \
+                  = & integral_(0)^(t) psi(t, tau) vb(f) (tau) dd(tau) + phi(t) vb(c).
+      $
+      where $psi(t, tau) = phi(t) phi(t)^(-1)$.
+    ]
+
+    #solution[
+      Since initial values are given, we can use Laplace Transform:
+      $
+                    s vb(X) (s) - vb(x) (0) = & A vb(X) (s) + vec(4 / (s + 1), 0) \
+                        (s I - A) vb(X) (s) = & vec(4 / (s + 1), 0) \
+        mat(s + 2, -1; -1, s + 2) vb(X) (s) = & vec(4 / (s + 1), 0) \
+                                  vb(X) (s) = & 1 / ((s + 1) (s + 3)) mat(s + 2, 1; 1; s + 2) vec(4 / (s + 1), 0) \
+                                  vb(X) (s) = & vec(
+                                                  1 / (s + 1) - 1 / (s + 3) + 2 / (s + 1)^2,
+                                                  2 / (s + 1)^2 - 1 / (s + 1) + 1 / (s + 3)
+                                                ) \
+                                  vb(x) (s) = & e^(-t) vec(1 + 2t, -1 + 2t) + e(-3t) vec(-1, 1).
+      $
+    ]
+  ]
+]
+
+#problem[
+  Solve
+  $
+     vb(x)' = & mat(-2, 1; 1, -2) vb(x) (t) + vec(0, 9t) \
+    vb(x)_H = & mat(e^(-t) vec(1, 1), e^(-3t) vec(1, -1)) vec(c_1, c_2).
+  $
+
+  #solution[
+    Since $vb(f) (t)$ is linear first-order, guess that
+    $
+       vb(x)_P = & vb(a) t + vb(b) \
+      vb(x)'_P = & vb(a).
+    $
+
+    Using the undetermined coefficient method, substitute:
+    $
+       vb(x)'_P - A vb(x)_P = & {vb(a) - A vb(b)}_0 t^0 {-A vb(a)}_1 t^1 \
+                            = & t vec(0, 9) \
+      because "term of" t^0 = & 0 \
+                    therefore & cases(
+                                  {}_0 = & 0,
+                                  -A vb(b) = & -vb(a)
+                                ) \
+                      vb(a) = & 1 / 3 vec(9, 18) \
+                      vb(b) = & vec(-4, -5) \
+                    vb(x)_P = & vec(3t - 4, 6t - 5).
+    $
+  ]
+
+  #problem[
+    Furthermore, given $vb(x) (0) = vb(0)$.
+
+    #solution[
+      $
+        vb(X) (s) = & 1 / ((s + 1) (s + 3)) mat(s + 2, 1; 1, s + 2) vec(0, 9 / s^2) \
+                  = & 9 vec(
+                        1 / (s^2 (s + 1) (s + 3)),
+                        1 / (s^2 (s + 3)) - 2 / (s^2 (s + 1) (s + 3))
+                      ) \
+                  = & 9 vec(
+                        (1 / 3) / s^2 - (- 4 / 9) / s + (1 / 2) / (s + 1) - (1 / 18) / (s + 3),
+                        (1 / 3) / s^2 - (1 / 9) / s + (1 / 9) (s + 3)
+                      ) \
+        vb(x) (s) = & vec(3t - 4, 6t - 5) + ...
+      $
+    ]
+  ]
+]
+
+#theorem[
+  If given
+  $
+         vb(x)' = & A vb(x) + vb(f) (t) \
+    vb(x)_H (t) = & mat(cos(beta t), sin(beta t); -sin(beta t), cos(beta t)) vec(c_1, c_2),
+  $
+  then guess that
+  $
+    vb(x)_P = & (vb(a) + t vb(c)) cos(beta t) + (vb(b) t vb(d)) sin(beta t).
+  $
 ]
 
