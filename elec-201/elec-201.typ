@@ -454,3 +454,40 @@ $
 $
 where $r_D$ is the dynamic resistance of the diode, calculated using two points on the line of $ln(i_D) : v_D$ approximation.
 
+== Rectifier
+Given an AC input, we can rectify it by connecting a diode in series:
+A half-wave rectifier.
+
+The DC component of that sinusoidal wave is
+$
+  V_"DC" = & 1 / T integral_(0)^(T) v(t) dd(t).
+$
+
+By using a bridge circuit, a four-diode combination to force currents to go in one direction regarding consumers of the electricity, we make a full-wave rectifier.
+The resulting waveform is a sinusoidal wave with one side flipped.
+
+Then, by adding a capacitor in parallel, we mitigate the drastic voltage chance in sinusoidal waves.
+The capacitor still has time to discharge a bit, which produces "ripples" in voltage.
+
+Its approximation is a saw-tooth shaped wave, with each tip at a peak, followed by a linear drop till the next peak.
+
+Given one full-wave rectifier with one capacitor and one resistor,
+$
+      V_"DC" = & V_"peak" - v_"ripple" / 2 \
+      I_"DC" = & V_"DC" / R \
+     Delta q = & I_"DC" Delta t \
+             = & V_"DC" / R dot 1 / (2 f) \
+             = & 1 / (2 R f) (V_"peak" - v_"ripple" / 2) \
+  v_"ripple" = & (Delta q) / C \
+             = & V_"peak" / (2 R C f + 1 / 2).
+$
+
+#warning-box[
+  This is a method to find $v_"ripple"$, not a formula.
+]
+
+== Zener Diode
+A Zener diode is a "backward" diode, the voltage drop and the current are backwards.
+
+So long as the current through the Zener diode is in a range, the voltage across it is almost constant.
+
