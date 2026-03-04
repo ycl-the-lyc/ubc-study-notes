@@ -1005,3 +1005,59 @@ $
   ]
 ]
 
+== Gaussian Distribution
+#definition(title: [Gaussian/Normal Distribution])[
+  A random variable $X$ has the _standard_ Gaussian distribution if it has the PDF of
+  $
+    f_X = phi(x) = & 1 / sqrt(2 pi) e^(- x^2 / 2),
+  $
+  denoted $X follows N(0, 1)$.
+
+  Note that
+  $
+    integral_(-oo)^(oo) e^(- x^2 / 2) = & sqrt(2 pi) \
+                         F_X = Phi(x) = & 1 / sqrt(2 pi) integral_(-oo)^(x) e^(- s^2 / 2) dd(s) \
+                               phi(a) = & phi(-a) \
+                               Phi(a) = & 1 - Phi(-a).
+  $
+
+  A random variable $Y = sigma X + mu$ has the _general_ Gaussian distribution, it has the PDF and CDF of
+  $
+    f_Y = & 1 / sigma f_X ((y - mu) / sigma) \
+        = & 1 / sqrt(2 pi sigma^2) e^(- (y - mu)^2 / (2 sigma^2)), \
+    F_Y = & sigma Phi((y - mu) / sigma).
+  $
+  denoted $Y follows N(mu, sigma^2) = N(EE(Y), Var(Y))$.
+
+  Note that
+  $
+    (Y - mu) / sigma follows N(0, 1).
+  $
+]
+
+#theorem[
+  Given $X follows N(0, 1)$.
+  $
+     EE(X) = & 0 \
+    Var(X) = & 1.
+  $
+]
+
+#theorem[
+  If $X follows N(mu, sigma^2)$ and $Y = a X + b$, then
+  $
+    Y follows N(a mu + b, a^2 sigma^2)
+  $
+]
+
+== Law of Large Numbers and Central Limit Theorem for Binomial Distribution
+Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1 - p)$.
+
+#theorem(title: [Law of Large Numbers])[
+  Given a random variable $S_n follows Bin(n, p)$,
+  $
+    forall epsilon > 0, lim_(n -> oo) P(abs(S_n / n - p) < epsilon) = 1,
+  $
+  meaning for larger $n$, $S_n$ is less likely to deviate from $EE(S_n)$.
+]
+
