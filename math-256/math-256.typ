@@ -1303,7 +1303,7 @@ where $llt (psi(t)) = P(s)$.
                         (1 / 3) / s^2 - (- 4 / 9) / s + (1 / 2) / (s + 1) - (1 / 18) / (s + 3),
                         (1 / 3) / s^2 - (1 / 9) / s + (1 / 9) (s + 3)
                       ) \
-        vb(x) (s) = & vec(3t - 4, 6t - 5) + ...
+        vb(x) (s) = & ...
       $
     ]
   ]
@@ -1318,6 +1318,86 @@ where $llt (psi(t)) = P(s)$.
   then guess that
   $
     vb(x)_P = & (vb(a) + t vb(c)) cos(beta t) + (vb(b) t + vb(d)) sin(beta t).
+  $
+]
+
+= Partial Differential Equation
+
+#example(title: [The Conservation Law])[
+  Given a car lane, let the density of cars at a point be $u(x, t)$ cars per unit length, and the flux of cars at a point be $q(x, t)$ cars per unit time.
+
+  Then, the change in number of cars within $[x, x + Delta x]$ and $[t, t + Delta t]$ can be represented in terms of the density of cars, or the flux of cars:
+  $
+    u(x, t + Delta t) Delta x - u(x, t) Delta x = & q(x, t) Delta t - q(x + Delta x, t) Delta t \
+    (u(x, t + Delta t) - u(x, t)) / (Delta t) = & - (q(x + Delta x, t) - q(x, t)) / (Delta x) \
+    lim_(Delta t -> 0) (u(x, t + Delta t) - u(x, t)) / (Delta t) = & - lim_(Delta x -> 0) (q(x + Delta x, t) - q(x, t)) / (Delta x) \
+    pdv(u, t) + pdv(q, t) =& 0.
+  $
+
+  We know that the flux is a multiple of density, $q = c u$.
+  Hence,
+  $
+    pdv(u, t) + c pdv(u, x) = & 0.
+  $
+
+  Similar to the ODE $y' = alpha y$ for which we guess that $y = e^(r x)$, here we guess that
+  $
+                            u(x, t) = & e^(k x + sigma t) \
+                          pdv(u, t) = & sigma e^(k x + sigma t) \
+                          pdv(u, x) = & k e^(k x + sigma t) \
+    (sigma + c k) e^(k x + sigma t) = & 0 \
+                              sigma = & - c k \
+                            u(x, t) = & e^(k (x - c t)).
+  $
+]
+
+#theorem(title: [Traveling Wave Solution])[
+  For any differentiable function $f(x)$,
+  $
+    u(x, t) = & f(x minus.plus c t)
+  $
+  is a solution to
+  $
+    pdv(u, t) plus.minus c pdv(u, x) = & 0,
+  $
+  because $x' = x - c t$ (Galilean Transformation).
+]
+
+#example(title: [Smart Driver])[
+  Following the previous example, but the drivers will slow down in case of increasing car density.
+  $
+    q = & c u - D pdv(u, x),
+  $
+  which makes
+  $
+    pdv(u, t) + c pdv(u, x) = & D pdv(u, x, 2).
+  $
+]
+
+#example(title: [Diffusion -- Random Walks])[
+  Given a line of trees which grows over time, the number of fruit flies on a tree is then $u(x, t)$.
+
+  The fruit flies travel in between the trees.
+  They have $p$ chance to jump to the left or right, and $1 - 2p$ chance to stay.
+
+  $
+    u(x, t + Delta t) = & p u(x + Delta x, t) + p u(x - Delta x, t) + (1 - 2p) u(x, t) \
+                      = & u(x, t) + p [u(x + Delta x, t) + u(x - Delta x, t) - 2 u(x, t)].
+  $
+
+  Using Taylor's Theorem,
+  $
+    u(x + Delta x, t) = & u(x, t) + Delta x pdv(u, x) (x, t) + (Delta x)^2 / 2 pdv(u, x, 2) (x, t) + ... \
+    u(x - Delta x, t) = & ...
+  $
+  all the way to the forth derivative ($(Delta x)^4 / 24 ...$).
+  $
+    u(x + Delta x, t) + u(x - Delta x, t) - 2 u(x, t) =& (Delta x)^2 pdv(u, x, 2) + (Delta x)^4 / 12 pdv(u, x, 4).
+  $
+
+  Substitute this into our $u(x, t + Delta t)$ model:
+  $
+    // TODO
   $
 ]
 
