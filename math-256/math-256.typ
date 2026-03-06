@@ -1392,12 +1392,94 @@ where $llt (psi(t)) = P(s)$.
   $
   all the way to the forth derivative ($(Delta x)^4 / 24 ...$).
   $
-    u(x + Delta x, t) + u(x - Delta x, t) - 2 u(x, t) =& (Delta x)^2 pdv(u, x, 2) + (Delta x)^4 / 12 pdv(u, x, 4).
+    u(x + Delta x, t) + u(x - Delta x, t) - 2 u(x, t) = & (Delta x)^2 pdv(u, x, 2) + (Delta x)^4 / 12 pdv(u, x, 4).
   $
 
   Substitute this into our $u(x, t + Delta t)$ model:
   $
-    // TODO
+    (u(x, t + Delta t) - u(x, t)) / (Delta t) = & p ((Delta x)^2) / (Delta t) pdv(u, x, 2) + p ((Delta x)^2) / (Delta t) ((Delta x)^2) / 12 pdv(u^4, x^2)
   $
+  where $p ((Delta x)^2) / (Delta t) = D$ is constant.
+  Let $Delta t, Delta x -> 0$, the LHS becomes definition of a partial derivative:
+  $
+    pdv(u, t) = & D pdv(u, x, 2).
+  $
+]
+
+$D$, the diffusion coefficient, is determined by the circumstance (e.g. material).
+
+#example(title: [Speed of a Random Walker])[
+  Given a random walker walking back and forth on a line, each step, taking $Delta t$, is $S_i = plus.minus Delta x$ with equal chance of choosing either sign.
+  Let $X_N$ be the total displacement.
+  $
+                        X_N = & S_1 + S_2 + S_3 + ... + S_N \
+                   EE (X_N) = & 0 \
+                      X_N^2 = & S_1^2 + S_2^2 + S_3^2 + ... + S_N^2 + 2 S_1 S_2 + 2 S_2 S_3 + ... + 2 S_(N - 1) S_N \
+                            = & N (Delta x)^2. \
+                        t_N = & N Delta t \
+                          N = & t_N / (Delta t) \
+                      X_N^2 = & t_N (Delta x)^2 / (Delta t) \
+                          D = & p (Delta x)^2 / (Delta t) quad "where" p = 1 / 2 \
+    (Delta x)^2 / (Delta t) = & 2 D \
+                      X_N^2 = & 2 D t_N \
+                        X_N = & sqrt(2 D t_N).
+  $
+]
+
+In cases where the propagation is on a 2D plane, the equation simply becomes
+$
+  pdv(u, t) = & D (pdv(u, x, 2) + pdv(u, y, 2))
+$
+which is Laplace's Equation.
+
+We can even apply Laplace Transformation on these PDEs.
+$
+  cases(
+    pdv(u, t) = pdv(u, x, 2) & T = alpha^2 X^2 & ("parabolic"),
+    pdv(u, t, 2) = c^2 pdv(u, x, 2) & T^2 - c^2 X^2 = 1 quad & ("hyperbolic"),
+    pdv(u, x, 2) + pdv(u, y, 2) = 0 quad & X^2 + Y^2 = 1 & ("ellipse")
+  )
+$
+
+#example(title: [Heat Equation Solution])[
+  Given that $pdv(u, t) = alpha^2 pdv(u, x, 2)$, guess that
+  $
+                             u(x, t) = & e^(i k x + sigma t) \
+                           pdv(u, t) = & sigma e^(i k x + sigma t) \
+                        pdv(u, x, 2) = & (i k)^2 e^(i k x + sigma t) \
+                                     = & -k^2 e^(i k x + sigma t) \
+    pdv(u, t) - alpha^2 pdv(u, x, 2) = & (sigma + alpha^2 k^2) e^(i k x + sigma t) \
+                                     = & 0 \
+                               sigma = & - alpha^2 k^2 \
+                             u(x, t) = & e^(i k x) e^(- alpha^2 k^2 t). \
+                           e^(i k x) = & cos(k, x) + i sin(k x),
+  $
+  hence $k$ determines the frequency.
+]
+
+#problem(title: [Initial Boundary Problems for Heat])[
+  Heating a metal bar with length $L$ from the middle.
+  $
+    pdv(u, t) = & alpha^2 pdv(u, x, 2) &              0 < x < L \
+      u(0, t) = & u(L, t) = 0 quad     & ("boundary condition") \
+      u(x, 0) = & f(x)                 &  ("initial condition")
+  $
+
+  Give $u(x, t)$.
+
+  #solution[
+    We know that
+    $
+      u(x, t) = u(x, t) = & e^(i k x) e^(- alpha^2 k^2 t) \
+                        = & X(s) T(t)
+    $
+    where $X(x), T(t)$ are some variable functions separated from the original equation.
+
+    $
+         pdv(u, t) = & X(x) T'(t) \
+      pdv(u, x, 2) = & X''(x) T(t) \
+      // TODO
+    $
+  ]
 ]
 
