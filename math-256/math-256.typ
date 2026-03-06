@@ -1455,6 +1455,11 @@ $
                            e^(i k x) = & cos(k, x) + i sin(k x),
   $
   hence $k$ determines the frequency.
+
+  #note-box[
+    Guessing $u(x, t) = e(k x + sigma t)$ will give a solution, as in the Conservation Law example.
+    However, that solution blows up with infinity, which does not match reality situations.
+  ]
 ]
 
 #problem(title: [Initial Boundary Problems for Heat])[
