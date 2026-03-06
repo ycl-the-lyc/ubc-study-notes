@@ -1005,6 +1005,13 @@ $
   ]
 ]
 
+#theorem[
+  Given random variable $X$ and $a, b in RR$,
+  $
+    Var(a X + b) = & a^2 Var(X).
+  $
+]
+
 == Gaussian Distribution
 #definition(title: [Gaussian/Normal Distribution])[
   A random variable $X$ has the _standard_ Gaussian distribution if it has the PDF of
@@ -1058,6 +1065,66 @@ Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1
   $
     forall epsilon > 0, lim_(n -> oo) P(abs(S_n / n - p) < epsilon) = 1,
   $
-  meaning for larger $n$, $S_n$ is less likely to deviate from $EE(S_n)$.
+  meaning that for larger $n$, $S_n$ is less likely to deviate from $EE(S_n)$ (even if $EE(S_x) = plus.minus oo$).
+
+  #proof[
+    // TODO future lecture
+  ]
 ]
 
+
+#theorem(title: [Central Limit Theorem])[
+  Given a random variable $S_n follows Bin(n, p)$, standardize it to be
+  $
+                       Q_n := & (S_n - EE(S_n)) / sqrt(Var(S_n)) \
+                            = & (S_n - n mu) / sqrt(n sigma^2) \
+    lim_(n -> oo) Q_n follows & N(0, 1);
+  $
+  then,
+  $
+    forall a < b, lim_(n -> oo) P(Q_n in [a, b]) = & P(N(0, 1) in [a, b]),
+  $
+  meaning that for all $a < b$, $lim_(n -> oo) P(Q_n in [a, b]) = Phi(b) - Phi(a)$.
+
+  The approximation is accurate enough when $n p (1 - p) > 10$.
+]
+
+#problem[
+  Flipping a coin for 10000 times, let $S_n$ be the number of heads.
+  Give $P(S_n in [4850, 5100])$.
+
+  #solution[
+    $
+        S_n follows & Bin(n, p) \
+                n = & 10000 \
+                p = & 1 / 2 \
+              n p = & 5000 \
+      n p (1 - p) = & 2500 >> 10.
+    $
+    Therefore, we approximate that
+    $
+                        Q_n follows & N(n p, n p (1 - p)) \
+                                  = & N(5000, 2500) \
+                                  = & N(5000, 50^2) \
+                                  = & mu + sigma Z follows N(0, 1) \
+                         S_n approx & 5000 + 50 Z \
+      P(S_n in [4850, 5100]) approx & P(5000 + 50 Z in [4850, 5100]) \
+                                  = & P(50 Z in [-150, 100]) \
+                                  = & P(Z in [-3, 2]) \
+                                  = & Phi(2) - Phi(-3).
+    $
+  ]
+]
+
+#problem(title: [One-dimension Random Walk])[
+  Given a random walker on a line that moves $plus.minus 1$ per step, with equal chance of either value.
+  Give its displacement after $n$ steps.
+
+  #solution[
+    Let $Y_i$ be result of the $i"th"$ coin flip, $X_i$ be the result of the $i"th"$ random walk.
+    $
+      X_i = & 2 Y_i - 1.
+    $
+    // TODO
+  ]
+]
