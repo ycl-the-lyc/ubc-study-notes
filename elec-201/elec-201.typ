@@ -487,7 +487,60 @@ $
 ]
 
 == Zener Diode
-A Zener diode is a "backward" diode, the voltage drop and the current are backwards.
+A Zener diode is a "backward" diode utilizing its breakdown voltage, the voltage drop and the current are backwards.
+
+#note-box[
+  Its symbol looks backwards, too.
+]
 
 So long as the current through the Zener diode is in a range, the voltage across it is almost constant.
+It is more accurate and has wider current ranges than normal, $n dot volt(0.7)$ diodes.
+
+#figure(
+  caption: [Equivalence of a Zener Diode],
+  circuit({
+    import zap: *
+    set-style(variant: "IEEE")
+
+    zener("Zr", (1, 0), (0, 0), i: $i_Z$)
+    draw.content((2, 0), $=$)
+    resistor("R", (3, 0), (5, 0), label: $r_Z$)
+    vsource("V", (7, 0), (5, 0), u: $v_x$)
+  }),
+)
+
+Note that there is no equation like Shockley's for Zener diodes.
+
+Similar to regular diodes,
+$
+  v_Z = & v_x + r_Z i_Z
+$
+where $r_Z$ is the inverse of slope.
+
+== Superposition
+Recall that we can solve linear circuits by killing all but one independent sources.
+When there are AC sources, this fact becomes very useful.
+
+#theorem(title: [Diode in Front of Small Signals])[
+  To a _small_ AC source, diodes can be seen as resistors.
+
+  I.e., on a small domain, the logarithmic function behaves like a linear function.
+  When DC sources push $v_D$ to some point on the rising curve of the function, the AC sources sees variation in $i_D$ linear.
+]
+
+#figure(
+  circuit({
+    import zap: *
+    set-style(variant: "IEEE")
+
+    vsource("vth", (0, 0), (0, 4), u: $v_"th"$)
+    resistor("rth", (0, 4), (4, 4), u: $r_"th" i_D$)
+    diode("d", (4, 4), (4, 0), u: $v_D$)
+    wire((4, 0), (0, 0))
+  }),
+)
+
+$
+  v_"th" / r_"th" - v_D / r_"th" = & I_0 (e^display(v_D / (n v_T)) - 1).
+$
 
