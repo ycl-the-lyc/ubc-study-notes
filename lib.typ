@@ -60,6 +60,7 @@
 #let Bin = math.op[Bin]
 #let Geom = math.op[Geom]
 #let Pois = math.op[Pois]
+#let Exp = math.op[Exp]
 
 #let Var = math.op[Var]
 
