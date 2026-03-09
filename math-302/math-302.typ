@@ -1128,3 +1128,44 @@ Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1
     // TODO
   ]
 ]
+
+== Moment-generating Function
+#definition(title: [Moment-generating Function (MGF)])[
+  Given a random variable $X$, its moment-generating function is defined as
+  $
+       M_X : RR -> & (0, oo] \
+    t in RR mapsto & EE (e^(t X))
+  $
+
+  For discrete random variables,
+  $
+    M_X (t) = & sum_k P(X = k) e^(t k).
+  $
+
+  For continuous random variables,
+  $
+    M_X (t) = & integral_(-oo)^(oo) f_X (x) e^(t x) dd(x),
+  $
+  which is $llt f_X$, meaning that a continuous random variable's PDF is recoverable from its MGF.
+  Hence, $M_X = M_Y implies f_X = f_Y$.
+]
+
+$
+     M_(X follows Bern(p)) = & 1 + p(e^t - 1) \
+  M_(X follows Unif[0, 1]) = & (e^t - 1) / t \
+$
+
+#problem[
+  Given $X follows N(0, 1)$, give $M_X (t)$.
+
+  #solution[
+    $
+      M_X (t) = & integral_(-oo)^(oo) f_X e^(t x) dd(x) \
+              = & integral_(-oo)^(oo) phi(x) e^(t x) dd(x) \
+              = & integral_(-oo)^(oo) e^(-x^2 / x) / sqrt(2 pi) e^(t x) dd(x) \
+              = & e^(t^2 / 2) integral_(-oo)^(oo) 1 / sqrt(2 pi) e^(- (x - t)^2 / 2) dd(x) \
+              = & e^(t^2 / 2) integral_(-oo)^(oo) f_N(t, 1) (x) dd(x).
+    $
+  ]
+]
+
