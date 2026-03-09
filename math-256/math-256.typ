@@ -1481,10 +1481,64 @@ $
     where $X(x), T(t)$ are some variable functions separated from the original equation.
 
     $
-         pdv(u, t) = & X(x) T'(t) \
-      pdv(u, x, 2) = & X''(x) T(t) \
-      // TODO
+                     pdv(u, t) = & X(x) T'(t) \
+                  pdv(u, x, 2) = & X''(x) T(t) \
+                     pdv(u, t) = & alpha^2 pdv(u, x, 2) \
+                    X(x) T'(t) = & alpha^2 X''(x) T(t) \
+      (T'(t)) / (alpha^2 T(t)) = & (X''(x)) / X(x).
     $
+    Since the two partial derivatives are likeliest independent, this equality in ratio suggests that they are a constant value, call it $-lambda$.
+    $
+      llt T = & ?? \
+            = & -lambda alpha^2 integral dd(t) + c \
+       T(t) = & A e^(-alpha^2 x t).
+    $
+
+    Given the boundary condition, we know that $X(0) = X(L) = 0$.
+    Let $lambda = mu^2$.
+    $
+      X'' + mu^2 X = & 0 \
+       dv(X, x, 2) = & - mu^2 X.
+    $
+
+    - If $mu = 0$, guess that
+      $
+                     X(x) = & A x + B \
+        because X(0) = X(L) & = 0 \
+          therefore A = B = & 0 quad ("trivial")
+      $
+
+    - If $mu > 0$, guess that
+      $
+                        X(x) = & e^(r x) \
+        (r^2 + mu^2) e^(r x) = & 0 \
+                           r = & plus.minus i mu \
+                        X(x) = & A cos(mu x) + B sin(mu x).
+      $
+
+    Using $X(0) = 0$, we get $A = 0$.
+    Then, use $X(L) = 0$,
+    $
+          B sin(mu L) = & 0 \
+               mu_n L = & n pi \
+      mu_n = (n pi) / L
+    $
+    where $n in NN$.
+
+    $
+      u_n (x, t) = & X_n (x) T_n (t) \
+                 = & sin((n pi) / L x) e^(-alpha^2 ((n pi) / L)^2 t).
+    $
+    With superposition,
+    $
+      u(x, t) = & sum_(n = 1)^oo B_n u_n (x, t).
+    $
+    Use the initial condition, $u(x, 0) = f(x)$, to find $B_n$.
+    $
+      f(x) = u(x, 0) = & sum_(n = 1)^oo B_n sin((n, pi) / L x)
+    $
+    which is a Fourier Sine Series.
+    // TODO abstract sht
   ]
 ]
 
