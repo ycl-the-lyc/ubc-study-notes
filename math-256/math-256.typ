@@ -1489,9 +1489,8 @@ $
     $
     Since the two partial derivatives are likeliest independent, this equality in ratio suggests that they are a constant value, call it $-lambda$.
     $
-      llt T = & ?? \
-            = & -lambda alpha^2 integral dd(t) + c \
-       T(t) = & A e^(-alpha^2 x t).
+      llt T = & -lambda alpha^2 integral dd(t) + c \
+       T(t) = & A e^(-alpha^2 mu^2 t).
     $
 
     Given the boundary condition, we know that $X(0) = X(L) = 0$.
@@ -1529,7 +1528,7 @@ $
       u_n (x, t) = & X_n (x) T_n (t) \
                  = & sin((n pi) / L x) e^(-alpha^2 ((n pi) / L)^2 t).
     $
-    With superposition,
+    With superposition, the actual $u$ is the sum of all $u_i$.
     $
       u(x, t) = & sum_(n = 1)^oo B_n u_n (x, t).
     $
@@ -1538,7 +1537,143 @@ $
       f(x) = u(x, 0) = & sum_(n = 1)^oo B_n sin((n, pi) / L x)
     $
     which is a Fourier Sine Series.
-    // TODO abstract sht
+
+    Use integrating coefficient, let
+    $
+      f(x) = & sum_(n = 1)^oo B_n sin((n pi x) / L),
+    $
+    then
+    $
+      integral_(0)^(L) sin((m pi x) / L) f(x) dd(x)
+      = & sum_(n = 1)^oo B_n underbrace(integral_(0)^(L) sin((m pi x) / L) sin((n pi x) / L) dd(x), I_(m n))
+    $
+    where $m$ is some constant.
+
+    - If $m eq.not n$:
+      Using the trigonometry identity of $cos(a plus.minus b) = cos(a) cos(b) minus.plus sin(a) sin(b)$,
+      $
+        1 / 2 [cos(A + B) - cos(A - B)] = & sin(A) sin(B).
+      $
+      Let $A = (m pi x) / L, B = (n pi x) / L$,
+      $
+        I_(m n) = & 1 / 2 integral_(0)^(L) [cos(((m + n) pi x) / L) - cos(((m - n) pi x) / L)] dd(x) \
+                = & 1 / 2 [
+                      evaluated(cos(((m + n) pi x) / L) / (((m + n) pi x) / L))_0^L
+                      - evaluated(cos(((m - n) pi x) / L) / (((m - n) pi x) / L))_0^L
+                    ]
+      $
+
+    - If $m = n$:
+      $
+        I_(m m) = & integral_(0)^(L) sin^2 ((m pi x) / L) dd(x).
+      $
+      Using the trigonometry identity of $cos(2a) = cos^2 (a) - sin^2 (a) = 1 - 2 sin^2 (a)$,
+      $
+        I_(m m) = & 1 / 2 integral_(0)^(L) [1 - cos^2 ((m pi x) / L)] dd(x) \
+                = & L / 2.
+      $
+
+    Now, we can remove all $m eq.not n$ terms.
+    $
+      integral_(0)^(L) sin((m pi x) / L) f(x) dd(x) = & B_m I_(m m) \
+                                                    = & B_m L / 2 \
+                                                B_n = & 2 / L integral_(0)^(L) sin((m pi x) / L) f(x) dd(x).
+    $
+    This and $u(x, t)$ in terms of $B_n$ gives the final solution.
+  ]
+]
+
+#problem[
+  Given $f(x) = x$ for $x in [0, L = pi]$.
+  Transform it into a Fourier Sine Series.
+
+  #solution[
+    $
+       B_n = & 2 / pi integral_(0)^(pi) x sin(n x) dd(x) \
+           = & 1 / 2 [
+                 evaluated(-x cos(n x) / n)_0^pi + 1 / n integral_(0)^(pi) cos(n x) dd(x)
+               ] \
+           = & (-1)^(n + 1) dot 2 / n \
+      f(x) = & sum_(n = 1)^oo B_n sin(n x).
+    $
+  ]
+]
+
+#problem(title: [Neumann Initial & Boundary Value Problem])[
+  For $x in (0, L), t > 0$,
+  $
+                              pdv(u, t) = & alpha^2 pdv(u, x, 2) \
+    pdv(u, x) (0, t) = pdv(u, x) (L, t) = & 0 \
+                                u(x, 0) = & f(x).
+  $
+  Give $u(x, t)$.
+
+  #solution[
+    Let $u(x, t) = X(x) T(t)$.
+    $
+                     pdv(u, t) = & X(x) T'(t) \
+                               = & alpha^2 pdv(u, x, 2) \
+                               = & alpha^2 X''(x) T(t) \
+      (T'(t)) / (alpha^2 T(t)) = & (X''(x)) / X(x) \
+                               = & - lambda \
+                               = & - mu^2.
+    $
+
+    Solve for $T(t)$, (make ODE, simple guess)
+    $
+      T(t) = & A e^(-alpha^2 mu^2 t).
+    $
+
+    Solve for $X(x)$.
+    $
+      X''(x) + mu^2 X(x) = & 0.
+    $
+
+    - If $mu = 0$,
+      $
+        X''(x) = & 0 \
+         X'(x) = & A,
+      $
+      so we guess that
+      $
+           X(x) = & A x + B \
+        X_0 (x) = & 1 quad ("we assume")>
+      $
+
+    - If $mu > 0$, we guess that
+      $
+        X(x) = & e^(r x),
+      $
+      so
+      $
+           r^2 + mu^2 = & 0 \
+                    r = & plus.minus mu i \
+                 X(x) = & A cos(mu x) + B sin(mu x) \
+                X'(x) = & -A mu sin(mu x) + B mu cos(mu x). \
+        because X'(0) = & 0 \
+          therefore B = & 0 \
+                 X(x) = & A cos(mu x) \
+                X'(x) = & -A mu sin(mu x).
+      $
+      Then use the $L$ boundary,
+      $
+        because -A mu sin(mu L) = & 0 \
+                 therefore mu_n = & (n pi) / L
+      $
+      where $n = 1, 2, ...$.
+
+    $
+      lambda_n = mu_n^2 = & cases(
+                              0 & n = 0,
+                              ((n pi) / L)^2 quad & n = 1, 2, ...
+                            ) \
+                X_n (x) = & cases(
+                              1 & n = 0,
+                              cos((n pi x) / L) quad & n = 1, 2, ...
+                            ) \
+                u(x, t) = & A_0 + sum_(n = 1)^oo A_n e^(-alpha^2 ((n pi) / L)^2 t) cos((n pi x) / L) \
+         f(x) = u(x, 0) = & A_0 + sum_(n = 1)^oo A_n cos((n pi x) / L). quad ("Fourier Cosine Series")
+    $
   ]
 ]
 
