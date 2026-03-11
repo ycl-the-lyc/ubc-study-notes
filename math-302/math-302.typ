@@ -1151,8 +1151,12 @@ Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1
 ]
 
 $
-     M_(X follows Bern(p)) = & 1 + p(e^t - 1) \
-  M_(X follows Unif[0, 1]) = & (e^t - 1) / t \
+      M_(X follows Bern(p)) = & 1 + p(e^t - 1) \
+   M_(X follows Unif[0, 1]) = & (e^t - 1) / t \
+  M_(X follows Exp(lambda)) = & cases(
+                                  oo & t >= lambda,
+                                  lambda / (1 - lambda) quad & t < lambda
+                                ).
 $
 
 #problem[
@@ -1167,5 +1171,39 @@ $
               = & e^(t^2 / 2) integral_(-oo)^(oo) f_N(t, 1) (x) dd(x).
     $
   ]
+]
+
+#theorem[
+  If there exists $delta > 0$ such that $M_X (t) = EE(e^(t X))$ is finite for all $t in (-delta, delta)$, then
+  $
+    M_X^((n)) (0) = & EE(X^n). quad n in NN
+  $
+]
+
+#problem[
+  Given $X follows Exp(lambda)$, give $EE(X), EE(X^2)$
+
+  #solution[
+    For $t < lambda$,
+    $
+       M' (t) = & lambda / (lambda - t)^2 \
+        EE(X) = & 1 / lambda; \
+      M'' (t) = & (2 lambda) / (lambda - t)^3 \
+      EE(X^2) = & 2 / lambda^2.
+    $
+  ]
+]
+
+#theorem[
+  Let $X follows Pois(lambda)$,
+  $
+     EE(X) = & lambda \
+    Var(X) = & lambda.
+  $
+
+  Let $Y follows Pois(mu)$,
+  $
+    X + Y follows Pois(lambda + mu).
+  $
 ]
 
