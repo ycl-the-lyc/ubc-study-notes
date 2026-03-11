@@ -184,7 +184,7 @@ Choosing either end of a V branch makes its voltage drop known.
 Current from higher voltage to lower voltage is absorbing power.
 Otherwise, it is delivering power.
 
-#definition(title: [Bipolar Junction Transistor])[
+#definition(title: [Bipolar Junction Transistor (BJT)])[
   An NPN or PNP transistor that amplifies current.
   It has a controlling _base,_ an input _collector,_ and an output _emitter._
 
@@ -543,4 +543,34 @@ When there are AC sources, this fact becomes very useful.
 $
   v_"th" / r_"th" - v_D / r_"th" = & I_0 (e^display(v_D / (n v_T)) - 1).
 $
+
+== Semiconductors
+Silicon atoms has four valance electrons normally, hence not conducting.
+
+When a voltage is applied onto a lattice of Silicon atoms, the four valance electrons on one atom can jump to another atom's valance shell against the electric field.
+At the same time, electrons at higher energy level -- the conducting band, moves along the electric field via the new vacancies created by the evicted valance electrons, at about three times the speed.
+
+By "doping", replacing some Silicon atoms with Boron atoms, we create more vacant valance spaces.
+Such semiconductor is called the "P-type" semiconductor, due to it having more space for electrons then pure Silicon.
+
+Similarly, by doping the Silicon with Arsenic atoms, which has five valance electrons, we create the "N-type" semiconductor.
+
+Layering P-type and N-type materials together, we create "P-N junctions".
+Using external voltage (from positive to negative), the electrons get pulled out of the P-type, and get pushed into the N-type.
+The electrons in the N-type then feeds into the P-type.
+
+If we apply a reverse voltage, meaning electrons enter the P-type and leave the N-type.
+From the contacting surface, called the "depletion zone", negative charges accumulate in the P-type, and positive charges accumulate in the N-type; they are not free to move.
+This static charge opposes the external (reverse) voltage we apply, as such, the P-N junction is reverse-biased.
+
+= Bipolar Transistor Junction
+A BJT is equivalent to a current-controlled dependent current source.
+
+It has three terminals:
+- base: controlling input;
+- collector: current input;
+- emitter: current output.
+
+Given $i_B$, it outputs $beta i_B$ where $beta$ is the amplification.
+When not given, we assume $beta = 100$.
 
