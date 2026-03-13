@@ -1675,5 +1675,73 @@ $
          f(x) = u(x, 0) = & A_0 + sum_(n = 1)^oo A_n cos((n pi x) / L). quad ("Fourier Cosine Series")
     $
   ]
+
+  #theorem[
+    For such a problem,
+    $
+      u(x, t) = & A_0 + sum_(n = 1)^oo A_n e^(-alpha^2 ((n pi) / L)^2 t) cos((n pi x) / L)
+    $
+    where
+    $
+              A_0 = & 1 / L integral_(0)^(L) f(x) dd(x) \
+                  = & 1 / 2 underbrace([2 / L integral_(0)^(L) f(x) dd(x)], a_0) \
+              A_n = & 2 / L integral_(0)^(L) f(x) cos((n pi x) / L) dd(x) \
+             f(x) = & a_0 / 2 + sum_(n = 1)^oo a_n cos((n pi x) / L) \
+      "where" a_n = & 2 / L integral_(0)^(L) f(x) cos((n pi x) / L) dd(x) quad n in NN.
+    $
+  ]
+]
+
+#problem(title: [Periodic Boundary Condition])[
+  $
+            pdv(u, t) = & alpha^2 pdv(u, x, 2) quad -L < x < L, t > 0 \
+             u(-L, t) = & u(L, t) \
+    pdv(u, x) (-L, t) = & pdv(u, x) (L, t) \
+              u(x, 0) = & f(x)
+  $
+
+  #solution[
+    Use the same transformation to arrive at
+    $
+                 T(t) = & A e^(-alpha^2 mu^2 t) \
+                X(-L) = & X(L) \
+               X'(-L) = & X'(L) \
+      X''(x) + mu^2 X = & 0.
+    $
+
+    - If $mu = 0$,
+      $
+         X'' = & 0 \
+          X' = & A \
+           X = & A x + B \
+           A = & 0 \
+        mu_0 = & 0 \
+         X_0 = & 1.
+      $
+
+    - If $mu > 0$,
+      $
+        X''(x) + mu^2 X = & 0 \
+                   X(x) = & A cos(mu x) + B sin(mu x) \
+                  X'(x) = & -A mu sin(mu x) + B mu cos(mu x) \
+          2 B sin(mu L) = & 0 \
+          2 A sin(mu L) = & 0 \
+                   mu_L = & n pi quad n = 1, 2, ... \
+                   mu_n = & (n pi) / L.
+      $
+
+    Hence, $X_n$ is of eigenfunction ${ cos((n pi x) / L), sin((n pi x) / L) }$.
+  ]
+
+  #theorem[
+    For such a problem,
+    $
+      lambda_n = & ((n pi) L)^2 quad n in {0} union {1, 2, ...} \
+          X_n in & {1} union { cos((n pi x) / L), sin((n pi x) / L) } \
+       u(x, t) = & A_0 + e^(-alpha^2 ((n pi ) / x)^2 t) [A_n cos((n pi x) / L) + B_n sin((n pi x) / L)] \
+          f(x) = & A_0 + sum_(n = 1)^oo [A_n cos((n pi x) / L) + B_n sin((n pi x) / L)] \
+      // TODO
+    $
+  ]
 ]
 
