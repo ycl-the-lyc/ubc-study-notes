@@ -1106,7 +1106,7 @@ Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1
                         Q_n follows & N(n p, n p (1 - p)) \
                                   = & N(5000, 2500) \
                                   = & N(5000, 50^2) \
-                                  = & mu + sigma Z follows N(0, 1) \
+                                  = & [mu + sigma Z] follows N(0, 1) \
                          S_n approx & 5000 + 50 Z \
       P(S_n in [4850, 5100]) approx & P(5000 + 50 Z in [4850, 5100]) \
                                   = & P(50 Z in [-150, 100]) \
