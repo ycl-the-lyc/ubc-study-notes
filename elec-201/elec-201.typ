@@ -571,6 +571,25 @@ It has three terminals:
 - collector: current input;
 - emitter: current output.
 
-Given $i_B$, it outputs $beta i_B$ where $beta$ is the amplification.
-When not given, we assume $beta = 100$.
+Note that the emitter contains both the input and the output current.
 
+The BJT, due to the electric properties of the N and p materials, has three modes.
+
+/ Linear Mode:
+  Given $i_B$, it outputs $beta i_B$ where $beta$ is the amplification.
+  When not given, we assume $beta = 100$.
+  We also have $alpha = beta / (1 + beta)$ to express $i_C$ in terms of $i_E$.
+
+  Hence, we model an NPN BJT like a reverse voltage source ($volt(0.7)$) with $i_B$ joining the collector-emitter branch, which has a dependent current source $i_C = beta i_B$.
+  The PNP BJT is just that with inversed polarity.
+
+/ Saturation Mode:
+  The current source on the C-E branch is replaced with a reverse $volt(0.2)$ voltage source.
+  $v_"c-e" = volt(0.2)$.
+
+/ Cut-off Mode:
+  Acting as an open circuit.
+
+To solve a BJT, we first assume that it is in linear mode.
+If $i_B$ is negative, then it should be cut off.
+Otherwise, check for voltage drop.
