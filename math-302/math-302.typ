@@ -511,19 +511,6 @@ We can extend the independence between two random variables to multiple's.
   ]
 ]
 
-== Poisson Distribution
-#definition(title: [Poisson Distribution])[
-  $Pois(lambda)$ is the number of 1 in some number of independent experiments that are either 1 or 0.
-  $
-    P(X follows Pois(lambda) = k) = & (e^(-lambda) lambda^k) / k!.
-  $
-
-  Note that for a sample space of $X follows Pois(lambda)$ elements, the number of 1, $Y follows Pois(lambda p)$, and the number of 0, $Z follows Pois(lambda (1 - p))$ are independent.
-  $
-    P(Y = k and Z = j) = & P(Pois(lambda) = k + j) P(Bin(k + j, p) = k).
-  $
-]
-
 == Conditional Independence
 #definition(title: [Conditional Independence])[
   Given events $D$, events $A, B$ are conditionally independent iff
@@ -1194,6 +1181,19 @@ $
   ]
 ]
 
+== Poisson Distribution
+#definition(title: [Poisson Distribution])[
+  $Pois(lambda)$ is the number of 1 in some number of independent experiments that are either 1 or 0.
+  $
+    P(X follows Pois(lambda) = k) = & (e^(-lambda) lambda^k) / k!.
+  $
+
+  Note that for a sample space of $X follows Pois(lambda)$ elements, the number of 1, $Y follows Pois(lambda p)$, and the number of 0, $Z follows Pois(lambda (1 - p))$ are independent.
+  $
+    P(Y = k and Z = j) = & P(Pois(lambda) = k + j) P(Bin(k + j, p) = k).
+  $
+]
+
 #theorem[
   Let $X follows Pois(lambda)$,
   $
@@ -1201,9 +1201,28 @@ $
     Var(X) = & lambda.
   $
 
-  Let $Y follows Pois(mu)$,
+  Let $Y follows Pois(mu)$ that is independent of $X$,
   $
     X + Y follows Pois(lambda + mu).
   $
 ]
+
+== Joint Distribution of Random Variables
+Given random variables $X, Y$.
+
+If $X, Y$ are discrete, then $(X, Y)$ is also discrete.
+
+#definition(title: [Marginal PMF])[
+  Let $p(k, l)$ be the joint PMF of $(X, Y)$, then the PMF of $X$ is
+  $
+    p_X (k) = & sum_l p(k, l).
+  $
+]
+
+LOTUS is applicable to joint probability of multiple random variables.
+
+/ $g(X, Y) = X + Y$:
+  $
+    EE(g(X, Y)) = & EE(X) + EE(Y).
+  $
 
