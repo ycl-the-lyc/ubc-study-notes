@@ -1534,7 +1534,7 @@ $
     $
     Use the initial condition, $u(x, 0) = f(x)$, to find $B_n$.
     $
-      f(x) = u(x, 0) = & sum_(n = 1)^oo B_n sin((n, pi) / L x)
+      f(x) = u(x, 0) = & sum_(n = 1)^oo B_n sin((n pi x) / L)
     $
     which is a Fourier Sine Series.
 
@@ -1637,7 +1637,7 @@ $
       so we guess that
       $
            X(x) = & A x + B \
-        X_0 (x) = & 1 quad ("we assume")>
+        X_0 (x) = & 1 quad ("we assume")
       $
 
     - If $mu > 0$, we guess that
@@ -1665,11 +1665,11 @@ $
     $
       lambda_n = mu_n^2 = & cases(
                               0 & n = 0,
-                              ((n pi) / L)^2 quad & n = 1, 2, ...
+                              ((n pi) / L)^2 quad & n in { 1, 2, ... }
                             ) \
                 X_n (x) = & cases(
                               1 & n = 0,
-                              cos((n pi x) / L) quad & n = 1, 2, ...
+                              cos((n pi x) / L) quad & n in { 1, 2, ... }
                             ) \
                 u(x, t) = & A_0 + sum_(n = 1)^oo A_n e^(-alpha^2 ((n pi) / L)^2 t) cos((n pi x) / L) \
          f(x) = u(x, 0) = & A_0 + sum_(n = 1)^oo A_n cos((n pi x) / L). quad ("Fourier Cosine Series")
@@ -1689,13 +1689,15 @@ $
              f(x) = & a_0 / 2 + sum_(n = 1)^oo a_n cos((n pi x) / L) \
       "where" a_n = & 2 / L integral_(0)^(L) f(x) cos((n pi x) / L) dd(x) quad n in NN.
     $
+
+    $f(x)$ is known.
   ]
 ]
 
 #problem(title: [Periodic Boundary Condition])[
   $
             pdv(u, t) = & alpha^2 pdv(u, x, 2) quad -L < x < L, t > 0 \
-             u(-L, t) = & u(L, t) \
+             u(-L, t) = & u(L, t) quad ("periodic") \
     pdv(u, x) (-L, t) = & pdv(u, x) (L, t) \
               u(x, 0) = & f(x)
   $
@@ -1731,6 +1733,33 @@ $
       $
 
     Hence, $X_n$ is of eigenfunction ${ cos((n pi x) / L), sin((n pi x) / L) }$.
+
+    Use the previous $m, n$ abstraction, let
+    $
+      I_(m n) = & integral_(0)^(L) sin((m pi x) / L) sin((n pi x) / L) dd(x) \
+      J_(m n) = & integral_(0)^(L) cos((m pi x) / L) cos((n pi x) / L) dd(x).
+    $
+
+    Integrating over a symmetrical interval calls for two conclusions for even and odd functions.
+    $
+      integral_(-L)^(L) f(x) dd(x) = & integral_(-L)^(0) f(x) dd(x) + integral_(0)^(L) f(x) dd(x) \
+                                   = & integral_(L)^(0) f(-t) (-dd(t)) + integral_(0)^(L) f(t) dd(t) \
+                                   = & integral_(0)^(L) [f(-t) + f(t)] dd(t) \
+                                   = & cases(
+                                         0 quad & f "is odd",
+                                         2 integral_(0)^(L) f(t) dd(t) quad & f "is even"
+                                       ).
+    $
+
+    Vectorize the coefficients of $f(x)$,
+    $
+      integral_(-L)^(L) f(x) vec(1, cos((m pi x) / L), sin((m pi x) / L)) dd(x) =& A_0 integral_(-L)^(L) vec(1, cancel(cos((m pi x) / L)), cancel(sin((m pi x) / L))) dd(x) \
+      & + sum_(n = 1)^oo A_n integral_(-L)^(L) vec(cancel(1), cos((m pi x) / L), cancel(sin((m pi x) / L))) cos((n pi x) / L) dd(x) \
+      & + sum_(n = 1)^oo B_n integral_(-L)^(L) vec(cancel(1), cancel(cos((m pi x) / L)), sin((m pi x) / L)) sin((n pi x) / L) dd(x) \
+      = & A_0 vec(2L, 0, 0) + sum_(n = 1)^oo A_n vec(0, 2 J_(m n), 0) + sum_(n = 1)^oo B_n vec(0, 0, 2 I_(m n)).
+    $
+
+    Then, reduce the expression of each row...
   ]
 
   #theorem[
@@ -1739,9 +1768,45 @@ $
       lambda_n = & ((n pi) L)^2 quad n in {0} union {1, 2, ...} \
           X_n in & {1} union { cos((n pi x) / L), sin((n pi x) / L) } \
        u(x, t) = & A_0 + e^(-alpha^2 ((n pi ) / x)^2 t) [A_n cos((n pi x) / L) + B_n sin((n pi x) / L)] \
-          f(x) = & A_0 + sum_(n = 1)^oo [A_n cos((n pi x) / L) + B_n sin((n pi x) / L)] \
-      // TODO
+          f(x) = & A_0 + sum_(n = 1)^oo [A_n cos((n pi x) / L) + B_n sin((n pi x) / L)]
     $
+    where $A_0 = a_0 / 2, A_n = a_n, B_n = b_n$,
+    $
+      a_n = & 1 / L integral_(-L)^(L) f(x) cos((n pi x) / L) dd(x) quad n >= 0 \
+      b_n = & 1 / L integral_(-L)^(L) f(x) sin((n pi x) / L) dd(x) quad n >= 1.
+    $
+    This is the _full-range_ Fourier Series.
+
+    Using parity of $f$, we can reduce the full-range series to a half-range series.
+
+    - If $f$ is odd,
+      $
+        a_n = & 0 \
+        b_n = & 2 / L integral_(0)^(L) f(x) sin((n pi x) / L) dd(x).
+      $
+    - If $f$ is even,
+      $
+        a_n = & 2 / L integral_(0)^(L) f(x) cos((n pi x) / L) dd(x) \
+        b_n = & 0.
+      $
+
+    #note-box[
+      $L$ is only half the period.
+    ]
   ]
 ]
 
+#problem[
+  Find the half-range Fourier Cosine Series of $f(x) = x$ with period $2pi$ on $[0, pi]$.
+
+  #solution[
+    $
+                a_0 = & 2 / pi integral_(0)^(pi) x dd(x) \
+                    = & 2 / pi evaluated(x^2 / 2)_0^pi \
+                    = & pi \
+                a_n = & 2 / pi integral_(0)^(pi) x cos(n x) dd(x) \
+                    = & 2 / pi [((-1)^n - 1) / n^2] \
+      f(x) = x approx & pi / 2 + 2 sum_(n = 0)^oo ((-1)^n - 1) / n^2 cos(n x).
+    $
+  ]
+]
