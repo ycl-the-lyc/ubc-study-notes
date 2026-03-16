@@ -1226,3 +1226,63 @@ LOTUS is applicable to joint probability of multiple random variables.
     EE(g(X, Y)) = & EE(X) + EE(Y).
   $
 
+== Lambda Distribution
+#definition(title: [Lambda Distribution])[
+  A random variable follows lambda distribution with $lambda > 0$ if
+  $
+    f_X (x) = & cases(
+                  lambda e^(-lambda x) quad & x >= 0,
+                  0 quad & x < 0
+                ).
+  $
+
+  It is like a continuous analog version of the Geometric distribution, for continuous wait times.
+]
+
+#theorem[
+  Let $X follows Exp(lambda)$.
+
+  - $P(X > t) = e^(-lambda t)$.
+
+  - For $a > 0$, $a X follows Exp(lambda / a)$ (proof by equivalent distribution using the previous item).
+
+  - $EE(X) = 1 / lambda, Var(X) = 1 / lambda^2$.
+
+  - $P(X > s + t given X > t) = P(X > s)$ (memorylessness, proof via basic algebra), thus $(X - t) follows Exp(lambda)$.
+]
+
+#theorem(title: [Limit of Geometric Distribution])[
+  Let $X_p follows Geom(p), Y_p := p X_p$.
+  $Y_p$ converges to $Exp(1)$ as $p -> 0$, a.k.a
+  $
+    lim_(p -> 0) P(Y_p <= t) = & P(Exp(1) <= t).
+  $
+]
+
+#problem[
+  Given a lightbulb that has a lifetime of exponential distribution with a mean of three years.
+
+  + What is the probability that the lightbulb breaks in one year?
+
+    #solution[
+      Let $X$ be the lifetime of the lightbulb, $EE(X) = 3 implies X follows Exp(1/3)$.
+      $
+          X follows & Exp(1/3) \
+        P(X <= 1) = & 1 - P(X > 1) \
+                  = & 1 - e^(-1/3 times 1) \
+                  = & 1 - e^(-1/3) \
+             approx & #calc.round(1 - calc.exp(-1 / 3), digits: 3).
+      $
+    ]
+
+  + Given that the lightbulb has been working for two years, what is the probability that the lightbulb breaks in the next year?
+
+    #solution[
+      $
+        P(X <= 3 given X > 2) = & P(X <= 1 + 2 given X > 2) \
+                              = & P(X <= 1) \
+                              = & ...
+      $
+    ]
+]
+
