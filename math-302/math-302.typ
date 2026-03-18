@@ -1286,3 +1286,27 @@ LOTUS is applicable to joint probability of multiple random variables.
     ]
 ]
 
+#theorem[
+  Let $X follows Exp(a), Y follows Exp(b)$ and $Z = min(X, Y)$.
+  If $X, Y$ are independent, then
+  $
+    Z follows Exp(a + b).
+  $
+]
+
+== Joint Distribution
+#definition(title: [Random Vector])[
+  Given random variables $X_1, X_2, ..., X_n$ on $Omega$,
+  $
+    vb(X) : Omega -> RR^n
+  $
+  is a random vector, its joint CDF is
+  $
+    vb(F)_(X_1, X_2, ..., X_n) (t_1, t_2, ..., t_n) =& P(X_1 <= t_1 inter X_2 <= t_2 inter ... inter X_n <= t_n).
+  $
+  Its PMF is defined similarly.
+]
+
+=== Jointly Continuous Random Variables
+// TODO 6.2
+
