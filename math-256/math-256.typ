@@ -1475,8 +1475,8 @@ $
   #solution[
     We know that
     $
-      u(x, t) = u(x, t) = & e^(i k x) e^(- alpha^2 k^2 t) \
-                        = & X(s) T(t)
+      u(x, t) = & e^(i k x) e^(- alpha^2 k^2 t) \
+              = & X(s) T(t)
     $
     where $X(x), T(t)$ are some variable functions separated from the original equation.
 
@@ -1809,4 +1809,61 @@ $
       f(x) = x approx & pi / 2 + 2 sum_(n = 0)^oo ((-1)^n - 1) / n^2 cos(n x).
     $
   ]
+
+  For the Fourier Series outside of the period we solved for, there are three ways to expand to them.
+
+  / Periodic Txtension: Copy-and-pasting the original period over.
+
+  / Odd Extension: Expanding the series while making it odd, like a sine wave, from where it extensed.
+
+  / Even Extension: Expanding the series while making it even, like a cosine wave, from where it extended.
+
+  #problem[
+    Periodically extend the series.
+
+    #solution[
+      $
+         2L = & pi \
+          L = & pi / 2 \
+        a_0 = & 1 / (pi / 2) [integral_(-pi / 2)^(0) (x + pi) dd(x) + integral_(0)^(pi / 2) x dd(x)] \
+            = & pi.
+      $
+      Notice that this is the same as the original series: periodic extension simply copies the wave.
+      $
+                  a_n = & 1 / (pi / 2) integral_(0)^(pi) x cos((n pi x) / (pi / 2)) dd(x) \
+                      = & 2 / pi integral_(0)^(pi) x cos(2 n x) dd(x) \
+                      = & 2 / pi [evaluated(x sin(2 n x) / (2 n))_0^pi - 1 / (2 n) integral_(0)^(pi) sin(2 n x) dd(x)] \
+                      = & 0 \
+                  b_n = & 2 / pi integral_(0)^(pi) x sin(2 n x) dd(x) \
+                      = & - 1 / n \
+        f(x) = x approx & pi / 2 - sum_(n = 1)^oo sin(2 n x) / n.
+      $
+    ]
+  ]
 ]
+
+#theorem(title: [Convergence Theorem])[
+  Assume that $f, f'$ are piecewise continuous, and of period $2L$.
+  Then,
+  $
+                  S_N (x) = & a_0 / 2 + sum_(n = 1)^N [a_n cos((n pi x) / L) + b_n sin((n pi x) / L)] \
+    lim_(N -> oo) S_N (x) = & (f(x^+) + f(x^-)) / 2.
+  $
+
+  There might be a jump, $J = f(x^+) - f(x^-)$, at the pieces' joint.
+  $
+    g(x) = & f(x) - J u(x)
+  $
+  makes a continuous function.
+]
+
+#problem(title: [continued])[
+  $
+                      a_n = & 2 / pi [((-1)^n - 1) / n^2] \
+                  S_N (x) = & 2 / pi sum_(n = 1)^N [((-1)^n - 1) / n sin(n x) ] \
+                 S'_N (x) = & 2 / pi sin(2 (N + 1) x) / sin(x) \
+    lim_(x -> 0) S'_N (x) = & lim_(x -> 0) [2 / pi cos(2 (N + 1) x) / cos(x) dot 2 (N + 1)] quad ("LHopital's")
+  $
+  which is to get $x_0$.
+]
+
