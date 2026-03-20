@@ -1302,11 +1302,55 @@ LOTUS is applicable to joint probability of multiple random variables.
   $
   is a random vector, its joint CDF is
   $
-    vb(F)_(X_1, X_2, ..., X_n) (t_1, t_2, ..., t_n) =& P(X_1 <= t_1 inter X_2 <= t_2 inter ... inter X_n <= t_n).
+    vb(F)_(X_1, X_2, ..., X_n) (t_1, t_2, ..., t_n) = & P(X_1 <= t_1 inter X_2 <= t_2 inter ... inter X_n <= t_n).
   $
   Its PMF is defined similarly.
 ]
 
 === Jointly Continuous Random Variables
-// TODO 6.2
+#definition(title: [Jointly Continuous])[
+  Random variables $X, Y$ are jointly continuous if
+  $
+    exists f_(X, Y) : RR^2 -> RR^+ suchthat forall B subset RR^2, & P((X, Y) in B) = integral.double_B f_(X, Y) (x, y) dd(x, y).
+  $
+
+  Also,
+  $
+    f_(X, Y) = & pdv(, x, y) F_(X, Y) (x, y).
+  $
+]
+
+#problem[
+  Let $X, Y follows Unif[0, 1]$, give $EE(X + Y)$ using their joint PDF.
+
+  #solution[
+    $
+      EE(X + Y) = & EE(g(X, Y)) quad g(x, y) = x + y \
+                = & integral.double_0^1 g(x, y) f_(X, Y) (x, y) dd(x, y) \
+                = & integral_(0)^(1) evaluated(x^2 / 2 + x y)_0^1 dd(y) \
+                = & evaluated(y / 2 + y^2 / 2)_0^1 \
+                = & 1
+    $
+  ]
+]
+
+#problem[
+  The previous setup, but $g(x, y) = abs(x - y)$.
+
+  #solution[
+    $
+          g(x, y) = & cases(
+                        x - y quad & x > y,
+                        y - x quad & y >= x,
+                      ) \
+      EE(g(X, Y)) = & integral.double_(0)^(1) abs(x - y) dd(x, y) \
+                  = & integral_(0)^(1) integral_(y)^(1) (x - y) dd(x, y) + integral_(0)^(1) integral_(x)^(1) (y - x) dd(y, x) \
+                    & "or" \
+                  = & integral_(0)^(1) integral_(0)^(x) (x - y) dd(y, x) + integral_(0)^(1) integral_(0)^(y) (y - x) dd(x, y) \
+                  = & 1 / 6 + 1 / 6 quad ("symmetry") \
+                  = & 1 / 3.
+    $
+
+  ]
+]
 
