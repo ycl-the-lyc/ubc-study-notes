@@ -585,11 +585,34 @@ The BJT, due to the electric properties of the N and p materials, has three mode
 
 / Saturation Mode:
   The current source on the C-E branch is replaced with a reverse $volt(0.2)$ voltage source.
-  $v_"c-e" = volt(0.2)$.
+  $v_"C-E" = volt(0.2)$.
 
 / Cut-off Mode:
   Acting as an open circuit.
 
 To solve a BJT, we first assume that it is in linear mode.
 If $i_B$ is negative, then it should be cut off.
-Otherwise, check for voltage drop.
+Otherwise, check for voltage drop -- if it is not more than $volt(0.2)$, then the BJT is saturated.
+
+// FIXME
+// == Small Signal
+// pi equiv
+
+== Biasing
+#definition(title: [James Early's Voltage])[
+  In AC, there is an additional current that increases proportionally to the C-E voltage.
+  Hence, we model it using a resistor in parallel to the collector diode.
+
+  With Ohm's Law, the distance from the x-intersection of that resistor's current-voltage line, to the $volt(0.2)$ saturation voltage, is called James Early's Voltage, $V_A$ (which will be given in data sheet).
+  The value of that modelling resistor is $r_0 = V_A / I_(C Q)$.
+]
+// FIXME
+
+== Load Line
+#definition(title: [Load Line])[
+  Given a circuit modeled with a voltage source of $v_"th"$, a resistor $r_"th"$, and a diode in series.
+  The relationship between $v_"th" / r_"th" = i_d$ and $v_d$ is called the load line, whose slope is $- 1/r_"th"$.
+]
+
+Given the other relationship between $i_C$ and $v_(C E)$, the two lines' intersection would be the circuit's stable state in DC.
+Then, we apply a AC source to move the load line and the biasing, hence their intersection.
