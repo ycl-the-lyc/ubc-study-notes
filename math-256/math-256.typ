@@ -1867,3 +1867,132 @@ $
   which is to get $x_0$.
 ]
 
+== Inhomogeneous PDE
+
+#problem[
+  $
+    pdv(u, t) = & alpha^2 pdv(u, x, 2) quad 0 < x < L, t > 0 \
+      u(0, t) = & a \
+      u(L, t) = & b \
+      u(x, 0) = & f(x).
+  $
+  The only difference is the boundary condition.
+
+  #solution[
+    Since physics tends to balance things out, we guess that the solution should be a straight line connecting $(0, a)$ and $(L, b)$.
+    $
+      u^oo (x) = & (b - a) / L x + a.
+    $
+    A straight line means a zero discriminant.
+    $
+      pdv(u^oo, t) = alpha^2 pdv(u^oo, x, 2) = & 0 \
+                                 u^oo (x, t) = & u^oo (x).
+    $
+
+    Assume that
+    $
+      u(x, t) = & u^oo + v(x, t)
+    $
+    where $v$ is the particular solution.
+
+    Plugin the initial and boundary conditions,
+    $
+        pdv(u, t) = & pdv(, t) [u^oo (x) + v(x, t)] \
+                  = & alpha^2 (pdv(u^oo, x, 2) + pdv(v, x, 2)) \
+                  = & alpha^2 pdv(u, x, 2) \
+        pdv(v, t) = & pdv(v, x, 2) \
+      a = u(0, t) = & u^oo (0) + v(0, t) \
+                  = & a + v(0, t) \
+          v(0, t) = & 0 \
+      b = u(L, t) = & u^oo (L) + v(L, t) \
+                  = & b + v(L, t) \
+          v(L, t) = & 0 \
+             f(x) = & u(x, 0) \
+                  = & u^oo (x) + v(x, 0) \
+          v(x, 0) = & f(x) = u^oo (x).
+    $
+
+    Notice that $v(x, t)$ actually has homogeneous boundary conditions, solve for it using Fourier Series,
+    $
+      v(x, t) = & sum_(n = 1)^oo b_n e^(-alpha^2 ((n pi) / L)^2 t) sin((n pi x) / L) \
+          b_n = & 2 / L integral_(0)^(L) [f(x) - u^oo (x)] sin((n pi x) / L) dd(x) \
+      u(x, t) = & (b - a) / L x + a + sum_(n = 1)^oo b_n e^(-alpha^2 ((n pi) / L)^2 t) sin((n pi x) / L).
+    $
+  ]
+]
+
+#problem[
+  The previous setup, but
+  $
+    pdv(u, t) = & alpha^2 pdv(u, x, 2) + sigma(x),
+  $
+
+  #solution[
+    We still guess with
+    $
+      pdv(u^oo, t) = & 0.
+    $
+    However, $sigma(x)$ makes our guess not a straight line.
+    $
+      alpha^2 pdv(u^oo, x, 2) + sigma(x) = & 0 \
+                            pdv(u^oo, x) = & - 1 / alpha^2 integral_(0)^(x) sigma(s) dd(s) + A \
+                            pdv(u^oo, x) = & - 1 / alpha^2 integral_(0)^(x) [integral_(0)^(L) sigma(s) dd(s)] dd(x) + A x + B \
+                                         = & F(x) + A x + B.
+    $
+
+    Then, use the boundary conditions,
+    $
+        u^oo (0) = & a \
+                 = & F(0) + B \
+               B = & a - F(0) \
+      u^oo (L) = b \
+                 = & F(0) + A L + (a - F(0)) \
+               A = & (b - a) / L - (F(L) - F(0)) / L.
+    $
+
+    Assume that
+    $
+      u(x, t) = & u^oo (x) + v(x, t).
+    $
+    ...we get
+    $
+              pdv(v, t) = & alpha^2 pdv(u, x, 2) \
+      v(0, t) = v(L, t) = & 0 \
+                v(x, 0) = & f(x) - u^oo (x) \
+                      ... &
+    $
+  ]
+]
+
+#problem(title: [Neumann Boundary Condition])[
+  The previous setup, but the function in boundary condition is $pdv(u, x)$ instead of $u$.
+
+  #solution[
+    Again, we reply on the fact that physics likes steady states.
+    Find a steady solution, i.e. $pdv(u^oo, t) = 0$, in cases where $sigma(x) = 0$ or not.
+
+    - If $sigma(x) = 0$,
+      $
+            pdv(u^oo, x) (0) = & a \
+                    u^oo (b) = & b \
+        pdv(u^oo, x) (0) = a = & pdv(u^oo, x) (L) = b.
+      $
+
+    - If $sigma(x) eq.not 0$,
+      $
+        pdv(u^oo, t) = 0 = & alpha^2 pdv(u^oo, x, 2) + sigma(x) \
+        pdv(u^oo, x, 2) = & - 1 / alpha^2 sigma(x) \
+        pdv(u^oo, x) = & - 1 / alpha^2 underbrace(integral_(0)^(x) sigma(s) dd(s), G(x)) + A \
+        u^oo = & - 1 / alpha^2 integral_(0)^(x) G(x) dd(x) + A x + B \
+        a = & pdv(u^oo, x) (0) \
+        = & G(0) + A \
+        A = & a - G(0) \
+        b = & pdv(u^oo, x) (L) \
+        = & G(L) + A \
+        A = & b - G(L) \
+        therefore a - G(0) = & b - G(L) \
+        b - a + 1 / alpha^2 integral_(0)^(L) sigma(s) dd(s) = & 0.
+      $
+  ]
+]
+
