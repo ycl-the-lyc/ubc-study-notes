@@ -1996,3 +1996,73 @@ $
   ]
 ]
 
+If we guess that
+$
+  u(x, t) = & e^(i k + sigma t)
+$
+for a physical solution, then the general solution would be
+$
+  u(x, t) = & F(x - c t) + G(x + c t).
+$
+
+Given a point $(x, t)$, the solution means that $(x, t)$ can only be influenced by $[x - c t, x + c t]$, which is like a triangle formed by lines from $(x, t)$ where $c$ is the inverse slope.
+
+#problem(title: [d'Alembert's Wave Solution (Infinite String)])[
+  Given an infinitely long string, there is no boundary condition.
+  $
+        pdv(u, t, 2) = & c^2 pdv(u, x, 2) quad -oo < x < oo, t > 0 \
+             u(x, 0) = & f(x) \
+    pdv(u, t) (x, 0) = & g(x).
+  $
+
+  #solution[
+    $
+                     u(x, t) = & F(x - c t) + G(x + c t) \
+            pdv(u, t) (x, t) = & -c F'(x - c t) + c G'(x + c t) \
+                     u(x, 0) = & F(x) + G(x) = f(x) quad                                                              & (1) \
+            pdv(u, t) (x, 0) = & -c F'(x) + c G'(x) = g(x) quad                                                       & (2) \
+            -c F(x) + c G(x) = & integral_(0)^(x) g(s) dd(s) + A quad                                                 & (3) \
+      c (1) - (3) : 2 c F(x) = & c f(x) - integral_(0)^(x) g(s) dd(s) - A \
+                        F(x) = & 1 / 2 f(x) - 1 / (2 c) integral_(0)^(x) g(s) dd(s) - A / (2 c) \
+      c (1) + (3) : 2 c G(x) = & c f(x) + integral_(0)^(x) g(s) dd(s) + A \
+                        G(x) = & 1 / 2 f(x) + 1 / (2 c) integral_(0)^(x) g(s) dd(s) + A / (2 c) \
+                     u(x, t) = & 1 / 2 [f(x - c t) + f(x + c t)] + 1 / (2 c) integral_(x - c t)^(x + c t) g(s) dd(s).
+    $
+  ]
+]
+
+#problem(title: [Finite String])[
+  Given a finite string, there is a boundary condition.
+  $
+         pdv(u, t, 2) = & c^2 pdv(u, x, 2) quad 0 < x < L, t > 0 \
+    u(0, t) = u(L, t) = & 0 \
+              u(x, 0) = & f(x) \
+     pdv(u, t) (x, 0) = & g(x).
+  $
+
+  #solution[
+    Use seperation of variables instead,
+    $
+                  u(x, t) = & X(x) T(t) \
+             pdv(u, t, 2) = & X(x) T''(t) \
+                          = & c^2 X''(x) T(t) \
+      T''(t) / (c^2 T(t)) = & (X''(x)) / X(x) \
+                          = & -lambda = -mu^2.
+    $
+    For $T$,
+    $
+        T''(t) + mu^2 c^2 T(t) = & 0 \
+      (r^2 + mu^2 c^2) e^(r t) = & 0 quad                         & "let" u = e^(r t) \
+                             r = & plus.minus i mu c \
+                          T(t) = & A cos(mu c t) + B sin(mu c t).
+    $
+    For $X$,
+    $
+       X''(x) + mu X(x) = & 0 \
+            X(0) = X(L) = & 0 \
+      lambda_n = mu^2_n = & ((n pi) / L)^2 quad & n in ZZ^+ \
+                X_n (x) = & sin((n pi x) / L).
+    $
+  ]
+]
+
