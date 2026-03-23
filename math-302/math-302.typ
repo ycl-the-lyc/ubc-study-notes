@@ -1307,7 +1307,6 @@ LOTUS is applicable to joint probability of multiple random variables.
   Its PMF is defined similarly.
 ]
 
-=== Jointly Continuous Random Variables
 #definition(title: [Jointly Continuous])[
   Random variables $X, Y$ are jointly continuous if
   $
@@ -1353,4 +1352,78 @@ LOTUS is applicable to joint probability of multiple random variables.
 
   ]
 ]
+
+#definition(title: [Marginal])[
+  Given a joint density function $f_(X,Y)$ of random variables $X, Y$, then $X$ is continuous with PDF
+  $
+    f_X = & integral_(-oo)^(oo) f_(X, Y) dd(y).
+  $
+]
+
+#problem[
+  Let $(X, Y) follows Unif(B)$ where $B = Set((x, y), x^2 + y^2 <= 1)$.
+
+  + Give the marginal of $X$.
+
+    #solution[
+      For $x in [-1, 1]$, we can constrain $y$ to $[-sqrt(1 - x^2), sqrt(1 - x^2)]$, which we denote as $y^-, y^+$.
+      $
+        f_(X, Y) (x, y) = & cases(
+                              1 / pi quad & (x, y) in B,
+                              0 quad & (x, y) in.not B
+                            ) \
+                f_X (x) = & integral_(-oo)^(oo) f_(X, Y) (x, y) dd(y) \
+                        = & cases(
+                              integral_(y^-)^(y^+) 1 / pi dd(y) quad & x in [-1, 1],
+                              0 quad & "otherwise"
+                            ) \
+                        = & cases(
+                              (2 sqrt(1 - x^2)) / pi quad & x in [-1, 1],
+                              0 quad & "otherwise"
+                            ).
+      $
+      By symmetry, the marginal of $Y$ is obvious.
+    ]
+
+  + Give the expectation of $X$.
+
+    #solution[
+      The PDFs of $X, Y$ are even functions.
+      $
+        (X, Y) =^d (-X, Y) implies & X Y =^d -X Y \
+              EE(X Y) = EE(-X Y) = & 0.
+      $
+    ]
+
+    #solution[
+      $
+        EE(X Y) = & integral.double_B f_(X, Y) (x, y) dd(x, y) \
+                = & integral_(-1)^(1) integral_(-sqrt(1 - x^2))^(sqrt(1 - x^2)) (x y) / pi dd(y, x) \
+                = & 0. quad                                                                         & ("odd function")
+      $
+    ]
+]
+
+#definition(title: [Jointly Independent])[
+  Given random variables $X, Y$.
+  - Let them be continuous, then they are independent iff
+    $
+      f_(X, Y) (x, y) = & f_X (x) f_Y (y)
+    $
+    for all $X, Y in RR$.
+  - Let them be discrete, then they are independent iff
+    $
+      p_(X, Y) (x, y) = & p_X (x) p_Y (y)
+    $
+    for all possible $x, y$ values.
+]
+
+When given a joint PDF $f_(X, Y)$, we only need to recover on PDF, e.g. $f_X$, then test if the function
+$
+  H(x, y) = & cases(
+                (f_(X, Y) (x, y)) / (f_X (x)) quad & f_X (x) eq.not 0,
+                0 quad & "otherwise"
+              )
+$
+is independent of $x$ in the first segment.
 
