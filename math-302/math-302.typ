@@ -1427,3 +1427,70 @@ $
 $
 is independent of $x$ in the first segment.
 
+#problem[
+  Let $(X, Y) follows Unif(S)$, are $X, Y$ independent?
+
+  #solution[
+    - If $S = [a, b] times [c, d]$, i.e. the clousure of $S$ is a rectangle.
+      $
+        f_(X, Y) = & 1_{(x, y) in S} / ((b - a) (d - c)) \
+                 = & 1_{ x in [a, b] } / (b - a) dot 1_{ y in [c, d] } / (d - c) \
+                 = & f_(X follows Unif[a, b]) f_(Y follows Unif[c, d]).
+      $
+      By definition, $X, Y$ are independent.
+
+    - Otherwise, they are not independent.
+
+      For instance, let $S$ be the area under $x = y$ and $y = 2 - x$.
+      $
+        f_(X, Y) (x, y) = & cases(
+                              1 / A_S = 1 quad & (x, y) in S,
+                              0 quad & "otherwise"
+                            ).
+      $
+
+      When $x in [0, 1]$,
+      $
+        f_X = & integral_(0)^(x) f_(X, Y) dd(y) \
+            = & integral_(0)^(x) 1 dd(y) \
+            = & x.
+      $
+      When $x in [1, 2]$,
+      $
+        f_X = & integral_(0)^(2 - x) f_(X, Y) dd(y) \
+        f_X = & integral_(0)^(2 - x) 1 dd(y) \
+            = & 2 - x.
+      $
+      When $y in [0, 1]$,
+      $
+        f_Y = & integral_(y)^(2 - y) f_(X, Y) dd(x) \
+            = & integral_(y)^(2 - y) 1 dd(x) \
+            = & 2 (2 - y).
+      $
+      Test them against the definition of independence:
+      $
+        x dot 2 (2 - y) eq.not & 1.
+      $
+      They are not independent.
+      (A faster test would be making $G(x, y) = f_(X, Y) / f_Y$ and see if it depends on $y$.)
+  ]
+]
+
+== Convolution Formula
+#theorem(title: [Sum of Random Variables])[
+  Let $X, Y$ be independent random variables.
+  We have
+  $
+    P(X + Y = n) = & sum_k p_(X, Y) (n, n - k).
+  $
+
+  - If $X, Y$ are discrete,
+    $
+      p_(X + Y) = sum_k p_X (k) p_Y (n - k) =: & (p_X convolve p_Y) (n).
+    $
+  - If $X, Y$ are continuous,
+    $
+      f_(X + Y) = integral_(-oo)^(oo) f_X (x) f_Y (z - x) dd(x) =: & (f_X convolve f_Y) (z).
+    $
+]
+
