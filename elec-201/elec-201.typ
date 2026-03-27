@@ -616,3 +616,26 @@ Otherwise, check for voltage drop -- if it is not more than $volt(0.2)$, then th
 
 Given the other relationship between $i_C$ and $v_(C E)$, the two lines' intersection would be the circuit's stable state in DC.
 Then, we apply a AC source to move the load line and the biasing, hence their intersection.
+
+= Field Effective Transistor (FET)
+
+The types of FET are
+- Junction FET (JFET)
+- D-MOS FET
+- E-MOS FET
+
+== JFET
+Current flow from drain (D) to source (S), controlled by a gate (G).
+
+Recall that P and N materials can create depletion zones under reverse voltage.
+If we wrap N material with P material, then control the voltage drop from the gate to the source, we can control how wide the depletion zone is, and how narrow the conducting zone, whose area is the $A$ is resistance equation, is.
+
+When the voltage drop from the drain to the source is too large, the depletion zone also becomes too large for current.
+Hence, after a certain $V_"DS"$, the current will also remain constant.
+That voltage is called the overdrive voltage, $V_"Ov" = V_"GS" - V_"PO"$ where $V_"PO"$ is the "pinch-off" voltage, i.e. the $V_"GS"$ that would turn off the JFET.
+$
+  I_"D" = & I_"DS"_"Sat" (1 - V_"GS" / V_"PO")^2
+$
+when $V_"Ov" > 0$.
+
+Notably, $I_"G" = 0$.
