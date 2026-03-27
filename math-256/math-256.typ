@@ -2058,10 +2058,53 @@ Given a point $(x, t)$, the solution means that $(x, t)$ can only be influenced 
     $
     For $X$,
     $
-       X''(x) + mu X(x) = & 0 \
-            X(0) = X(L) = & 0 \
-      lambda_n = mu^2_n = & ((n pi) / L)^2 quad & n in ZZ^+ \
-                X_n (x) = & sin((n pi x) / L).
+      X''(x) + mu X(x) = & 0 \
+      X(0) = X(L) = & 0 \
+      lambda_n = mu^2_n = & ((n pi) / L)^2 quad & n in {1, 2, ...} \
+      X_n (x) = & sin((n pi x) / L) \
+      = & sin(mu_n x) \
+      u(x, t) = & sum_(n = 1)^oo T_n (t) X_n (x) \
+      = & sum_(n = 1)^oo [A_n cos(mu_n c t) + B_n sin(mu_n c t)] sin(mu_n x) \
+      pdv(u, t) = & sum_(n = 1)^oo [-A_n mu_n c sin(mu_n c t) + B_n mu_n c cos(mu_n c t)] sin(mu_n x) \
+      f(x) = u(x, 0) = & sum_(n = 1)^oo A_n sin(mu_n x) \
+      A_n = & 2 / L integral_(0)^(L) f(x) sin(mu x) dd(x) \
+      = & f_n \
+      g(x) = pdv(u, t) (x, 0) = & sum_(n = 1)^oo (B_n mu_n c) sin(mu_n x) \
+      B_n mu_n c = & 2 / L integral_(0)^(L) g(x) sin(mu x) dd(x) \
+      = & g_n \
+      u(x, t) = & sum_(n = 1)^oo f_n sin(mu_n x) cos(mu_n c t) \
+      & + sum_(n = 1)^oo g_n / (mu_n c) sin(mu_n x) sin(mu_n c t).
+    $
+    Recall the double angle formula:
+    $
+                         sin(alpha plus.minus beta) = & sin(alpha) cos(beta) plus.minus cos(alpha) sin(beta) \
+      1 / 2 [sin(alpha - beta) + sin(alpha + beta)] = & sin(alpha) cos(beta) \
+                         cos(alpha plus.minus beta) = & cos(alpha) cos(beta) minus.plus sin(alpha) sin(beta) \
+      1 / 2 [cos(alpha - beta) - cos(alpha + beta)] = & sin(alpha) sin(beta).
+    $
+    Use them to expand $u(x, t)$:
+    $
+      u(x, t) = & 1 / 2 sum_(n = 1)^oo f_n [sin(mu_n (x - c t)) + sin(mu_n (x + c t))] \
+                & + 1 / (2 c) sum_(n = 1)^oo [cos(mu_n (x - c t)) - cos(mu_n (x + c t))].
+    $
+    Looks like the d'Alembert's Wave Solution.
+
+    Furthermore, we find the odd extension of $f, g$:
+    $
+                           f^"odd"_(2L) (x) = & sum_(n = 1)^oo f_n sin(mu_n (x)) \
+                           g^"odd"_(2L) (x) = & sum_(n = 1)^oo g_n sin(mu_n (x)) \
+      integral^x g^"odd"_(2L) (s) dd(s) + A = & -sum_(n = 1)^oo g_n / mu_n cos(mu_n x) \
+                                    u(x, t) = & 1 / 2 [f^"odd"_(2L) (x - c t) + f^"odd"_(2L) (x + c t)] \
+                                              & + 1 / (2 c) integral_(x - c t)^(x + c t) g^"odd"_(2L) (s) dd(s).
+    $
+    It is the same for even extensions.
+
+    The oscillation is then
+    $
+      cos((n pi) / L c (t + P_n)) = & cos((n pi) / L c t) \
+                              P_n = & (2 L) / (n c) \
+                              F_n = & (n c) / (2 L) \
+                                  = & n / (2 L) sqrt(T / e)
     $
   ]
 ]
