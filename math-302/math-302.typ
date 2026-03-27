@@ -1492,5 +1492,61 @@ is independent of $x$ in the first segment.
     $
       f_(X + Y) = integral_(-oo)^(oo) f_X (x) f_Y (z - x) dd(x) =: & (f_X convolve f_Y) (z).
     $
+  - If $X$ is continuous, but $Y$ is discrete,
+    $
+      f_(X + Y) = sum_y P(Y = y) f_X (z - y).
+    $
 ]
 
+#problem[
+  Find $f_(X + Y)$ for independent $X, Y follows Unif[0, 1]$.
+
+  #solution[
+    $
+      X + Y in [0, 2] implies & f_(X + Y) (z) = 0 quad (z in.not [0, 2]).
+    $
+    Let $z in [0, 2]$.
+    $
+          f_X (x) = & 1_{x in [0, 1]} \
+      f_Y (z - x) = & 1_{z - x in [0, 1]} \
+                  = & 1_{x in [z - 1, z]} \
+        f_(X + Y) = & integral_(-oo)^(oo) f_X (x) f_Y (z - x) dd(x) \
+                  = & integral_(-oo)^(oo) underbrace(
+                        1_{x in [0, 1] inter [z - 1, z]},
+                        cases(
+                          1_{x in [0, z]} quad & z in [0, 1),
+                          1_{x in [z - 1, 1]} quad & z in [1, 2],
+                          0 quad & "otherwise"
+                        )
+                      ) dd(x) \
+                  = & cases(
+                        z quad & z in [0, 1),
+                        2 - z quad & z in [1, 2],
+                        0 quad & "otherwise"
+                      ).
+    $
+  ]
+]
+
+#problem[
+  Find $f_(X - Y)$ for independent $X, Y follows Exp(1)$.
+
+  #solution[
+    Based on memorylessness of exponential distribution,
+    $
+      cases(
+        X - Y follows Exp(1) quad & X - Y > 0,
+        Y - X follows Exp(1) quad & X - Y <= 0
+      ).
+    $
+    Then use conditional probability to solve for the PDF.
+    (But that would not involve the convolution formula!)
+  ]
+
+  #solution[
+    $
+      f_(X - Y) = integral_(-oo)^(oo) f_X (x) f_Y (x - z) dd(x)
+      // TODO rewrite to indicator form
+    $
+  ]
+]
