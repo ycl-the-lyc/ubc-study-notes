@@ -2104,7 +2104,7 @@ Given a point $(x, t)$, the solution means that $(x, t)$ can only be influenced 
       cos((n pi) / L c (t + P_n)) = & cos((n pi) / L c t) \
                               P_n = & (2 L) / (n c) \
                               F_n = & (n c) / (2 L) \
-                                  = & n / (2 L) sqrt(T / e)
+                                  = & n / (2 L) sqrt(T / rho)
     $
   ]
 ]
