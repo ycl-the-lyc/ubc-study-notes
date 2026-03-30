@@ -63,6 +63,8 @@
 #let Exp = math.op[Exp]
 
 #let Var = math.op[Var]
+#let Cov = math.op[Cov]
+#let Corr = math.op[Corr]
 
 #let npk(..args) = {
   let n = args.at(0, default: $n$)

@@ -15,10 +15,10 @@
 
   A possibility, $P$, is the relevant probability measure on $Omega$ so that for all events $A subset.eq Omega, P(A) = "the probability that event" A "occurs"$.
 
-  A complement of an event, $A$, in $Omega$, is $A^C = Omega - A$.
+  A complement of an event, $A$, in $Omega$, is $A^complement = Omega - A$.
 ]
 
-Naturally, $P(Omega) = P(A union.plus A^C) = 1$, and $P(union.plus_(i=1)^n A_i)$ where $A$ is a _countable_ set, for $n in NN union {oo}$.
+Naturally, $P(Omega) = P(A union.plus A^complement) = 1$, and $P(union.plus_(i=1)^n A_i)$ where $A$ is a _countable_ set, for $n in NN union {oo}$.
 
 #theorem[
   $
@@ -268,7 +268,7 @@ A random variable is discrete if its sample space where sample probability is no
 = Conditional Probability
 #definition(title: [Conditional Probability])[
   Denoted $P(A|B)$, it is the probability of event $A$ given event $B$ is happened.
-  $P(A|B) + P(A^c|B) = 1$.
+  $P(A|B) + P(A^complement|B) = 1$.
 
   Since
   $
@@ -296,8 +296,8 @@ $
 
 #theorem(title: [Total Probability Formula])[
   $
-    P(A) = & P(A inter B) + P(A inter B^c) \
-         = & P(A given B) P(B) + P(A given B^c) P(B^c).
+    P(A) = & P(A inter B) + P(A inter B^complement) \
+         = & P(A given B) P(B) + P(A given B^complement) P(B^complement).
   $
   If $B_i$ partitions $Omega$, then
   $
@@ -338,7 +338,7 @@ This fact can dissect complicated probability into simpler probabilities for ind
   $
     P(B given A) = & P(A inter B) / P(A) \
                  = & (P(A given B) P(B)) / P(A) \
-                 = & (P(A given B) P(B)) / (P(A given B) P(B) + P(A given B^c) P(B^c))
+                 = & (P(A given B) P(B)) / (P(A given B) P(B) + P(A given B^complement) P(B^complement))
   $
 ]
 
@@ -358,12 +358,12 @@ This fact can dissect complicated probability into simpler probabilities for ind
     $
     We want $P(D given T)$.
     $
-                P(D) = & 1 / 10^6 \
-      P(T given D^c) = & 1 / 10^4 \
-      P(T^c given D) = & 1 / 10^5 \
-        P(T given D) = & 1 - P(T^c given D) \
-        P(D given T) = & (P(T given D) P(D)) / P(T) \
-                     = & (P(T given D) P(D)) / (P(T given D) P(D) + P(T given D^c) P(D^c)).
+                         P(D) = & 1 / 10^6 \
+      P(T given D^complement) = & 1 / 10^4 \
+      P(T^complement given D) = & 1 / 10^5 \
+                 P(T given D) = & 1 - P(T^complement given D) \
+                 P(D given T) = & (P(T given D) P(D)) / P(T) \
+                              = & (P(T given D) P(D)) / (P(T given D) P(D) + P(T given D^complement) P(D^complement)).
     $
   ]
 ]
@@ -386,14 +386,14 @@ This fact can dissect complicated probability into simpler probabilities for ind
       A = & "two daughters" \
       D = & "at least one is a daughter born on Sunday".
     $
-    $P(D)$ is not obvious, but $P(A), P(D^c)$ are easy to get.
+    $P(D)$ is not obvious, but $P(A), P(D^complement)$ are easy to get.
     Use the total probability formula:
     $
       P(A given D) = & P(A inter D) / P(D) \
-              P(D) = & 1 - P(D^c) \
+              P(D) = & 1 - P(D^complement) \
                    = & 1 - (1 - 1 / 2 times 1 / 7)^2 \
                    = & 27 / 196 \
-      P(A inter D) = & P(A) - P(A inter D^c) \
+      P(A inter D) = & P(A) - P(A inter D^complement) \
                    = & (1 / 2)^2 - (1 / 2 times 6 / 7)^2 \
                    = & 13 / 196 \
       P(A given D) = & 13 / 27.
@@ -418,9 +418,9 @@ $
 
 #theorem[
   If $A, B$ are independent, then so are
-  - $A, B^c$,
-  - $A^c, B$,
-  - $A^c, B^c$.
+  - $A, B^complement$,
+  - $A^complement, B$,
+  - $A^complement, B^complement$.
 ]
 
 #theorem[
@@ -797,7 +797,7 @@ $
     $
       EE X = & EE sum_(j = 1)^n X_j \
            = & n p \
-         p = & 1 - P(A_1^c) \
+         p = & 1 - P(A_1^complement) \
            = & 1 - (365 times 364^(n - 1)) / 365^n \
            = & 1 - (364 / 365)^(n - 1).
     $
@@ -887,12 +887,12 @@ $
   $
     Var(X follows Unif[-1000, 1000]) = & EE (X - 0)^2 \
                                      = & integral_(-oo)^(oo) x^2 f_X (x) dd(x) \
-                                       & "where" f_X = 1 / 2000 dot 1_{x in [-1000, 1000]} \
+                                       & "where" f_X = 1 / 2000 dot bb(1)_{x in [-1000, 1000]} \
                                      = & 1 / 2000 integral_(-1000)^(1000) x^2 dd(x) \
                                      = & 1000^2 / 3. \
           Var(Y follows Unif[-1, 1]) = & EE (Y - 0)^2 \
                                      = & integral_(-oo)^(oo) y^2 f_Y (y) dd(y) \
-                                       & "where" f_Y = 1 / 2 dot 1_{y in [-1, 1]} \
+                                       & "where" f_Y = 1 / 2 dot bb(1)_{y in [-1, 1]} \
                                      = & 1 / 2 integral_(-1)^(1) y^2 dd(y) \
                                      = & 1 / 3.
   $
@@ -970,7 +970,7 @@ $
   Let $X$ be the number of students in a class of $n$ students who share their birthday with other students.
   Let $A_i$ be the events that student $i$ does not share their birthday with any other student.
 
-  Give the expectation and variance of $Y = sum_(j = 1)^n 1_A_j$.
+  Give the expectation and variance of $Y = sum_(j = 1)^n bb(1)_A_j$.
 
   #solution[
     By symmetry,
@@ -980,8 +980,8 @@ $
                            q := P(A_j inter A_k) = & P(A_1 inter A_2) \
                                                  = & (365 dot 364 dot 363^(n - 2)) / 365^n \
                                                  = & 364 / 365 dot (363 / 365)^(n - 2). \
-                                           EE(Y) = & EE sum_(k = 1)^n 1_A_k \
-                                                 = & sum_(k = 1)^n EE(1_A_k) \
+                                           EE(Y) = & EE sum_(k = 1)^n bb(1)_A_k \
+                                                 = & sum_(k = 1)^n EE(bb(1)_A_k) \
                                                  = & sum_(k = 1)^n P(A_k) \
                                                  = & sum_(k = 1)^n p \
                                                  = & n p; \
@@ -1433,8 +1433,8 @@ is independent of $x$ in the first segment.
   #solution[
     - If $S = [a, b] times [c, d]$, i.e. the clousure of $S$ is a rectangle.
       $
-        f_(X, Y) = & 1_{(x, y) in S} / ((b - a) (d - c)) \
-                 = & 1_{ x in [a, b] } / (b - a) dot 1_{ y in [c, d] } / (d - c) \
+        f_(X, Y) = & bb(1)_{(x, y) in S} / ((b - a) (d - c)) \
+                 = & bb(1)_{ x in [a, b] } / (b - a) dot bb(1)_{ y in [c, d] } / (d - c) \
                  = & f_(X follows Unif[a, b]) f_(Y follows Unif[c, d]).
       $
       By definition, $X, Y$ are independent.
@@ -1507,15 +1507,15 @@ is independent of $x$ in the first segment.
     $
     Let $z in [0, 2]$.
     $
-          f_X (x) = & 1_{x in [0, 1]} \
-      f_Y (z - x) = & 1_{z - x in [0, 1]} \
-                  = & 1_{x in [z - 1, z]} \
+          f_X (x) = & bb(1)_{x in [0, 1]} \
+      f_Y (z - x) = & bb(1)_{z - x in [0, 1]} \
+                  = & bb(1)_{x in [z - 1, z]} \
         f_(X + Y) = & integral_(-oo)^(oo) f_X (x) f_Y (z - x) dd(x) \
                   = & integral_(-oo)^(oo) underbrace(
-                        1_{x in [0, 1] inter [z - 1, z]},
+                        bb(1)_{x in [0, 1] inter [z - 1, z]},
                         cases(
-                          1_{x in [0, z]} quad & z in [0, 1),
-                          1_{x in [z - 1, 1]} quad & z in [1, 2],
+                          bb(1)_{x in [0, z]} quad & z in [0, 1),
+                          bb(1)_{x in [z - 1, 1]} quad & z in [1, 2],
                           0 quad & "otherwise"
                         )
                       ) dd(x) \
@@ -1547,6 +1547,59 @@ is independent of $x$ in the first segment.
     $
       f_(X - Y) = integral_(-oo)^(oo) f_X (x) f_Y (x - z) dd(x)
       // TODO rewrite to indicator form
+    $
+  ]
+]
+
+== Covariance and Correlation
+#definition(title: [Covariance and Correlation])[
+  $
+     Cov(X, Y) := & EE((X - EE(X)) (Y - EE(Y))) \
+                = & EE(X Y) - EE(X) EE(Y) \
+    Corr(X, Y) := & Cov(X, Y) / sqrt(Var(X) Var(Y)).
+  $
+]
+
+Other properties include:
+- $
+    X, Y "are independent" implies & Cov(X, Y) = 0 \
+         Cov(X, Y) = 0 implies.not & X, Y "are independent"; \
+     Cov(bb(1)_A, bb(1)_B) = 0 iff & A, B "are independent".
+  $
+- $abs(Cov(X, Y)) <= sqrt(Var(X) Var(Y))$.
+- $Cov(X, Y) = Cov(Y, X)$.
+- $Cov(a X + b Z, Y) = a Cov(X, Y) + b Cov(Z, Y)$ (bilinearity).
+- $Cov(-X, X) = - Var(X)$.
+- $Cov(bb(1)_A, bb(1)_B) = Cov(bb(1)_A^complement, bb(1)_B^complement)$.
+
+#theorem(title: [Variance of Sum of Random Variables])[
+  $
+    Var(sum_(i = 1)^n X_i) = & sum_(i = 1)^n Var(X_i) + sum_(i eq.not j) Cov(X_i, X_j) \
+                           = & sum_(i = 1)^n Var(X_i) + 2 sum_(1 <= i < j <= n) Cov(X_i, X_j).
+  $
+]
+
+Replace the arbitrary random variable $X$ with a indicator, we have:
+
+#theorem(title: [Variance of Sum of Indicators])[
+  $
+    Var(sum_(i = 1)^n bb(1)_A_i) = & sum_(i = 1)^n Var(bb(1)_A_i) + sum_(i eq.not j) Cov(bb(1)_A_i, bb(1)_A_j) \
+    = & sum_(i = 1)^n P(A_i) (1 - P(A_i)) + 2 sum_(1 <= i < j <= n) P(A_i inter A_j) - P(A_i) P(A_j).
+  $
+]
+
+#problem[
+  Let $X$ be the number of Ace in a five-card hand.
+  What is $Var(X)$?
+
+  #solution[
+    Let $A_i$ be the event that the $i$th card is an Ace.
+    $
+           X = & sum_(i = 1)^5 bb(1)_A_i \
+      Var(X) = & Var(sum_(i = 1)^5 bb(1)_A_i) \
+             = & sum_(i = 1)^5 Var(A_i) + 2 sum_(1 <= i < j <= 5) Cov(bb(1)_A_i, bb(1)_A_j) \
+             = & sum_(i = 1)^5 P(A_i) (1 - P(A_i)) + 2 sum_(1 <= i < j <= 5) (P(A_i inter A_j) - P(A_i) P(A_j)) \
+             = & 5 times 4 / 52 times 48 / 52 + 2 times nck(5, 2) times 4 / 52 (3 / 52 - 4 / 52).
     $
   ]
 ]
