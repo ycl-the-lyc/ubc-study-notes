@@ -2109,3 +2109,122 @@ Given a point $(x, t)$, the solution means that $(x, t)$ can only be influenced 
   ]
 ]
 
+== Summary
+/ Heat Eq.: $u_t = alpha^2 u_(x x)$.
+/ Wave Eq.: $u_(t t) = c^2 u_(x x)$.
+/ Laplace's Eq.: $u_(x x) + u_(y y) = 0$.
+  - Distribution on a 2D plane: $u_t = alpha^2 (u_(x x) + u_(y y))$.
+  - 2D plane with damping: $u_(t t) + gamma u_t = c^2 (u_(x x) + u_(y y))$.
+  #solution[
+    - $
+                  u(x, y) = & e^(i k x + sigma y) \
+        u_(x x) + u_(y y) = & [(i k)^2 + sigma^2] e^(i k x + sigma y) \
+                          = & 0 \
+                    sigma = & plus.minus k.
+      $
+    - $
+        u(x, y) = & e^(i k x) e^(plus.minus k y) \
+                = & e^(plus.minus k x) e^(i k y).
+      $
+  ]
+
+#problem[
+  Given four boundary conditions for a Laplace's equation:
+  $
+    u_(x x) + u_(y y) = & Delta u \
+              u(x, 0) = & f^"S" (x) \
+              u(x, b) = & f^"N" (x) \
+              u(0, y) = & f^"W" (x) \
+              u(a, y) = & f^"E" (x),
+  $
+  give $u(x, y)$.
+
+  #solution[
+    Since derivation is a linear operation, we can split the problem into four parts:
+    $
+      Delta u^"N" = Delta u^"E" = Delta u^"S" = Delta u^"W" = & 0 \
+                              u^"N" + u^"E" + u^"S" + u^"W" = & u.
+    $
+
+    #important-box[
+      Be very familiar with hyperbolic trigonometry identities.
+    ]
+
+    - The case of $Delta u^"N" = 0$:
+      $
+                     u^"N" (x, y) = & X(x) Y(y) \
+        X''(x) Y(y) + X(x) Y''(y) = & 0 quad "boundaries depend on" x \
+                  (X''(x)) / X(x) = & - (Y''(y)) / Y(y) \
+                                  = & -mu^2. quad "setup for the" X "solution"
+      $
+      For $X$,
+      $
+        X''(x) + mu^2 X(x) = & 0 \
+               X(0) = X(a) = & 0 \
+                      mu_n = & (n pi) / a \
+                   X_n (x) = & sin((n pi x) / a).
+      $
+      For $Y$,
+      $
+          Y''(y) - mu^2 Y(y) = & 0 \
+                           Y = & e^(r y) \
+        (r^2 - mu^2) e^(r y) = & 0 \
+                           r = & plus.minus mu \
+                        Y(y) = & c_1 e^(mu y) + c_2 e^(-mu y) \
+                             = & A cosh(mu y) + B sinh(mu y) \
+              Y(0) = 0 implies & A = 0 \
+                        Y(y) = & B sinh(mu y).
+      $
+      Write them into a Fourier Sine Series,
+      $
+                    u^"N" (x, y) = & sum_(n = 1)^oo B_n sinh((n pi y) / a) sin((n pi x) / a) \
+        f^"N" (X) = u^"n" (x, b) = & sum_(n = 1)^oo B_n sinh((n pi b) / a) sin((n pi x) / a) \
+          B_n sinh((n pi b) / a) = & 2 / a integral_(0)^(a) f^"N" (x) sin((n pi x) / a) dd(x) \
+                             B_n = & (f^"N"_n) / sinh((n pi b) / a) \
+                    u^"N" (x, y) = & sum_(n = 1)^oo f^"N"_n sinh((n pi y) / a) / sinh((n pi b) / a) sin((n pi x) / a) \
+      $
+
+    - The case of $Delta u^"E" = 0$:
+      Swap symbols from $u^"N" (x, y)$:
+      $
+        u^"E" (x, y) = & sum_(n = 1)^oo f^"N"_n sinh((n pi x) / b) / sinh((n pi a) / b) sin((n pi y) / b).
+      $
+
+    - The case of $Delta u^"W" = 0$:
+      $
+                     u^"W" (x, y) = & X(x) Y(y) \
+        X''(x) Y(y) + X(x) Y''(y) = & 0 quad "boundaries depend on" y \
+                  (X''(x)) / X(x) = & - (Y''(y)) / Y(y) \
+                                  = & mu^2. quad "setup for the" Y "solution"
+      $
+
+      For $Y$,
+      $
+              ... \
+        Y_n (y) = & sin((n pi y) / b).
+      $
+
+      For $X$,
+      $
+        X''(x) - mu^2 X(x) = & 0 \
+        X(x) = & A cosh(mu x) + B sinh(mu x) \
+        = & C sinh(mu (a - x)) \
+        X(a) = 0 implies & B = - (A cos(mu a)) / sinh(mu a) \
+        X(x) = & A / sinh(mu a) [sinh(mu a) cosh(mu x) - cosh(mu a) sinh(mu x)] \
+        = & A / sinh(mu a) sinh(mu (a - x)) \
+        = & C sinh(mu (a - x)) \
+        u^"W" (x, y) =& sum_(n = 1)^oo C_n sinh((n pi) / b (a - x)) sin((n pi y) / b) \
+        f^"W" (y) = u^"W" (0, y) =& sum_(n = 1)^oo C_n sinh((n pi a) / b) sin((n pi y) / b) \
+        C_n sinh((n pi a) / b) =& 2 / b integral_(0)^(b) f^"W" (y) sin((n pi y) / b) dd(y) \
+        C_n f^"W"_n / sinh((n pi a) / b) \
+        u^"W" (x, y) =& sum_(n = 1)^oo f^"W"_n sinh((n pi (a - x)) / b) / sinh((n pi a) / b) sin((n pi y) / b).
+      $
+
+    - The case of $Delta u^"S" = 0$:
+      Swap symbols from $u^"W" (x, y)$:
+      $
+        u^"S" (x, y) =& sum_(n = 1)^oo f^"S"_n sinh((n pi (b - y)) / a) / sinh((n pi b) / a) sin((n pi x) / a).
+      $
+  ]
+]
+
