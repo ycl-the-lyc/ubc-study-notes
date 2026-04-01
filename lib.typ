@@ -62,6 +62,8 @@
 #let Pois = math.op[Pois]
 #let Exp = math.op[Exp]
 
+#let Ind = $bb(1)$
+
 #let Var = math.op[Var]
 #let Cov = math.op[Cov]
 #let Corr = math.op[Corr]

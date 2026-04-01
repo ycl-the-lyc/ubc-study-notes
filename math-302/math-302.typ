@@ -887,12 +887,12 @@ $
   $
     Var(X follows Unif[-1000, 1000]) = & EE (X - 0)^2 \
                                      = & integral_(-oo)^(oo) x^2 f_X (x) dd(x) \
-                                       & "where" f_X = 1 / 2000 dot bb(1)_{x in [-1000, 1000]} \
+                                       & "where" f_X = 1 / 2000 dot Ind_{x in [-1000, 1000]} \
                                      = & 1 / 2000 integral_(-1000)^(1000) x^2 dd(x) \
                                      = & 1000^2 / 3. \
           Var(Y follows Unif[-1, 1]) = & EE (Y - 0)^2 \
                                      = & integral_(-oo)^(oo) y^2 f_Y (y) dd(y) \
-                                       & "where" f_Y = 1 / 2 dot bb(1)_{y in [-1, 1]} \
+                                       & "where" f_Y = 1 / 2 dot Ind_{y in [-1, 1]} \
                                      = & 1 / 2 integral_(-1)^(1) y^2 dd(y) \
                                      = & 1 / 3.
   $
@@ -970,7 +970,7 @@ $
   Let $X$ be the number of students in a class of $n$ students who share their birthday with other students.
   Let $A_i$ be the events that student $i$ does not share their birthday with any other student.
 
-  Give the expectation and variance of $Y = sum_(j = 1)^n bb(1)_A_j$.
+  Give the expectation and variance of $Y = sum_(j = 1)^n Ind_A_j$.
 
   #solution[
     By symmetry,
@@ -980,8 +980,8 @@ $
                            q := P(A_j inter A_k) = & P(A_1 inter A_2) \
                                                  = & (365 dot 364 dot 363^(n - 2)) / 365^n \
                                                  = & 364 / 365 dot (363 / 365)^(n - 2). \
-                                           EE(Y) = & EE sum_(k = 1)^n bb(1)_A_k \
-                                                 = & sum_(k = 1)^n EE(bb(1)_A_k) \
+                                           EE(Y) = & EE sum_(k = 1)^n Ind_A_k \
+                                                 = & sum_(k = 1)^n EE(Ind_A_k) \
                                                  = & sum_(k = 1)^n P(A_k) \
                                                  = & sum_(k = 1)^n p \
                                                  = & n p; \
@@ -1433,8 +1433,8 @@ is independent of $x$ in the first segment.
   #solution[
     - If $S = [a, b] times [c, d]$, i.e. the clousure of $S$ is a rectangle.
       $
-        f_(X, Y) = & bb(1)_{(x, y) in S} / ((b - a) (d - c)) \
-                 = & bb(1)_{ x in [a, b] } / (b - a) dot bb(1)_{ y in [c, d] } / (d - c) \
+        f_(X, Y) = & Ind_{(x, y) in S} / ((b - a) (d - c)) \
+                 = & Ind_{ x in [a, b] } / (b - a) dot Ind_{ y in [c, d] } / (d - c) \
                  = & f_(X follows Unif[a, b]) f_(Y follows Unif[c, d]).
       $
       By definition, $X, Y$ are independent.
@@ -1507,15 +1507,15 @@ is independent of $x$ in the first segment.
     $
     Let $z in [0, 2]$.
     $
-          f_X (x) = & bb(1)_{x in [0, 1]} \
-      f_Y (z - x) = & bb(1)_{z - x in [0, 1]} \
-                  = & bb(1)_{x in [z - 1, z]} \
+          f_X (x) = & Ind_{x in [0, 1]} \
+      f_Y (z - x) = & Ind_{z - x in [0, 1]} \
+                  = & Ind_{x in [z - 1, z]} \
         f_(X + Y) = & integral_(-oo)^(oo) f_X (x) f_Y (z - x) dd(x) \
                   = & integral_(-oo)^(oo) underbrace(
-                        bb(1)_{x in [0, 1] inter [z - 1, z]},
+                        Ind_{x in [0, 1] inter [z - 1, z]},
                         cases(
-                          bb(1)_{x in [0, z]} quad & z in [0, 1),
-                          bb(1)_{x in [z - 1, 1]} quad & z in [1, 2],
+                          Ind_{x in [0, z]} quad & z in [0, 1),
+                          Ind_{x in [z - 1, 1]} quad & z in [1, 2],
                           0 quad & "otherwise"
                         )
                       ) dd(x) \
@@ -1564,13 +1564,16 @@ Other properties include:
 - $
     X, Y "are independent" implies & Cov(X, Y) = 0 \
          Cov(X, Y) = 0 implies.not & X, Y "are independent"; \
-     Cov(bb(1)_A, bb(1)_B) = 0 iff & A, B "are independent".
+         Cov(Ind_A, Ind_B) = 0 iff & A, B "are independent".
   $
 - $abs(Cov(X, Y)) <= sqrt(Var(X) Var(Y))$.
 - $Cov(X, Y) = Cov(Y, X)$.
 - $Cov(a X + b Z, Y) = a Cov(X, Y) + b Cov(Z, Y)$ (bilinearity).
 - $Cov(-X, X) = - Var(X)$.
-- $Cov(bb(1)_A, bb(1)_B) = Cov(bb(1)_A^complement, bb(1)_B^complement)$.
+- $Cov(Ind_A, Ind_B) = Cov(Ind_A^complement, Ind_B^complement)$.
+- $-1 <= Corr(X, Y) <= 1$.
+- $Y = a X + b iff Corr(X, Y)$ = 1.
+- $Cov(X, Y)$ and $Corr(X, Y)$ have the same sign.
 
 #theorem(title: [Variance of Sum of Random Variables])[
   $
@@ -1583,7 +1586,7 @@ Replace the arbitrary random variable $X$ with a indicator, we have:
 
 #theorem(title: [Variance of Sum of Indicators])[
   $
-    Var(sum_(i = 1)^n bb(1)_A_i) = & sum_(i = 1)^n Var(bb(1)_A_i) + sum_(i eq.not j) Cov(bb(1)_A_i, bb(1)_A_j) \
+    Var(sum_(i = 1)^n Ind_A_i) = & sum_(i = 1)^n Var(Ind_A_i) + sum_(i eq.not j) Cov(Ind_A_i, Ind_A_j) \
     = & sum_(i = 1)^n P(A_i) (1 - P(A_i)) + 2 sum_(1 <= i < j <= n) P(A_i inter A_j) - P(A_i) P(A_j).
   $
 ]
@@ -1595,11 +1598,62 @@ Replace the arbitrary random variable $X$ with a indicator, we have:
   #solution[
     Let $A_i$ be the event that the $i$th card is an Ace.
     $
-           X = & sum_(i = 1)^5 bb(1)_A_i \
-      Var(X) = & Var(sum_(i = 1)^5 bb(1)_A_i) \
-             = & sum_(i = 1)^5 Var(A_i) + 2 sum_(1 <= i < j <= 5) Cov(bb(1)_A_i, bb(1)_A_j) \
+           X = & sum_(i = 1)^5 Ind_A_i \
+      Var(X) = & Var(sum_(i = 1)^5 Ind_A_i) \
+             = & sum_(i = 1)^5 Var(A_i) + 2 sum_(1 <= i < j <= 5) Cov(Ind_A_i, Ind_A_j) \
              = & sum_(i = 1)^5 P(A_i) (1 - P(A_i)) + 2 sum_(1 <= i < j <= 5) (P(A_i inter A_j) - P(A_i) P(A_j)) \
              = & 5 times 4 / 52 times 48 / 52 + 2 times nck(5, 2) times 4 / 52 (3 / 52 - 4 / 52).
     $
   ]
 ]
+
+#problem[
+  In a sequence of $n$ fair coin tosses, let $X$ be the number of two consecutive heads.
+  Give $EE(X), Var(X)$.
+
+  #solution[
+    Let $A_i$ be the event that the $i$th and the $(i + 1)$th toss are heads.
+    $
+      X = & sum_(i = 1)^(n - 1) Ind_(A_i).
+    $
+    Coin tosses are pairwise independent to one another, hence
+    $
+      P(A_i) = & 1 / 4 \
+       EE(X) = & EE(sum_(i = 1)^(n - 1) Ind_(A_i)) \
+             = & (n - 1) / 4.
+    $
+    Obviously, $A_j$ and $A_k$ are independent if $j - k >= 2$.
+    $
+      P(A_j inter A_(j + 1)) = & 1 / 8 \
+         Cov(A_j, A_(j + 1)) = & P(A_j inter A_(j + 1)) - P(A_j) - P(A_(j + 1)) \
+                             = & 1 / 16 \
+                      Var(X) = & Var(sum_(j = 1)^(n - 1) Ind_(A_j)) \
+                             = & sum_(j = 1)^(n - 1) Var(Ind_(A_j)) + 2 sum_(j = 1)^(n - 2) Cov(Ind_(A_j), Ind_(A_(j + 1))) \
+                             = & (n - 1) 3 / 16 + (n - 2) 1 / 16.
+    $
+  ]
+]
+
+== Estimating Tail Probabilities
+#theorem(title: [Markov's Inequality])[
+  Given a non-negative random variable $X$ and value $t > 0$,
+  $
+    P(X >= t) <= & EE(X) / t.
+  $
+]
+
+#theorem(title: [Chebychev's Inequality])[
+  Given random variable $X$ with $EE(X) = mu, Var(X) = sigma^2$, for $t >= 0$,
+  $
+    P(abs(X - mu) >= t) <= & sigma^2 / t^2.
+  $
+]
+
+#corollary-box(title: [$sqrt(n)$ Deviation From Sum])[
+  Given $X_i$ uncorrelated random variables, and their sum $S_n$,
+  $
+    P(abs(S_n - n mu) >= sqrt(n) t) = & P(abs(S_n / n - mu) >= t / sqrt(n)) \
+                                   <= & sigma^2 / t^2.
+  $
+]
+
