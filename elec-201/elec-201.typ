@@ -621,8 +621,8 @@ Then, we apply a AC source to move the load line and the biasing, hence their in
 
 The types of FET are
 - Junction FET (JFET)
-- D-MOS FET
-- E-MOS FET
+- D-MOSFET (Metal Oxide Semiconductor FET)
+- E-MOSFET
 
 == JFET
 Current flow from drain (D) to source (S), controlled by a gate (G).
@@ -633,9 +633,42 @@ If we wrap N material with P material, then control the voltage drop from the ga
 When the voltage drop from the drain to the source is too large, the depletion zone also becomes too large for current.
 Hence, after a certain $V_"DS"$, the current will also remain constant.
 That voltage is called the overdrive voltage, $V_"Ov" = V_"GS" - V_"PO"$ where $V_"PO"$ is the "pinch-off" voltage, i.e. the $V_"GS"$ that would turn off the JFET.
+An overdrive voltage greater than $V_"DS"$ corresponds to a constant voltage.
+
+Otherwise, we are in the triode mode.
 $
   I_"D" = & I_"DS"_"Sat" (1 - V_"GS" / V_"PO")^2
 $
-when $V_"Ov" > 0$.
+when $V_"Ov" > V_"DS"$.
 
 Notably, $I_"G" = 0$.
+
+== MOSFET
+A MOSFET is like a JFET, but instead of direct contact of an N channel and a P wrap, it is a _weak_ P channel, an metal wrap, and a glass insulator in between.
+
+The weak P channel can hardly conduct, so it is normally just off.
+In parallel to the source and the drain, there are _strong_ N materials.
+They still cannot fight the P channel, but only when a _large_ voltage is applied to the gate; that voltage is called the threshold $V_"t"$.
+
+Hence, it functions the opposite to a JFET:
+Gate voltage creates a channel, not shuts off one.
+
+The saturation mode exists, too.
+$
+  V_"Ov" = & V_"GS" - V_t.
+$
+
+- If $V_"GS" < V_t$, then $I_D = 0$.
+- Otherwise...
+  - If $V_"DS" >= V_"Ov"$, then it is in saturation mode.
+    $
+      I_D = & 1 / 2 k_n V_"Ov"^2.
+    $
+  - If $V_"DS" < V_"Ov"$, then the conductance (inverse resistance) is given by
+    $
+      G_"DS" = & k_n (V_"Ov" - V_"DS" / 2) \
+         I_D = & G_"DS" V_"DS"
+    $
+    where $k_n$ is the conductance coefficient.
+
+To solve a MOSFET, we first see if it is in cut-off by comparing $V_"GS"$ and $V_t$, then we assume it is in saturation, solve for $V_"DS"$ and see if it make sense; if it does not, then we form an equation of $I_D$ in triode mode.
