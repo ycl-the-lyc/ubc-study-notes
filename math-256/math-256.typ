@@ -2223,8 +2223,112 @@ Given a point $(x, t)$, the solution means that $(x, t)$ can only be influenced 
     - The case of $Delta u^"S" = 0$:
       Swap symbols from $u^"W" (x, y)$:
       $
-        u^"S" (x, y) =& sum_(n = 1)^oo f^"S"_n sinh((n pi (b - y)) / a) / sinh((n pi b) / a) sin((n pi x) / a).
+        u^"S" (x, y) = & sum_(n = 1)^oo f^"S"_n sinh((n pi (b - y)) / a) / sinh((n pi b) / a) sin((n pi x) / a).
       $
   ]
 ]
 
+#problem(title: [Another Neumann Boundary Condition])[
+  Given an $a$ for $x$ and a $b$ for $y$,
+  $
+                                Delta u = & 0 \
+    pdv(u, x) (0, y) = pdv(u, x) (a, y) = & 0 \
+                       pdv(u, y) (x, 0) = & f(x) \
+                       pdv(u, y) (x, b) = & 0.
+  $
+  Additionally, $f'(x)$ should be zero, because of physics.
+
+  #solution[
+    $
+      Delta u = & pdv(u, x, 2) + pdv(u, y, 2).
+    $
+    Notice that
+    $
+      pdv(u, x) (0, y) = pdv(u, x) (a, y) = & 0
+    $
+    is a homogeneous boundary condition, hence we can seperate variables.
+    $
+                          u(x, y) = & X(x) Y(y) \
+      pdv(u, x, 2) + pdv(u, y, 2) = & X''(x) Y(y) + X(x) Y''(y) \
+                                  = & 0 \
+                  (X''(x)) / X(x) = & - (Y''(y)) / Y(y) \
+                                  = & -mu^2.
+    $
+    (The homogeneous boundary condition is in the $x$ direction, which is why we choose to make $-mu^2$ instead of $mu^2$.)
+    $
+      pdv(u, x) (0, y) = & X'(0) Y(y) quad & "always true" \
+                 X'(0) = & 0.
+    $
+    For $X$,
+    $
+      X''(x) + mu^2 X(x) = & 0 \
+           X'(0) = X'(a) = & 0 \
+                    mu_n = & (n pi) / a quad    & n in {0, 1, 2, ...} \
+                 X_n (x) = & cos((n pi x) / a).
+    $
+    For $Y$,
+    $
+      Y''(y) - mu^2 Y(y) = & 0 \
+                   Y'(b) = & 0 \
+                    Y(y) = & A cosh(mu y) + B sinh(mu y) \
+                         = & C cosh(mu (b - y)),
+    $
+    which can be given by
+    $
+      Y'(b) = & A mu sinh(mu b) + B mu cosh(mu b) \
+            = & 0 \
+          B = & - (A sinh(mu b)) / cosh(mu b) \
+       Y(y) = & A / cosh(mu b) [cosh(mu b) cosh(mu y) - sinh(mu b) sinh(mu y)] \
+            = & underbrace(A / cosh(mu b), C) cosh(mu (b - y)).
+    $
+
+    $
+      u(x, y) = & C_0 + sum_(n = 1)^oo C_n cosh(mu_n (b - y)) cos(mu_n x) \
+      pdv(u, y) (x, y) = & 0 + sum_(n = 1)^oo -C_n mu_n sinh(mu_n (b - y)) cos(mu_n x) \
+      f(x) = & 0 - sum_(n = 1)^oo C_n mu_n sinh(mu_n b) cos((n pi x) / a) \
+      = & a_0 / 2 + sum_(n = 1)^oo a_n cos((n pi x)/ L) \
+      a_0 = & 2 / a integral_(0)^(a) f(x) dd(x) \
+      = & 0 \
+      -C_n mu_n sinh(mu_n b) = & 2 / a integral_(0)^(a) f(x) cos((n pi x) / a) dd(x) \
+      = & a_n^f \
+      C_n = & - a_n^f / (mu_n sinh(mu_n b)) \
+      u(x, y) = & C_0 - sum_(n = 1)^oo (a_n^f cosh((n pi) / a (b - y)) cos((n pi x) / a)) / ((n pi) / a sinh((n pi b) / a)).
+    $
+  ]
+]
+
+#problem(title: [Mixed Boundary Conditions])[
+  The previous setup, but the left $x$ boundary is
+  $
+    pdv(u, x) (0, y) = & 0,
+  $
+  and the bottom boundary is
+  $
+    pdv(u, y) (x, 0) = & sin((3 pi x) / (2 a)).
+  $
+
+  #solution[
+    ...still choose $-mu^2$ since the homogeneous boundary is in the $x$ direction.
+
+    For $X$,
+    $
+      X(0) = X'(a) = & 0.
+    $
+    - If $mu = 0$,
+      $
+        X''(0) = X'(0) = & 0,
+      $
+      trivial.
+    - If $mu > 0$,
+      $
+                   X(x) = & A cos(mu x) + B sin(mu x) \
+                  X'(x) = & -A mu sin(mu x) + B mu cos(mu x) \
+         X(0) = 0 implies & A = 0 \
+        X'(a) = 0 implies & mu a = (?) pi / 2 \
+                 mu_n a = & (2n - 1) pi / 2 \
+                   mu_n = & ((2n - 1) pi) / (2a) quad        & n in {1, 2, ...} \
+                X_n (x) = & sin(mu_n x).
+      $
+    // TODO somehow get Y
+  ]
+]
