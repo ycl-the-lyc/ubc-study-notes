@@ -657,6 +657,7 @@ The saturation mode exists, too.
 $
   V_"Ov" = & V_"GS" - V_t.
 $
+(Voltage drop from the gate is fixed in a setup, hence the corresponding overdrive voltage.)
 
 - If $V_"GS" < V_t$, then $I_D = 0$.
 - Otherwise...
@@ -664,11 +665,25 @@ $
     $
       I_D = & 1 / 2 k_n V_"Ov"^2.
     $
+    (Not considering Early's effect.)
   - If $V_"DS" < V_"Ov"$, then the conductance (inverse resistance) is given by
     $
       G_"DS" = & k_n (V_"Ov" - V_"DS" / 2) \
-         I_D = & G_"DS" V_"DS"
+       I_"D" = & G_"DS" V_"DS"
     $
     where $k_n$ is the conductance coefficient.
+    Differntiate $I_"D"$, we get $V_"Ov"$ when it gets to zero.
 
-To solve a MOSFET, we first see if it is in cut-off by comparing $V_"GS"$ and $V_t$, then we assume it is in saturation, solve for $V_"DS"$ and see if it make sense; if it does not, then we form an equation of $I_D$ in triode mode.
+To solve a MOSFET, we first see if it is in cut-off by comparing $V_"GS"$ and $V_t$, then we assume it is in saturation, solve for $V_"DS"$ and see if it make sense; if it does not, then we form an equation of $I_"D"$ in triode mode.
+
+=== P-channel MOSFET
+Just like in BJT, we can swap the N and the P materials.
+$V_"GS", V_t, V_"DS"$ are negated, and so are their comparison:
+- $V_"GS"$ has to be more negative than $V_t$ to conduct;
+- $V_"DS"$ has to be more negative than $V_"GS" - V_t$ to overdrive.
+
+== Complementary MOSFET
+By baking a P-MOSFET and an N-MOSFET side-by-side on a chip, we (may) create a complementary pair of MOSFET that operate in exactly opposite logic, for perfect NOT logic.
+That is a CMOSTFET.
+
+// TODO
