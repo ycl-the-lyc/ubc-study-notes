@@ -1055,7 +1055,7 @@ Given random variable $S_n follows Bin(n, p)$, $EE(S_n) = n p, Var(S_n) = n p (1
   meaning that for larger $n$, $S_n$ is less likely to deviate from $EE(S_n)$ (even if $EE(S_x) = plus.minus oo$).
 
   #proof[
-    // TODO future lecture
+    See Chebychev's Inequality in @ch:est-tail-prob.
   ]
 ]
 
@@ -1634,7 +1634,7 @@ Replace the arbitrary random variable $X$ with a indicator, we have:
   ]
 ]
 
-== Estimating Tail Probabilities
+== Estimating Tail Probabilities <ch:est-tail-prob>
 #theorem(title: [Markov's Inequality])[
   Given a non-negative random variable $X$ and value $t > 0$,
   $
@@ -1656,4 +1656,31 @@ Replace the arbitrary random variable $X$ with a indicator, we have:
                                    <= & sigma^2 / t^2.
   $
 ]
+
+When constructing an upper-bound with Chebychev's Inequality, we may expand the event size to formulate an absolute value, since $a > b$ is like how $a$ deviate from its expected value.
+$
+  a >= b implies abs(a - mu) >= b - mu.
+$
+
+#theorem(title: [Normal Tail Decay])[
+  $
+                                                         P(N(0, 1) gt.lt.eq t) <= & e^(-t^2 / 2) \
+    P(N(mu, sigma^2) gt.lt.eq mu plus.minus t) = P(N(0, 1) gt.eq.lt t / sigma) <= & e^(-t^2 / (2 sigma^2)).
+  $
+]
+
+== Conditional Distribution of Discrete Random Variable
+#definition[
+  Let $X$ be a discrete random variable, and $B$ be an event that $P(B) > 0$.
+  $
+    P_(X = k given B) = & P(X = k inter B) / P(B).
+  $
+
+  Hence,
+  $
+    EE(X given B) = & sum_k k P(X = k given B).
+  $
+]
+
+This total expectation formula is just like the total probability formula we saw before.
 
