@@ -643,8 +643,9 @@ when $V_"Ov" > V_"DS"$.
 
 Notably, $I_"G" = 0$.
 
-== MOSFET
+== Enhanced MOSFET
 A MOSFET is like a JFET, but instead of direct contact of an N channel and a P wrap, it is a _weak_ P channel, an metal wrap, and a glass insulator in between.
+That is an EMOSFET.
 
 The weak P channel can hardly conduct, so it is normally just off.
 In parallel to the source and the drain, there are _strong_ N materials.
@@ -680,10 +681,36 @@ To solve a MOSFET, we first see if it is in cut-off by comparing $V_"GS"$ and $V
 Just like in BJT, we can swap the N and the P materials.
 $V_"GS", V_t, V_"DS"$ are negated, and so are their comparison:
 - $V_"GS"$ has to be more negative than $V_t$ to conduct;
-- $V_"DS"$ has to be more negative than $V_"GS" - V_t$ to overdrive.
+- $V_"DS"$ has to be more negative than $V_"GS" - V_t$ to saturate.
+
 
 == Complementary MOSFET
 By baking a P-MOSFET and an N-MOSFET side-by-side on a chip, we (may) create a complementary pair of MOSFET that operate in exactly opposite logic, for perfect NOT logic.
 That is a CMOSTFET.
 
-// TODO
+== Biasing
+The biasing circuit is almost the same as the BJT's, however, it amplifies voltage instead of current, and the voltage divider is way more precise, since $I_"GS" = 0$.
+
+And, since it amplifies voltage, a resistor from the sink to the reference (ground) would act as a negative feedback:
+$I_"D" arrow.t thin implies V_"S" arrow.t thin implies V_"GS" arrow.b$
+
+=== Channel Length Modulation
+We mentioned that Early's effect will be present under a large (DC) signal.
+In saturation mode, $I_"D"$ is not actually constant.
+$
+  I_"D"_o = & 1/2 k_n V_"Ov"^2 \
+    I_"D" = & 1/2 k_n V_"Ov"^2 + V_"DS" / r_o \
+          = & 1/2 k_n V_"Ov"^2 (1 + V_"DS" / abs(V_A)) \
+          = & 1/2 k_n V_"Ov"^2 (1 + lambda V_"DS")
+$
+where $r_o = (abs(V_A) + V_"Ov") / I_"D"_o$ is inverse of the slope, $lambda = 1 / abs(V_A)$.
+
+=== Small Signals
+Just like for BJT,
+$
+  i_"d" = & g_m v_"d" \
+    g_m = & evaluated(pdv(i_"D", v_"GS"))_(V_"GS") \
+        = & k_n V_"Ov".
+$
+
+In parallel with this voltage-controled current source, we add the channel length modulation resistance, $r_o$.
