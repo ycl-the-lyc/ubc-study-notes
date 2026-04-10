@@ -714,3 +714,14 @@ $
 $
 
 In parallel with this voltage-controled current source, we add the channel length modulation resistance, $r_o$.
+In AC,
+$
+  r_o = & abs(V_A) / I_"D"_o.
+$
+
+In general,
+$
+  V_"DS" approx & V_"DD" / 2 \
+   V_"S" approx & V_"DD" / 8.
+$
+
