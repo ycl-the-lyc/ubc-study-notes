@@ -1684,3 +1684,29 @@ $
 
 This total expectation formula is just like the total probability formula we saw before.
 
+Now, we can replace an event with a discrete random variable, and it will still work.
+
+#problem[
+  Let $Y$ be the outcome of a fair six-sided die roll.
+  Roll the die for some times $X_1, X_2, ... X_Y$, and let $S$ be their sum.
+  Give $EE(S)$.
+
+  #solution[
+    Given $Y = y$, we would have
+    $
+                      S = & sum_(j = 1)^y X_j \
+      EE(S given Y = y) = & y EE(X_1).
+    $
+    Hence,
+    $
+      EE(S) = & sum_y P(Y = y) EE(S given Y = y) \
+            = & underbrace(sum_y P(Y = y), EE(Y)) y EE(X_1) \
+            = & EE(X_1) EE(Y) \
+            = & (7/2)^2.
+    $
+  ]
+]
+
+Even if $X$ is continuous, or $X, Y$ are jointly continuous, it still works.
+Just replace $P(Y = ...)$ with the PDF or joint PDF, and sum with integral.
+
