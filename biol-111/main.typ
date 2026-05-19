@@ -4,6 +4,39 @@
   author: "Yecheng Liang",
 )
 
+/// Make a allele symbol.
+///
+/// - base (str, content): Symbol of the gene.
+/// - phenotypes (arguments): Symbols of the phenotypes.
+/// -> content
+#let allele(base, ..phenotypes) = $#base^#phenotypes.pos().join()$
+
+/// Make a Punnett Square as a table.
+///
+/// - als (array): Alleles for the rows.
+/// - comb (function): Combinator of two alleles, must take alleles `(row, col)` and return a `table.cell` equivalent.
+/// - alt (auto, array): Alleles for the columns, leave as `auto` for `als`
+/// - targs (arguments): Arguments for the `table` the function produces, excluding `columns` and `rows`
+/// -> content
+#let punnett(als, comb, alt: auto, targs: arguments()) = {
+  alt = if alt == auto { als } else { alt }
+  let targs = (
+    arguments(
+      align: center + horizon,
+      stroke: (x, y) => if x == 0 and y == 0 { none } else { black + 0.5pt },
+    )
+      + targs
+  )
+  table(
+    columns: alt.len() + 1,
+    rows: als.len() + 1,
+    ..targs,
+    none,
+    ..alt,
+    ..als.zip(cartprod(als, alt).map(((a, b)) => comb(a, b)).chunks(alt.len())).flatten()
+  )
+}
+
 = Genetics
 
 == Genetic Materials
@@ -62,7 +95,7 @@
 
 / Homozygpous: A cell having identical alleles across homologous chromosomes.
 
-/ Hetrozygous: A cell having different alleles across homologous chromosomes.
+/ Heterozygous: A cell having different alleles across homologous chromosomes.
 
 + $G_1$, gap one, cell growth;
   At the end, cell checks if condition is favorable for cell division.
@@ -109,3 +142,69 @@ Hence, ploidy is unchaned.
 Each chromosome is duplicated, combined with its duplicated homologous chromosome, then distributed into four cells.
 Hence, ploidy is halved.
 
+From the meiosis process, we can see that in a diploid cell, the number of possible genotypes is
+$
+  2^n
+$
+where $n$ is the number of alleles that can independently swap, since there are two possible alignments for each homologous chromosome pair.
+Homozygpous alleles does not affect this number.
+
+Cross-over and locus of the gene determines if the alleles can be swapped independently.
+In other words, if the cross-over separates genes of the genotype (on a chromosome).
+
+== Genotype and Phenotype
+This section assumes diploid organisms.
+
+/ Dominant allele: An allele that would express a phenotype with a positive number of it present.
+
+/ Recessive allele: An allele that would not express a phenotype unless all of the gene is that allele.
+
+The relationship can be affected by other genes.
+
+#example[
+  #let (FB, FW) = ("B", "W").map(allele.with("F"))
+  Let $FB := "black fur", FW := "white fur"$.
+  If we say that $FB$ is dominant and $FW$ is recessive (some times distinguished with capitalization), then
+  $
+    FB FB = FB FW = & "black fur" \
+            FW FW = & "white fur".
+  $
+]
+
+/ Incomplete dominance: The two original phenotypes combine to produce a third, in-between phenotype.
+
+/ Co-dominance: The two phenotypes interleave, but in their original way.
+
+#definition(title: [Punnett Square])[
+  Basically, Cartesian product of two identical sets.
+]
+
+#example[
+  Use the fruit fly eye color example.
+
+  #let red = red.darken(20%).transparentize(30%)
+  #let (XR, Xr) = ("R", "r").map(allele.with("X"))
+  #let Y = allele("Y")
+  #let a2c(a) = ((XR, red), (Xr, white)).find(((b, _)) => a == b).at(1)
+
+  $
+    XR := & "red eye" \
+    Xr := & "white eye" \
+    XR >> & Xr.
+  $
+  #figure(
+    caption: $#XR#Xr times #XR#Y$,
+    punnett(
+      (XR, Xr),
+      alt: (XR, Y),
+      (a, b) => {
+        let fill = if b == Y { a2c(a) } else { red }
+        let sex = if b == Y { sym.mars } else { sym.venus }
+        table.cell(
+          fill: fill,
+          $#a#b space #sex$,
+        )
+      },
+    ),
+  )
+]
