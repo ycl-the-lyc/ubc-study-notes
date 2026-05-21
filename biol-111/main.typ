@@ -55,7 +55,7 @@
 
 / Codon: A Three-nucleotide block that codes a specific amino acid.
 
-/ Phenotype: A measurable physical property of an individual.
+/ Phenotype: An expression of a physical property of an individual.
 
 / Chromosome: A pack of DNAs.
   / Chromatid: A DNA in the chromosome.
@@ -74,6 +74,7 @@
 / Procaryote: An organism whose cell has no nucleus.
 
 / Somatic/vegetal cell: A "body" cell.
+  / Autosomal: Of "body", not sex.
 
 / Gamete: A "sex" cell.
 
@@ -208,3 +209,84 @@ The relationship can be affected by other genes.
     ),
   )
 ]
+
+#example[
+  An for non-dominance with skin color as example.
+
+  #let (R1, R2) = (1, 2).map(allele.with("R"))
+  $
+        #R1 := & "red skin" \
+        #R2 := & "white skin" \
+    #R1 approx & #R2.
+  $
+
+  #figure(
+    caption: $#R1#R2 times #R1#R2$,
+    punnett(
+      (R1, R2),
+      (a, b) => {
+        let fill = if (a, b) == (R1, R1) {
+          red
+        } else if (a, b) == (R2, R2) {
+          white
+        } else {
+          gradient.linear(red, white, angle: 45deg).sharp(3)
+        }
+        table.cell(fill: fill, $#a#b$)
+      },
+    ),
+  )
+]
+
+/ Trait: An observable characteristic of an organism, usually morphological.
+  A phenotype is an expression of a state of a trait.
+
+/ True-breeding: A breeding where both parents are homozygpous.
+  The offspring is then heterozygous.
+
+
+Remember that X-link traits can inherit differently across male and female offsprings.
+A phenotypic mode of inheritance difference between male and female offsprings indicate that the trait is X-linked.
+
+#definition(title: [Pedigree])[
+  A pedigree is a tree of decendence showcasing sex, mating outcome, and traits.
+
+  #figure(
+    caption: [Pedigree Symbols],
+    table(
+      columns: (20%, auto),
+      [Symbol], [Meaning],
+      $square$, [Male],
+      $circle$, [Female],
+      $square.filled \/ circle.filled$, [Is "affected"],
+      $stretch(-, size: #200%)$, [Mated],
+      $stretch(=, size: #200%)$, [Consanguine mated],
+      $tack.b$, [Produced],
+    ),
+  )
+]
+
+#example[
+  Given an unaffected female (1) and an affected male (2), who mate to produce an affected male (3), the inheritance mode cannot be X-linked dominant.
+
+  #let (XA, Xa) = ("A", "a").map(allele.with("X"))
+  #let Y = allele("Y")
+  #proof[
+    Assume that the inheritance mode is X-linked dominant.
+    Let $A$ be the indicator that one is affected.
+    $
+      #XA := & "affected" \
+      #Xa := & "not affected".
+    $
+    Then,
+    $
+         not A(P_1) implies & P_1 = Xa Xa \
+             A(P_2) implies & P_2 = Xa #Y \
+             A(F_3) implies & F_3 = XA #Y \
+      P_1 times P_2 implies & F_3 = s #Y quad & "where" s in P_1.
+    $
+    However, $XA in.not P_1 implies s eq.not XA$, which contradicts $XA #Y = s #Y$.
+    Therefore, the inheritance mode cannot be X-linked dominant.
+  ]
+]
+
