@@ -109,6 +109,9 @@
 
 + $M$, nuclear division, mitosis or meiosis, then cytokinesis (duplicating cytoplasm, which is stuff other than the nucleus).
 
+After cytokinesis, animal cells pinch-off, plant cells form a wall in between.
+Then, two new cells are formed.
+
 === Mitosis
 + Prophase & prometaphase, DNAs condense into chromosomes, spindle apparatus starts to form;
 
@@ -124,6 +127,7 @@ Hence, ploidy is unchaned.
 === Meiosis
 + Meiosis Ⅰ
   + Prophase, DNAs condense into chromosomes, spindle apparatus starts to form;
+
     Homologous chromosomes combine at centromeres, forming tetrads.
     Cross-over can happen when combining:
     + A protein breaks a pair of non-sister chromatids at one or two same location;
@@ -138,6 +142,7 @@ Hence, ploidy is unchaned.
   + Telophase, nuclear envelopes reform.
 
 + Meiosis Ⅱ
+
   Basically mitosis.
 
 Each chromosome is duplicated, combined with its duplicated homologous chromosome, then distributed into four cells.
@@ -266,6 +271,12 @@ A phenotypic mode of inheritance difference between male and female offsprings i
   )
 ]
 
+In pratice, we need to be aware of assumptions made in drawing a pedigree.
+Phenotypes are not always two distinct types, determined by only one gene, or not affected by external factors like the environment.
+Genotypes may not be typical, for example, one can carry extra chromosomes.
+
+Always check reliability of a pedigree when interpreting it.
+
 #example[
   Given an unaffected female (1) and an affected male (2), who mate to produce an affected male (3), the inheritance mode cannot be X-linked dominant.
 
@@ -289,4 +300,21 @@ A phenotypic mode of inheritance difference between male and female offsprings i
     Therefore, the inheritance mode cannot be X-linked dominant.
   ]
 ]
+
+= Evolution
+/ Microevolution: Changes in allele composition or frequencies within a species.
+
+/ Macroevolution: Descent of new species from an old one, usually over a very long time.
+
+In this course as of now, we define life as organisms of one or multiple cells and use DNA as genetic codes.
+So viruses are not, and we can assume that all living things have a common ancestor.
+
+/ Homology: Also homologous feature; a trait present in multiple organisms that was inherited from their common ancestor.
+  A homologous feature does not have to look the same, or function in the same way on these organisms.
+  Traits that look or function similarly may not be homologies.
+
+/ Extinction: An event where a species has no living members and can no longer pass their distinct genetic material to offspings.
+  "Javis, overlay extinction rate with human industrialization timeline."
+
+/ Vestigial feature: A small remnant of a feature that was significant.
 
