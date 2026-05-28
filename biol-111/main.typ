@@ -302,7 +302,7 @@ Always check reliability of a pedigree when interpreting it.
 ]
 
 = Evolution
-/ Microevolution: Changes in allele composition or frequencies within a species.
+/ Microevolution: Changes in allele frequencies within a species.
 
 / Macroevolution: Descent of new species from an old one, usually over a very long time.
 
@@ -317,4 +317,46 @@ So viruses are not, and we can assume that all living things have a common ances
   "Javis, overlay extinction rate with human industrialization timeline."
 
 / Vestigial feature: A small remnant of a feature that was significant.
+
+== Machenisms of Evolution
+
+/ Mutation: Random changes to alleles that introduces new alleles.
+  From as small as one nucleotide, to segments of chromosomes.
+
+Mostly due to error in gene duplication, hence most prominant during meiosis and mitosis.
+If a mutation occurs in a germline cell ("sex" cell), it could be inherited, hence significant to evolution.
+
+Many mutation has little to no effect on an individual or its fitness.
+It is because most genes do not code for amino acids, and those which do sometime have redundancy.
+
+/ Gene flow: Alleles introduced to a population by moving-in and mating of individuals.
+
+Skipping explanation since random walk is learned.
+
+/ Genetic drift: Random shifts in allele frequencies in a population over generations.
+
+For diploids like us, passing of either of the two paired chromosomes from each parent can cause genetic drifts.
+There is also random survival of individuals carrying certain alleles.
+In all, some individuals have more descendants than others, just by luck.
+
+Genetic drift tend to have larger effects on smaller populations, since each drift in an individual is more effective when population is small.
+Yes, the partial differential random walk diagrams.
+
+  / Bottleneck event: A drastic decrease of population.
+    Only alleles left in indivuduals alive are carried on.
+
+  / Founder event: A small group from a population starting a new population.
+    It is effectively the same as a bottleneck event.
+
+  These events make genetic drifts more likely, but it can happen without change in popilation.
+
+/ Natural selection: Non-random changes in allele frequencies due to conditions being favorable to some individuals.
+
+  / Fitness: A measure of relative reproductive success.
+    Survival before potential reproduction counts, but survival alone does not count.
+
+Natural selection occur iff:
+- Variation: There is variation in phenotypes.
+- Differential reproduction: The different phenotypes result in different fitness.
+- Heredity: The alleles expressing the phenotypes are inheritable.
 
