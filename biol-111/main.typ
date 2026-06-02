@@ -94,7 +94,7 @@
 / Genotype: A set of gene carried in a cell.
   There can be multiple genotypes in one cell.
 
-/ Homozygpous: A cell having identical alleles across homologous chromosomes.
+/ Homozygous: A cell having identical alleles across homologous chromosomes.
 
 / Heterozygous: A cell having different alleles across homologous chromosomes.
 
