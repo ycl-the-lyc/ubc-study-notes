@@ -335,12 +335,12 @@ Skipping explanation since random walk is learned.
 
 / Genetic drift: Random shifts in allele frequencies in a population over generations.
 
-For diploids like us, passing of either of the two paired chromosomes from each parent can cause genetic drifts.
-There is also random survival of individuals carrying certain alleles.
-In all, some individuals have more descendants than others, just by luck.
+  For diploids like us, passing of either of the two paired chromosomes from each parent can cause genetic drifts.
+  There is also random survival of individuals carrying certain alleles.
+  In all, some individuals have more descendants than others, just by luck.
 
-Genetic drift tend to have larger effects on smaller populations, since each drift in an individual is more effective when population is small.
-Yes, the partial differential random walk diagrams.
+  Genetic drift tend to have larger effects on smaller populations, since each drift in an individual is more effective when population is small.
+  Yes, the partial differential random walk diagrams.
 
   / Bottleneck event: A drastic decrease of population.
     Only alleles left in indivuduals alive are carried on.
@@ -353,10 +353,33 @@ Yes, the partial differential random walk diagrams.
 / Natural selection: Non-random changes in allele frequencies due to conditions being favorable to some individuals.
 
   / Fitness: A measure of relative reproductive success.
-    Survival before potential reproduction counts, but survival alone does not count.
+    Survival before potential reproduction counts, but survival alone does not matter.
 
+=== Natural Selection
 Natural selection occur iff:
 - Variation: There is variation in phenotypes.
 - Differential reproduction: The different phenotypes result in different fitness.
+  In case of sexual selection, the difference can also be the gene quality of the offsprings.
 - Heredity: The alleles expressing the phenotypes are inheritable.
+
+There are three modes of selection:
+
+/ Directional selection: Selection that favors one end of a phenotype.
+  It usually reduces variation in that phenotype.
+
+/ Stablilzing selection: Selection that favors the average of a phenotype.
+  It usually reduces variation in that phenotype.
+
+/ Disruptive selection: Selection that punishes the average of a phenotype.
+  It usually raises variation in that phenotype, but does not affect the range or the average.
+
+Note that the same selected phenotype may be results of different alleles or genes.
+
+/ Adaptation: A species becoming more fit over generations.
+  It can be physiological, but also behavioral.
+
+  As a part of natural selection, the adapted phenotype must be heritable, and function towards higher fitness.
+
+/ Acclimation: An individual becoming more fit during its lifetime.
+  Hence, not a part of natural selection.
 
