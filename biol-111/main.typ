@@ -313,6 +313,8 @@ So viruses are not, and we can assume that all living things have a common ances
   A homologous feature does not have to look the same, or function in the same way on these organisms.
   Traits that look or function similarly may not be homologies.
 
+/ Analogy: Also analogous feature; traits that look or function similarly but not inherited from a common ancestor.
+
 / Extinction: An event where a species has no living members and can no longer pass their distinct genetic material to offspings.
   "Javis, overlay extinction rate with human industrialization timeline."
 
@@ -382,4 +384,49 @@ Note that the same selected phenotype may be results of different alleles or gen
 
 / Acclimation: An individual becoming more fit during its lifetime.
   Hence, not a part of natural selection.
+
+== Phylogenetic Trees
+Basically a tree of species growing along time, with some nodes having trait marks, whom of common parent indicate diversion of a trait.
+A node of one child may not be marked, but we can point to any point with a non-zero time component and say some species is there.
+
+/ Sister taxa: Children of a common parent on a phylogenetic tree.
+
+/ Monophyletic group: Also clade; a subtree of a phylogenetic tree.
+/ Polyphyletic group: A monophyletic group without the common ancestor.
+/ Paraphyletic group: A monophyletic group excluding some subtrees of the common ancestor.
+
+/ Synapomorphy: Homologous traits inherited from the most recent ancestor.
+/ Plesiomorphy: Also symplesiomorphy; homologous traits inherited from before the penultimate branching.
+/ Autapomorphy: Traits unique to a branch.
+
+Note that these are only defined for branchings shown.
+It is very likely for more intermediate branching to exist but not drawn.
+
+/ Related: Having a common ancestor.
+  The more homology (usually more common ancestors), the closer two species are related.
+
+The trees are bifurcating, but they can multifurcate when details are not known or coarsely scaled.
+
+== Speciation
+There is no definite definition of species, but in this class...
+
+/ Species (biological): A population whose members can interbreed and produce viable, fertile offsprings.
+  This is not defined for asexual or organisms whose reproductive status we cannot confirm, exempli gratiā extinct species without relevant records.
+/ Viable: Can survive.
+/ Fertile: Can reproduce.
+
+The timing in breeding also counts as a reproductive barrier.
+
+To speciate:
++ Stop gene flow.
++ Diverge genetics.
++ Isolate reproduction.
+
+/ Allopatric speciation: Speciation via physical separation of population.
+  / Vicariance: Formation of new physical barriers.
+  / Dispersal: One-way movement of populations, not migration.
+
+/ Sympatric speciation: Speciation without physical barriers.
+  This include microhabitat choices, since the organisms can technically move among those freely.
+  For instance, the speciation of Apply Fly and Hawthorn Fly.
 
