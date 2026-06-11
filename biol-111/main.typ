@@ -422,6 +422,9 @@ To speciate:
 + Diverge genetics.
 + Isolate reproduction.
 
+The reproductive barriers can be either pre- and post- zygotic.
+Mechanisms before the gametes fuse are prezygotic.
+
 / Allopatric speciation: Speciation via physical separation of population.
   / Vicariance: Formation of new physical barriers.
   / Dispersal: One-way movement of populations, not migration.
@@ -429,4 +432,16 @@ To speciate:
 / Sympatric speciation: Speciation without physical barriers.
   This include microhabitat choices, since the organisms can technically move among those freely.
   For instance, the speciation of Apply Fly and Hawthorn Fly.
+
+= Ecology
+
+== Distribution
+Places organisms reside for at least a period of time.
+Distribution can change regularly over time and elevation.
+It dependes on abiotic and biotic factors, such as organisms' ability of dispersal, competetion and predation.
+
+/ Tolerance: How well can an organism survive, ranges from optimum, physiological stress, to intolerance.
+  It is related to abundance of that organism.
+
+Note that the range of tolerance spans on non-zero survivorship.
 
