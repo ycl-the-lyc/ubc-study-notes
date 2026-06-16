@@ -302,7 +302,7 @@ Always check reliability of a pedigree when interpreting it.
 ]
 
 = Evolution
-/ Microevolution: Changes in allele frequencies within a species.
+/ Microevolution: Changes in allele frequencies within a specie.
 
 / Macroevolution: Descent of new species from an old one, usually over a very long time.
 
@@ -315,7 +315,7 @@ So viruses are not, and we can assume that all living things have a common ances
 
 / Analogy: Also analogous feature; traits that look or function similarly but not inherited from a common ancestor.
 
-/ Extinction: An event where a species has no living members and can no longer pass their distinct genetic material to offspings.
+/ Extinction: An event where a specie has no living members and can no longer pass their distinct genetic material to offspings.
   "Javis, overlay extinction rate with human industrialization timeline."
 
 / Vestigial feature: A small remnant of a feature that was significant.
@@ -377,7 +377,7 @@ There are three modes of selection:
 
 Note that the same selected phenotype may be results of different alleles or genes.
 
-/ Adaptation: A species becoming more fit over generations.
+/ Adaptation: A specie becoming more fit over generations.
   It can be physiological, but also behavioral.
 
   As a part of natural selection, the adapted phenotype must be heritable, and function towards higher fitness.
@@ -410,7 +410,7 @@ The trees are bifurcating, but they can multifurcate when details are not known 
 == Speciation
 There is no definite definition of species, but in this class...
 
-/ Species (biological): A population whose members can interbreed and produce viable, fertile offsprings.
+/ Specie (biological): A population whose members can interbreed and produce viable, fertile offsprings.
   This is not defined for asexual or organisms whose reproductive status we cannot confirm, exempli gratiā extinct species without relevant records.
 / Viable: Can survive.
 / Fertile: Can reproduce.
@@ -434,6 +434,7 @@ Mechanisms before the gametes fuse are prezygotic.
   For instance, the speciation of Apply Fly and Hawthorn Fly.
 
 = Ecology
+Ecology can study individuals, populations, species, and communities.
 
 == Distribution
 Places organisms reside for at least a period of time.
@@ -445,3 +446,43 @@ It dependes on abiotic and biotic factors, such as organisms' ability of dispers
 
 Note that the range of tolerance spans on non-zero survivorship.
 
+== Population
+/ Population: A group of the same specie in an area at the same time.
+  / Lincoln-Peterson index: The index of the mark-recapture counting method.
+  / Mark-recapture counting: Catching and marking $M$ individuals, then releasing them and let them integrate with their population, finally recapturing $n$ individuals and count the marked ones, $m$.
+    The estimated population size $acute(N)$ is $n times M / m$.
+    It assumes that
+    - the population size remained constant;
+    - the marked ones integrated into their population;
+    - the likelyhood of each individual to be captured was the same.
+
+Note that when calculating birth rate and death rate, we use the population size before the births and deaths.
+
+=== Patterns of Growth
+For population in the nature, it is usually logistical or exponential.
+Exponential growth occurs when no limiting factor is applied, otherwise, exponential growth is expected.
+$
+  N'(t) = & r N(t)
+$
+where $r$ is the growth rate.
+
+Since living resource is limited, a population has a maximum.
+$
+  N'(t) = & r (K - N(t)) / K N(t)
+$
+where $K$ is the maximum capacity.
+
+
+=== Life History
+A life history include birth, growth, reproduction, and death.
+
+A specie is usually $r$-selected or $K$-selected.
+$r$-selected species have high fecundity and low life expectancy, while $K$-selected species have high life expectancy and low fecundity.
+
+== Community
+We classify interactions between organisms as:
+/ Amensalism: One organism inflicting harm on others at no cost or gain of fitness.
+/ Commensalism: One organism benefiting from others but not costing their fitness.
+/ Mutualism: Two organisms benefiting from each other.
+/ Predation: 
+/ Competetion: 
