@@ -484,5 +484,45 @@ We classify interactions between organisms as:
 / Amensalism: One organism inflicting harm on others at no cost or gain of fitness.
 / Commensalism: One organism benefiting from others but not costing their fitness.
 / Mutualism: Two organisms benefiting from each other.
-/ Predation: 
-/ Competetion: 
+/ Predation: One organism hunts and kills other organisms for its fitness.
+/ Competition: Two organisms compete for the same, limited resources.
+
+=== Ecological Niche
+Everything survives has its place, such is the ecological niche of a specie.
+There is the fundamental niche, which is the possible ecological roles the specie can play, and there is the realized niche, which is the actual roles the specie play, due to constraints like competetion.
+
+/ Stable coexistence: Competitors stably partition their fundamental niche to coexist.
+/ Competitive exclusion: The stronger competitor gains their fundamental niche at the cost of the weaker competitor's fundamental niche.
+
+== Succession
+/ Disturbance: A change to an ecosystem that usually involves substantial loss of biomass.
+
+/ Primary succession: Succession when organisms start over to colonize a place.
+  For example, following removal of all soil, plants have to start from lichen on rocks.
+
+/ Secondary succession: Succession when life-sustaining resources still largely exist.
+
+At earlier stages of succession, organisms are usually $r$-selected, and display other life history traits that fit the harsh environment.
+At later stages of succession, organism are more $K$-selected, focusing on individual survival and growth.
+
+== Energy Flow and Nutrient Cycle
+The original energy input is solar energy from the Sun, plus some chemical energy and heat from the mantle of the Earth.
+
+Then, energy flows as follows, from one trophic level to another:
++ Producers, they photosynthesis.
++ Primary consumers, they eat the producers.
++ Secondary consumers, they eat the primary consumers.
++ Tertiary consumers, they eat the tertiary consumers.
++ Detritivores and decomposers, they eat dead bodies of everyone above.
+
+Roughly 10% of chemical energy is transferred to the consumer trophic level, save for the detritivores and the decomposers.
+We can use relative biomass to estimate a specie's trophic level.
+
+Unlike energy, nutrients do not have a constant input or output, but are rather recycled within the Earth.
+
+- Nitrogen, 80% in the atmosphere, but quite an amount in organisms can come from the ocean.
+  However, the triple bond in nitrogen molecules is too strong for all but bacteria, who converts nitrogen molecules to those of weaker bonds.
+
+- Carbon, mostly in the atmosphere.
+  The producers photosynthesize to fixate carbon, others oxidize carbon back out.
+
