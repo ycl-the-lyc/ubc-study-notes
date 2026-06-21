@@ -254,7 +254,7 @@ Remember that X-link traits can inherit differently across male and female offsp
 A phenotypic mode of inheritance difference between male and female offsprings indicate that the trait is X-linked.
 
 #definition(title: [Pedigree])[
-  A pedigree is a tree of decendence showcasing sex, mating outcome, and traits.
+  A pedigree is a tree of descendance showcasing sex, mating outcome, and traits.
 
   #figure(
     caption: [Pedigree Symbols],
