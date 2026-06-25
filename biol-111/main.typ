@@ -369,7 +369,7 @@ There are three modes of selection:
 / Directional selection: Selection that favors one end of a phenotype.
   It usually reduces variation in that phenotype.
 
-/ Stablilzing selection: Selection that favors the average of a phenotype.
+/ Stabilizing selection: Selection that favors the average of a phenotype.
   It usually reduces variation in that phenotype.
 
 / Disruptive selection: Selection that punishes the average of a phenotype.
